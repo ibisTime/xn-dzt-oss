@@ -3269,3 +3269,14 @@ function getDefaultFileIcon() {
     var src = __inline("../images/default_file.png");
     return src;
 }
+//设置自动退出
+$(function() {
+    var validTimer;
+    $(document).on('mousemove', function(e) {
+        clearTimeout(validTimer);
+        validTimer = setTimeout(function() {
+            sessionStorage.setItem('token', '');
+            location.href = '../signin.html?kind=' + (sessionStorage.getItem('loginKind') || '01');
+        }, +OSS.userValidTime * 60 * 1000);
+    });
+});

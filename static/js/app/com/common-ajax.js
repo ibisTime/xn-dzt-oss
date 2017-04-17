@@ -57,7 +57,7 @@ function urlDispatch(code) {
     // } else if (/^80[4]/.test(code)) {
     //     url = OSS.smsUrl;
     // } else {
-        url = OSS.mainUrl;
+    url = OSS.mainUrl;
     // }
     return url;
 }
@@ -68,13 +68,10 @@ function reqApi(options) {
         token: sessionStorage.getItem('token') || '',
         updater: sessionStorage.getItem('userName'),
         systemCode: sessionStorage.getItem('systemCode'),
-         //updaterId: sessionStorage.getItem('userId'),
+        //updaterId: sessionStorage.getItem('userId'),
+        companyCode: OSS.companyCode
     };
-    //车贷权限控制
-    if(options.code == "617015"){
-        commonParams["userId"] = getUserId();
-        commonParams["level"] = getRoleLevel();
-    }
+
 
     var params = {
         code: options.code,
@@ -115,7 +112,8 @@ function reqApi1(options) {
         json: JSON.stringify($.extend({
             token: sessionStorage.getItem('token') || '',
             updater: sessionStorage.getItem('userName'),
-            systemCode: sessionStorage.getItem('systemCode')
+            systemCode: sessionStorage.getItem('systemCode'),
+            companyCode: OSS.companyCode
         }, options.json))
     };
 

@@ -65,6 +65,9 @@ $(function() {
     var options = {
         fields: fields,
         code: code,
+         code: {
+            userId: code
+        },
         addCode: '805042',
         editCode: "805181",
         detailCode: "805056",
@@ -80,20 +83,4 @@ $(function() {
     };
 
     buildDetail(options);
-
-    // $("#subBtn").off("click").on("click", function() {
-    //     if ($('#jsForm').valid()) {
-    //         var data = $('#jsForm').serializeObject();
-    //         data.accountNumberList = [data.accountNumberList];
-    //         data.transAmount = -data.transAmount;
-
-    //         reqApi({
-    //             code: "802510",
-    //             json: data
-    //         }).done(function(data) {
-    //             sucDetail();
-    //         });
-    //     }
-    // })
-
 });

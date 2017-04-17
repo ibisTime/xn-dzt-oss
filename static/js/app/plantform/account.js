@@ -4,12 +4,12 @@ $(function() {
     reqApi({
         code: '802503',
         json: {
-            userId: getUserId()
+            userId: OSS.SYS_USER
         }
     }).done(function(data) {
         $("#amount-CNY").text("￥" + data[0].amount / 1000)
-        $("#amount-CGB").text(data[2].amount / 1000 + "菜狗币")
-        $("#amount-JF").text(data[1].amount / 1000 + "积分")
+        // $("#amount-CGB").text(data[2].amount / 1000 + "菜狗币")
+        // $("#amount-JF").text(data[1].amount / 1000 + "积分")
     });
 
     $('#accoutSaleBtn').click(function() {

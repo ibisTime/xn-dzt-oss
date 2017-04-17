@@ -1,8 +1,8 @@
 $(function() {
-    var userKind = {
-        "f1": "C端用户",
-        "f2": "B端用户"
-    }
+    // var userKind = {
+    //     "f1": "C端用户",
+    //     "f2": "B端用户"
+    // }
     var columns = [{
             field: '',
             title: '',
@@ -56,12 +56,7 @@ $(function() {
         pageCode: '805054',
         searchParams: {
             kind: "11"
-        },
-        // beforeSearch: function(json) {
-        //     if ($("#kind").val() == "") {
-        //         json.kind = "ff3";
-        //     }
-        // }
+        }
     });
     $('#rockBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');

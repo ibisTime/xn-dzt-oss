@@ -11,5 +11,5 @@ OSS.picBaseUrl = 'http://oigx51fc5.bkt.clouddn.com';
 OSS.picShow = '?imageMogr2/auto-orient/thumbnail/!100x100r';
 //系统userid
 OSS.SYS_USER = 'SYS_USER_DZT';
-//系统有效时间
-OSS.userValidTime=30;
+//用户登录有效时间
+OSS.userValidTime = 30;

@@ -5,7 +5,7 @@ $(function() {
             checkbox: true
         }, {
             field: "realName",
-            title: "户名"
+            title: "用户名"
         },
         {
             field: 'channelType',
@@ -19,7 +19,7 @@ $(function() {
             field: 'bizType',
             title: '业务类型',
             key: "biz_type",
-           // keyCode: "802006",
+            // keyCode: "802006",
             search: true,
             type: 'select',
             formatter: Dict.getNameForList('biz_type'),
@@ -28,7 +28,7 @@ $(function() {
             title: '流水状态',
             type: 'select',
             key: "jour_status",
-           // keyCode: "802006",
+            // keyCode: "802006",
             formatter: Dict.getNameForList("jour_status"),
             search: true
         },
@@ -46,11 +46,11 @@ $(function() {
         columns: columns,
         pageCode: '802520',
         searchParams: {
-            userId: getUserId(),
+            userId: OSS.SYS_USER,
         }
     });
 
-    $('#backBtn').click(function() {
+    $('#gobackBtn').click(function() {
         goBack();
     });
 });

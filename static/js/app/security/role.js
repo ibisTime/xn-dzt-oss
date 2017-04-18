@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     var columns = [{
         field: '',
         title: '',
@@ -32,7 +32,7 @@ $(function () {
         pageCode: '805020',
         deleteCode: '805024'
     });
-    $('#changeBtn').click(function () {
+    $('#changeBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");

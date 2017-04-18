@@ -42,6 +42,23 @@ $(function() {
             field: "remark",
             readonly: true
         }, {
+            title: "选择量体师",
+            type: "citySelect",
+            readonly: true,
+            onChange: function(v, r) {
+                $('#ltUser').renderDropdown({
+                    listCode: '805055',
+                    keyName: 'userId',
+                    valueName: 'loginName',
+                    searchName: "{{loginName.DATA}}--{{mobile.DATA}}",
+                    params: {
+                        kind: "f2",
+                        status: '0',
+                        updater: ""
+                    }
+                });
+            }
+        }, {
             title: "量体师姓名",
             field: "ltName",
             type: "select",
@@ -67,44 +84,7 @@ $(function() {
         }, {
             title: " 备注",
             field: "remark",
-            maxlength: 255,
-            readonly: true
-        }, {
-            field: 'orderCode',
-            title: '发货单号',
-            type: "hidden",
-            value: code,
-            readonly: true,
-        }, {
-            title: '物流公司',
-            field: 'logisticsCompany',
-            type: 'select',
-            key: 'wl_company',
-            readonly: true,
-        }, {
-            title: '物流单号',
-            field: 'logisticsCode',
-            readonly: true,
-        }, {
-            field: 'deliverer',
-            title: '发货人',
-            readonly: true,
-        }, {
-            field: 'deliveryDatetime',
-            title: '发货时间',
-            type: "datetime",
-            formatter: dateTimeFormat,
-            readonly: true,
-        }, {
-            field: 'pdf',
-            title: '物流单',
-            type: 'img',
-            readonly: true
-        }, {
-            field: 'remark',
-            title: '备注',
-            maxlength: 255,
-            readonly: true
+            maxlength: 255
         }
     ];
 
@@ -115,6 +95,21 @@ $(function() {
     };
 
     options.buttons = [{
+        title: '确认',
+        handler: function() {
+            if ($('#jsForm').valid()) {
+                var data = {};
+                data['orderCode'] = code;
+                data['remark'] = $("#remark").val();
+                reqApi({
+                    code: "620208",
+                    json: data
+                }).done(function() {
+                    sucDetail();
+                });
+            }
+        }
+    }, {
         title: '返回',
         handler: function() {
             goBack();

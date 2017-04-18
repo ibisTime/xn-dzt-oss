@@ -68,7 +68,7 @@ function reqApi(options) {
         token: sessionStorage.getItem('token') || '',
         updater: sessionStorage.getItem('userName'),
         systemCode: sessionStorage.getItem('systemCode'),
-        //updaterId: sessionStorage.getItem('userId'),
+        updaterId: sessionStorage.getItem('userId'),
         companyCode: OSS.companyCode
     };
 
@@ -113,6 +113,7 @@ function reqApi1(options) {
             token: sessionStorage.getItem('token') || '',
             updater: sessionStorage.getItem('userName'),
             systemCode: sessionStorage.getItem('systemCode'),
+            updaterId: sessionStorage.getItem('userId'),
             companyCode: OSS.companyCode
         }, options.json))
     };

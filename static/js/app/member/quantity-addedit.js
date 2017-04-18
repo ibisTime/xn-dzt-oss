@@ -4,6 +4,11 @@ $(function() {
     //var userId = getQueryString('userId') || '';
 
     var fields = [{
+        field: "userReferee",
+        value: sessionStorage.getItem('userId'),
+        type: "hidden",
+        required: true
+    }, {
         field: "kind",
         value: 'f2',
         type: 'hidden',
@@ -65,11 +70,11 @@ $(function() {
     var options = {
         fields: fields,
         code: code,
-         code: {
+        code: {
             userId: code
         },
         addCode: '805042',
-        editCode: "805181",
+        editCode: "805182",
         detailCode: "805056",
         view: view,
         beforeSubmit: function(data) {

@@ -7,13 +7,11 @@ $(function() {
             userId: OSS.SYS_USER
         }
     }).done(function(data) {
-        $("#amount-CNY").text("￥" + data[0].amount / 1000)
-        // $("#amount-CGB").text(data[2].amount / 1000 + "菜狗币")
-        // $("#amount-JF").text(data[1].amount / 1000 + "积分")
+        $("#amount-CNY").text("￥" + data[0].amount / 1000);
     });
 
     $('#accoutSaleBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        // var selRecords = $('#tableList').bootstrapTable('getSelections');
         var dw = dialog({
             content: '<form class="pop-form" id="popForm" novalidate="novalidate">' +
                 '<ul class="form-info" id="formContainer"></ul>' +

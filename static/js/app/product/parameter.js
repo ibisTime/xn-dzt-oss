@@ -6,18 +6,18 @@ $(function() {
         checkbox: true
     }, {
         title: "产品",
-        field: "",
+        field: "name",
 
     }, {
         title: "type",
-        field: "",
+        field: "type",
         type: "select",
-        key: "",
-        formatter: Dict.getNameForList(""),
+        key: "m_type",
+        formatter: Dict.getNameForList("m_type"),
         search: true
     }, {
-        field: 'key',
-        title: '父名称',
+        field: 'parentCode',
+        title: 'key',
         type: "select",
         key: "product_parent",
         formatter: Dict.getNameForList("product_parent"),
@@ -38,7 +38,7 @@ $(function() {
     buildList({
         router: 'parameter',
         columns: columns,
-        pageCode: '',
+        pageCode: '620055',
 
     });
 

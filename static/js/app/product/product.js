@@ -6,21 +6,24 @@ $(function() {
         checkbox: true
     }, {
         title: "名称",
-        field: "",
+        field: "name",
         search: true
     }, {
         title: "价格",
-        field: "",
+        field: "price",
         formatter: moneyFormat
     }, {
         field: 'pic',
-        title: '图片'
+        title: '图片',
+        formatter: function(v, data) {
+            return '<img src=' + OSS.picBaseUrl + '/' + v + '>'
+        }
     }, {
         title: "创建时间",
-        field: "",
+        field: "createDatetime",
         formatter: dateTimeFormat
     }, {
-        field: '',
+        field: 'updateDatetime',
         title: '最后修改时间',
         formatter: dateTimeFormat
     }, {
@@ -30,7 +33,7 @@ $(function() {
     buildList({
         router: 'product',
         columns: columns,
-        pageCode: '',
+        pageCode: '620005',
 
     });
 

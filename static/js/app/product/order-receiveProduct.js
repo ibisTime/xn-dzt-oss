@@ -42,6 +42,23 @@ $(function() {
             field: "remark",
             readonly: true
         }, {
+            title: "选择量体师",
+            type: "citySelect",
+            readonly: true,
+            onChange: function(v, r) {
+                $('#ltUser').renderDropdown({
+                    listCode: '805055',
+                    keyName: 'userId',
+                    valueName: 'loginName',
+                    searchName: "{{loginName.DATA}}--{{mobile.DATA}}",
+                    params: {
+                        kind: "f2",
+                        status: '0',
+                        updater: ""
+                    }
+                });
+            }
+        }, {
             title: "量体师姓名",
             field: "ltName",
             type: "select",
@@ -103,8 +120,7 @@ $(function() {
         }, {
             field: 'remark',
             title: '备注',
-            maxlength: 255,
-            readonly: true
+            maxlength: 255
         }
     ];
 
@@ -115,6 +131,19 @@ $(function() {
     };
 
     options.buttons = [{
+        title: '确认',
+        handler: function() {
+            if ($('#jsForm').valid()) {
+                var data = $('#jsForm').serializeObject();
+                reqApi({
+                    code: "620210",
+                    json: data
+                }).done(function() {
+                    sucDetail();
+                });
+            }
+        }
+    }, {
         title: '返回',
         handler: function() {
             goBack();

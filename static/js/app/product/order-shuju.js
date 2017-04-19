@@ -1,9 +1,27 @@
 $(function() {
     var allData = {};
+    var code = getQueryString('code');
+    var productSpecsList;
+    reqApi({
+        code: "620221",
+        json: { code },
+        sync: true
+    }).then(function(data) {
+        if (data.productList && data.productList.length &&
+            data.productList[0].productSpecsList &&
+            data.productList[0].productSpecsList.length) {
+            productSpecsList = data.productList[0].productSpecsList;
+        }
+    });
+
+
+
+
     var ids = ["1-1", "1-3", "1-4", "1-5",
         "1-6", "1-7", "1-8", "1-9", "1-10",
         "1-11", "3-1", "3-5", "3-6", "3-7",
-        "3-8", "4-2", "4-3", "4-4"
+        "3-8", "4-2", "4-3", "4-4", "4-5",
+        "5-2", "5-3", "5-4"
     ];
     var ids1 = [{
         id: "1-2-1",
@@ -44,6 +62,22 @@ $(function() {
         }
         createPage1();
         caretePage2();
+        if (productSpecsList) {
+            initData();
+        }
+    }
+
+    function initData() {
+        $.each(productSpecsList, function(index, spec) {
+            if (spec.parentCode == "1-2") {
+                $("#modal-chose").find(".fab_type[data-name=" + spec.type + "]").click()
+                    .end().find("li[data-code=" + spec.code + "]").click();
+            } else if (spec.name) {
+                $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]").click();
+            } else {
+                $("#" + spec.parentCode).val(spec.code);
+            }
+        })
     }
 
     function createPage1() {
@@ -116,7 +150,7 @@ $(function() {
             self.addClass("act")
                 .siblings(".act").removeClass("act");
             id = self.closest(".case").attr("id");
-            param[id] = self.attr("code");
+            param[id] = self.attr("data-code");
         });
         // 头部tab切换
         // $("#navUl").on("click", "span", function() {
@@ -195,9 +229,181 @@ $(function() {
             }
         });
         $("#to_step_1").on("click", function() {
+            goPage(0);
+        });
+        $("#to_pre_step_2").on("click", function() {
             goPage(1);
         });
 
+        $("#to_nex_step_4").on("click", function() {
+            goPage(3);
+        });
+        $("#form-tab2").validate({
+            'rules': {
+                '2-1': {
+                    required: true,
+                    max: 60,
+                    min: 30
+                },
+                '2-11': {
+                    required: true
+                },
+                '2-2': {
+                    required: true,
+                    max: 180,
+                    min: 60
+                },
+                '2-12': {
+                    required: true
+                },
+                '2-3': {
+                    required: true,
+                    max: 170,
+                    min: 50
+                },
+                '2-13': {
+                    required: true
+                },
+                '2-4': {
+                    required: true,
+                    max: 170,
+                    min: 50
+                },
+                '2-14': {
+                    required: true
+                },
+                '2-5': {
+                    required: true,
+                    max: 70,
+                    min: 35
+                },
+                '2-15': {
+                    required: true
+                },
+                '2-6': {
+                    required: true,
+                    max: 90,
+                    min: 50
+                },
+                '2-16': {
+                    required: true
+                },
+                '2-7': {
+                    required: true,
+                    max: 80,
+                    min: 15
+                },
+                '2-17': {
+                    required: true
+                },
+                '2-8': {
+                    required: true,
+                    max: 65,
+                    min: 20
+                },
+                '2-18': {
+                    required: true
+                },
+                '2-9': {
+                    required: true,
+                    max: 30,
+                    min: 15
+                },
+                '2-19': {
+                    required: true
+                },
+            }
+        });
+        $("#form-tab3").validate({
+            'rules': {
+                '4-3': {
+                    min: 10,
+                    max: 100,
+                    number: true
+                },
+                '4-4': {
+                    min: 10,
+                    max: 100,
+                    number: true
+                },
+                '4-5': {
+                    min: 15,
+                    max: 70,
+                    number: true
+                }
+            }
+        });
+        $("#form-tab4").validate({
+            'rules': {
+                '5-1': {
+                    required: true,
+                    maxlength: 60,
+                    isNotFace: true
+                }
+            }
+        });
+        $("#form-tab5").validate({
+            'rules': {
+                '6-1': {
+                    required: true,
+                    maxlength: 60,
+                    number: true
+                },
+                '6-2': {
+                    required: true,
+                    maxlength: 60,
+                    number: true
+                },
+                '6-3': {
+                    required: true,
+                    maxlength: 60,
+                    number: true
+                },
+                '6-4': {
+                    required: true,
+                    maxlength: 255,
+                    isNotFace: true
+                },
+                '6-5': {
+                    maxlength: 255,
+                    isNotFace: true
+                }
+            }
+        });
+        $("#to_pre_step_3").on("click", function() {
+            goPage(2);
+        });
+
+        $("#to_next_step_5").on("click", function() {
+            if (validatePage4()) {
+                goPage(4);
+            }
+        });
+
+        $("#to_pre_step_4").on("click", function() {
+            goPage(3);
+        });
+        $("#submit").on("click", function() {
+            if (validatePage5()) {
+                var data = {};
+                var data2 = $('#form-tab2').serializeObject();
+                var data3 = $('#form-tab3').serializeObject();
+                var data4 = $('#form-tab4').serializeObject();
+                var data5 = $('#form-tab5').serializeObject();
+
+                param = $.extend(param, data2, data3, data4, data5);
+                data['orderCode'] = code;
+                data['map'] = param;
+
+                reqApi({
+                    code: "620205",
+                    json: data
+                }).done(function() {
+                    sucDetail();
+                });
+
+            }
+        });
     }
 
     function goPage(index) {
@@ -214,10 +420,55 @@ $(function() {
             toastr.info("衬衫面料不能为空");
             return false;
         }
+        param['1-2'] = code;
         return true;
     }
 
     function validatePage2() {
+        if ($('#form-tab2').valid()) {
+            var data = $('#form-tab2').serializeObject();
+            if (data == "") {
+                toastr.info("请按要求填写完整");
+                return false;
+            }
+            return true;
+        }
+        return false;
+
+    }
+
+    function validatePage3() {
+        if ($('#form-tab2').valid()) {
+            var data = $('#form-tab2').serializeObject();
+            return true;
+        }
+        return false;
+
+    }
+
+    function validatePage4() {
+        if ($('#form-tab4').valid()) {
+            var data = $('#form-tab4').serializeObject();
+            if (data == "") {
+                toastr.info("请按要求填写完整");
+                return false;
+            }
+            return true;
+        }
+        return false;
+
+    }
+
+    function validatePage5() {
+        if ($('#form-tab5').valid()) {
+            var data = $('#form-tab5').serializeObject();
+            if (data == "") {
+                toastr.info("请按要求填写完整");
+                return false;
+            }
+            return true;
+        }
+        return false;
 
     }
 

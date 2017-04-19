@@ -43,7 +43,7 @@ $(function() {
         readonly: view
     }, {
         title: "分成比例",
-        field: "divideRate,
+        field: "divRate,
         required: true,
         readonly: view
     }];

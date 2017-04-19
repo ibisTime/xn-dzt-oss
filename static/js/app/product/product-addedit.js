@@ -17,7 +17,7 @@ $(function() {
         field: 'pic',
         title: '图片',
         type: "img",
-        required: true
+        //required: true
     }];
 
     buildDetail({

@@ -28,7 +28,7 @@ $(function() {
             search: true
         }, {
             title: "分成比例",
-            field: "divideRate"
+            field: "divRate"
         }, {
             title: "状态",
             field: "status",

@@ -27,10 +27,10 @@ $(function() {
         formatter: dateTimeFormat
     }, {
         title: "量体师",
-        field: "ltName"
+        field: "ltUser"
     }, {
         title: "订单金额",
-        field: "",
+        field: "amount",
         formatter: moneyFormat
     }, {
         title: "备注",
@@ -59,20 +59,21 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
+        if (selRecords[0].status != 1) {
+            toastr.info("不是代定价的状态");
+            return;
+        }
         window.location.href = 'order_price.html?code=' + selRecords[0].code;
     });
-    $("#priceBtn").click(function() {
+
+    $("#payBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = 'order_price.html?code=' + selRecords[0].code;
-    });
-    $("#payBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
+        if (selRecords[0].status != 2) {
+            toastr.info("不是可以代支付的状态");
             return;
         }
         window.location.href = 'order_pay.html?code=' + selRecords[0].code;
@@ -84,6 +85,10 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
+        if (selRecords[0].status != 3) {
+            toastr.info("不是可以代支付的状态");
+            return;
+        }
         window.location.href = 'order_shuju.html?code=' + selRecords[0].code;
     });
     $("#cheBtn").click(function() {
@@ -93,7 +98,7 @@ $(function() {
             return;
         }
         if (selRecords[0].status != 4) {
-            toastr.info("不是待审核状态");
+            toastr.info("不是待复核的状态");
             return;
         }
         window.location.href = 'order_partnerCheck.html?code=' + selRecords[0].code;
@@ -152,4 +157,16 @@ $(function() {
 
     });
 
+    $("#tijiaoBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != 3) {
+            toastr.info("不是可以提交复核的状态");
+            return;
+        }
+        window.location.href = 'order_tijiao.html?code=' + selRecords[0].code;
+    });
 });

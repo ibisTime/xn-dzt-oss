@@ -43,21 +43,8 @@ $(function() {
             readonly: true
         }, {
             title: "选择量体师",
-            type: "citySelect",
-            readonly: true,
-            onChange: function(v, r) {
-                $('#ltUser').renderDropdown({
-                    listCode: '805055',
-                    keyName: 'userId',
-                    valueName: 'loginName',
-                    searchName: "{{loginName.DATA}}--{{mobile.DATA}}",
-                    params: {
-                        kind: "f2",
-                        status: '0',
-                        updater: ""
-                    }
-                });
-            }
+            type: "ltUser",
+            readonly: true
         }, {
             title: "量体师姓名",
             field: "ltName",

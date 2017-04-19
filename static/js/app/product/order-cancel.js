@@ -59,7 +59,7 @@ $(function() {
         handler: function() {
             if ($('#jsForm').valid()) {
                 var data = $('#jsForm').serializeObject();
-                data['userId'] = sessionStorage.getItem('userId');
+                data['updater'] = sessionStorage.getItem('userName');
                 data['orderCode'] = code;
                 reqApi({
                     code: "620211",

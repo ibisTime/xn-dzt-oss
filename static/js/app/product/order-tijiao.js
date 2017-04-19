@@ -42,27 +42,8 @@ $(function() {
             field: "remark",
             readonly: true
         }, {
-            title: "选择量体师",
-            field:"ltUser",
-//            type: "citySelect",
-            readonly: true,
-//            onChange: function(v, r) {
-//                $('#ltUser').renderDropdown({
-//                    listCode: '001403',
-//                    keyName: 'userId',
-//                    valueName: 'loginName',
-//                    searchName: "{{loginName.DATA}}--{{mobile.DATA}}",
-//                    params: {
-//                        kind: "f2",
-//                        status: '0',
-                      
-              //      }
-//                });
-//            }
-        }, {
-            title: "量体师姓名",
-            field: "ltName",
-            type: "select",
+            title: "量体师",
+            field: "ltUser",
             readonly: true
         }, {
             title: '价格',
@@ -82,46 +63,6 @@ $(function() {
             title: "收件人地址",
             field: "reAddress",
             readonly: true
-        }, {
-            title: " 备注",
-            field: "remark",
-            maxlength: 255,
-            readonly: true
-        }, {
-            field: 'orderCode',
-            title: '发货单号',
-            type: "hidden",
-            value: code,
-            readonly: true,
-        }, {
-            title: '物流公司',
-            field: 'logisticsCompany',
-            type: 'select',
-            key: 'wl_company',
-            readonly: true,
-        }, {
-            title: '物流单号',
-            field: 'logisticsCode',
-            readonly: true,
-        }, {
-            field: 'deliverer',
-            title: '发货人',
-            readonly: true,
-        }, {
-            field: 'deliveryDatetime',
-            title: '发货时间',
-            type: "datetime",
-            formatter: dateTimeFormat,
-            readonly: true,
-        }, {
-            field: 'pdf',
-            title: '物流单',
-            type: 'img',
-            readonly: true
-        }, {
-            field: 'remark',
-            title: '备注',
-            maxlength: 255
         }
     ];
 
@@ -132,12 +73,13 @@ $(function() {
     };
 
     options.buttons = [{
-        title: '确认',
+        title: '确定',
         handler: function() {
             if ($('#jsForm').valid()) {
-                var data = $('#jsForm').serializeObject();
+                var data = {};
+                data['orderCode'] = code;
                 reqApi({
-                    code: "620210",
+                    code: "620206",
                     json: data
                 }).done(function() {
                     sucDetail();
@@ -150,5 +92,8 @@ $(function() {
             goBack();
         }
     }];
+
     buildDetail(options);
+
+
 });

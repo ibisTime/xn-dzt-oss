@@ -16,7 +16,7 @@ $(function() {
         field: 'pic',
         title: '图片',
         formatter: function(v, data) {
-            return '<img src=' + OSS.picBaseUrl + '/' + v + '>'
+            return '<img  style="width:40px;height:40px" src=' + OSS.picBaseUrl + '/' + v + ' >'
         }
     }, {
         title: "创建时间",

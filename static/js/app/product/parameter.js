@@ -1,4 +1,10 @@
 $(function() {
+    var typeKind = {
+        "80支棉": "80支棉",
+        "100支棉": "100支棉",
+        "棉真丝": "棉真丝",
+        "棉弹力": "棉弹力"
+    };
 
     var columns = [{
         field: '',
@@ -11,25 +17,24 @@ $(function() {
     }, {
         title: "type",
         field: "type",
-        type: "select",
-        key: "m_type",
-        formatter: Dict.getNameForList("m_type"),
-        search: true
+        type: 'select',
+        search: true,
+        data: typeKind
     }, {
         field: 'parentCode',
         title: 'key',
         type: "select",
-        key: "product_parent",
-        formatter: Dict.getNameForList("product_parent"),
+        key: "measure",
+        formatter: Dict.getNameForList("measure"),
         search: true
     }, {
         field: 'pic',
-        title: '图片'
+        title: '图片',
+        formatter: function(v, data) {
+            return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
+        }
     }, {
-        field: '',
-        title: '文字'
-    }, {
-        field: '',
+        field: 'orderNo',
         title: '次序'
     }, {
         title: "备注",

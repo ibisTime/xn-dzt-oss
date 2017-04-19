@@ -1,65 +1,59 @@
 $(function() {
-    var userKind = {
-        "f1": "C端用户",
-        "f2": "B端用户"
-    }
+
+
     var columns = [{
-        field: '',
-        title: '',
-        checkbox: true
-    }, {
-        title: '姓名',
-        field: 'nickname',
-        formatter: function(value, row, index) {
-            return row['realName'] ? row['realName'] : value;
-        },
-        search: true
-    }, {
-        title: "辖区",
-        field: "province2",
-        // formatter: function(v, data) {
-        //     var result = (data.province || "") + (data.city || "") + (data.area || "") + (data.address || "");
-        //     return result || "-";
-        // },
-        afterSet: function(v, data) {
-            if (view) {
-                $('#province').html(data.province);
-                data.city && $('#city').html(data.city);
-                data.area && $('#area').html(data.area);
-                data.address && $("#address").html(data.address);
+            field: '',
+            title: '',
+            checkbox: true
+        }, {
+            title: '姓名',
+            field: 'loginName',
+            // formatter: function(value, row, index) {
+            //     return row['realName'] ? row['realName'] : value;
+            // },
+            search: true
+        }, {
+            title: "辖区",
+            field: "province2",
+            formatter: function(v, data) {
+                var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "") + (data.userExt.address || "");
+                return result || "-";
             }
+        }, {
+            title: "身份证号",
+            field: "idNo",
+        }, {
+            title: '手机号',
+            field: 'mobile',
+            search: true
+        }, {
+            title: "分成比例",
+            field: "divRate"
+        }, {
+            title: "状态",
+            field: "status",
+            type: "select",
+            key: "user_status",
+            formatter: Dict.getNameForList("user_status"),
+            search: true
         },
-    }, {
-        title: "身份证号",
-        field: "idNo",
-    }, {
-        title: '手机号',
-        field: 'mobile',
-        search: true
-    }, {
-        title: "分成比例",
-        field: "divRate"
-    }, {
-        title: "状态",
-        field: "status",
-        type: "select",
-        key: "user_status",
-        formatter: Dict.getNameForList("user_status"),
-        search: true
-    }, {
-        title: "加入时间",
-        field: "",
-        formatter: dateTimeFormat
-    }, {
-        title: '备注',
-        field: 'remark'
-    }];
+        // {
+        //     title: "加入时间",
+        //     field: "",
+        //     formatter: dateTimeFormat
+        // }, 
+        {
+            title: '备注',
+            field: 'remark'
+        }
+    ];
     buildList({
-        router: 'custom',
+        router: 'quantity',
         columns: columns,
         pageCode: '805054',
         searchParams: {
-            kind: "f1"
+            kind: "f2",
+            userReferee: sessionStorage.getItem('userId')
         },
         // beforeSearch: function(json) {
         //     if ($("#kind").val() == "") {
@@ -138,6 +132,29 @@ $(function() {
         window.location.href = "member_addedit.html?userId=" + selRecords[0].userId;
 
     });
+    $("#edit2Btn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "partner_addedit.html?userId=" + selRecords[0].userId;
 
-    $("#streamBtn").remove();
+    });
+    $("#achieveBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "quantity_achieve.html?userId=" + selRecords[0].userId;
+    });
+    $("#accountBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "account.html?userId=" + selRecords[0].userId;
+    });
 });

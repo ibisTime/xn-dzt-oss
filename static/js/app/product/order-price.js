@@ -52,7 +52,8 @@ $(function() {
         }, {
             field: "quantity",
             title: '数量',
-            number: true,
+            type: "hidden",
+            value: "1",
             required: true
         }
     ];

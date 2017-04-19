@@ -1,6 +1,12 @@
 $(function() {
 
     var code = getQueryString('code');
+    var typeKind = {
+        "1-2-1": "80支棉",
+        "1-2-2": "100支棉",
+        "1-2-3": "棉真丝",
+        "1-2-4": "棉弹力"
+    };
 
     var fields = [{
         title: "名称",
@@ -11,29 +17,26 @@ $(function() {
         title: "key",
         field: "parentCode",
         type: 'select',
-        key: "product_parent",
+        key: "measure",
+        formatter: Dict.getNameForList("measure"),
+        // key: "product_parent",
         required: true,
     }, {
         field: 'type',
         title: '类型',
         type: "select",
-        required: true
+        data: typeKind
+            // required: true
     }, {
         field: 'pic',
         title: '图片',
         type: "img",
-        required: true
+        //required: true
     }, {
         field: 'orderNo',
         title: '顺序',
-        type: "img",
+        number: true,
         required: true
-    }, {
-        title: "价格",
-        field: "price",
-        amount: true,
-        formatter: moneyFormat,
-        required: true,
     }];
 
     buildDetail({

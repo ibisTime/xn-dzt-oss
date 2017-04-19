@@ -27,6 +27,10 @@ $(function() {
         }, {
             title: '量体地址',
             field: 'province1',
+            formatter: function(v, data) {
+                var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
+                return result || "-";
+            },
             readonly: true
         }, {
             title: '量体时间',
@@ -57,6 +61,7 @@ $(function() {
             if ($('#jsForm').valid()) {
                 var data = {};
                 data['orderCode'] = code;
+                data['payType'] = "1";
                 reqApi({
                     code: "620204",
                     json: data

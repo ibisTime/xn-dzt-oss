@@ -4,68 +4,52 @@ $(function() {
         "f2": "B端用户"
     }
     var columns = [{
-        field: '',
-        title: '',
-        checkbox: true
-    }, {
-        title: '姓名',
-        field: 'nickname',
-        formatter: function(value, row, index) {
-            return row['realName'] ? row['realName'] : value;
+            field: '',
+            title: '',
+            checkbox: true
+        }, {
+            title: "昵称",
+            field: "nickname",
+            // search: true
         },
-        search: true
-    }, {
-        title: "辖区",
-        field: "province2",
-        // formatter: function(v, data) {
-        //     var result = (data.province || "") + (data.city || "") + (data.area || "") + (data.address || "");
-        //     return result || "-";
-        // },
-        afterSet: function(v, data) {
-            if (view) {
-                $('#province').html(data.province);
-                data.city && $('#city').html(data.city);
-                data.area && $('#area').html(data.area);
-                data.address && $("#address").html(data.address);
-            }
+        {
+            title: '姓名',
+            field: 'realName',
+            // formatter: function(value, row, index) {
+            //     return row['realName'] ? row['realName'] : value;
+            // },
+            search: true
         },
-    }, {
-        title: "身份证号",
-        field: "idNo",
-    }, {
-        title: '手机号',
-        field: 'mobile',
-        search: true
-    }, {
-        title: "分成比例",
-        field: "divRate"
-    }, {
-        title: "状态",
-        field: "status",
-        type: "select",
-        key: "user_status",
-        formatter: Dict.getNameForList("user_status"),
-        search: true
-    }, {
-        title: "加入时间",
-        field: "",
-        formatter: dateTimeFormat
-    }, {
-        title: '备注',
-        field: 'remark'
-    }];
+        {
+            title: "身份证号",
+            field: "idNo",
+        }, {
+            title: '手机号',
+            field: 'mobile',
+            search: true
+        }, {
+            title: "状态",
+            field: "status",
+            type: "select",
+            key: "user_status",
+            formatter: Dict.getNameForList("user_status"),
+            search: true
+        }, {
+            title: "注册时间",
+            field: "createDatetime",
+            formatter: dateTimeFormat
+        }, {
+            title: '备注',
+            field: 'remark'
+        }
+    ];
     buildList({
         router: 'custom',
         columns: columns,
         pageCode: '805054',
         searchParams: {
             kind: "f1"
-        },
-        // beforeSearch: function(json) {
-        //     if ($("#kind").val() == "") {
-        //         json.kind = "ff3";
-        //     }
-        // }
+        }
     });
     $('#rockBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -119,25 +103,23 @@ $(function() {
 
         });
     });
-    $('#inteBtn').click(function() {
+    $('#accountBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "member_inte.html?userId=" + selRecords[0].userId;
+        window.location.href = "account.html?userId=" + selRecords[0].userId;
 
     });
 
-    $("#detail2Btn").click(function() {
+    $("#orderBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "member_addedit.html?userId=" + selRecords[0].userId;
+        window.location.href = "custom_achieve.html?userId=" + selRecords[0].userId;
 
     });
-
-    $("#streamBtn").remove();
 });

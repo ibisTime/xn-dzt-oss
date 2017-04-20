@@ -2,6 +2,20 @@ $(function() {
     var code = getQueryString('userId');
     var view = !!getQueryString('v');
     //var userId = getQueryString('userId') || '';
+    var province;
+    var city;
+    var area;
+    reqApi({
+        code: "805056",
+        json: { userId: sessionStorage.getItem('userId') },
+        sync: true
+    }).then(function(data) {
+        province = data.province;
+        city = data.city;
+        area = data.data;
+    });
+    console.log(province);
+
 
     var fields = [{
         field: "userReferee",

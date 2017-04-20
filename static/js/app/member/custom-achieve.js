@@ -35,12 +35,12 @@ $(function() {
     }, {
         title: "备注",
         field: "remark"
-    }];
+    }, ];
     buildList({
         columns: columns,
         pageCode: '620220',
         searchParams: {
-            toUser: userId
+            applyUser: userId
         }
     });
     $("#addBtn").remove();
@@ -49,4 +49,5 @@ $(function() {
     $("#activeBtn").remove();
     $("#achieveBtn").remove();
     $("#accountBtn").remove();
+    $("#orderBtn").remove();
 });

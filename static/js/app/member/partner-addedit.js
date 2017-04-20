@@ -8,9 +8,15 @@ $(function() {
             value: "11",
             type: "hidden",
             required: true
+        }, {
+            field: 'loginName',
+            title: "登录名",
+            maxlength: 32,
+            required: true,
+            readonly: view
         },
         {
-            field: 'loginName',
+            field: 'realName',
             title: "合伙人姓名",
             maxlength: 32,
             required: true,
@@ -20,11 +26,6 @@ $(function() {
             title: '辖区',
             required: true,
             type: 'citySelect',
-            // readonly: view,
-            // formatter: function(v, data) {
-            //     var result = (data.demand.province || "") + (data.demand.city || "") + (data.demand.area || "") + (data.demand.address || "");
-            //     return result || "-";
-            // },
             afterSet: function(v, data) {
                 if (code) {
                     if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
@@ -37,11 +38,13 @@ $(function() {
                     $("#province").trigger("change");
                     data.userExt.city && $('#city').val(data.userExt.city);
                     data.userExt.area && $('#area').val(data.userExt.area);
+                    data.userExt.city ? $('#city').trigger('change') : $('#province').trigger('change');
+                    data.userExt.area && $('#area').val(data.userExt.area);
                 }
-            },
+            }
         }, {
             field: 'mobile',
-            title: '联系方式',
+            title: '手机号',
             mobile: true,
             required: true,
             readonly: view
@@ -53,7 +56,7 @@ $(function() {
             readonly: view
         }, {
             title: "分成比例",
-            field: "divideRate",
+            field: "divRate",
             required: true,
             readonly: view
         }

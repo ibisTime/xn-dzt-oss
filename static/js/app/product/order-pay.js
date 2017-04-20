@@ -35,11 +35,11 @@ $(function() {
         }, {
             title: '量体时间',
             field: 'ltDatetime',
-            formatter: dateTimeFormat,
+            formatter: dateFormat,
             readonly: true
         }, {
             title: "量体嘱咐",
-            field: "remark",
+            field: "applyNote",
             readonly: true
         }, {
             title: '价格',

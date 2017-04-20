@@ -23,12 +23,12 @@ $(function() {
         field: "createDatetime",
         formatter: dateTimeFormat
     }, {
+        title: "最后修改人",
+        field: "updater"
+    }, {
         field: 'updateDatetime',
         title: '最后修改时间',
         formatter: dateTimeFormat
-    }, {
-        title: "最后修改人",
-        field: "updater"
     }];
     buildList({
         router: 'product',

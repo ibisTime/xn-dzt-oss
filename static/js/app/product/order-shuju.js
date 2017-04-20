@@ -2,26 +2,34 @@ $(function() {
     var allData = {};
     var code = getQueryString('code');
     var productSpecsList;
+    var modelCode;
     reqApi({
         code: "620221",
         json: { code },
         sync: true
     }).then(function(data) {
-        if (data.productList && data.productList.length &&
-            data.productList[0].productSpecsList &&
-            data.productList[0].productSpecsList.length) {
-            productSpecsList = data.productList[0].productSpecsList;
+        if (data.productList && data.productList.length) {
+            modelCode = data.productList[0].modelCode;
+            if (data.productList[0].productSpecsList &&
+                data.productList[0].productSpecsList.length) {
+                productSpecsList = data.productList[0].productSpecsList;
+            }
         }
+        // if (data.productList && data.productList.length &&
+        //     data.productList[0].productSpecsList &&
+        //     data.productList[0].productSpecsList.length) {
+        //     productSpecsList = data.productList[0].productSpecsList;
+
+        // }
+
     });
-
-
-
+    console.log("########" + modelCode);
 
     var ids = ["1-1", "1-3", "1-4", "1-5",
         "1-6", "1-7", "1-8", "1-9", "1-10",
         "1-11", "3-1", "3-5", "3-6", "3-7",
-        "3-8", "4-2", "4-3", "4-4", "4-5",
-        "5-2", "5-3", "5-4"
+        "3-8", '4-1', "4-2", "4-3", "4-4", "4-5",
+        "5-2", "5-3", "5-4", '4-6', '4-7', '4-8'
     ];
     var ids1 = [{
         id: "1-2-1",
@@ -42,7 +50,8 @@ $(function() {
 
     function getInfo() {
         reqApi({
-            code: "620057"
+            code: "620057",
+            json: { modelCode }
         }).then(function(data) {
             getData(data);
         });

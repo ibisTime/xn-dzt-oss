@@ -33,6 +33,9 @@ $(function() {
         field: "amount",
         formatter: moneyFormat
     }, {
+        title: "量体嘱咐",
+        field: "applyNote"
+    }, {
         title: "备注",
         field: "remark"
     }];

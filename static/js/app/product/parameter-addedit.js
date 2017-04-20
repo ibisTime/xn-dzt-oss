@@ -2,12 +2,19 @@ $(function() {
 
     var code = getQueryString('code');
     var typeKind = {
-        "1-2-1": "80支棉",
-        "1-2-2": "100支棉",
-        "1-2-3": "棉真丝",
-        "1-2-4": "棉弹力"
+        "80支棉": "80支棉",
+        "100支棉": "100支棉",
+        "棉真丝": "棉真丝",
+        "棉弹力": "棉弹力"
     };
 
+    var typeSelect = {
+        field: 'type',
+        title: '类型',
+        type: "select",
+        data: typeKind,
+        hidden: true
+    };
     var fields = [{
         title: "名称",
         field: "name",
@@ -19,15 +26,13 @@ $(function() {
         type: 'select',
         key: "measure",
         formatter: Dict.getNameForList("measure"),
-        // key: "product_parent",
         required: true,
-    }, {
-        field: 'type',
-        title: '类型',
-        type: "select",
-        data: typeKind
-            // required: true
-    }, {
+        onChange: function(v, data) {
+            if (v == "1-2") {
+                typeSelect.hidden = false;
+            } else { typeSelect.hidden = true }
+        }
+    }, typeSelect, {
         field: 'pic',
         title: '图片',
         type: "img",

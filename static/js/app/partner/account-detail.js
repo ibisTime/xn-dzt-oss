@@ -46,7 +46,7 @@ $(function() {
         columns: columns,
         pageCode: '802520',
         searchParams: {
-            userId: OSS.SYS_USER,
+            userId: sessionStorage.getItem('userId')
         }
     });
 

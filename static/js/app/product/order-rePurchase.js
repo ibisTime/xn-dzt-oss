@@ -14,6 +14,7 @@ $(function() {
         },
         keyName: 'userId',
         valueName: '{{userId.DATA}} -{{loginName.DATA}}',
+        //  searchName: 'mobile',
         required: true
     }];
 

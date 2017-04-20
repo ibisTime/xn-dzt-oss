@@ -1,6 +1,18 @@
 $(function() {
     var code = getQueryString('code');
-    //var  view =getQueryString('v');
+
+
+    var priceList = {};
+    reqApi({
+        code: "620007",
+        json: { code },
+        sync: true
+    }).then(function(data) {
+        for (var i = 0; i < data.length; i++) {
+            priceList[data[i].code] = moneyFormat(data[i].price);
+        }
+    });
+
 
     var fields = [{
             title: '订单号',
@@ -35,19 +47,17 @@ $(function() {
         }, {
             title: '量体时间',
             field: 'ltDatetime',
-            formatter: dateTimeFormat,
+            formatter: dateFormat,
             readonly: true
         }, {
             title: "量体嘱咐",
-            field: "remark",
+            field: "applyNote",
             readonly: true
         }, {
             title: "价格",
             field: "modelCode",
             type: "select",
-            listCode: '620007',
-            keyName: "code",
-            valueName: 'price',
+            data: priceList,
             required: true
         }, {
             field: "quantity",

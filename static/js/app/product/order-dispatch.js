@@ -35,11 +35,11 @@ $(function() {
         }, {
             title: '量体时间',
             field: 'ltDatetime',
-            formatter: dateTimeFormat,
+            formatter: dateFormat,
             readonly: true
         }, {
             title: "量体嘱咐",
-            field: "remark",
+            field: "applyNote",
             readonly: true
         }, {
             title: "选择量体师",
@@ -49,12 +49,11 @@ $(function() {
                 var province = $("#province").val();
                 var city = $("#city").val();
                 var area = $("#area").val();
-
                 $('#ltUser').renderDropdown({
                     listCode: '001403',
                     keyName: 'userId',
                     valueName: 'loginName',
-                    searchName: "loginName",
+                    searchName: "{{loginName.DATA}}--{{realName.DATA}}",
                     params: {
                         kind: "f2",
                         province: province,

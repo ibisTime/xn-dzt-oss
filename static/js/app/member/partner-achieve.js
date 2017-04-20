@@ -1,5 +1,5 @@
 $(function() {
-
+    var userId = getQueryString('userId');
     var columns = [{
         field: '',
         title: '',
@@ -24,7 +24,7 @@ $(function() {
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
-        formatter: dateFormat
+        formatter: dateTimeFormat
     }, {
         title: "量体师",
         field: "ltUser"
@@ -37,8 +37,17 @@ $(function() {
         field: "remark"
     }];
     buildList({
-        router: 'orderSearch',
+        // router: 'quantity_achieve',
         columns: columns,
-        pageCode: '620220'
+        pageCode: '620220',
+        searchParams: {
+            toUser: userId
+        }
     });
+    $("#addBtn").remove();
+    $("#edit2Btn").remove();
+    $("#rockBtn").remove();
+    $("#activeBtn").remove();
+    $("#achieveBtn").remove();
+    $("#accountBtn").remove();
 });

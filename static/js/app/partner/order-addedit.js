@@ -41,7 +41,7 @@ $(function() {
         maxlength: 64,
         required: true,
     }, {
-        field: 'remark',
+        field: 'applyNote',
         title: '量体嘱咐',
         maxlength: 250
     }];

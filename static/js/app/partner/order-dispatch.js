@@ -53,8 +53,8 @@ $(function() {
                 $('#ltUser').renderDropdown({
                     listCode: '001403',
                     keyName: 'userId',
-                    valueName: 'loginName',
-                    searchName: "loginName",
+                    valueName: '{{realName.DATA}}--{{mobile.DATA}}',
+                    searchName: "mobile",
                     params: {
                         kind: "f2",
                         province: province,

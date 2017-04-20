@@ -13,7 +13,7 @@ $(function() {
             updater: ""
         },
         keyName: 'userId',
-        valueName: '{{userId.DATA}} -{{loginName.DATA}}',
+        valueName: '{{nickname.DATA}}--{{mobile.DATA}}',
         required: true
     }, {
         field: 'applyName',
@@ -41,7 +41,7 @@ $(function() {
         maxlength: 64,
         required: true,
     }, {
-        field: 'remark',
+        field: 'applyNote',
         title: '量体嘱咐',
         maxlength: 250
     }];
@@ -51,9 +51,15 @@ $(function() {
         code: code,
         addCode: '620200',
         beforeSubmit: function(data) {
-            data.ltProvince = $('#province').val();
-            data.ltCity = $('#city').val();
-            data.ltArea = $('#area').val();
+            // if (data.province == data.city && data.city == data.area) {
+            //     data.city = "";
+            //     data.area = "";
+            // } else if (data.province == data.city && data.city != data.area) {
+            //     data.city = data.area;
+            // }
+            data.ltProvince = data.province;
+            data.ltCity = data.city;
+            data.ltArea = data.area;
             return data
         }
     });

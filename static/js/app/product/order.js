@@ -24,17 +24,24 @@ $(function() {
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
-        formatter: dateTimeFormat
+        formatter: dateFormat
     }, {
         title: "量体师",
-        field: "ltUser"
+        field: "ltUser",
+        formatter: function(v, data) {
+            if (data.ltUserDO) {
+                return data.ltUserDO.realName
+            } else {
+                return "-"
+            }
+        }
     }, {
         title: "订单金额",
         field: "amount",
         formatter: moneyFormat
     }, {
-        title: "备注",
-        field: "remark"
+        title: "量体嘱咐",
+        field: 'applyNote'
     }];
     buildList({
         router: 'order',
@@ -86,7 +93,7 @@ $(function() {
             return;
         }
         if (selRecords[0].status != 3) {
-            toastr.info("不是可以代支付的状态");
+            toastr.info("不是可以数据录入的状态");
             return;
         }
         window.location.href = 'order_shuju.html?code=' + selRecords[0].code;
@@ -123,7 +130,7 @@ $(function() {
             return;
         }
         if (selRecords[0].status != 6) {
-            toastr.info("不是待提交生产状态");
+            toastr.info("不是可以发货的状态");
             return;
         }
         window.location.href = 'order_sendProduct.html?code=' + selRecords[0].code;

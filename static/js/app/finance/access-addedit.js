@@ -16,15 +16,13 @@ $(function() {
         title: '用户账户',
         required: true,
         type: "select",
-        pageCode: "802500",
+        pageCode: '802500',
         keyName: "accountNumber",
-        // valueName: '{{realName.DATA}}',
         required: true,
-        // multiple: true,
         type: 'select',
-        // dict: [
-        //     ['type', 'account_kind']
-        // ],
+        dict: [
+            ['type', 'account_kind']
+        ],
         params: {
             currency: 'CNY',
             userId: userId,

@@ -6,26 +6,31 @@ $(function() {
             title: '',
             checkbox: true
         }, {
-            title: '姓名',
-            field: 'loginName',
-            // formatter: function(value, row, index) {
-            //     return row['realName'] ? row['realName'] : value;
-            // },
-            search: true
+            title: '登录名/手机号',
+            field: 'mobile',
+            // search: true
         }, {
+            title: '姓名',
+            field: 'realName',
+            search: true
+        },
+        {
             title: "辖区",
             field: "province2",
             formatter: function(v, data) {
+                if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
+                    data.userExt.city = "";
+                    data.userExt.area = "";
+                } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
+                    data.userExt.city = '';
+                }
                 var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "") + (data.userExt.address || "");
                 return result || "-";
             }
-        }, {
+        },
+        {
             title: "身份证号",
             field: "idNo",
-        }, {
-            title: '手机号',
-            field: 'mobile',
-            search: true
         }, {
             title: "分成比例",
             field: "divRate"
@@ -36,15 +41,6 @@ $(function() {
             key: "user_status",
             formatter: Dict.getNameForList("user_status"),
             search: true
-        },
-        // {
-        //     title: "加入时间",
-        //     field: "",
-        //     formatter: dateTimeFormat
-        // }, 
-        {
-            title: '备注',
-            field: 'remark'
         }
     ];
     buildList({
@@ -54,12 +50,7 @@ $(function() {
         searchParams: {
             kind: "f2",
             userReferee: sessionStorage.getItem('userId')
-        },
-        // beforeSearch: function(json) {
-        //     if ($("#kind").val() == "") {
-        //         json.kind = "ff3";
-        //     }
-        // }
+        }
     });
     $('#rockBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -113,15 +104,6 @@ $(function() {
 
         });
     });
-    $('#inteBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "member_inte.html?userId=" + selRecords[0].userId;
-
-    });
 
     $("#detail2Btn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -138,7 +120,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "partner_addedit.html?userId=" + selRecords[0].userId;
+        window.location.href = "quantity_addedit.html?userId=" + selRecords[0].userId;
 
     });
     $("#achieveBtn").click(function() {
@@ -155,6 +137,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "account.html?userId=" + selRecords[0].userId;
+        window.location.href = "accountlt.html?userId=" + selRecords[0].userId;
     });
+    $("#ledgerBtn").remove();
 });

@@ -58,5 +58,5 @@ $(function() {
     $("#achieveBtn").remove();
     $("#accountBtn").remove();
     $("#ledgerBtn").remove();
-    $("#ledgerBtn").remove();
+
 });

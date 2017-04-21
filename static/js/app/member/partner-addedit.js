@@ -2,19 +2,34 @@ $(function() {
     var code = getQueryString('userId');
     var view = !!getQueryString('v');
     // var userId = getQueryString('userId');
+    var loginNameView = {
+        field: 'loginName1',
+        title: "登录名",
+        readonly: true,
+        formatter: function(v, data) {
+            return data.loginName
+        }
+    };
+    var loginNameEdit = {
+        field: 'loginName',
+        title: "登录名",
+        maxlength: 32,
+        required: true
+    };
+    if (code) {
+        loginNameView.hidden = false;
+        loginNameEdit.hidden = true;
+    } else {
+        loginNameView.hidden = true;
+    }
+
 
     var fields = [{
             field: "kind",
             value: "11",
             type: "hidden",
             required: true
-        }, {
-            field: 'loginName',
-            title: "登录名",
-            maxlength: 32,
-            required: true,
-            readonly: view
-        },
+        }, loginNameView, loginNameEdit,
         {
             field: 'realName',
             title: "合伙人姓名",
@@ -74,6 +89,7 @@ $(function() {
         beforeSubmit: function(data) {
             if (code) {
                 data.userId = code;
+                // data.loginName =
                 return data;
             } else {
                 return data

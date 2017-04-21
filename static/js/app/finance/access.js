@@ -67,4 +67,13 @@ $(function() {
         window.location.href = "access_check.html?code=" + selRecords[0].code;
 
     });
+    $('#detaBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "recharge_detail.html?code=" + selRecords[0].code;
+
+    });
 });

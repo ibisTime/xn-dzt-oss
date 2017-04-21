@@ -122,4 +122,5 @@ $(function() {
         window.location.href = "custom_achieve.html?userId=" + selRecords[0].userId;
 
     });
+    $("#ledgerBtn").remove();
 });

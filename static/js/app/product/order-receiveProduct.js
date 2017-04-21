@@ -42,28 +42,16 @@ $(function() {
             field: "applyNote",
             readonly: true
         }, {
-            title: "选择量体师",
-            field:"ltUser",
-//            type: "citySelect",
+            title: "量体师",
+            field: "ltUser",
             readonly: true,
-//            onChange: function(v, r) {
-//                $('#ltUser').renderDropdown({
-//                    listCode: '001403',
-//                    keyName: 'userId',
-//                    valueName: 'loginName',
-//                    searchName: "{{loginName.DATA}}--{{mobile.DATA}}",
-//                    params: {
-//                        kind: "f2",
-//                        status: '0',
-                      
-              //      }
-//                });
-//            }
-        }, {
-            title: "量体师姓名",
-            field: "ltName",
-            type: "select",
-            readonly: true
+            formatter: function(v, data) {
+                if (data.ltUserDO) {
+                    return data.ltUserDO.realName
+                } else {
+                    return "-"
+                }
+            },
         }, {
             title: '价格',
             field: "amount",

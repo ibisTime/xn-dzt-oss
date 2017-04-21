@@ -50,4 +50,5 @@ $(function() {
     $("#activeBtn").remove();
     $("#achieveBtn").remove();
     $("#accountBtn").remove();
+    $("#ledgerBtn").remove();
 });

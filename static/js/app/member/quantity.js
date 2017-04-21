@@ -20,6 +20,12 @@ $(function() {
         title: "辖区",
         field: "province2",
         formatter: function(v, data) {
+            if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
+                data.userExt.city = "";
+                data.userExt.area = "";
+            } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
+                data.userExt.city = '';
+            }
             var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "") + (data.userExt.address || "");
             return result || "-";
         }
@@ -141,4 +147,5 @@ $(function() {
         }
         window.location.href = "account.html?userId=" + selRecords[0].userId;
     });
+    $("#ledgerBtn").remove();
 });

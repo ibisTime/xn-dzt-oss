@@ -1,7 +1,26 @@
 $(function() {
     var code = getQueryString('userId');
     var view = !!getQueryString('v');
-    //var userId = getQueryString('userId') || '';
+    var mobileView = {
+        field: 'mobile1',
+        title: "登录名/手机号",
+        readonly: true,
+        formatter: function(v, data) {
+            return data.mobile
+        }
+    };
+    var mobileEdit = {
+        field: 'mobile',
+        title: "登录名/手机号",
+        mobile: true,
+        required: true
+    };
+    if (code) {
+        mobileView.hidden = false;
+        mobileEdit.hidden = true;
+    } else {
+        mobileView.hidden = true;
+    }
 
     var fields = [{
         field: "userReferee",
@@ -13,13 +32,7 @@ $(function() {
         value: 'f2',
         type: 'hidden',
         required: true
-    }, {
-        field: 'mobile',
-        title: '登录名/手机号',
-        mobile: true,
-        required: true,
-        // readonly: true
-    }, {
+    }, mobileView, mobileEdit, {
         field: 'realName',
         title: "量体师姓名",
         maxlength: 32,

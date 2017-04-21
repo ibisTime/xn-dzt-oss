@@ -13,10 +13,11 @@ $(function() {
             updater: ""
         },
         keyName: 'userId',
-        valueName: '{{userId.DATA}} -{{loginName.DATA}}',
-        //  searchName: 'mobile',
+        valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
+        searchName: 'mobile',
         required: true
     }];
+
 
     var options = {
         fields: fields,

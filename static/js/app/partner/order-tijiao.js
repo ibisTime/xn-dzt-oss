@@ -35,15 +35,22 @@ $(function() {
         }, {
             title: '量体时间',
             field: 'ltDatetime',
-            formatter: dateTimeFormat,
+            formatter: dateFormat,
             readonly: true
         }, {
             title: "量体嘱咐",
-            field: "remark",
+            field: "applyNote",
             readonly: true
         }, {
-            title: "量体师姓名",
+            title: "量体师",
             field: "ltUser",
+            formatter: function(v, data) {
+                if (data.ltUserDO) {
+                    return data.ltUserDO.realName
+                } else {
+                    return "-"
+                }
+            },
             readonly: true
         }, {
             title: '价格',
@@ -63,12 +70,11 @@ $(function() {
             title: "收件人地址",
             field: "reAddress",
             readonly: true
-        },
-        // {
-        //     title: " 备注",
-        //     field: "remark",
-        //     maxlength: 255
-        // }
+        }, {
+            title: " 备注",
+            field: "remark",
+            maxlength: 255
+        }
     ];
 
     var options = {
@@ -83,7 +89,7 @@ $(function() {
             if ($('#jsForm').valid()) {
                 var data = {};
                 data['orderCode'] = code;
-                data['updater'] = sessionStorage.getItem('userName');
+                // data['updater'] = sessionStorage.getItem('userName');
                 data["result"] = "1";
                 data["remark"] = $("#remark").val();
                 reqApi({
@@ -100,7 +106,7 @@ $(function() {
             if ($('#jsForm').valid()) {
                 var data = {};
                 data['orderCode'] = code;
-                data['updater'] = sessionStorage.getItem('userName');
+                // data['updater'] = sessionStorage.getItem('userName');
                 data["result"] = "0";
                 data["remark"] = $("#remark").val();
                 reqApi({

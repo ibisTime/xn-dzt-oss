@@ -1,6 +1,18 @@
 $(function() {
     var code = getQueryString('code');
     //var  view =getQueryString('v');
+    var province;
+    var city;
+    var area;
+    reqApi({
+        code: "805056",
+        json: { userId: sessionStorage.getItem('userId') },
+        sync: true
+    }).then(function(data) {
+        province = data.userExt.province;
+        city = data.userExt.city;
+        area = data.userExt.area;
+    });
 
     var fields = [{
             title: '订单号',
@@ -28,6 +40,12 @@ $(function() {
             title: '量体地址',
             field: 'province1',
             formatter: function(v, data) {
+                if (data.ltProvince == data.ltCity && data.ltCity == data.ltArea) {
+                    data.ltCity = "";
+                    data.ltArea = "";
+                } else if (data.ltProvince == data.ltCity && data.ltCity != data.ltArea) {
+                    data.ltCity = '';
+                }
                 var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
                 return result || "-";
             },
@@ -35,41 +53,56 @@ $(function() {
         }, {
             title: '量体时间',
             field: 'ltDatetime',
-            formatter: dateTimeFormat,
+            formatter: dateFormat,
             readonly: true
         }, {
             title: "量体嘱咐",
-            field: "remark",
+            field: "applyNote",
             readonly: true
-        }, {
-            title: "选择量体师",
-            type: "citySelect",
-            required: true,
-            onChange: function(v, r) {
-                var province = $("#province").val();
-                var city = $("#city").val();
-                var area = $("#area").val();
+        },
+        //  {
+        //     title: "选择量体师",
+        //     type: "citySelect",
+        //     required: true,
+        //     onChange: function(v, r) {
+        //         var province = $("#province").val();
+        //         var city = $("#city").val();
+        //         var area = $("#area").val();
 
-                $('#ltUser').renderDropdown({
-                    listCode: '001403',
-                    keyName: 'userId',
-                    valueName: '{{realName.DATA}}--{{mobile.DATA}}',
-                    searchName: "mobile",
-                    params: {
-                        kind: "f2",
-                        province: province,
-                        city: city,
-                        area: area,
-                        //status: '0',
-                        userRefere: sessionStorage.getItem('userId'),
-                        updater: ''
-                    }
-                });
-            }
-        }, {
-            title: "量体师编号",
+        //         $('#ltUser').renderDropdown({
+        //             listCode: '001403',
+        //             keyName: 'userId',
+        //             valueName: '{{realName.DATA}}--{{mobile.DATA}}',
+        //             searchName: "mobile",
+        //             params: {
+        //                 kind: "f2",
+        //                 province: province,
+        //                 city: city,
+        //                 area: area,
+        //                 //status: '0',
+        //                 userRefere: sessionStorage.getItem('userId'),
+        //                 updater: ''
+        //             }
+        //         });
+        //     }
+        // },
+        {
+            title: "选择量体师",
             field: 'ltUser',
             type: 'select',
+            listCode: '001403',
+            keyName: 'userId',
+            valueName: '{{realName.DATA}}--{{mobile.DATA}}',
+            searchName: "mobile",
+            params: {
+                kind: "f2",
+                province: province,
+                city: city,
+                area: area,
+                //status: '0',
+                userRefere: sessionStorage.getItem('userId'),
+                updater: ''
+            },
             required: true
         }
     ];
@@ -87,7 +120,6 @@ $(function() {
                 var data = {};
                 data['orderCode'] = code;
                 data['ltUser'] = $("#ltUser").val();
-                // data["ltName"] = $("#ltUser").val();
                 reqApi({
                     code: "620202",
                     json: data

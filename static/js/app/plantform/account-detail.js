@@ -10,7 +10,6 @@ $(function() {
         {
             field: 'channelType',
             title: '渠道类型',
-            //keyCode: "802006",
             type: "select",
             key: "channel_type",
             formatter: Dict.getNameForList('channel_type'),
@@ -19,7 +18,6 @@ $(function() {
             field: 'bizType',
             title: '业务类型',
             key: "biz_type",
-            // keyCode: "802006",
             search: true,
             type: 'select',
             formatter: Dict.getNameForList('biz_type'),
@@ -28,7 +26,6 @@ $(function() {
             title: '流水状态',
             type: 'select',
             key: "jour_status",
-            // keyCode: "802006",
             formatter: Dict.getNameForList("jour_status"),
             search: true
         },

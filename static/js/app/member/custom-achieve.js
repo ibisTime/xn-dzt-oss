@@ -24,10 +24,18 @@ $(function() {
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
-        formatter: dateTimeFormat
+        formatter: dateFormat
     }, {
         title: "量体师",
-        field: "ltUser"
+        field: "ltUser",
+        formatter: function(v, data) {
+            if (data.ltUserDO) {
+                return data.ltUserDO.realName
+            } else {
+                return "-"
+            }
+        },
+
     }, {
         title: "订单金额",
         field: "amount",
@@ -50,4 +58,5 @@ $(function() {
     $("#achieveBtn").remove();
     $("#accountBtn").remove();
     $("#orderBtn").remove();
+    $("#ledgerBtn").remove();
 });

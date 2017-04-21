@@ -7,7 +7,16 @@ $(function() {
     }, {
         title: "订单编号",
         field: "code",
+        //search: true
+    }, {
+        field: 'applyName',
+        title: '下单用户',
         search: true
+    }, {
+        title: '量体师',
+        field: "ltName",
+        search: true,
+        visible: false
     }, {
         title: "订单状态",
         field: "status",
@@ -15,9 +24,6 @@ $(function() {
         key: "order_status",
         formatter: Dict.getNameForList("order_status"),
         search: true
-    }, {
-        field: 'applyName',
-        title: '下单用户'
     }, {
         title: "联系方式",
         field: "applyMobile"
@@ -43,13 +49,22 @@ $(function() {
         title: "量体嘱咐",
         field: 'applyNote'
     }];
+
     buildList({
         router: 'order',
         columns: columns,
-        pageCode: '620220',
-
+        pageCode: '620220'
     });
+
     $("#rePurchaseBtn").click(function() {
+        // if (selRecords.length <= 0) {
+        //     toastr.info("请选择记录");
+        //     return;
+        // }
+        // if (selRecords[0].status != 1) {
+        //     toastr.info("不是代定价的状态");
+        //     return;
+        // }
         window.location.href = 'order_rePurchase.html';
     });
     $("#edit2Btn").click(function() {
@@ -154,14 +169,11 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        if (selRecords[0].status == 1 || selRecords[0].status == 2) {
-
-            window.location.href = 'order_cancel.html?code=' + selRecords[0].code;
-        } else {
+        if (selRecords[0].status == 8 || selRecords[0].status == 9) {
             toastr.info("不是可以取消订单状态");
             return;
         }
-
+        window.location.href = 'order_cancel.html?code=' + selRecords[0].code;
     });
 
     $("#tijiaoBtn").click(function() {
@@ -174,6 +186,11 @@ $(function() {
             toastr.info("不是可以提交复核的状态");
             return;
         }
+        // if (!selRecords[0].ltUser) {
+        //     toastr.info("不是可以提交复核的状态");
+        //     return;
+        // }
+
         window.location.href = 'order_tijiao.html?code=' + selRecords[0].code;
     });
 });

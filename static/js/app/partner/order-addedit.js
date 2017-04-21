@@ -29,7 +29,7 @@ $(function() {
         field: 'ltDatetime',
         title: '量体时间',
         required: true,
-        type: 'datetime'
+        type: 'date'
     }, {
         field: 'Province1',
         title: '量体地址',

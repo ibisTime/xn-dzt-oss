@@ -8,13 +8,12 @@ $(function() {
         "棉弹力": "棉弹力"
     };
 
-    var typeSelect = {
-        field: 'type',
-        title: '类型',
-        type: "select",
-        data: typeKind,
-        hidden: true
-    };
+    // var typeSelect = {
+    //     field: 'type',
+    //     title: '类型',
+    //     type: "select",
+    //     data: typeKind
+    // };
     var fields = [{
         title: "名称",
         field: "name",
@@ -25,23 +24,21 @@ $(function() {
         field: "parentCode",
         type: 'select',
         key: "measure",
-        formatter: Dict.getNameForList("measure"),
         required: true,
-        onChange: function(v, data) {
-            if (v == "1-2") {
-                typeSelect.hidden = false;
-            } else { typeSelect.hidden = true }
-        }
-    }, typeSelect, {
-        field: 'pic',
-        title: '图片',
-        type: "img",
-        //required: true
+        // onChange: function(v, data) {
+        //     if (v == "1-2") {
+        //         typeSelect.hidden = false;
+        //     } else { typeSelect.hidden = true }
+        // }
     }, {
         field: 'orderNo',
         title: '顺序',
         number: true,
         required: true
+    }, {
+        field: 'pic',
+        title: '图片',
+        type: "img"
     }];
 
     buildDetail({

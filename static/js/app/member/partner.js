@@ -22,7 +22,13 @@ $(function() {
         type: "select",
         field: "province",
         formatter: function(v, data) {
-            var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "") + (data.userExt.address || "");
+            if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
+                data.userExt.city = "";
+                data.userExt.area = "";
+            } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
+                data.userExt.city = '';
+            }
+            var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "");
             return result || "-";
         }
     }, {
@@ -132,4 +138,5 @@ $(function() {
         window.location.href = "partner_addedit.html?userId=" + selRecords[0].userId;
 
     });
+    $("#ledgerBtn").remove();
 });

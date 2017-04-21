@@ -42,14 +42,16 @@ $(function() {
             field: "applyNote",
             readonly: true
         }, {
-            title: "选择量体师",
+            title: "量体师",
             type: "ltUser",
-            readonly: true
-        }, {
-            title: "量体师姓名",
-            field: "ltName",
-            type: "select",
-            readonly: true
+            readonly: true,
+            formatter: function(v, data) {
+                if (data.ltUserDO) {
+                    return data.ltUserDO.realName
+                } else {
+                    return "-"
+                }
+            },
         }, {
             title: '价格',
             field: "amount",

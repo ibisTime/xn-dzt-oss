@@ -63,5 +63,4 @@ $(function() {
     $("#achieveBtn").remove();
     $("#accountBtn").remove();
     $("#ledgerBtn").remove();
-    $("#orderBtn").remove();
 });

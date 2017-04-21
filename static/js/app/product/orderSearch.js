@@ -27,7 +27,14 @@ $(function() {
         formatter: dateFormat
     }, {
         title: "量体师",
-        field: "ltUser"
+        field: "ltUser",
+        formatter: function(v, data) {
+            if (data.ltUserDO) {
+                return data.ltUserDO.realName
+            } else {
+                return "-"
+            }
+        }
     }, {
         title: "订单金额",
         field: "amount",

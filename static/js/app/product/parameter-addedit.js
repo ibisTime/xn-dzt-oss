@@ -8,12 +8,13 @@ $(function() {
         "棉弹力": "棉弹力"
     };
 
-    // var typeSelect = {
-    //     field: 'type',
-    //     title: '类型',
-    //     type: "select",
-    //     data: typeKind
-    // };
+    var typeSelect = {
+        field: 'type',
+        title: '类型',
+        type: "select",
+        data: typeKind,
+        hidden: true
+    };
     var fields = [{
         title: "名称",
         field: "name",
@@ -24,12 +25,7 @@ $(function() {
         field: "parentCode",
         type: 'select',
         key: "measure",
-        required: true,
-        // onChange: function(v, data) {
-        //     if (v == "1-2") {
-        //         typeSelect.hidden = false;
-        //     } else { typeSelect.hidden = true }
-        // }
+        required: true
     }, {
         field: 'orderNo',
         title: '顺序',

@@ -20,10 +20,6 @@ $(function() {
         title: '业务类型',
         search: true,
         key: 'biz_type',
-        data: {
-            '11': '充值',
-            '-11': '取现'
-        },
         //   keyCode: '802006',
         formatter: Dict.getNameForList('biz_type')
     }, {
@@ -49,7 +45,15 @@ $(function() {
             bizType: '11,-11'
         }
     });
+    $('#detaBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "recharge_detail.html?code=" + selRecords[0].code;
 
+    });
 
 
 });

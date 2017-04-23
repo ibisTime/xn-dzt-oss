@@ -72,7 +72,8 @@ $(function() {
         }, {
             title: " 备注",
             field: "remark",
-            maxlength: 255
+            maxlength: 255,
+            required: true
         }
     ];
 

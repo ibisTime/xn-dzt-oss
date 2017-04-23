@@ -14,7 +14,7 @@ $(function() {
         city = data.userExt.city;
         area = data.userExt.area;
     });
-    console.log(province);
+
 
 
     var mobileView = {

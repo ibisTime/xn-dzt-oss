@@ -7,7 +7,7 @@ $(function() {
     }, {
         title: "订单编号",
         field: "code",
-        //search: true
+        search: true
     }, {
         field: 'applyName',
         title: '下单用户',

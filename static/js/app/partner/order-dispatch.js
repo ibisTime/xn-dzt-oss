@@ -99,7 +99,7 @@ $(function() {
                 province: province,
                 city: city,
                 area: area,
-                //status: '0',
+                status: '0',
                 userRefere: sessionStorage.getItem('userId'),
                 updater: ''
             },

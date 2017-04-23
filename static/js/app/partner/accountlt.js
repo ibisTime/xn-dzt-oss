@@ -43,7 +43,7 @@ $(function() {
     });
 
     $('#addBtn').remove();
-    $('#edit2Btn').remove();
+    $("#edit2Btn").remove();
     $('#rockBtn').remove();
     $('#activeBtn').remove();
     $('#achieveBtn').remove();

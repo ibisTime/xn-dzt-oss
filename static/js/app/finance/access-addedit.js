@@ -28,7 +28,7 @@ $(function() {
             userId: userId,
             type: 'NOT_P'
         },
-        valueName: '{{realName.DATA}} - {{typeName.DATA}}',
+        valueName: '{{realName.DATA}} -{{typeName.DATA}}',
         searchName: 'realName'
     }, {
         field: 'transAmount',

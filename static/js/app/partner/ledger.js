@@ -34,11 +34,14 @@ $(function() {
             // keyCode: "802006",
             formatter: Dict.getNameForList("jour_status"),
             search: true
-        },
-        {
+        }, {
             field: 'transAmount',
             title: '变动金额',
             formatter: moneyFormat
+        }, {
+            field: 'createDatetime',
+            title: '创建时间',
+            formatter: dateTimeFormat
         }, {
             field: 'bizNote',
             title: "备注"

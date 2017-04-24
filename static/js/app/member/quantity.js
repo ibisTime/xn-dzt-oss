@@ -42,6 +42,10 @@ $(function() {
         key: "user_status",
         formatter: Dict.getNameForList("user_status"),
         search: true
+    }, {
+        field: 'createDatetime',
+        title: '加入时间',
+        formatter: dateTimeFormat
     }];
     buildList({
         router: 'quantity',

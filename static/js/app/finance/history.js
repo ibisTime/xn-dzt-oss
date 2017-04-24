@@ -23,16 +23,16 @@ $(function() {
         //   keyCode: '802006',
         formatter: Dict.getNameForList('biz_type')
     }, {
+        field: 'createDatetime',
+        title: '创建时间',
+        formatter: dateTimeFormat
+    }, {
         field: 'status',
         title: '状态',
         key: 'jour_status',
         // keyCode: '802006',
         formatter: Dict.getNameForList('jour_status'),
         search: true
-    }, {
-        field: 'createDatetime',
-        title: '创建时间',
-        formatter: dateTimeFormat
     }, {
         field: 'bizNote',
         title: '备注说明'

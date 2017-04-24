@@ -1,7 +1,16 @@
 $(function() {
     var code = getQueryString('code');
     var view = !!getQueryString('v');
-    // var userId = getQueryString('userId') || '';
+    // var userId = sessionStorage.getItem('userId');
+    var accountNumber;
+    reqApi({
+        code: "802503",
+        json: { userId: sessionStorage.getItem('userId') },
+        sync: true
+    }).then(function(data) {
+        accountNumber = data[0].accountNumber;
+    });
+
 
     var fields = [{
         field: 'bizType',
@@ -15,18 +24,17 @@ $(function() {
         field: 'accountNumberList',
         title: '用户账户',
         required: true,
-        type: "select",
-        pageCode: "802500",
-        keyName: "accountNumber",
-        required: true,
-        type: 'select',
-        params: {
-            currency: 'CNY',
-            userId: sessionStorage.getItem('userId'),
-            type: 'NOT_P'
-        },
-        valueName: '{{realName.DATA}} - {{typeName.DATA}}',
-        searchName: 'realName'
+        type: "hidden",
+        value: accountNumber,
+        // pageCode: "802500",
+        // keyName: "accountNumber",
+        // params: {
+        //     currency: 'CNY',
+        //     userId: sessionStorage.getItem('userId'),
+        //     type: 'NOT_P'
+        // },
+        // valueName: '{{realName.DATA}} - {{typeName.DATA}}',
+        // searchName: 'realName'
     }, {
         field: 'transAmount',
         title: '取现金额',

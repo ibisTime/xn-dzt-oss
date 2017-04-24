@@ -39,6 +39,10 @@ $(function() {
         title: '变动后金额',
         formatter: moneyFormat
     }, {
+        title: "创建时间",
+        field: 'createDatetime',
+        formatter: dateTimeFormat
+    }, {
         field: 'status',
         title: '状态',
         type: 'select',

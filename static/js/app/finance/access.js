@@ -37,6 +37,10 @@ $(function() {
             field: 'postAmount',
             title: '变动后金额',
             formatter: moneyFormat
+        }, {
+            title: "创建时间",
+            field: 'createDatetime',
+            formatter: dateTimeFormat
         },
         {
             field: 'status',

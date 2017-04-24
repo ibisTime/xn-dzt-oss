@@ -2,47 +2,47 @@ $(function() {
 
 
     var columns = [{
-            field: '',
-            title: '',
-            checkbox: true
-        }, {
-            title: '登录名/手机号',
-            field: 'mobile',
-            // search: true
-        }, {
-            title: '姓名',
-            field: 'realName',
-            search: true
-        },
-        {
-            title: "辖区",
-            field: "province2",
-            formatter: function(v, data) {
-                if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
-                    data.userExt.city = "";
-                    data.userExt.area = "";
-                } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
-                    data.userExt.city = '';
-                }
-                var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "") + (data.userExt.address || "");
-                return result || "-";
+        field: '',
+        title: '',
+        checkbox: true
+    }, {
+        title: '登录名/手机号',
+        field: 'mobile'
+    }, {
+        title: '姓名',
+        field: 'realName',
+        search: true
+    }, {
+        title: "辖区",
+        field: "province2",
+        formatter: function(v, data) {
+            if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
+                data.userExt.city = "";
+                data.userExt.area = "";
+            } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
+                data.userExt.city = '';
             }
-        },
-        {
-            title: "身份证号",
-            field: "idNo",
-        }, {
-            title: "分成比例",
-            field: "divRate"
-        }, {
-            title: "状态",
-            field: "status",
-            type: "select",
-            key: "user_status",
-            formatter: Dict.getNameForList("user_status"),
-            search: true
+            var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "") + (data.userExt.address || "");
+            return result || "-";
         }
-    ];
+    }, {
+        title: "身份证号",
+        field: "idNo",
+    }, {
+        title: "分成比例",
+        field: "divRate"
+    }, {
+        title: "状态",
+        field: "status",
+        type: "select",
+        key: "user_status",
+        formatter: Dict.getNameForList("user_status"),
+        search: true
+    }, {
+        field: 'createDatetime',
+        title: '加入时间',
+        formatter: dateTimeFormat
+    }];
     buildList({
         router: 'quantity',
         columns: columns,

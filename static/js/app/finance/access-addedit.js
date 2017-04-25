@@ -40,7 +40,7 @@ $(function() {
         title: '取现说明',
         required: true,
         maxlength: 32
-    }, ];
+    }];
 
     var options = {
         fields: fields,

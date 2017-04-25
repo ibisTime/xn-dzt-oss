@@ -51,8 +51,8 @@ $(function() {
         formatter: Dict.getNameForList('jour_status'),
         search: true
     }, {
-        field: 'remark',
-        title: '备注'
+        field: 'bizNote',
+        title: '取现说明'
     }];
     buildList({
         columns: columns,
@@ -65,6 +65,10 @@ $(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != "0") {
+            toastr.info("不是可以审批的状态");
             return;
         }
         window.location.href = "recharge_check.html?code=" + selRecords[0].code;

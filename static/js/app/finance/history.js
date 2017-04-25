@@ -19,6 +19,10 @@ $(function() {
         field: 'bizType',
         title: '业务类型',
         search: true,
+        data: {
+            "11": "充值",
+            "-11": "取现"
+        },
         key: 'biz_type',
         //   keyCode: '802006',
         formatter: Dict.getNameForList('biz_type')
@@ -35,7 +39,7 @@ $(function() {
         search: true
     }, {
         field: 'bizNote',
-        title: '备注说明'
+        title: '充值说明'
     }];
 
     buildList({

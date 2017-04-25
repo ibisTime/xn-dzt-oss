@@ -5,7 +5,7 @@ $(function() {
     var priceList = {};
     reqApi({
         code: "620007",
-        json: {},
+        json: { updater: "" },
         sync: true
     }).then(function(data) {
         for (var i = 0; i < data.length; i++) {

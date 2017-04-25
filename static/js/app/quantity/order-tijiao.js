@@ -28,12 +28,6 @@ $(function() {
             title: '量体地址',
             field: 'province1',
             formatter: function(v, data) {
-                if (data.ltProvince == data.ltCity && data.ltCity == data.ltArea) {
-                    data.ltCity = "";
-                    data.ltArea = "";
-                } else if (data.ltProvince == data.ltCity && data.ltCity != data.ltArea) {
-                    data.ltCity = '';
-                }
                 var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
                 return result || "-";
             },
@@ -50,6 +44,7 @@ $(function() {
         }, {
             title: "量体师",
             field: "ltUser",
+            readonly: true,
             formatter: function(v, data) {
                 if (data.ltUserDO) {
                     return data.ltUserDO.realName
@@ -57,7 +52,6 @@ $(function() {
                     return "-"
                 }
             },
-            readonly: true
         }, {
             title: '价格',
             field: "amount",
@@ -75,43 +69,6 @@ $(function() {
         }, {
             title: "收件人地址",
             field: "reAddress",
-
-            readonly: true
-        }, {
-            field: 'orderCode',
-            title: '发货单号',
-            type: "hidden",
-            value: code,
-            readonly: true,
-        }, {
-            title: '物流公司',
-            field: 'logisticsCompany',
-            type: 'select',
-            key: 'wl_company',
-            readonly: true,
-        }, {
-            title: '物流单号',
-            field: 'logisticsCode',
-            readonly: true,
-        }, {
-            field: 'deliverer',
-            title: '发货人',
-            readonly: true,
-        }, {
-            field: 'deliveryDatetime',
-            title: '发货时间',
-            type: "datetime",
-            formatter: dateTimeFormat,
-            readonly: true,
-        }, {
-            field: 'pdf',
-            title: '物流单',
-            type: 'img',
-            readonly: true
-        }, {
-            field: 'remark',
-            title: '备注',
-            maxlength: 255,
             readonly: true
         }
     ];
@@ -123,11 +80,26 @@ $(function() {
     };
 
     options.buttons = [{
+        title: '确定',
+        handler: function() {
+            if ($('#jsForm1').valid()) {
+                var data = {};
+                data['orderCode'] = code;
+                reqApi({
+                    code: "620206",
+                    json: data
+                }).done(function() {
+                    sucDetail();
+                });
+            }
+        }
+    }, {
         title: '返回',
         handler: function() {
             goBack();
         }
     }];
+
     buildDetail(options);
     var allData = {};
     var productSpecsList;
@@ -143,8 +115,6 @@ $(function() {
                 data.productList[0].productSpecsList.length) {
                 productSpecsList = data.productList[0].productSpecsList;
             }
-        } else {
-            modelCode = '1'
         }
         // if (data.productList && data.productList.length &&
         //     data.productList[0].productSpecsList &&
@@ -152,9 +122,7 @@ $(function() {
         //     productSpecsList = data.productList[0].productSpecsList;
         // }
     });
-    if (modelCode == "3") {
-        $('#jsForm').css('display', 'none')
-    };
+
     var ids = ["1-1", "1-3", "1-4", "1-5",
         "1-6", "1-7", "1-8", "1-9", "1-10",
         "1-11", "3-1", "3-5", "3-6", "3-7",
@@ -396,4 +364,5 @@ $(function() {
             return OSS.picBaseUrl + "/" + src;
         }
     }
+
 });

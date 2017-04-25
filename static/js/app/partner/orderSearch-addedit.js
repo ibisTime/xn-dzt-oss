@@ -142,14 +142,11 @@ $(function() {
             if (data.productList[0].productSpecsList &&
                 data.productList[0].productSpecsList.length) {
                 productSpecsList = data.productList[0].productSpecsList;
-            }
-            //  else { productSpecsList = "pro" }
-        } else {
-            modelCode = "3"
+            } else { productSpecsList = "3" }
         }
 
     });
-    if (modelCode != "3") {
+    if (productSpecsList != '3') {
         var ids = ["1-1", "1-3", "1-4", "1-5",
             "1-6", "1-7", "1-8", "1-9", "1-10",
             "1-11", "3-1", "3-5", "3-6", "3-7",

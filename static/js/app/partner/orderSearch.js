@@ -14,10 +14,16 @@ $(function() {
         type: "select",
         key: "order_status",
         formatter: Dict.getNameForList("order_status"),
-        search: true
+        // search: true
     }, {
         field: 'applyName',
-        title: '下单用户'
+        title: '下单用户',
+        search: true
+    }, {
+        title: '量体师',
+        field: "ltName",
+        search: true,
+        visible: false
     }, {
         title: "联系方式",
         field: "applyMobile"
@@ -51,7 +57,8 @@ $(function() {
         columns: columns,
         pageCode: '620220',
         searchParams: {
-            toUser: sessionStorage.getItem('userId')
+            toUser: sessionStorage.getItem('userId'),
+            status: "8"
         }
     });
     $("#rePurchaseBtn").click(function() {

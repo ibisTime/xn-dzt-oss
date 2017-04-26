@@ -22,6 +22,16 @@ $(function() {
         field: "status",
         type: "select",
         key: "order_status",
+        data: {
+            "1": "待量体",
+            "2": "已定价",
+            "3": "已支付",
+            "4": "待复核",
+            "5": "待生产",
+            "6": "生产中",
+            "7": "已发货",
+            "9": '已取消'
+        },
         formatter: Dict.getNameForList("order_status"),
         search: true
     }, {
@@ -53,7 +63,11 @@ $(function() {
     buildList({
         router: 'order',
         columns: columns,
-        pageCode: '620220'
+        pageCode: '620220',
+        searchParams: {
+            statusList: ["1", "2", "3", "4", "5", "6", "7", "9"]
+                // status: "!=8"
+        }
     });
 
     $("#rePurchaseBtn").click(function() {
@@ -85,7 +99,15 @@ $(function() {
             toastr.info("不是代定价的状态");
             return;
         }
-        window.location.href = 'order_price.html?code=' + selRecords[0].code;
+
+        if (!selRecords[0].ltUser) {
+            toastr.info("不是代定价的状态");
+            return;
+        } else {
+            window.location.href = 'order_price.html?code=' + selRecords[0].code;
+        };
+
+
     });
 
     $("#payBtn").click(function() {
@@ -186,11 +208,14 @@ $(function() {
             toastr.info("不是可以提交复核的状态");
             return;
         }
-        // if (!selRecords[0].ltUser) {
-        //     toastr.info("不是可以提交复核的状态");
-        //     return;
-        // }
-
         window.location.href = 'order_tijiao.html?code=' + selRecords[0].code;
+    });
+    $("#detaBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = 'orderSearch_addedit.html?code=' + selRecords[0].code;
     });
 });

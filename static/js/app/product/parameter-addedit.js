@@ -7,34 +7,56 @@ $(function() {
         "棉真丝": "棉真丝",
         "棉弹力": "棉弹力"
     };
-
-    var typeSelect = {
-        field: 'type',
-        title: '类型',
-        type: "select",
-        data: typeKind,
-        hidden: true
-    };
+    // var number = ;
+    // var picParam =;
+    // var typeParam = ;
     var fields = [{
-        title: "名称",
-        field: "name",
-        maxlength: 255,
-        required: true,
-    }, {
-        title: "key",
+        title: "栏目项",
         field: "parentCode",
         type: 'select',
         key: "measure",
-        required: true
+        required: true,
+
+    }, {
+        title: "栏目值",
+        field: "name",
+        maxlength: 255,
+        required: true,
+
     }, {
         field: 'orderNo',
         title: '顺序',
         number: true,
-        required: true
+        required: true,
+        afterSet: function(v, data) {
+                if (v == undefined) {
+                    $("#orderNo").parent().css("display", 'none')
+                }
+            }
+            // hidden: true
     }, {
-        field: 'pic',
-        title: '图片',
-        type: "img"
+        title: "图片",
+        field: "pic",
+        type: "img",
+        // hidden: true,
+        required: true,
+        afterSet: function(v, data) {
+            if (v == undefined || v == "") {
+                $("#pic").parent().css("display", 'none')
+            }
+        }
+    }, {
+        field: 'type',
+        title: '类型',
+        type: "select",
+        data: typeKind,
+        required: true,
+        afterSet: function(v, data) {
+                if (v == undefined) {
+                    $("#type").parent().css("display", 'none')
+                }
+            }
+            // hidden: true
     }];
 
     buildDetail({

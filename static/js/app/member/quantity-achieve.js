@@ -17,7 +17,8 @@ $(function() {
         search: true
     }, {
         field: 'applyName',
-        title: '下单用户'
+        title: '下单用户',
+        search: true
     }, {
         title: "联系方式",
         field: "applyMobile"

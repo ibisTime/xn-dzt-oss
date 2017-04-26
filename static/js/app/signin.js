@@ -8,7 +8,7 @@ function getQueryString(name) {
     }
     return '';
 }
-sessionStorage.setItem('loginKind', getQueryString('kind') || 'f1');
+sessionStorage.setItem('loginKind', getQueryString('kind') || '01');
 sessionStorage.setItem('listSearchs', '');
 $(function() {
     $('#hello-text').html(OSS.systemName);

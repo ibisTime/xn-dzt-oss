@@ -13,11 +13,27 @@ $(function() {
         field: "status",
         type: "select",
         key: "order_status",
+        data: {
+            "1": "待量体",
+            "2": "已定价",
+            "3": "已支付",
+            "4": "待复核",
+            "5": "待生产",
+            "6": "生产中",
+            "7": "已发货",
+            "9": '已取消'
+        },
         formatter: Dict.getNameForList("order_status"),
         search: true
     }, {
         field: 'applyName',
-        title: '下单用户'
+        title: '下单用户',
+        search: true
+    }, {
+        title: '量体师',
+        field: "ltName",
+        search: true,
+        visible: false
     }, {
         title: "联系方式",
         field: "applyMobile"
@@ -27,7 +43,7 @@ $(function() {
         formatter: dateFormat
     }, {
         title: "量体师",
-        field: "ltUser",
+        field: "ltUser1",
         formatter: function(v, data) {
             if (data.ltUserDO) {
                 return data.ltUserDO.realName
@@ -51,7 +67,8 @@ $(function() {
         columns: columns,
         pageCode: '620220',
         searchParams: {
-            toUser: sessionStorage.getItem('userId')
+            toUser: sessionStorage.getItem('userId'),
+            statusList: ["1", "2", "3", "4", "5", "6", "7", "9"]
         }
     });
     $("#rePurchaseBtn").click(function() {
@@ -82,5 +99,14 @@ $(function() {
             return;
         }
         window.location.href = 'order_tijiao.html?code=' + selRecords[0].code;
+    });
+    $("#detaBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+
+        window.location.href = 'orderSearch_addedit.html?code=' + selRecords[0].code;
     });
 });

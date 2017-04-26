@@ -592,7 +592,7 @@ function buildList(options) {
     if (options.type != 'o2m') {
         showPermissionControl();
     }
-
+    var searchs = JSON.parse(sessionStorage.getItem('listSearchs') || '{}')[location.pathname];
     options.router = options.router || /.*\/([^\/]*)\.html/.exec(location.href)[1];
 
     var html = '<ul>';
@@ -719,6 +719,7 @@ function buildList(options) {
     });
 
     $('#searchBtn').click(function() {
+        updateListSearch();
         $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
     });
 
@@ -790,7 +791,10 @@ function buildList(options) {
         });
 
     });
-
+    var searchValue;
+    for (searchValue in searchs) {
+        $('#' + searchValue).val(searchs[searchValue]);
+    }
     $('#detailBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -3280,3 +3284,11 @@ $(function() {
         }, +OSS.userValidTime * 60 * 1000);
     });
 });
+
+function updateListSearch() {
+    var searchs = JSON.parse(sessionStorage.getItem('listSearchs') || '{}');
+    var pathName = location.pathname;
+    var params = $('.search-form').serializeObject();
+    searchs[pathName] = params;
+    sessionStorage.setItem('listSearchs', JSON.stringify(searchs));
+}

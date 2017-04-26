@@ -17,7 +17,13 @@ $(function() {
         search: true
     }, {
         field: 'applyName',
-        title: '下单用户'
+        title: '下单用户',
+        search: true
+    }, {
+        title: '量体师',
+        field: "ltName",
+        search: true,
+        visible: false
     }, {
         title: "联系方式",
         field: "applyMobile"
@@ -27,7 +33,14 @@ $(function() {
         formatter: dateTimeFormat
     }, {
         title: "量体师",
-        field: "ltUser"
+        field: "ltUser",
+        formatter: function(v, data) {
+            if (data.ltUserDO) {
+                return data.ltUserDO.realName
+            } else {
+                return "-"
+            }
+        },
     }, {
         title: "订单金额",
         field: "amount",

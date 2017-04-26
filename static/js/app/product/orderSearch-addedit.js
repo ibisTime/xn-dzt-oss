@@ -100,8 +100,8 @@ $(function() {
         }, {
             field: 'deliveryDatetime',
             title: '发货时间',
-            type: "datetime",
-            formatter: dateTimeFormat,
+            // type: "datetime",
+            formatter: dateFormat,
             readonly: true,
         }, {
             field: 'pdf',
@@ -207,7 +207,9 @@ $(function() {
                     $("#modal-chose").find(".fab_type[data-name=" + spec.type + "]").click()
                         .end().find("li[data-code=" + spec.code + "]").click();
                 } else if (spec.name) {
-                    $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]").click();
+                    var ele = $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]");
+                    spec.pic && ele.attr("src", getImg(spec.pic));
+                    ele.click();
                 } else {
                     $("#" + spec.parentCode).val(spec.code).prop("disabled", 1);
                 }

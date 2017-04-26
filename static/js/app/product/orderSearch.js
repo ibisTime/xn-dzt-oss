@@ -9,15 +9,20 @@ $(function() {
         field: "code",
         search: true
     }, {
+        title: '量体师',
+        field: "ltName",
+        search: true,
+        visible: false
+    }, {
         title: "订单状态",
         field: "status",
         type: "select",
         key: "order_status",
-        formatter: Dict.getNameForList("order_status"),
-        search: true
+        formatter: Dict.getNameForList("order_status")
     }, {
         field: 'applyName',
-        title: '下单用户'
+        title: '下单用户',
+        search: true
     }, {
         title: "联系方式",
         field: "applyMobile"
@@ -46,6 +51,10 @@ $(function() {
     buildList({
         router: 'orderSearch',
         columns: columns,
-        pageCode: '620220'
+        pageCode: '620220',
+        searchParams: {
+            status: "8"
+        }
+
     });
 });

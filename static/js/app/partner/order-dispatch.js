@@ -100,7 +100,7 @@ $(function() {
                 city: city,
                 area: area,
                 status: '0',
-                userRefere: sessionStorage.getItem('userId'),
+                // userReferee: sessionStorage.getItem('userId'),
                 updater: ''
             },
             required: true

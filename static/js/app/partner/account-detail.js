@@ -40,6 +40,9 @@ $(function() {
             title: '创建时间',
             formatter: dateTimeFormat
         }, {
+            title: "审核意见",
+            field: "remark"
+        }, {
             field: 'bizNote',
             title: "备注"
         }

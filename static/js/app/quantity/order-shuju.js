@@ -82,6 +82,9 @@ $(function() {
                     .end().find("li[data-code=" + spec.code + "]").click();
             } else if (spec.name) {
                 $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]").click();
+                // var ele = $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]");
+                // spec.pic && ele.find("img").attr("src", getImg(spec.pic));
+                // ele.click();
             } else {
                 $("#" + spec.parentCode).val(spec.code);
             }
@@ -244,7 +247,9 @@ $(function() {
         });
 
         $("#to_nex_step_4").on("click", function() {
-            goPage(3);
+            if (validatePage3()) {
+                goPage(3);
+            }
         });
         $("#form-tab2").validate({
             'rules': {
@@ -327,17 +332,20 @@ $(function() {
                 '4-3': {
                     min: 10,
                     max: 100,
-                    number: true
+                    number: true,
+                    required: true
                 },
                 '4-4': {
-                    min: 10,
-                    max: 100,
-                    number: true
-                },
-                '4-5': {
                     min: 15,
                     max: 70,
-                    number: true
+                    number: true,
+                    required: true
+                },
+                '4-2': {
+                    min: 10,
+                    max: 100,
+                    number: true,
+                    required: true
                 }
             }
         });
@@ -345,7 +353,7 @@ $(function() {
             'rules': {
                 '5-1': {
                     required: true,
-                    maxlength: 60,
+                    maxlength: 10,
                     isNotFace: true
                 }
             }
@@ -354,17 +362,17 @@ $(function() {
             'rules': {
                 '6-1': {
                     required: true,
-                    maxlength: 60,
+                    maxlength: 5,
                     number: true
                 },
                 '6-2': {
                     required: true,
-                    maxlength: 60,
+                    maxlength: 10,
                     number: true
                 },
                 '6-3': {
                     required: true,
-                    maxlength: 60,
+                    maxlength: 7,
                     number: true
                 },
                 '6-4': {
@@ -374,7 +382,8 @@ $(function() {
                 },
                 '6-5': {
                     maxlength: 255,
-                    isNotFace: true
+                    isNotFace: true,
+                    required: true,
                 }
             }
         });
@@ -446,8 +455,8 @@ $(function() {
     }
 
     function validatePage3() {
-        if ($('#form-tab2').valid()) {
-            var data = $('#form-tab2').serializeObject();
+        if ($('#form-tab3').valid()) {
+            var data = $('#form-tab3').serializeObject();
             return true;
         }
         return false;

@@ -3,75 +3,77 @@ $(function() {
     //var  view =getQueryString('v');
 
     var fields = [{
-            title: '订单号',
-            field: 'code1',
-            formatter: function(v, data) {
-                return data.code
-            },
-            readonly: true
-        }, {
-            title: '状态',
-            field: 'status',
-            key: "order_status",
-            formatter: Dict.getNameForList("order_status"),
-            readonly: true
+        title: '订单号',
+        field: 'code1',
+        formatter: function(v, data) {
+            return data.code
         },
-        {
-            title: '下单人',
-            field: 'applyName',
-            readonly: true
-        }, {
-            title: '联系方式',
-            field: 'applyMobile',
-            readonly: true
-        }, {
-            title: '量体地址',
-            field: 'province1',
-            formatter: function(v, data) {
-                var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
-                return result || "-";
-            },
-            readonly: true
-        }, {
-            title: '量体时间',
-            field: 'ltDatetime',
-            formatter: dateFormat,
-            readonly: true
-        }, {
-            title: "量体嘱咐",
-            field: "applyNote",
-            readonly: true
-        }, {
-            title: "量体师",
-            field: "ltUser",
-            readonly: true,
-            formatter: function(v, data) {
-                if (data.ltUserDO) {
-                    return data.ltUserDO.realName
-                } else {
-                    return "-"
-                }
-            },
-        }, {
-            title: '价格',
-            field: "amount",
-            formatter: moneyFormat,
-            readonly: true
-        }, {
-            title: "收件人姓名",
-            field: "receiver",
-            type: "select",
-            readonly: true
-        }, {
-            title: "收件人联系方式",
-            field: 'reMobile',
-            readonly: true
-        }, {
-            title: "收件人地址",
-            field: "reAddress",
-            readonly: true
-        }
-    ];
+        readonly: true
+    }, {
+        title: '状态',
+        field: 'status',
+        key: "order_status",
+        formatter: Dict.getNameForList("order_status"),
+        readonly: true
+    }, {
+        title: '下单人',
+        field: 'applyName',
+        readonly: true
+    }, {
+        title: '联系方式',
+        field: 'applyMobile',
+        readonly: true
+    }, {
+        title: '量体地址',
+        field: 'province1',
+        formatter: function(v, data) {
+            var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
+            return result || "-";
+        },
+        readonly: true
+    }, {
+        title: '量体时间',
+        field: 'ltDatetime',
+        formatter: dateFormat,
+        readonly: true
+    }, {
+        title: "量体嘱咐",
+        field: "applyNote",
+        readonly: true
+    }, {
+        title: "量体师",
+        field: "ltUser",
+        readonly: true,
+        formatter: function(v, data) {
+            if (data.ltUserDO) {
+                return data.ltUserDO.realName
+            } else {
+                return "-"
+            }
+        },
+    }, {
+        title: '价格',
+        field: "amount",
+        formatter: moneyFormat,
+        readonly: true
+    }, {
+        title: "收件人姓名",
+        field: "receiver",
+        type: "select",
+        readonly: true
+    }, {
+        title: "收件人联系方式",
+        field: 'reMobile',
+        readonly: true
+    }, {
+        title: "收件人地址",
+        field: "reAddress",
+        readonly: true
+    }, {
+        title: "复核意见",
+        field: "remark",
+        readonly: true
+    }];
 
     var options = {
         fields: fields,
@@ -180,7 +182,9 @@ $(function() {
                 $("#modal-chose").find(".fab_type[data-name=" + spec.type + "]").click()
                     .end().find("li[data-code=" + spec.code + "]").click();
             } else if (spec.name) {
-                $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]").click();
+                var ele = $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]");
+                spec.pic && ele.find("img").attr("src", getImg(spec.pic));
+                ele.click();
             } else {
                 $("#" + spec.parentCode).val(spec.code).prop("disabled", 1);
             }

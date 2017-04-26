@@ -1,11 +1,353 @@
 <link rel="import" href="../head.html?__inline">
 <script src="../../js/app/product/order-submit.js"></script>
+<style>
+    .tab-hd {
+        height: 46px;
+        background-color: #f7f7f7;
+        letter-spacing: 1.4px;
+        border-bottom: 1px solid #5daedb;
+        color: #666;
+    }
+    
+    .tab-hd span {
+        height: 45px;
+        line-height: 45px;
+        padding: 0 20px;
+        display: inline-block;
+        float: left;
+        cursor: pointer;
+    }
+    
+    .tab-hd span.act {
+        background: #5daedb;
+        color: #fff;
+    }
+    
+    .form-tab {
+        margin-top: 30px;
+        line-height: 34px;
+        display: none;
+    }
+    
+    .form-tab.act {
+        display: block;
+    }
+    
+    .form-tab .item-tab {
+        letter-spacing: 1px;
+        position: relative;
+        padding-left: 75px;
+        clear: both;
+    }
+    
+    .item-tab>span {
+        position: absolute;
+        display: inline-block;
+        height: 34px;
+        width: 120px;
+        text-align: left;
+        top: 0;
+        left: 0;
+        line-height: 34px;
+        z-index: -1;
+    }
+    
+    .item-tab .case {
+        min-height: 40px;
+        margin-bottom: 22px;
+        clear: both;
+    }
+    
+    .item-tab .case>span {
+        display: inline-block;
+        min-width: 95px;
+        margin-right: 5px;
+        padding: 0 10px;
+        height: 34px;
+        line-height: 32px;
+        text-align: center;
+        border-radius: 4px;
+        background: #f7f7f7;
+        border: 1px solid #cccccc;
+    }
+    
+    .item-tab .case>span.act {
+        background: #5daedb;
+        border: 1px solid #5daedb;
+        color: #fff;
+    }
+    
+    .item-tab .caseimg {
+        margin-bottom: 10px;
+    }
+    
+    .item-tab .caseimg.imgcenter {
+        text-align: center;
+    }
+    
+    .item-tab .caseimg>div {
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .item-tab .caseimg>div.act {
+        color: #5daedb;
+    }
+    
+    .item-tab .caseimg>div p {
+        position: relative;
+        line-height: 70px;
+        overflow: hidden;
+        width: 70px;
+        height: 70px;
+        border: 3px solid #cccccc;
+        border-radius: 4px;
+    }
+    
+    .item-tab .caseimg>div.act p {
+        border: 3px solid #5daedb;
+    }
+    
+    .item-tab .caseimg.imgcenter img,
+    .item-tab .caseimg.imgright img {
+        width: 60px;
+    }
+    
+    .item-tab .casebtn {
+        padding-bottom: 40px;
+    }
+    
+    .item-tab .casebtn input[type=button] {
+        width: 100px;
+        height: 40px;
+        background-color: #5daedb;
+        color: #fff;
+        margin-right: 2px;
+        border-radius: 4px;
+        line-height: 40px;
+        text-align: center;
+    }
+    
+    .modal-chose {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        transform: scale(0);
+        -webkit-transform: scale(0);
+        overflow: hidden;
+        top: 0;
+    }
+    
+    .modal-chose.open {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+    }
+    
+    .modalbg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-transition: background 0.6s ease 0s;
+        -moz-transition: background 0.6s ease 0s;
+        transition: background 0.6s ease 0s;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0);
+    }
+    
+    .modalbg.open {
+        background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .more-condition {
+        position: absolute;
+        width: 45%;
+        min-width: 500px;
+        height: 100%;
+        top: 0;
+        right: 0;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        background: #fff;
+        transform: translate(500px, 0);
+        -webkit-transform: translate(500px, 0);
+        -webkit-transition: transform 0.6s ease 0s;
+        -moz-transition: transform 0.6s ease 0s;
+        transition: transform 0.6s ease 0s;
+        transform-origin: right 0;
+        -moz-transform-origin: right 0;
+        -webkit-transform-origin: right 0;
+    }
+    
+    .more-condition.open {
+        transform: translate(0, 0);
+        -webkit-transform: translate(0, 0);
+    }
+    
+    .form {
+        margin: 60px 0 60px 115px;
+    }
+    
+    .more-condition .form {
+        margin-left: 58px;
+    }
+    
+    .more-condition .sel-tab {
+        margin: 40px 40px 40px 50px;
+    }
+    
+    .form-content {
+        margin-top: 30px;
+        color: #666;
+    }
+    
+    .more-condition .form-content {
+        margin-top: 10px;
+        color: #666;
+    }
+    
+    .item-form {
+        line-height: 40px;
+        position: relative;
+        padding-left: 70px;
+        margin-bottom: 20px;
+    }
+    
+    .item-form-l {
+        padding-left: 0;
+    }
+    
+    .item-form input[type=text] {
+        display: block;
+        padding-left: 10px;
+        height: 40px;
+        line-height: normal;
+        border: 1px solid #cccccc;
+        border-radius: 1px;
+        width: 305px;
+    }
+    
+    .item-form-l input[type=text] {
+        display: inline-block;
+        width: 220px;
+        background: url(http://brand.linkingchina.com.cn/Public/pad/css/css.css?20170417160721) repeat-x;
+    }
+    
+    .item-form input[type=button] {
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        border-radius: 4px;
+        background-color: #5daedb;
+        width: 150px;
+        line-height: 40px;
+    }
+    
+    .item-form-l input[type=button] {
+        width: 90px;
+        margin-left: 10px;
+    }
+    
+    .shell-con {
+        position: absolute;
+        top: 160px;
+        left: 50px;
+        right: 20px;
+        bottom: 40px;
+        margin: auto;
+        overflow: auto;
+    }
+    
+    .fab_type_list {
+        display: none;
+    }
+    
+    .fab_type_list.act {
+        display: block;
+    }
+    
+    .shell-con li {
+        float: left;
+        margin-right: 10px;
+        text-align: center;
+        font-size: 10px;
+        letter-spacing: 0px;
+        color: #333;
+        padding-bottom: 10px;
+    }
+    
+    .shell-con li img {
+        width: 72px;
+        height: 72px;
+    }
+    
+    .cb {
+        clear: both;
+    }
+    
+    .shell-con li.act img {
+        border: 2px solid #991f21;
+    }
+    
+    .form-tab .item-tab {
+        letter-spacing: 1px;
+        position: relative;
+        padding-left: 75px;
+        clear: both;
+    }
+    
+    .form-tab .item-tab-fl {
+        float: left;
+        width: 50%;
+        clear: none;
+    }
+    
+    .item-tab .case input[type=text],
+    .item-tab .case input[type=number] {
+        height: 40px;
+        line-height: normal;
+        width: 150px;
+        border: 1px solid #cccccc;
+        background: #f7f7f7;
+        text-align: left;
+        padding-left: 10px;
+    }
+    
+    .item-tab .case>a {
+        display: inline-block;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 4px;
+        color: #bbb;
+        letter-spacing: 2px;
+        cursor: default;
+    }
+    
+    .item-form span {
+        position: absolute;
+        display: inline-block;
+        height: 40px;
+        width: 60px;
+        text-align: left;
+        top: 0;
+        left: 0;
+    }
+    
+    .item-form input[type=text].text-full {
+        width: 460px;
+    }
+    
+    .item-form input[type=text].text-fullt {
+        margin-top: 20px;
+    }
+</style>
 <div class="place">
     <span>位置：</span>
     <ul>
     </ul>
 </div>
-<form id="jsForm">
+<form id="jsForm1">
     <div class="form-body">
         <div class="form-title"><span id="page-title"></span></div>
         <ul class="form-info" id="form-info">
@@ -13,4 +355,394 @@
         </ul>
     </div>
 </form>
+<div id="jsForm">
+    <div class="form-body">
+        <div class="form-title"><span id="page-title">数据信息</span></div>
+        <!-- <ul class="form-info" id="form-info">
+
+        </ul> -->
+        <div class="tab-hd" id="navUl">
+            <span class="act">款式搭配</span>
+            <span>量体数据</span>
+            <span>特体数据(非必填)</span>
+            <span>刺绣内容</span>
+            <span>客户信息</span>
+        </div>
+        <div class="form-tab act">
+            <div class="item-tab">
+                <span>衬衫规格: </span>
+                <div class="case" id="1-1" name='1-1'>
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>衬衫面料:</span>
+                <div class="case param_17" id="1-2" name='1-2'>
+                    <label id="selected_fab_full_info"></label>
+                    <img id="select_fab_img" src="" width="50px">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>领型选择:</span>
+                <div class="case caseimg imgcenter" id="1-3">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>袖型选择:</span>
+                <div class="case caseimg imgright" id="1-4">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>门襟选择:</span>
+                <div class="case caseimg imgcenter" id="1-5">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>下摆选择:</span>
+                <div class="case caseimg imgcenter" id="1-6">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>收省选择:</span>
+                <div class="case caseimg imgcenter" id="1-7">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>领口颜色:</span>
+                <div class="case" id="1-8">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>口袋选择:</span>
+                <div class="case" id="1-9">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>钮扣选择:</span>
+                <div class="case" id="1-10">
+                </div>
+            </div>
+            <div class="item-tab">
+                <span>钮扣颜色:</span>
+                <div class="case" id="1-11">
+                </div>
+            </div>
+        </div>
+        <!--tab2-->
+        <div class="form-tab">
+            <form id="form-tab2" name="form-tab2">
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">领围测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-1" name="2-1" class="param_26" min_val="30.00" max_val="60.00" style="width:80px;">
+                        <a id="param_26_desc">范围: 30.00-60.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3366CC;">领围成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-10" name="2-10" class="param_26_zoom" min_val="30.00" max_val="60.00" style="width:80px;">
+                        <a id="param_26_desc">&nbsp;</a>
+                    </div>
+                </div>
+
+
+
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">胸围测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-2" name="2-2" class="param_27" min_val="60.00" max_val="180.00" style="width:80px;">
+                        <a id="param_27_desc">范围: 60.00-180.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3366CC;">胸围成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-11" name="2-11" class="param_27_zoom" min_val="60.00" max_val="180.00" style="width:80px;">
+                        <a id="param_27_desc">&nbsp;</a>
+                    </div>
+                </div>
+
+
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">腰围测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-3" name="2-3" class="param_28" min_val="50.00" max_val="170.00" style="width:80px;">
+                        <a id="param_28_desc">范围: 50.00-170.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3366CC;">腰围成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-12" name="2-12" class="param_28_zoom" min_val="50.00" max_val="170.00" style="width:80px;">
+                        <a id="param_28_desc">&nbsp;</a>
+                    </div>
+                </div>
+
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">臀围测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-4" name="2-4" class="param_29" min_val="50.00" max_val="170.00" style="width:80px;">
+                        <a id="param_29_desc">范围: 50.00-170.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3366CC;">臀围成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-13" name="2-13" class="param_29_zoom" min_val="50.00" max_val="170.00" style="width:80px;">
+                        <a id="param_29_desc">&nbsp;</a>
+                    </div>
+                </div>
+
+
+
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">肩宽测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-5" name="2-5" class="param_30" min_val="35.00" max_val="70.00" style="width:80px;">
+                        <a id="param_30_desc">范围: 35.00-70.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3366CC;">肩宽成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-14" name="2-14" class="param_30_zoom" min_val="35.00" max_val="70.00" style="width:80px;">
+                        <a id="param_30_desc">&nbsp;</a>
+                    </div>
+                </div>
+
+
+
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">衣长测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-6" name="2-6" class="param_31" min_val="50.00" max_val="90.00" style="width:80px;">
+                        <a id="param_31_desc">范围: 50.00-90.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3366CC;">衣长成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-15" name="2-15" class="param_31_zoom" min_val="50.00" max_val="90.00" style="width:80px;">
+                        <a id="param_31_desc">&nbsp;</a>
+                    </div>
+                </div>
+
+
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">袖长测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-7" name="2-7" class="param_32" min_val="15.00" max_val="80.00" style="width:80px;">
+                        <a id="param_32_desc">范围: 15.00-80.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3366CC;">袖长成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-16" name="2-16" class="param_32_zoom" min_val="15.00" max_val="80.00" style="width:80px;">
+                        <a id="param_32_desc">&nbsp;</a>
+                    </div>
+                </div>
+
+
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">臂围测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-8" name="2-8" class="param_33" min_val="20.00" max_val="65.00" style="width:80px;">
+                        <a id="param_33_desc">范围: 20.00-65.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3366CC;">臂围成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-17" name="2-17" class="param_33_zoom" min_val="20.00" max_val="65.00" style="width:80px;">
+                        <a id="param_33_desc">&nbsp;</a>
+                    </div>
+                </div>
+
+
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left">腕围测量:</span>
+                    <div class="case">
+                        <input type="number" id="2-9" name="2-9" class="param_34" min_val="15.00" max_val="30.00" style="width:80px;">
+                        <a id="param_34_desc">范围: 15.00-30.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span class="span_right" style="color:#3466CC;">腕围成衣:</span>
+                    <div class="case">
+                        <input type="number" id="2-18" name="2-18" class="param_34_zoom" min_val="15.00" max_val="30.00" style="width:80px;">
+                        <a id="param_34_desc">&nbsp;</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--tab3-->
+        <div class="form-tab">
+            <form id='form-tab3' name='form-tab3'>
+
+                <!--<div class="item-tab tab-input">
+                    <span>&nbsp;</span>
+                    <font color="red">
+                        <h2 style="font-size: 20px;">特体数据为非必填项，轻微特体不用填写，不需要每一处都填写！</h2>
+                    </font>
+                </div>
+
+                <div class="item-tab tab-input" style="margin-bottom: 20px;">
+                    <span>&nbsp;</span>
+                    <font color="red">
+                        <h2 style="font-size: 20px;">明显特殊体型只需填写相应的特体位置，其它地方可以为空！</h2>
+                    </font>
+                </div>-->
+                <div class="item-tab">
+                    <span>体型: </span>
+                    <div class="case" id="4-1" name='4-1'>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span>前胸宽数据:</span>
+                    <div class="case">
+                        <input type="number" placeholder="" class="param_43" id="4-2" name="4-2" min_val="10.00" max_val="100.00" style="width:80px;">
+                        <a id="param_43_desc">范围: 10.00-100.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span>后背宽数据:</span>
+                    <div class="case">
+                        <input type="number" placeholder="" class="param_44" id="4-3" name="4-3" min_val="10.00" max_val="100.00" style="width:80px;">
+                        <a id="param_44_desc">范围: 10.00-100.00</a>
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span>中臂围数据:</span>
+                    <div class="case">
+                        <input type="number" placeholder="" class="param_45" id="4-4" name="4-4" min_val="15.00" max_val="70.00" style="width:80px;">
+                        <a id="param_45_desc">范围: 15.00-70.00</a>
+                    </div>
+                </div>
+                <div class="item-tab">
+                    <span>肩斜量:</span>
+                    <div class="case caseimg imgright " id="4-5" name='4-5'>
+                    </div>
+                </div>
+
+                <div class="item-tab tab-input">
+                    <span>腹部量:</span>
+                    <div class="case" id="4-6" name="4-6">
+                        <span class="param_47 act" param_value="正常">正常</span>
+                        <span class="param_47" param_value="有小肚" style="display: none;">有小肚</span>
+                        <span class="param_47" param_value="大肚" style="display: none;">大肚</span>
+                    </div>
+                </div>
+
+                <div class="item-tab tab-input">
+                    <span>脖子:</span>
+                    <div class="case" id="4-7" name="4-7">
+                        <span class="param_48 act" param_value="正常">正常</span>
+                        <span class="param_48" param_value="短脖" style="display: none;">短脖</span>
+                    </div>
+                </div>
+
+                <div class="item-tab tab-input">
+                    <span>背部:</span>
+                    <div class="case" id="4-8" name="4-8">
+                        <span class="param_49 act" param_value="正常">正常</span>
+                        <span class="param_49" param_value="驼背" style="display: none;">驼背</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--tab4-->
+        <div class="form-tab">
+            <form id='form-tab4' name='form-tab4'>
+                <div class="item-tab tab-input item-tab-fl item-tab-mb">
+                    <span>个性刺绣:</span>
+                    <div class="case">
+                        <input type="text" id="5-1" name='5-1' value="" class="param_23">
+                        <a>客户刺绣文字</a>
+                    </div>
+                </div>
+
+                <div class="item-tab has_emb_text">
+                    <span>刺绣位置:</span>
+                    <div class="case caseimg " id="5-2" name='5-2'>
+                    </div>
+                </div>
+
+                <div class="item-tab has_emb_text">
+                    <span>刺绣字体:</span>
+                    <div class="case caseimg imgcenter" id="5-3" name='5-3'>
+                    </div>
+                </div>
+                <div class="item-tab has_emb_text">
+                    <span>刺绣颜色:</span>
+                    <div class="case caseimg imgcenter" id="5-4" name='5-4'>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--tab5-->
+        <div class="form-tab">
+            <form id='form-tab5' name='form-tab5'>
+                <div class="form-content">
+                    <div class="item-form">
+                        <span>年龄(岁)</span>
+                        <input type="text" class="param_23" id='6-1' name='6-1'>
+                    </div>
+                    <div class="item-form">
+                        <span>身高(cm)</span>
+                        <input type="text" class="param_23" id='6-2' name='6-2'>
+                    </div>
+                    <div class="item-form">
+                        <span>体重(kg)</span>
+                        <input type="text" class="param_23" id='6-3' name='6-3'>
+                    </div>
+
+                    <div class="item-form">
+                        <span>邮寄地址</span>
+                        <input class="text-full text-fullt param_23" type="text" placeholder="请填写详细寄件地址" id='6-4' name='6-4' value="">
+                    </div>
+                    <div class="item-form">
+                        <span>备注</span>
+                        <input class="text-full param_23" type="text" placeholder="客户相关备注信息" id='6-5' name='6-5' value="">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="modal-chose" class="modal-chose">
+    <div class="modalbg"></div>
+    <div class="more-condition" id="select_fabric_div">
+        <div class="sel-tab form">
+            <div class="form-content">
+                <div class="item-form-l item-form">
+                    <input class="sel-shell" type="text" name="" value="" id="input_fab_code">
+                    <input type="button" class="close-l" name="" value="确定" id="confirm_input_code">
+                </div>
+                <div class="item-tab">
+                    <div class="case">
+                        <span class="fab_type act" data-name="80支棉" style="width:70px; min-width: 70px;" fab_price_level="1">80支棉</span>
+                        <span class="fab_type" data-name="100支棉" style="width:70px; min-width: 70px;" fab_price_level="2">100支棉</span>
+                        <span class="fab_type" data-name="棉真丝" style="width:70px; min-width: 70px;" fab_price_level="4">棉真丝</span>
+                        <span class="fab_type" data-name="棉弹力" style="width:70px; min-width: 70px;" fab_price_level="5">棉弹力</span>
+                    </div>
+                </div>
+                <div class="shell-con">
+                    <ul class="fab_type_list act" id="1-2-1">
+                    </ul>
+                    <ul class="fab_type_list" id="1-2-2">
+                    </ul>
+                    <ul class="fab_type_list" id="1-2-3">
+                    </ul>
+                    <ul class="fab_type_list" id="1-2-4">
+                    </ul>
+                    <p class="cb"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <link rel="import" href="../foot.html?__inline">

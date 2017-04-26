@@ -11,22 +11,34 @@ $(function() {
         title: '',
         checkbox: true
     }, {
-        title: "产品",
-        field: "name",
-
-    }, {
-        title: "type",
-        field: "type",
-        type: 'select',
-        search: true,
-        data: typeKind
+        title: "所属产品",
+        field: "modelCode",
+        formatter: function(v, data) {
+            return data.model.name
+        },
+        type: "select",
+        listCode: "620007",
+        keyName: "code",
+        valueName: 'name',
+        searchName: 'name',
+        search: true
     }, {
         field: 'parentCode',
-        title: 'key',
+        title: '栏目项',
         type: "select",
         key: "measure",
         formatter: Dict.getNameForList("measure"),
         search: true
+    }, {
+        title: "栏目值",
+        field: "name",
+
+    }, {
+        title: "类型",
+        field: "type",
+        type: 'select',
+        search: true,
+        data: typeKind
     }, {
         field: 'pic',
         title: '图片',
@@ -36,9 +48,6 @@ $(function() {
     }, {
         field: 'orderNo',
         title: '次序'
-    }, {
-        title: "备注",
-        field: "remark"
     }];
     buildList({
         router: 'parameter',

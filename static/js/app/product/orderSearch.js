@@ -18,6 +18,7 @@ $(function() {
         field: "status",
         type: "select",
         key: "order_status",
+        search: true,
         formatter: Dict.getNameForList("order_status")
     }, {
         field: 'applyName',
@@ -52,9 +53,9 @@ $(function() {
         router: 'orderSearch',
         columns: columns,
         pageCode: '620220',
-        searchParams: {
-            status: "8"
-        }
+        // searchParams: {
+        //     status: "8"
+        // }
 
     });
 });

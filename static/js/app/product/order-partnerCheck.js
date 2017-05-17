@@ -73,7 +73,10 @@ $(function() {
             title: " 备注",
             field: "remark",
             maxlength: 255,
-            required: true
+            required: true,
+            formatter: function(){
+             return "复核人："+sessionStorage.getItem('loginName')+"，编号："+sessionStorage.getItem('userId');
+            }
         }
     ];
 

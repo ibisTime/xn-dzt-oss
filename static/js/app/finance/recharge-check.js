@@ -1,92 +1,28 @@
 $(function() {
     var code = getQueryString('code');
     var view = !!getQueryString('v');
+    var isDetail = !!getQueryString('detail');
 
-    var fields = [{
-        title: '户名',
-        field: 'realName',
-        required: true,
-        maxlength: 32
-    }, {
-        title: '账号',
-        field: 'accountNumber',
-        required: true
-    }, {
-        title: '流水编号',
-        field: 'code1',
-        '[value]': 'code'
-    }, {
-        field: 'channelType',
-        title: '渠道类型',
-        type: 'select',
-        key: 'channel_type',
-        // keyCode: '802006',
-        formatter: Dict.getNameForList('channel_type')
-    }, {
-        field: 'bizType',
-        title: '业务类型',
-        type: 'select',
-        key: 'biz_type',
-        // keyCode: '802006',
-        formatter: Dict.getNameForList('biz_type')
-    }, {
-        field: 'transAmount',
-        title: '变动金额',
-        formatter: moneyFormat
-    }, {
-        field: 'preAmount',
-        title: '变动前金额',
-        formatter: moneyFormat
-    }, {
-        field: 'postAmount',
-        title: '变动后金额',
-        formatter: moneyFormat
-    }, {
-        field: 'createDatetime',
-        title: '金额変动时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'status',
-        title: '状态',
-        type: 'select',
-        key: 'jour_status',
-        // keyCode: '802006',
-        formatter: Dict.getNameForList('jour_status'),
-    }, {
-        field: 'workDate',
-        title: '拟对账时间'
-    }, {
-        field: 'bizNote',
-        title: '充值说明'
-    }, {
-        title: '备注',
-        field: 'remark',
-        maxlength: 250
-    }, {
-        title: '意见说明',
-        field: 'rollbackNote',
+    var approveNoteField = {
+        title: '审核意见',
+        field: 'payNote',
         maxlength: 250,
         required: true,
         readonly: false
-    }];
-
-    var options = {
-        fields: fields,
-        code: code,
-        detailCode: '802522',
-        view: true
     };
+    var payList = [approveNoteField]
 
-    options.buttons = [{
+
+    var buttons = [{
         title: '通过',
         handler: function() {
             if ($('#jsForm').valid()) {
                 var data = $('#jsForm').serializeObject();
-                data.rollbackResult = '1';
-                data.rollbackUser = getUserName();
+                data.payResult = '1';
+                data.payUser = getUserName();
                 data.codeList = [data.code];
                 reqApi({
-                    code: '802511',
+                    code: '802701',
                     json: data
                 }).done(function(data) {
                     sucDetail();
@@ -98,11 +34,11 @@ $(function() {
         handler: function() {
             if ($('#jsForm').valid()) {
                 var data = $('#jsForm').serializeObject();
-                data.rollbackResult = '0';
-                data.rollbackUser = getUserName();
+                data.payResult = '0';
+                data.payUser = getUserName();
                 data.codeList = [data.code];
                 reqApi({
-                    code: '802511',
+                    code: '802701',
                     json: data
                 }).done(function(data) {
                     sucDetail();
@@ -115,6 +51,106 @@ $(function() {
             goBack();
         }
     }];
+
+
+    if (isDetail) {
+        approveNoteField = {
+            title: '支付说明',
+            field: 'payNote',
+            maxlength: 250
+        };
+        approveCodeField = {
+            title: '支付渠道号',
+            field: 'payCode',
+            maxlength: 250,
+        };
+        buttons = "";
+        payList = [{
+            field: 'payUser',
+            title: '审核人'
+        }, {
+            field: 'payDatetime',
+            title: '审核时间',
+            formatter: dateTimeFormat
+        }, approveNoteField, approveCodeField]
+    }
+
+    var fields = [{
+        title: '编号',
+        field: 'code1',
+        formatter: function(v, data) {
+            return data.code;
+        }
+    }, {
+        title: '账号',
+        field: 'accountNumber',
+        required: true
+    }, {
+        title: '户名',
+        field: 'accountName',
+        required: true
+    }, {
+        field: 'amount',
+        title: '金额',
+        formatter: moneyFormat
+    }, {
+        field: 'currency',
+        title: '币种',
+        type: 'select',
+        key: 'currency_type',
+        // keyCode: "802006",
+        formatter: Dict.getNameForList("currency_type"),
+        search: true
+    }, {
+        field: 'channelType',
+        title: '支付渠道',
+        type: 'select',
+        key: 'channel_type',
+        // keyCode: '802006',
+        formatter: Dict.getNameForList('channel_type'),
+        search: true
+    }, {
+        field: 'payCardInfo',
+        title: '开户行',
+        type: "select",
+        listCode: "802116",
+        keyName: 'bankCode',
+        valueName: 'bankName',
+    }, {
+        field: 'payCardNo',
+        title: '银行卡号',
+    }, {
+        field: 'status',
+        title: '状态',
+        type: 'select',
+        key: 'withdraw_status',
+        // keyCode: '802006',
+        formatter: Dict.getNameForList('withdraw_status'),
+        search: true
+    }, {
+        field: 'applyUser',
+        title: '申请人',
+        formatter: function(v, data) {
+            if (data.user.kind == '01') {
+                return data.user.loginName;
+            } else {
+                return data.user.mobile;
+            }
+        }
+    }, {
+        field: 'applyDatetime',
+        title: '申请充值时间',
+        formatter: dateTimeFormat,
+    }];
+    fields = fields.concat(payList)
+
+    var options = {
+        fields: fields,
+        code: code,
+        detailCode: '802706',
+        view: true,
+        buttons: buttons
+    };
 
     buildDetail(options);
 });

@@ -1,67 +1,62 @@
 $(function() {
-    var code = getQueryString('code');
     var view = !!getQueryString('v');
     var userId = getQueryString('userId') || '';
-
 
     var fields = [{
         field: 'bizType',
         type: 'hidden',
         value: '11'
     }, {
-        field: 'bizNote',
-        type: 'hidden',
-        value: '线下充值'
-    }, {
-        field: 'accountNumberList',
+        field: 'accountNumber',
         title: '用户账户',
         required: true,
         type: 'select',
-        pageCode: '802500',
-        keyName: "accountNumber",
-        required: true,
-        type: 'select',
+        pageCode: userId ? '802503' : '802500',
         dict: [
             ['type', 'account_kind']
         ],
         params: {
             currency: 'CNY',
-            userId: userId,
-            type: 'NOT_P'
+            userId: userId
         },
+        keyName: 'accountNumber',
         valueName: '{{realName.DATA}} - {{typeName.DATA}}',
-        searchName: 'realName'
+        searchName: 'realName',
+        help: '支持户名查询'
     }, {
-        field: 'transAmount',
+        field: 'amount',
         title: '充值金额',
         required: true,
-        amount: true
+        amount: true,
+        formatter: moneyFormat
     }, {
-        field: 'bankcardNumber',
-        title: '充值说明',
+        field: 'payCardInfo',
+        title: '开户行',
+        type: "select",
+        listCode: "802116",
+        keyName: 'bankCode',
+        valueName: 'bankName',
+        required: true
+    }, {
+        field: 'payCardNo',
+        title: '银行卡号',
         required: true,
-        maxlength: 60
-    }, ];
+        bankCard: true
+    }];
 
     var options = {
         fields: fields,
-        code: code,
-        addCode: '802510',
-        view: view
+        addCode: '802700',
+        view: view,
+        beforeSubmit: function(data) {
+            data.applyUser = getUserId();
+            return data;
+        }
     };
 
     buildDetail(options);
-    $("#subBtn").off("click").on("click", function() {
-        if ($('#jsForm').valid()) {
-            var data = $('#jsForm').serializeObject();
-            data.accountNumberList = [data.accountNumberList];
-            // data.transAmount = -data.transAmount;
-            reqApi({
-                code: "802510",
-                json: data
-            }).done(function(data) {
-                sucDetail();
-            });
-        }
-    })
+
+
+
+
 });

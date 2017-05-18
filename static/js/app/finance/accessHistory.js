@@ -22,7 +22,7 @@ $(function() {
         key: 'channel_type',
         // keyCode: '802006',
         formatter: Dict.getNameForList('channel_type'),
-        // search: true
+        search: true
     }, {
         field: 'payCardInfo',
         title: '开户行',
@@ -82,7 +82,7 @@ $(function() {
         pageCode: '802755',
         // singleSelect: false,
         searchParams: {
-            channelType: '90',
+            // channelType: '90',
             companyCode: OSS.companyCode
         }
     });

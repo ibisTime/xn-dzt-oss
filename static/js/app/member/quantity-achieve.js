@@ -41,9 +41,6 @@ $(function() {
         title: "订单金额",
         field: "amount",
         formatter: moneyFormat
-    }, {
-        title: "备注",
-        field: "remark"
     }];
     buildList({
         columns: columns,

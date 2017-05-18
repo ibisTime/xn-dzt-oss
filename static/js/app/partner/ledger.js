@@ -53,6 +53,7 @@ $(function() {
         pageCode: '802520',
         searchParams: {
             accountNumber: accountNumber,
+            companyCode: OSS.companyCode
         }
     });
 

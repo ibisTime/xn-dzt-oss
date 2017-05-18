@@ -50,7 +50,7 @@ $(function() {
                     return data.userExt.province
                 } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
                     return data.userExt.province + data.userExt.area;
-                }else{
+                } else {
                     return data.userExt.province + data.userExt.city + data.userExt.area
                 }
             }
@@ -66,8 +66,8 @@ $(function() {
         field: "loginName",
         required: true,
         readonly: true,
-        formatter: function(){
-         return sessionStorage.getItem('loginName');
+        formatter: function() {
+            return sessionStorage.getItem('loginName');
         }
     }, {
         title: "分成比例",
@@ -108,7 +108,7 @@ $(function() {
                 }).done(function() {
                     sucDetail();
                 });
-            }else{
+            } else {
                 toastr.info("请填写分成比例");
             }
         }

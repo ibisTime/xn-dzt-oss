@@ -4,8 +4,8 @@ $(function() {
     var isDetail = !!getQueryString('detail');
 
     var approveNoteField = {
-        title: '审核意见',
-        field: 'approveNote',
+        title: '支付说明',
+        field: 'payNote',
         maxlength: 250,
         required: true,
         readonly: false
@@ -18,11 +18,11 @@ $(function() {
         handler: function() {
             if ($('#jsForm').valid()) {
                 var data = $('#jsForm').serializeObject();
-                data.approveResult = '1';
-                data.approveUser = getUserName();
+                data.payResult = '1';
+                data.payUser = getUserName();
                 data.codeList = [data.code];
                 reqApi({
-                    code: '802752',
+                    code: '802753',
                     json: data
                 }).done(function(data) {
                     sucDetail();
@@ -34,11 +34,11 @@ $(function() {
         handler: function() {
             if ($('#jsForm').valid()) {
                 var data = $('#jsForm').serializeObject();
-                data.approveResult = '0';
-                data.approveUser = getUserName();
+                data.payResult = '0';
+                data.payUser = getUserName();
                 data.codeList = [data.code];
                 reqApi({
-                    code: '802752',
+                    code: '802753',
                     json: data
                 }).done(function(data) {
                     sucDetail();
@@ -113,7 +113,7 @@ $(function() {
         valueName: 'bankName',
     }, {
         field: 'payCardNo',
-        title: '银行卡号'
+        title: '银行卡号',
     }, {
         field: 'status',
         title: '状态',

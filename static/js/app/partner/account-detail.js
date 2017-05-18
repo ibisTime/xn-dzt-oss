@@ -52,7 +52,8 @@ $(function() {
         columns: columns,
         pageCode: '802520',
         searchParams: {
-            userId: sessionStorage.getItem('userId')
+            userId: sessionStorage.getItem('userId'),
+            companyCode: OSS.companyCode
         }
     });
 

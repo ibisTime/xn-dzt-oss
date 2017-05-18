@@ -1,4 +1,7 @@
 $(function() {
+    var accountNumber = getQueryString('accountNumber');
+
+
     var columns = [{
             field: '',
             title: '',
@@ -47,6 +50,8 @@ $(function() {
         pageCode: '802520',
         searchParams: {
             userId: OSS.SYS_USER,
+            companyCode: OSS.companyCode,
+            accountNumber: accountNumber
         }
     });
 

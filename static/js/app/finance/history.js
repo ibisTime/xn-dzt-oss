@@ -1,63 +1,108 @@
 $(function() {
 
-    var columns = [{
-        field: '',
-        title: '',
-        checkbox: true
-    }, {
-        field: 'realName',
-        title: '户名',
-        search: true
-    }, {
-        field: 'accountNumber',
-        title: '账户编号',
-    }, {
-        title: "金额",
-        field: "transAmount",
-        formatter: moneyFormat
-    }, {
-        field: 'bizType',
-        title: '业务类型',
-        search: true,
-        data: {
-            "11": "充值",
-            "-11": "取现"
-        },
-        key: 'biz_type',
-        //   keyCode: '802006',
-        formatter: Dict.getNameForList('biz_type')
-    }, {
-        field: 'createDatetime',
-        title: '创建时间',
-        formatter: dateTimeFormat
-    }, {
-        field: 'status',
-        title: '状态',
-        key: 'jour_status',
-        // keyCode: '802006',
-        formatter: Dict.getNameForList('jour_status'),
-        search: true
-    }, {
-        field: 'bizNote',
-        title: '充值说明'
-    }];
 
+    var columns = [{
+            field: '',
+            title: '',
+            checkbox: true
+        }, {
+            field: 'code',
+            title: '编号',
+        }, {
+            field: 'accountName',
+            title: '户名',
+            search: true
+        },
+        {
+            field: 'currency',
+            title: '币种',
+            type: 'select',
+            key: 'currency_type',
+            formatter: Dict.getNameForList("currency_type"),
+            // search: true
+        },
+        {
+            field: 'amount',
+            title: '充值金额',
+            formatter: moneyFormat
+        }, {
+            field: 'channelType',
+            title: '支付渠道',
+            type: 'select',
+            key: 'channel_type',
+            formatter: Dict.getNameForList('channel_type'),
+            // search: true
+        }, {
+            field: 'payCardInfo',
+            title: '开户行',
+            type: "select",
+            listCode: "802116",
+            keyName: 'bankCode',
+            valueName: 'bankName',
+        }, {
+            field: 'payCardNo',
+            title: '银行卡号',
+        }, {
+            field: 'applyUser',
+            title: '申请人',
+            formatter: function(v, data) {
+                if (data.user.kind == '01') {
+                    return data.user.loginName;
+                } else {
+                    return data.user.mobile;
+                }
+            }
+        }, {
+            field: 'applyDatetime',
+            title: '申请日期',
+            formatter: dateTimeFormat,
+            field1: 'applyDatetimeStart',
+            title1: '申请日期',
+            type1: 'date',
+            field2: 'applyDatetimeEnd',
+            type2: 'date',
+            search: true
+        }, {
+            field1: 'payDateStart',
+            title1: '审核日期',
+            type1: 'date',
+            field2: 'payDateEnd',
+            type2: 'date',
+            search: true,
+            visible: false
+        }, {
+            field: 'payUser',
+            title: '审核人'
+        }, {
+            field: 'payDatetime',
+            title: '审核时间',
+            formatter: dateTimeFormat
+        }, {
+            field: 'status',
+            title: '状态',
+            type: 'select',
+            key: 'withdraw_status',
+            formatter: Dict.getNameForList('withdraw_status'),
+            search: true
+        }
+    ];
     buildList({
         columns: columns,
-        pageCode: '802520',
+        pageCode: '802705',
+        // singleSelect: false,
         searchParams: {
-            bizType: '11,-11'
+            channelType: '90',
+            companyCode: OSS.companyCode
         }
     });
-    $('#detaBtn').click(function() {
+
+    $("#detaBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "recharge_detail.html?code=" + selRecords[0].code;
-
+        location.href = "recharge_check.html?code=" + selRecords[0].code + "&detail=1";
     });
-
 
 });

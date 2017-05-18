@@ -1,5 +1,7 @@
 $(function() {
     var view = 1;
+    var accountNumber;
+    var accountNumberPing;
 
     reqApi({
         code: '802503',
@@ -7,9 +9,18 @@ $(function() {
             userId: OSS.SYS_USER
         }
     }).done(function(data) {
-        $("#amount-CNY").text("￥" + data[0].amount / 1000);
+        $("#amount-yu").text("￥" + data[0].amount / 1000);
+        accountNumberPing = data[0].accountNumber;
     });
-
+    reqApi({
+        code: '802503',
+        json: {
+            userId: "SYS_USER_DZT_TG"
+        }
+    }).done(function(data) {
+        $("#amount-CNY").text("￥" + data[0].amount / 1000);
+        accountNumber = data[0].accountNumber;
+    });
 
     $('#accoutGrantBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -92,12 +103,19 @@ $(function() {
     });
     $("#accoutBtn").click(
         function() {
-            window.location.href = 'account_detail.html'
+            window.location.href = 'account_detail.html';
         }
     );
+    $("#accoutPingBtn").click(
+        function() {
+            window.location.href = 'account_detail.html?accountNumber=' + accountNumberPing;
+        }
+    );
+
+
     $("#accouBtn").click(
         function() {
-            window.location.href = 'account_quxian.html'
+            window.location.href = 'account_quxian.html?accountNumber=' + accountNumber;
         }
     );
 });

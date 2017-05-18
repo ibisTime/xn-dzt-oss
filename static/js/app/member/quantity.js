@@ -157,7 +157,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        if (selRecords[0].status !== 3) {
+        if (selRecords[0].status != 3) {
             toastr.info("不是可以审核的状态");
             return;
         }

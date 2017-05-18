@@ -6,7 +6,7 @@ OSS.system = 'CD-CDZT000009';
 //公司编号
 OSS.companyCode = 'CD-CDZT000009';
 // picUrl
-OSS.picBaseUrl = 'http://oigx51fc5.bkt.clouddn.com';
+OSS.picBaseUrl = 'http://opf6b9y6y.bkt.clouddn.com';
 // picShow
 OSS.picShow = '?imageMogr2/auto-orient/thumbnail/!100x100r';
 //系统userid

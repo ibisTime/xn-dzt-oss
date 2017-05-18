@@ -14,7 +14,7 @@ $(function() {
         type: "select",
         key: "order_status",
         formatter: Dict.getNameForList("order_status"),
-        // search: true
+        search: true
     }, {
         field: 'applyName',
         title: '下单用户',
@@ -50,7 +50,7 @@ $(function() {
         pageCode: '620220',
         searchParams: {
             ltUser: sessionStorage.getItem('userId'),
-            status: "8"
+            // status: "8"
         }
     });
 });

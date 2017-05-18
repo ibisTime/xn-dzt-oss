@@ -60,4 +60,5 @@ $(function() {
     $("#accountBtn").remove();
     $("#ledgerBtn").remove();
     $("#ledgerBtn").remove();
+    $("#cheBtn").remove();
 });

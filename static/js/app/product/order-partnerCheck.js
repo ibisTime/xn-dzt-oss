@@ -75,7 +75,8 @@ $(function() {
             maxlength: 255,
             required: true,
             formatter: function(){
-             return "复核人："+sessionStorage.getItem('loginName')+"，编号："+sessionStorage.getItem('userId');
+             return "复核人：, 编号：";
+              // "复核人："+sessionStorage.getItem('loginName')+"，编号："+sessionStorage.getItem('userId');
             }
         }
     ];

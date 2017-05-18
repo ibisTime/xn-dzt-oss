@@ -49,6 +49,7 @@ $(function() {
     $('#achieveBtn').remove();
     $('#accountBtn').remove();
     $('#orderBtn').remove();
+    $("#cheBtn").remove();
     $('#ledgerBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {

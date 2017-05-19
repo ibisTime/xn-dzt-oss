@@ -13,7 +13,27 @@ $(function() {
             if (data.productList[0].productSpecsList &&
                 data.productList[0].productSpecsList.length) {
                 productSpecsList = data.productList[0].productSpecsList;
+                var v51 = 0;
+                data.productList[0].productSpecsList.forEach(function(v, i) {
+                    if (v.parentCode == "5-1") {
+                        v51 = 1;
+                    }
+                });
+                if (v51) {
+                    $(".cxradio").eq(0).attr("checked", "checked");
+                    $("#wrap").css("display", "block")
+
+                } else {
+                    $(".cxradio").eq(1).attr("checked", "checked");
+                    $("#wrap").css("display", "none");
+                    $("#5-1").val("");
+                    $("#5-2 .param").removeClass("act");
+                    $("#5-3 .param").removeClass("act");
+                    $("#5-4 .param").removeClass("act");
+                }
+
             }
+
         }
         // if (data.productList && data.productList.length &&
         //     data.productList[0].productSpecsList &&
@@ -23,6 +43,8 @@ $(function() {
         // }
 
     });
+
+
 
     var ids = ["1-1", "1-3", "1-4", "1-5",
         "1-6", "1-7", "1-8", "1-9", "1-10",
@@ -156,6 +178,111 @@ $(function() {
     }
 
     function addListeners() {
+
+        $(".param_26").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_26_zoom").val(parseFloat(val).toFixed(2))
+            } else {
+                $(".param_26_zoom").val(parseFloat(val).toFixed(2))
+            }
+
+        });
+        $(".param_27").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_27_zoom").val(parseFloat(val * 1.1).toFixed(2))
+            } else {
+                $(".param_27_zoom").val(parseFloat(val * 1.08).toFixed(2))
+            }
+
+        });
+        $(".param_28").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_28_zoom").val(parseFloat(val * 1.1).toFixed(2))
+            } else {
+                $(".param_28_zoom").val(parseFloat(val * 1.07).toFixed(2))
+            }
+
+        });
+        $(".param_29").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_29_zoom").val(parseFloat(val * 1.1 - 2).toFixed(2))
+            } else {
+                $(".param_29_zoom").val(parseFloat(val * 1.08 - 4).toFixed(2))
+            }
+
+        });
+        $(".param_30").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_30_zoom").val(parseFloat(val).toFixed(2))
+            } else {
+                $(".param_30_zoom").val(parseFloat(val).toFixed(2))
+            }
+
+        });
+        $(".param_31").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_31_zoom").val(parseFloat(val).toFixed(2))
+            } else {
+                $(".param_31_zoom").val(parseFloat(val).toFixed(2))
+            }
+
+        });
+        $(".param_32").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_32_zoom").val(parseFloat(val).toFixed(2))
+            } else {
+                $(".param_32_zoom").val(parseFloat(val).toFixed(2))
+            }
+
+        });
+        $(".param_33").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_33_zoom").val(parseFloat(val * 1 + 9).toFixed(2))
+            } else {
+                $(".param_33_zoom").val(parseFloat(val * 1 + 7).toFixed(2))
+            }
+
+        });
+        $(".param_34").keyup(function() {
+            var val = $(this).val();
+            var dataCode = $("input[type='radio']:checked").attr("data-code");
+            if (dataCode == "01") {
+                $(".param_34_zoom").val(parseFloat(val * 1 + 6).toFixed(2))
+            } else {
+                $(".param_34_zoom").val(parseFloat(val * 1 + 5).toFixed(2))
+            }
+        });
+        $(".cxradio").click(function() {
+            var dataid = $(this).attr("data-id");
+            if (dataid == '03') {
+                $("#wrap").css("display", "block")
+            } else if (dataid == '04') {
+                $("#wrap").css("display", "none");
+                $("#5-1").val("");
+                $("#5-2 .param").removeClass("act");
+                $("#5-3 .param").removeClass("act");
+                $("#5-4 .param").removeClass("act");
+            }
+        });
+
+
+
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
             var self = $(this);
@@ -252,6 +379,8 @@ $(function() {
                 goPage(3);
             }
         });
+
+
         $("#form-tab2").validate({
             'rules': {
                 '2-1': {
@@ -328,25 +457,57 @@ $(function() {
                 },
             }
         });
+
+
+        // function listener() {
+        //     var dataCode = $("input[type='radio']:checked").attr("data-code");
+        //     $("input:radio").change(function() {
+        //         console.log(1)
+        //         if (dataCode == "01") {
+        //             $("#2-10").html(parseFloat($("#2-1").val()));
+        //             console.log($("#2-1").val());
+        //             $("#2-11").html(parseFloat($("#2-2").val()) * 1.1);
+        //             $("#2-12").html(parseFloat($("#2-3").val()) * 1.1);
+        //             $("#2-13").html(parseFloat($("#2-4").val()) * 1.1 - 2);
+        //             $("#2-14").html(parseFloat($("#2-5").val()));
+        //             $("#2-15").html(parseFloat($("#2-6").val()));
+        //             $("#2-16").html(parseFloat($("#2-7").val()));
+        //             $("#2-17").html(parseFloat($("#2-8").val()) + 9);
+        //             $("#2-18").html(parseFloat($("#2-9").val()) + 6);
+        //         } else if (dataCode == "02") {
+        //             $("#2-10").html(parseFloat($("#2-1").val()));
+        //             $("#2-11").html(parseFloat($("#2-2").val()) * 1.08);
+        //             $("#2-12").html(parseFloat($("#2-3").val()) * 1.07);
+        //             $("#2-13").html(parseFloat($("#2-4").val()) * 1.08 - 4);
+        //             $("#2-14").html(parseFloat($("#2-5").val()));
+        //             $("#2-15").html(parseFloat($("#2-6").val()));
+        //             $("#2-16").html(parseFloat($("#2-7").val()));
+        //             $("#2-17").html(parseFloat($("#2-8").val()) + 7);
+        //             $("#2-18").html(parseFloat($("#2-9").val()) + 5);
+        //         }
+        //     })
+        // };
+
+
         $("#form-tab3").validate({
             'rules': {
                 '4-3': {
                     min: 10,
                     max: 100,
                     number: true,
-                    required: true
+                    // required: true
                 },
                 '4-4': {
                     min: 15,
                     max: 70,
                     number: true,
-                    required: true
+                    // required: true
                 },
                 '4-2': {
                     min: 10,
                     max: 100,
                     number: true,
-                    required: true
+                    // required: true
                 }
             }
         });

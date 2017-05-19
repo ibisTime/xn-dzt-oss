@@ -5,7 +5,7 @@ $(function() {
         code: '802900',
         json: {
             "bizType": "GW",
-            "accountNumber": OSS.companyCode
+            "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
         $("#amount-totle").text("￥" + data.totalAmount / 1000);
@@ -23,7 +23,7 @@ $(function() {
         code: '802900',
         json: {
             "bizType": "HHRFC",
-            "accountNumber": OSS.companyCode
+            "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
         $("#amount-Hhaccess").text("￥" + data.totalAmount / 1000);
@@ -32,7 +32,7 @@ $(function() {
         code: '802900',
         json: {
             "bizType": "LTSFC",
-            "accountNumber": OSS.companyCode
+            "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
         $("#amount-ltaccess").text("￥" + data.totalAmount / 1000);
@@ -41,7 +41,7 @@ $(function() {
         code: '802900',
         json: {
             "bizType": "GWTK",
-            "accountNumber": OSS.companyCode
+            "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
         $("#amount-quaccess").text("￥" + data.totalAmount / 1000);

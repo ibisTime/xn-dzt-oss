@@ -3,77 +3,79 @@ $(function() {
     //var  view =getQueryString('v');
 
     var fields = [{
-        title: '订单号',
-        field: 'code1',
-        formatter: function(v, data) {
-            return data.code
+            title: '订单号',
+            field: 'code1',
+            formatter: function(v, data) {
+                return data.code
+            },
+            readonly: true
+        }, {
+            title: '状态',
+            field: 'status',
+            key: "order_status",
+            formatter: Dict.getNameForList("order_status"),
+            readonly: true
+        }, {
+            title: '下单人',
+            field: 'applyName',
+            readonly: true
+        }, {
+            title: '联系方式',
+            field: 'applyMobile',
+            readonly: true
+        }, {
+            title: '量体地址',
+            field: 'province1',
+            formatter: function(v, data) {
+                var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
+                return result || "-";
+            },
+            readonly: true
+        }, {
+            title: '量体时间',
+            field: 'ltDatetime',
+            formatter: dateFormat,
+            readonly: true
+        }, {
+            title: "量体嘱咐",
+            field: "applyNote",
+            readonly: true
+        }, {
+            title: "量体师",
+            field: "ltUser",
+            readonly: true,
+            formatter: function(v, data) {
+                if (data.ltUserDO) {
+                    return data.ltUserDO.realName
+                } else {
+                    return "-"
+                }
+            },
+        }, {
+            title: '价格',
+            field: "amount",
+            formatter: moneyFormat,
+            readonly: true
+        }, {
+            title: "收件人姓名",
+            field: "receiver",
+            type: "select",
+            readonly: true
+        }, {
+            title: "收件人联系方式",
+            field: 'reMobile',
+            readonly: true
+        }, {
+            title: "收件人地址",
+            field: "reAddress",
+            readonly: true
         },
-        readonly: true
-    }, {
-        title: '状态',
-        field: 'status',
-        key: "order_status",
-        formatter: Dict.getNameForList("order_status"),
-        readonly: true
-    }, {
-        title: '下单人',
-        field: 'applyName',
-        readonly: true
-    }, {
-        title: '联系方式',
-        field: 'applyMobile',
-        readonly: true
-    }, {
-        title: '量体地址',
-        field: 'province1',
-        formatter: function(v, data) {
-            var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
-            return result || "-";
-        },
-        readonly: true
-    }, {
-        title: '量体时间',
-        field: 'ltDatetime',
-        formatter: dateFormat,
-        readonly: true
-    }, {
-        title: "量体嘱咐",
-        field: "applyNote",
-        readonly: true
-    }, {
-        title: "量体师",
-        field: "ltUser",
-        readonly: true,
-        formatter: function(v, data) {
-            if (data.ltUserDO) {
-                return data.ltUserDO.realName
-            } else {
-                return "-"
-            }
-        },
-    }, {
-        title: '价格',
-        field: "amount",
-        formatter: moneyFormat,
-        readonly: true
-    }, {
-        title: "收件人姓名",
-        field: "receiver",
-        type: "select",
-        readonly: true
-    }, {
-        title: "收件人联系方式",
-        field: 'reMobile',
-        readonly: true
-    }, {
-        title: "收件人地址",
-        field: "reAddress",
-        readonly: true
-    }, {
-        title: "复核意见",
-        field: "remark",
-        readonly: true
-    }];
+        // {
+        //     title: "复核意见",
+        //     field: "remark",
+        //     readonly: true
+        // }
+    ];
 
     var options = {
         fields: fields,
@@ -116,13 +118,27 @@ $(function() {
             if (data.productList[0].productSpecsList &&
                 data.productList[0].productSpecsList.length) {
                 productSpecsList = data.productList[0].productSpecsList;
+                var v51 = 0;
+                data.productList[0].productSpecsList.forEach(function(v, i) {
+                    if (v.parentCode == "5-1") {
+                        v51 = 1;
+                    }
+                });
+                if (v51) {
+                    $(".cxradio").eq(0).attr("checked", "checked");
+                    $("#wrap").css("display", "block");
+                    $("#cixiu").css("display", "none")
+                } else {
+                    $(".cxradio").eq(1).attr("checked", "checked");
+                    $("#wrap").css("display", "none");
+                    $("#5-1").val("");
+                    $("#5-2 .param").removeClass("act");
+                    $("#5-3 .param").removeClass("act");
+                    $("#5-4 .param").removeClass("act");
+                }
             }
         }
-        // if (data.productList && data.productList.length &&
-        //     data.productList[0].productSpecsList &&
-        //     data.productList[0].productSpecsList.length) {
-        //     productSpecsList = data.productList[0].productSpecsList;
-        // }
+
     });
 
     var ids = ["1-1", "1-3", "1-4", "1-5",

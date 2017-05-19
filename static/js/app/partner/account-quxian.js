@@ -31,14 +31,14 @@ $(function() {
     }, {
         field: 'payCardInfo',
         title: '开户行',
-        required: true,
-    }, {
-        field: 'payCardNo',
-        title: '银行卡号',
         type: "select",
         listCode: "802116",
         keyName: 'bankCode',
         valueName: 'bankName',
+        required: true,
+    }, {
+        field: 'payCardNo',
+        title: '银行卡号',
         required: true,
         bankCard: true,
     }];

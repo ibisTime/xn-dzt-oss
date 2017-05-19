@@ -1,5 +1,5 @@
 <link rel="import" href="../head.html?__inline">
-<script src="../../js/app/quantity/order-shuju.js"></script>
+<script src="../../js/app/product/order-shuju.js"></script>
 <style>
     .tab-hd {
         height: 46px;
@@ -341,6 +341,16 @@
     .item-form input[type=text].text-fullt {
         margin-top: 20px;
     }
+    
+    .item-div {
+        width: 80%;
+        height: 30px;
+    }
+    
+    .cxradio {
+        margin-left: 50px;
+        margin-top: -30px
+    }
 </style>
 <div class="place">
     <span>位置：</span>
@@ -424,9 +434,23 @@
                 </div>
             </div>
         </div>
-        <!--tab2-->
+        <!--tab2 量体数据-->
         <div class="form-tab">
             <form id="form-tab2" name="form-tab2">
+
+                <div class="item-tab tab-input item-tab-fl item-tab-mb">
+                    <span>尺寸选择:</span>
+                    <div class="case">
+                        <input type="radio" name="biao" style="margin-left:50px;margin-top: -30px;padding-top:-20px" data-code='01' checked>成衣尺寸标准版
+                        <input type="radio" name="biao" style="margin-left:50px;margin-top: -30px" data-code='02'>成衣尺寸修身版
+                    </div>
+                </div>
+                <div class="item-tab tab-input item-tab-fl item-tab-mb">
+                    <span></span>
+                    <div class="case">
+
+                    </div>
+                </div>
                 <div class="item-tab tab-input item-tab-fl">
                     <span clas="span_left">领围测量:</span>
                     <div class="case">
@@ -579,24 +603,14 @@
                     </div>
                 </div>
             </form>
+
+
         </div>
-        <!--tab3-->
+        <!--tab3 特体数据-->
         <div class="form-tab">
             <form id='form-tab3' name='form-tab3'>
 
-                <!--<div class="item-tab tab-input">
-                    <span>&nbsp;</span>
-                    <font color="red">
-                        <h2 style="font-size: 20px;">特体数据为非必填项，轻微特体不用填写，不需要每一处都填写！</h2>
-                    </font>
-                </div>
 
-                <div class="item-tab tab-input" style="margin-bottom: 20px;">
-                    <span>&nbsp;</span>
-                    <font color="red">
-                        <h2 style="font-size: 20px;">明显特殊体型只需填写相应的特体位置，其它地方可以为空！</h2>
-                    </font>
-                </div>-->
                 <div class="item-tab">
                     <span>体型: </span>
                     <div class="case" id="4-1" name='4-1'>
@@ -662,31 +676,46 @@
                 </div>
             </form>
         </div>
-        <!--tab4-->
+        <!--tab4 刺绣内容-->
         <div class="form-tab">
             <form id='form-tab4' name='form-tab4'>
+
                 <div class="item-tab tab-input item-tab-fl item-tab-mb">
-                    <span>个性刺绣:</span>
+                    <span>是否需要刺绣:</span>
                     <div class="case">
-                        <input type="text" id="5-1" name='5-1' value="" class="param_23">
-                        <a>客户刺绣文字</a>
+                        <input type="radio" name="biao" class="cxradio" data-id='03' checked>需要刺绣
+                        <input type="radio" name="biao" class="cxradio" data-id='04'>不需要刺绣
                     </div>
                 </div>
+                <div id="wrap">
+                    <div class="item-tab tab-input item-tab-fl item-tab-mb">
+                        <span> </span>
+                        <div class="case">
+                        </div>
+                    </div>
+                    <div class="item-tab tab-input item-tab-fl item-tab-mb">
+                        <span>个性刺绣:</span>
+                        <div class="case">
+                            <input type="text" id="5-1" name='5-1' value="" class="param_23">
+                            <a>客户刺绣文字</a>
+                        </div>
+                    </div>
 
-                <div class="item-tab has_emb_text">
-                    <span>刺绣位置:</span>
-                    <div class="case caseimg " id="5-2" name='5-2'>
+                    <div class="item-tab has_emb_text">
+                        <span>刺绣位置:</span>
+                        <div class="case caseimg " id="5-2" name='5-2'>
+                        </div>
                     </div>
-                </div>
 
-                <div class="item-tab has_emb_text">
-                    <span>刺绣字体:</span>
-                    <div class="case caseimg imgcenter" id="5-3" name='5-3'>
+                    <div class="item-tab has_emb_text">
+                        <span>刺绣字体:</span>
+                        <div class="case caseimg imgcenter" id="5-3" name='5-3'>
+                        </div>
                     </div>
-                </div>
-                <div class="item-tab has_emb_text">
-                    <span>刺绣颜色:</span>
-                    <div class="case caseimg imgcenter" id="5-4" name='5-4'>
+                    <div class="item-tab has_emb_text">
+                        <span>刺绣颜色:</span>
+                        <div class="case caseimg imgcenter" id="5-4" name='5-4'>
+                        </div>
                     </div>
                 </div>
                 <div class="item-tab item-tabbtn">
@@ -697,7 +726,7 @@
                 </div>
             </form>
         </div>
-        <!--tab5-->
+        <!--tab5 客户信息-->
         <div class="form-tab">
             <form id='form-tab5' name='form-tab5'>
                 <div class="form-content">
@@ -734,6 +763,7 @@
         </div>
     </div>
 </div>
+
 <div id="modal-chose" class="modal-chose">
     <div class="modalbg"></div>
     <div class="more-condition" id="select_fabric_div">

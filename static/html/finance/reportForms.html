@@ -3,13 +3,14 @@
 <style>
     .account-w {
         width: 100%;
-        padding: 30px 10px;
+        padding: 10px 50px;
         overflow: hidden;
     }
     
     .account-list-w {
         width: 350px;
         float: left;
+        margin: 5px 20px 5px 20px;
         padding: 20px;
     }
     
@@ -46,6 +47,20 @@
 <div class="account-w">
     <div class="account-list-w">
         <div class="account-list">
+            <div class="account-fs">充值总额：
+                <p class="account-amount" id="amount-access"></p>
+            </div>
+        </div>
+    </div>
+    <div class="account-list-w">
+        <div class="account-list">
+            <div class="account-fs">取现总额：
+                <p class="account-amount" id="amount-quxianaccess"></p>
+            </div>
+        </div>
+    </div>
+    <div class="account-list-w">
+        <div class="account-list">
 
             <div class="account-fs">营业总额：
                 <p class="account-amount" id="amount-totle"></p>
@@ -56,8 +71,8 @@
 
     <div class="account-list-w">
         <div class="account-list">
-            <div class="account-fs">充值总额：
-                <p class="account-amount" id="amount-access"></p>
+            <div class="account-fs">退款总额：
+                <p class="account-amount" id="amount-quaccess"></p>
             </div>
         </div>
     </div>
@@ -75,20 +90,8 @@
             </div>
         </div>
     </div>
-    <div class="account-list-w">
-        <div class="account-list">
-            <div class="account-fs">取现总额：
-                <p class="account-amount" id="amount-quxianaccess"></p>
-            </div>
-        </div>
-    </div>
-    <div class="account-list-w">
-        <div class="account-list">
-            <div class="account-fs">退款总额：
-                <p class="account-amount" id="amount-quaccess"></p>
-            </div>
-        </div>
-    </div>
+
+
 
 
 </div>

@@ -1,16 +1,9 @@
 $(function() {
     var code = getQueryString('code');
     var view = !!getQueryString('v');
-    var userId = getQueryString('userId') || '';
-
+    // var userId = getQueryString('userId') || '';
     var accountNumber = getQueryString('accountNumber');
-    // reqApi({
-    //     code: "802503",
-    //     json: { userId: sessionStorage.getItem('userId') },
-    //     sync: true
-    // }).then(function(data) {
-    //     accountNumber = data[0].accountNumber;
-    // });
+
 
     var fields = [{
         field: 'bizType',

@@ -138,6 +138,24 @@ $(function() {
             if (data.productList[0].productSpecsList &&
                 data.productList[0].productSpecsList.length) {
                 productSpecsList = data.productList[0].productSpecsList;
+                var v51 = 0;
+                data.productList[0].productSpecsList.forEach(function(v, i) {
+                    if (v.parentCode == "5-1") {
+                        v51 = 1;
+                    }
+                });
+                if (v51) {
+                    $(".cxradio").eq(0).attr("checked", "checked");
+                    $("#wrap").css("display", "block");
+                    $("#cixiu").css("display", "none")
+                } else {
+                    $(".cxradio").eq(1).attr("checked", "checked");
+                    $("#wrap").css("display", "none");
+                    $("#5-1").val("");
+                    $("#5-2 .param").removeClass("act");
+                    $("#5-3 .param").removeClass("act");
+                    $("#5-4 .param").removeClass("act");
+                }
             }
         }
         // if (data.productList && data.productList.length &&

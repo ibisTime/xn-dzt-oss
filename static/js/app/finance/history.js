@@ -56,10 +56,10 @@ $(function() {
             field: 'applyDatetime',
             title: '申请日期',
             formatter: dateTimeFormat,
-            field1: 'applyDatetimeStart',
+            field1: 'applyDateStart',
             title1: '申请日期',
             type1: 'date',
-            field2: 'applyDatetimeEnd',
+            field2: 'applyDateEnd',
             type2: 'date',
             search: true
         }, {
@@ -81,8 +81,8 @@ $(function() {
             field: 'status',
             title: '状态',
             type: 'select',
-            key: 'withdraw_status',
-            formatter: Dict.getNameForList('withdraw_status'),
+            key: 'charge_status',
+            formatter: Dict.getNameForList('charge_status'),
             search: true
         }
     ];

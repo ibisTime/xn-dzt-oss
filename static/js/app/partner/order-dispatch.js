@@ -1,18 +1,17 @@
 $(function() {
     var code = getQueryString('code');
-    //var  view =getQueryString('v');
-    var province;
-    var city;
-    var area;
-    reqApi({
-        code: "805056",
-        json: { userId: sessionStorage.getItem('userId') },
-        sync: true
-    }).then(function(data) {
-        province = data.userExt.province;
-        city = data.userExt.city;
-        area = data.userExt.area;
-    });
+    // var province;
+    // var city;
+    // var area;
+    // reqApi({
+    //     code: "805056",
+    //     json: { userId: sessionStorage.getItem('userId') },
+    //     sync: true
+    // }).then(function(data) {
+    //     province = data.userExt.province;
+    //     city = data.userExt.city;
+    //     area = data.userExt.area;
+    // });
 
     var fields = [{
             title: '订单号',
@@ -96,11 +95,11 @@ $(function() {
             searchName: "mobile",
             params: {
                 kind: "f2",
-                province: province,
-                city: city,
-                area: area,
+                // province: province,
+                // city: city,
+                // area: area,
                 status: '0',
-                // userReferee: sessionStorage.getItem('userId'),
+                userReferee: sessionStorage.getItem('userId'),
                 updater: ''
             },
             required: true

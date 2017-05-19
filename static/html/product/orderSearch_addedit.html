@@ -341,6 +341,16 @@
     .item-form input[type=text].text-fullt {
         margin-top: 20px;
     }
+    
+    .item-div {
+        width: 80%;
+        height: 30px;
+    }
+    
+    .cxradio {
+        margin-left: 50px;
+        margin-top: -30px
+    }
 </style>
 <div class="place">
     <span>位置：</span>
@@ -580,19 +590,7 @@
         <div class="form-tab">
             <form id='form-tab3' name='form-tab3'>
 
-                <!--<div class="item-tab tab-input">
-                    <span>&nbsp;</span>
-                    <font color="red">
-                        <h2 style="font-size: 20px;">特体数据为非必填项，轻微特体不用填写，不需要每一处都填写！</h2>
-                    </font>
-                </div>
 
-                <div class="item-tab tab-input" style="margin-bottom: 20px;">
-                    <span>&nbsp;</span>
-                    <font color="red">
-                        <h2 style="font-size: 20px;">明显特殊体型只需填写相应的特体位置，其它地方可以为空！</h2>
-                    </font>
-                </div>-->
                 <div class="item-tab">
                     <span>体型: </span>
                     <div class="case" id="4-1" name='4-1'>
@@ -654,28 +652,33 @@
         <!--tab4-->
         <div class="form-tab">
             <form id='form-tab4' name='form-tab4'>
-                <div class="item-tab tab-input item-tab-fl item-tab-mb">
-                    <span>个性刺绣:</span>
-                    <div class="case">
-                        <input type="text" id="5-1" name='5-1' value="" class="param_23">
-                        <a>客户刺绣文字</a>
-                    </div>
+                <div id="cixiu">
+                    无需刺绣
                 </div>
+                <div id="wrap">
+                    <div class="item-tab tab-input item-tab-fl item-tab-mb">
+                        <span>个性刺绣:</span>
+                        <div class="case">
+                            <input type="text" id="5-1" name='5-1' value="" class="param_23">
+                            <a>客户刺绣文字</a>
+                        </div>
+                    </div>
 
-                <div class="item-tab has_emb_text">
-                    <span>刺绣位置:</span>
-                    <div class="case caseimg " id="5-2" name='5-2'>
+                    <div class="item-tab has_emb_text">
+                        <span>刺绣位置:</span>
+                        <div class="case caseimg " id="5-2" name='5-2'>
+                        </div>
                     </div>
-                </div>
 
-                <div class="item-tab has_emb_text">
-                    <span>刺绣字体:</span>
-                    <div class="case caseimg imgcenter" id="5-3" name='5-3'>
+                    <div class="item-tab has_emb_text">
+                        <span>刺绣字体:</span>
+                        <div class="case caseimg imgcenter" id="5-3" name='5-3'>
+                        </div>
                     </div>
-                </div>
-                <div class="item-tab has_emb_text">
-                    <span>刺绣颜色:</span>
-                    <div class="case caseimg imgcenter" id="5-4" name='5-4'>
+                    <div class="item-tab has_emb_text">
+                        <span>刺绣颜色:</span>
+                        <div class="case caseimg imgcenter" id="5-4" name='5-4'>
+                        </div>
                     </div>
                 </div>
             </form>

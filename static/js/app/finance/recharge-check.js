@@ -123,9 +123,9 @@ $(function() {
         field: 'status',
         title: '状态',
         type: 'select',
-        key: 'withdraw_status',
+        key: 'charge_status',
         // keyCode: '802006',
-        formatter: Dict.getNameForList('withdraw_status'),
+        formatter: Dict.getNameForList('charge_status'),
         search: true
     }, {
         field: 'applyUser',

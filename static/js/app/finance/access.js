@@ -47,10 +47,10 @@ $(function() {
         field: 'applyDatetime',
         title: '申请时间',
         formatter: dateTimeFormat,
-        field1: 'applyDatetimeStart',
+        field1: 'applyDateStart',
         title1: '申请时间',
         type1: 'date',
-        field2: 'applyDatetimeEnd',
+        field2: 'applyDateEnd',
         type2: 'date',
         search: true
     }, {

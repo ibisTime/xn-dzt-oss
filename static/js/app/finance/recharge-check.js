@@ -59,11 +59,11 @@ $(function() {
             field: 'payNote',
             maxlength: 250
         };
-        approveCodeField = {
-            title: '支付渠道号',
-            field: 'payCode',
-            maxlength: 250,
-        };
+        // approveCodeField = {
+        //     title: '支付渠道号',
+        //     field: 'payCode',
+        //     maxlength: 250,
+        // };
         buttons = "";
         payList = [{
             field: 'payUser',
@@ -72,7 +72,7 @@ $(function() {
             field: 'payDatetime',
             title: '审核时间',
             formatter: dateTimeFormat
-        }, approveNoteField, approveCodeField]
+        }, approveNoteField]
     }
 
     var fields = [{
@@ -112,10 +112,10 @@ $(function() {
     }, {
         field: 'payCardInfo',
         title: '开户行',
-        type: "select",
-        listCode: "802116",
-        keyName: 'bankCode',
-        valueName: 'bankName',
+        // type: "select",
+        // listCode: "802116",
+        // keyName: 'bankCode',
+        // valueName: 'bankName',
     }, {
         field: 'payCardNo',
         title: '银行卡号',

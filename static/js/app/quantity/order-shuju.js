@@ -193,9 +193,11 @@ $(function() {
             var val = $(this).val();
             var dataCode = $("input[type='radio']:checked").attr("data-code");
             if (dataCode == "01") {
-                $(".param_27_zoom").val(parseFloat(val * 1.1).toFixed(2))
+                $(".param_27_zoom").val(parseFloat(val * 1.1).toFixed(2));
+                // $(".param_29_zoom").val(parseFloat(val * 1.1 - 2).toFixed(2));
             } else {
-                $(".param_27_zoom").val(parseFloat(val * 1.08).toFixed(2))
+                $(".param_27_zoom").val(parseFloat(val * 1.08).toFixed(2));
+                // $(".param_29_zoom").val(parseFloat(val * 1.08 - 4).toFixed(2));
             }
 
         });
@@ -210,7 +212,7 @@ $(function() {
 
         });
         $(".param_29").keyup(function() {
-            var val = $(this).val();
+            var val = $(".param_27").val();
             var dataCode = $("input[type='radio']:checked").attr("data-code");
             if (dataCode == "01") {
                 $(".param_29_zoom").val(parseFloat(val * 1.1 - 2).toFixed(2))

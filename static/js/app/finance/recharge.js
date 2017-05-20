@@ -17,8 +17,7 @@ $(function() {
             title: '币种',
             type: 'select',
             key: 'currency_type',
-            formatter: Dict.getNameForList("currency_type"),
-            // search: true
+            formatter: Dict.getNameForList("currency_type")
         },
         {
             field: 'amount',
@@ -34,10 +33,10 @@ $(function() {
         }, {
             field: 'payCardInfo',
             title: '开户行',
-            type: "select",
-            listCode: "802116",
-            keyName: 'bankCode',
-            valueName: 'bankName',
+            // type: "select",
+            // listCode: "802116",
+            // keyName: 'bankCode',
+            // valueName: 'bankName',
         }, {
             field: 'payCardNo',
             title: '银行卡号',

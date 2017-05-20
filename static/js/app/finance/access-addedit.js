@@ -34,11 +34,12 @@ $(function() {
     }, {
         field: 'payCardInfo',
         title: '开户行',
-        type: "select",
-        listCode: "802116",
-        keyName: 'bankCode',
-        valueName: 'bankName',
-        required: true
+        // type: "select",
+        // listCode: "802116",
+        // keyName: 'bankCode',
+        // valueName: 'bankName',
+        required: true,
+        maxlength: 255
     }, {
         field: 'payCardNo',
         title: '银行卡号',

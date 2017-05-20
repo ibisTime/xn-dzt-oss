@@ -71,7 +71,7 @@ $(function() {
             field: "reAddress",
             readonly: true
         }, {
-            title: " 备注",
+            title: "备注",
             field: "remark",
             maxlength: 255,
             readonly: true

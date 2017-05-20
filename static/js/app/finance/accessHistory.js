@@ -26,10 +26,10 @@ $(function() {
     }, {
         field: 'payCardInfo',
         title: '开户行',
-        type: "select",
-        listCode: "802116",
-        keyName: 'bankCode',
-        valueName: 'bankName',
+        // type: "select",
+        // listCode: "802116",
+        // keyName: 'bankCode',
+        // valueName: 'bankName',
     }, {
         field: 'payCardNo',
         title: '银行卡号',
@@ -82,7 +82,7 @@ $(function() {
         pageCode: '802755',
         // singleSelect: false,
         searchParams: {
-            // channelType: '90',
+            channelType: '90',
             companyCode: OSS.companyCode
         }
     });

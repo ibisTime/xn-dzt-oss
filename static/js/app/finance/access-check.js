@@ -107,10 +107,10 @@ $(function() {
     }, {
         field: 'payCardInfo',
         title: '开户行',
-        type: "select",
-        listCode: "802116",
-        keyName: 'bankCode',
-        valueName: 'bankName',
+        // type: "select",
+        // listCode: "802116",
+        // keyName: 'bankCode',
+        // valueName: 'bankName',
     }, {
         field: 'payCardNo',
         title: '银行卡号'
@@ -118,9 +118,9 @@ $(function() {
         field: 'status',
         title: '状态',
         type: 'select',
-        key: 'jour_status',
+        key: 'withdraw_status',
         // keyCode: '802006',
-        formatter: Dict.getNameForList('jour_status'),
+        formatter: Dict.getNameForList('withdraw_status'),
         search: true
     }, {
         field: 'applyUser',

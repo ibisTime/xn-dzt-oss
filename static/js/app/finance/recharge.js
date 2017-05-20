@@ -12,13 +12,13 @@ $(function() {
             title: '户名',
             search: true
         },
-        {
-            field: 'currency',
-            title: '币种',
-            type: 'select',
-            key: 'currency_type',
-            formatter: Dict.getNameForList("currency_type")
-        },
+        // {
+        //     field: 'currency',
+        //     title: '币种',
+        //     type: 'select',
+        //     key: 'currency_type',
+        //     formatter: Dict.getNameForList("currency_type")
+        // },
         {
             field: 'amount',
             title: '充值金额',

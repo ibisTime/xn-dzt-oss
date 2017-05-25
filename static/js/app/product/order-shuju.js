@@ -142,6 +142,13 @@ $(function() {
         if (data) {
             if (data[0].pic) {
                 createImgHtmls(id, data);
+            }else if(id == "1-8"){
+                if (data[0].code > data[1].code) {
+                    var temp = data[0];
+                    data[0] = data[1];
+                    data[1] = temp;
+                }
+                createCheckHtml(id, data);
             } else {
                 createCheckHtml(id, data);
             }
@@ -153,16 +160,19 @@ $(function() {
         var html = "";
         for (var i = 0; i < data.length; i++) {
             var cls = "param";
+            var cls0 = "cover"
             if (i == 0) {
                 cls += " act";
+                cls0 += " show";
                 param[id] = data[i].code;
             }
             html += '<div class="' + cls + '" data-code="' + data[i].code + '">' +
-                '<p><img src="' + getImg(data[i].pic) + '"></p>' + data[i].name +
+                '<p><img src="' + getImg(data[i].pic) + '">'+'<span class = "'+ cls0 +'"></span> '+'</p>' + data[i].name +
                 '</div>';
         }
         $("#" + id).html(html);
     }
+
 
     function createCheckHtml(id, data) {
         var html = "";
@@ -286,8 +296,8 @@ $(function() {
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
             var self = $(this);
-            self.addClass("act")
-                .siblings(".act").removeClass("act");
+            self.addClass("act").find("span").addClass("show")
+                .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
             id = self.closest(".case").attr("id");
             param[id] = self.attr("data-code");
         });

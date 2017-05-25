@@ -108,6 +108,9 @@
     
     .item-tab .caseimg>div.act p {
         border: 3px solid #5daedb;
+        position: relative;
+        top: 0;
+        left: 0;
     }
     
     .item-tab .caseimg.imgcenter img,
@@ -351,6 +354,18 @@
         margin-left: 50px;
         margin-top: -30px
     }
+    
+    .cover {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: #DBE3F5;
+        z-index: 1;
+        opacity: 0.5;
+        display: none;
+    }
 </style>
 <div class="place">
     <span>位置：</span>
@@ -448,9 +463,10 @@
                 <div class="item-tab tab-input item-tab-fl item-tab-mb">
                     <span></span>
                     <div class="case">
-
                     </div>
                 </div>
+
+
                 <div class="item-tab tab-input item-tab-fl">
                     <span clas="span_left">领围测量:</span>
                     <div class="case">
@@ -599,6 +615,7 @@
                 <div class="item-tab tabtn-full">
                     <div class="case casebtn">
                         <input class="min" type="button" name="" value="上一步" id="to_step_1">
+                        <input class="min" type="button" name="" value="生成放码尺寸" id="complete">
                         <input class="min" type="button" name="" value="下一步" id="to_step_3">
                     </div>
                 </div>

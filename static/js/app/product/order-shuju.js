@@ -142,7 +142,7 @@ $(function() {
         if (data) {
             if (data[0].pic) {
                 createImgHtmls(id, data);
-            }else if(id == "1-8"){
+            } else if (id == "1-8") {
                 if (data[0].code > data[1].code) {
                     var temp = data[0];
                     data[0] = data[1];
@@ -167,7 +167,7 @@ $(function() {
                 param[id] = data[i].code;
             }
             html += '<div class="' + cls + '" data-code="' + data[i].code + '">' +
-                '<p><img src="' + getImg(data[i].pic) + '">'+'<span class = "'+ cls0 +'"></span> '+'</p>' + data[i].name +
+                '<p><img src="' + getImg(data[i].pic) + '">' + '<span class = "' + cls0 + '"></span> ' + '</p>' + data[i].name +
                 '</div>';
         }
         $("#" + id).html(html);
@@ -189,95 +189,7 @@ $(function() {
 
     function addListeners() {
 
-        $(".param_26").keyup(function() {
-            var val = $(this).val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_26_zoom").val(parseFloat(val).toFixed(2))
-            } else {
-                $(".param_26_zoom").val(parseFloat(val).toFixed(2))
-            }
-
-        });
-        $(".param_27").keyup(function() {
-            var val = $(this).val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_27_zoom").val(parseFloat(val * 1.1).toFixed(2));
-            } else {
-                $(".param_27_zoom").val(parseFloat(val * 1.08).toFixed(2));
-            }
-
-        });
-        $(".param_28").keyup(function() {
-            var val = $(this).val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_28_zoom").val(parseFloat(val * 1.1).toFixed(2))
-            } else {
-                $(".param_28_zoom").val(parseFloat(val * 1.07).toFixed(2))
-            }
-
-        });
-        $(".param_29").keyup(function() {
-            var val = $(".param_27").val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_29_zoom").val(parseFloat(val * 1.1 - 2).toFixed(2))
-            } else {
-                $(".param_29_zoom").val(parseFloat(val * 1.08 - 4).toFixed(2))
-            }
-
-        });
-        $(".param_30").keyup(function() {
-            var val = $(this).val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_30_zoom").val(parseFloat(val).toFixed(2))
-            } else {
-                $(".param_30_zoom").val(parseFloat(val).toFixed(2))
-            }
-
-        });
-        $(".param_31").keyup(function() {
-            var val = $(this).val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_31_zoom").val(parseFloat(val).toFixed(2))
-            } else {
-                $(".param_31_zoom").val(parseFloat(val).toFixed(2))
-            }
-
-        });
-        $(".param_32").keyup(function() {
-            var val = $(this).val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_32_zoom").val(parseFloat(val).toFixed(2))
-            } else {
-                $(".param_32_zoom").val(parseFloat(val).toFixed(2))
-            }
-
-        });
-        $(".param_33").keyup(function() {
-            var val = $(this).val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_33_zoom").val(parseFloat(val * 1 + 9).toFixed(2))
-            } else {
-                $(".param_33_zoom").val(parseFloat(val * 1 + 7).toFixed(2))
-            }
-
-        });
-        $(".param_34").keyup(function() {
-            var val = $(this).val();
-            var dataCode = $("input[type='radio']:checked").attr("data-code");
-            if (dataCode == "01") {
-                $(".param_34_zoom").val(parseFloat(val * 1 + 6).toFixed(2))
-            } else {
-                $(".param_34_zoom").val(parseFloat(val * 1 + 5).toFixed(2))
-            }
-        });
+        
         $(".cxradio").click(function() {
             var dataid = $(this).attr("data-id");
             if (dataid == '03') {
@@ -294,10 +206,20 @@ $(function() {
 
 
         // 页面参数按钮点击
+        // $("#jsForm").on("click", ".param", function(e) {
+        //     var self = $(this);
+        //     self.addClass("act").find("span").addClass("show")
+        //         .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
+        //     id = self.closest(".case").attr("id");
+        //     param[id] = self.attr("data-code");
+        // });
+        // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
             var self = $(this);
             self.addClass("act").find("span").addClass("show")
                 .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
+            self.addClass("act").siblings(".act").removeClass("act");
+
             id = self.closest(".case").attr("id");
             param[id] = self.attr("data-code");
         });
@@ -377,6 +299,11 @@ $(function() {
                 goPage(2);
             }
         });
+        $("#complete").on("click", function() {
+            if (validatePageYan()) {
+                createDimeByRules();
+            }
+        });
         $("#to_step_1").on("click", function() {
             goPage(0);
         });
@@ -398,106 +325,75 @@ $(function() {
                     max: 60,
                     min: 30
                 },
-                '2-11': {
-                    required: true
-                },
+                // '2-11': {
+                //     required: true
+                // },
                 '2-2': {
                     required: true,
                     max: 180,
                     min: 60
                 },
-                '2-12': {
-                    required: true
-                },
+                // '2-12': {
+                //     required: true
+                // },
                 '2-3': {
                     required: true,
                     max: 170,
                     min: 50
                 },
-                '2-13': {
-                    required: true
-                },
+                // '2-13': {
+                //     required: true
+                // },
                 '2-4': {
                     required: true,
                     max: 170,
                     min: 50
                 },
-                '2-14': {
-                    required: true
-                },
+                // '2-14': {
+                //     required: true
+                // },
                 '2-5': {
                     required: true,
                     max: 70,
                     min: 35
                 },
-                '2-15': {
-                    required: true
-                },
+                // '2-15': {
+                //     required: true
+                // },
                 '2-6': {
                     required: true,
                     max: 90,
                     min: 50
                 },
-                '2-16': {
-                    required: true
-                },
+                // '2-16': {
+                //     required: true
+                // },
                 '2-7': {
                     required: true,
                     max: 80,
                     min: 15
                 },
-                '2-17': {
-                    required: true
-                },
+                // '2-17': {
+                //     required: true
+                // },
                 '2-8': {
                     required: true,
                     max: 65,
                     min: 20
                 },
-                '2-18': {
-                    required: true
-                },
+                // '2-18': {
+                //     required: true
+                // },
                 '2-9': {
                     required: true,
                     max: 30,
                     min: 15
                 },
-                '2-10': {
-                    required: true
-                },
+                // '2-10': {
+                //     required: true
+                // },
             }
         });
-
-
-        // function listener() {
-        //     var dataCode = $("input[type='radio']:checked").attr("data-code");
-        //     $("input:radio").change(function() {
-        //         console.log(1)
-        //         if (dataCode == "01") {
-        //             $("#2-10").html(parseFloat($("#2-1").val()));
-        //             console.log($("#2-1").val());
-        //             $("#2-11").html(parseFloat($("#2-2").val()) * 1.1);
-        //             $("#2-12").html(parseFloat($("#2-3").val()) * 1.1);
-        //             $("#2-13").html(parseFloat($("#2-4").val()) * 1.1 - 2);
-        //             $("#2-14").html(parseFloat($("#2-5").val()));
-        //             $("#2-15").html(parseFloat($("#2-6").val()));
-        //             $("#2-16").html(parseFloat($("#2-7").val()));
-        //             $("#2-17").html(parseFloat($("#2-8").val()) + 9);
-        //             $("#2-18").html(parseFloat($("#2-9").val()) + 6);
-        //         } else if (dataCode == "02") {
-        //             $("#2-10").html(parseFloat($("#2-1").val()));
-        //             $("#2-11").html(parseFloat($("#2-2").val()) * 1.08);
-        //             $("#2-12").html(parseFloat($("#2-3").val()) * 1.07);
-        //             $("#2-13").html(parseFloat($("#2-4").val()) * 1.08 - 4);
-        //             $("#2-14").html(parseFloat($("#2-5").val()));
-        //             $("#2-15").html(parseFloat($("#2-6").val()));
-        //             $("#2-16").html(parseFloat($("#2-7").val()));
-        //             $("#2-17").html(parseFloat($("#2-8").val()) + 7);
-        //             $("#2-18").html(parseFloat($("#2-9").val()) + 5);
-        //         }
-        //     })
-        // };
-
 
         $("#form-tab3").validate({
             'rules': {
@@ -595,6 +491,40 @@ $(function() {
         });
     }
 
+    function createDimeByRules() {
+        var dataCode = $("input[type='radio']:checked").attr("data-code");
+        var val26 = $(".param_26").val()
+        var val27 = $(".param_27").val();
+        var val28 = $(".param_28").val();
+        // var val29 = $(".param_29").val();
+        var val30 = $(".param_30").val();
+        var val31 = $(".param_31").val();
+        var val32 = $(".param_32").val();
+        var val33 = $(".param_33").val();
+        var val34 = $(".param_34").val();
+        if (dataCode == "01") {
+            $(".param_26_zoom").val(parseFloat(val26).toFixed(2));
+            $(".param_27_zoom").val(parseFloat(val27 * 1.1).toFixed(2));
+            $(".param_28_zoom").val(parseFloat(val28 * 1.1).toFixed(2));
+            $(".param_29_zoom").val(parseFloat(val27 * 1.1 - 2).toFixed(2))
+            $(".param_30_zoom").val(parseFloat(val30).toFixed(2));
+            $(".param_31_zoom").val(parseFloat(val31).toFixed(2));
+            $(".param_32_zoom").val(parseFloat(val32).toFixed(2));
+            $(".param_33_zoom").val(parseFloat(val33*1 +9).toFixed(2));
+            $(".param_34_zoom").val(parseFloat(val34*1+6).toFixed(2));
+        } else {
+            $(".param_26_zoom").val(parseFloat(val26).toFixed(2));
+            $(".param_27_zoom").val(parseFloat(val27 * 1.08).toFixed(2));
+            $(".param_28_zoom").val(parseFloat(val28 * 1.07).toFixed(2));
+            $(".param_29_zoom").val(parseFloat(val27 * 1.08 - 4).toFixed(2));
+            $(".param_30_zoom").val(parseFloat(val30).toFixed(2));
+            $(".param_31_zoom").val(parseFloat(val31).toFixed(2));
+            $(".param_32_zoom").val(parseFloat(val32).toFixed(2));
+            $(".param_33_zoom").val(parseFloat(val33*1+7).toFixed(2));
+            $(".param_34_zoom").val(parseFloat(val34*1 +5).toFixed(2));
+        }
+    }
+
     function goPage(index) {
         $("#navUl").find("span:eq(" + index + ")").addClass("act")
             .siblings("span.act").removeClass("act");
@@ -614,6 +544,19 @@ $(function() {
     }
 
     function validatePage2() {
+        if ($('#form-tab2').valid()) {
+            var data = $('#form-tab2').serializeObject();
+            if (data == "") {
+                toastr.info("请按要求填写完整");
+                return false;
+            }
+            return true;
+        }
+        return false;
+
+    }
+
+    function validatePageYan() {
         if ($('#form-tab2').valid()) {
             var data = $('#form-tab2').serializeObject();
             if (data == "") {

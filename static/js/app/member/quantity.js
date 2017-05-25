@@ -164,5 +164,14 @@ $(function() {
         window.location.href = "quantity_check.html?userId=" + selRecords[0].userId;
 
     });
+    $('#rateBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = "quantity_rate.html?userId=" + selRecords[0].userId;
+
+    });
     $("#ledgerBtn").remove();
 });

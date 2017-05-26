@@ -58,4 +58,5 @@ $(function() {
     $("#ledgerBtn").remove();
     $("#ledgerBtn").remove();
     $("#cheBtn").remove();
+    $("#rateBtn").remove();
 });

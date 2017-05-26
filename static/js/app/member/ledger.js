@@ -68,4 +68,7 @@ $(function() {
     $("#accountBtn").remove();
     $("#ledgerBtn").remove();
     $("#orderBtn").remove();
+    $("#cheBtn").remove();
+    $("#rateBtn").remove();
+
 });

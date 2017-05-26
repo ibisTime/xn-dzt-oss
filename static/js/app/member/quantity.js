@@ -135,6 +135,7 @@ $(function() {
         window.location.href = "quantity_addedit.html?userId=" + selRecords[0].userId;
 
     });
+    //业绩
     $("#achieveBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -143,6 +144,7 @@ $(function() {
         }
         window.location.href = "quantity_achieve.html?userId=" + selRecords[0].userId;
     });
+    //账户
     $("#accountBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -151,6 +153,7 @@ $(function() {
         }
         window.location.href = "account.html?userId=" + selRecords[0].userId;
     });
+    //审核
     $('#cheBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -164,6 +167,7 @@ $(function() {
         window.location.href = "quantity_check.html?userId=" + selRecords[0].userId;
 
     });
+    //修改分成比例
     $('#rateBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {

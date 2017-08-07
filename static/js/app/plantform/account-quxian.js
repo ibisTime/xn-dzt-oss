@@ -1,15 +1,8 @@
 $(function() {
-    var code = getQueryString('code');
-    var view = !!getQueryString('v');
-    // var userId = getQueryString('userId') || '';
+
     var accountNumber = getQueryString('accountNumber');
 
-
     var fields = [{
-        field: 'bizType',
-        type: 'hidden',
-        value: '-11'
-    }, {
         field: 'accountNumber',
         title: '用户账户',
         required: true,
@@ -22,12 +15,14 @@ $(function() {
         amount: true,
         formatter: moneyFormat
     }, {
+        title: "支付时间",
+        field: "payDatetime",
+        type: "datetime",
+        formatter: dateFormat,
+        required: true,
+    }, {
         field: 'payCardInfo',
         title: '开户行',
-        // type: "select",
-        // listCode: "802116",
-        // keyName: 'bankCode',
-        // valueName: 'bankName',
         required: true,
         maxlength: 255
     }, {
@@ -35,14 +30,15 @@ $(function() {
         title: '银行卡号',
         required: true,
         bankCard: true,
+    }, {
+        field: 'applyNote',
+        title: '备注',
+        maxlength: 255
     }];
 
     var options = {
         fields: fields,
-        code: code,
-        addCode: '802751',
-        detailCode: '802756',
-        view: view,
+        addCode: '802754',
         beforeSubmit: function(data) {
             data.applyUser = getUserId();
             return data;

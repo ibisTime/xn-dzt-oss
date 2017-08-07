@@ -1,10 +1,6 @@
 $(function() {
     var accountNumber = getQueryString('accountNumber');
-    var accountNumberPing = getQueryString('accountNumberPing');
-    var isPing = getQueryString('ping');
-    var accountNumberValue = isPing ? accountNumberPing : accountNumber;
-
-
+   
     var columns = [{
             field: '',
             title: '',
@@ -53,7 +49,7 @@ $(function() {
         pageCode: '802520',
         searchParams: {
             companyCode: OSS.companyCode,
-            accountNumber: accountNumberValue
+            accountNumber: accountNumber
         }
     });
 

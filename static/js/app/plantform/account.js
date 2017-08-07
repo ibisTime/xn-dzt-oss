@@ -1,7 +1,7 @@
 $(function() {
-    var view = 1;
+    var accountNumberJF;
     var accountNumber;
-    var accountNumberPing;
+    var accountNumberCNY;
 
     reqApi({
         code: '802503',
@@ -9,8 +9,10 @@ $(function() {
             userId: OSS.SYS_USER
         }
     }).then(function(data) {
-        $("#amount-yu").text("￥" + data[0].amount / 1000);
-        accountNumberPing = data[0].accountNumber;
+        $("#amount-CNY").text("￥" + (data[0].amount/1000).toFixed(2));
+        accountNumberCNY = data[0].accountNumber;
+        $("#amount-JF").text("￥" + (data[1].amount/1000).toFixed(2));
+        accountNumberJF = data[1].accountNumber;
     });
 
 
@@ -20,23 +22,20 @@ $(function() {
             userId: "SYS_USER_DZT_TG"
         }
     }).then(function(data) {
-        $("#amount-CNY").text("￥" + data[0].amount / 1000);
+        $("#amount-TG").text("￥" + (data[0].amount / 1000).toFixed(2));
         accountNumber = data[0].accountNumber;
     });
 
-    $("#accoutBtn").click(
-        function() {
-            window.location.href = 'account_detail.html?accountNumber=' + accountNumber;
+    $("#accoutJFBtn").click(function() {
+            window.location.href = 'account_detail.html?accountNumber=' + accountNumberJF;
         }
     );
-    $("#accoutPingBtn").click(
-        function() {
-            window.location.href = 'account_detail.html?ping=1&accountNumberPing=' + accountNumberPing;
+    $("#accoutCNYBtn").click(function() {
+            window.location.href = 'account_detail.html?accountNumber=' + accountNumberCNY;
         }
     );
-    $("#accouBtn").click(
-        function() {
-            window.location.href = 'account_quxian.html?accountNumber=' + accountNumberPing;
+    $("#quxianBtn").click(function() {
+            window.location.href = 'account_quxian.html?accountNumber=' + accountNumber;
         }
     );
 });

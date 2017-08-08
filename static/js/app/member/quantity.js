@@ -7,14 +7,10 @@ $(function() {
         checkbox: true
     }, {
         title: '登录名/手机号',
-        field: 'mobile',
-        // search: true
+        field: 'mobile'
     }, {
         title: '姓名',
         field: 'realName',
-        // formatter: function(value, row, index) {
-        //     return row['realName'] ? row['realName'] : value;
-        // },
         search: true
     }, {
         title: "辖区",

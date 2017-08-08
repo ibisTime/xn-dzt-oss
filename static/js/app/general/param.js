@@ -1,7 +1,5 @@
 $(function() {
 
-
-
     var columns = [{
             field: '',
             title: '',
@@ -13,7 +11,10 @@ $(function() {
         },
         {
             field: 'note',
-            title: '参数值'
+            title: '参数值',
+            // formatter:function(v,data){
+            //    return v && '<img  style="width:60px;height:60px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
+            // }
         },
         {
             field: 'cvalue',
@@ -26,6 +27,9 @@ $(function() {
     buildList({
         router: 'param',
         columns: columns,
-        pageCode: '807715'
+        pageCode: '807715',
+        searchParams:{
+            type:"1"
+        }
     });
 });

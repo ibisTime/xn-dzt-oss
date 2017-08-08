@@ -601,6 +601,7 @@ function buildList(options) {
     var urlParamsStr = '';
     var columns = options.columns;
     var dateTimeList = [];
+    var dateTimeList1 = [];
     if (urlParams) {
         for (var i in urlParams) {
             urlParamsStr += '&' + i + '=' + urlParams[i];
@@ -614,9 +615,13 @@ function buildList(options) {
         if (item.search) {
             if (item.key || item.type == 'select') {
                 html += '<li><label>' + item.title + '</label><select ' + (item.multiple ? 'multiple' : '') + ' id="' + item.field + '" name="' + item.field + '"></select></li>';
-            } else if (item.type1 == 'date' || item.type1 == "datetime") {
+            } else if (item.twoDate) {
                 dateTimeList.push(item);
-                html += '<li style="width: 50%;"><label>' + item.title1 + '</label><input id="' + item.field1 + '" name="' + item.field1 + '" class="lay-input"/><label style="float:none;padding-left: 10px;">至</label><input id="' + item.field2 + '" name="' + item.field2 + '" class="lay-input"/></li>';
+                html += '<li  class="search-form-li" style="width: 50%;"><label>' + item.title1 + '</label><input id="' + item.field1 + '" name="' + item.field1 + '" class="lay-input lay-input1"/><label style="float:none;padding-left: 10px;">~</label><input id="' + item.field2 + '" name="' + item.field2 + '" class="lay-input lay-input1"/></li>';
+                // 单个日期搜索框
+            } else if (item.type == 'date' || item.type == "datetime") {
+                dateTimeList1.push(item);
+                html += '<li  class="search-form-li" style="width: 50%;"><label>' + item.title + '</label><input id="' + item.field + '" name="' + item.field + '" class="lay-input lay-input1"/></li>';
             } else if (item.type == "citySelect") {
                 html += '<li class="clearfix" style="width:56%;"><label>' + item.title + '</label><div id="city-group"><select id="province" name="province" class="control-def prov"></select>' +
                     '<select id="city" name="city" class="control-def city"></select>' +
@@ -634,23 +639,46 @@ function buildList(options) {
     }
     html += '<li><input id="searchBtn" type="button" class="btn" value="查询" /><input type="reset" class="btn" value="重置" /></li></ul>';
     $('.search-form').append(html);
-
+    // 两个日期搜索框
     for (var i = 0, len = dateTimeList.length; i < len; i++) {
-        var item = dateTimeList[i];
-        laydate({
-            elem: '#' + item.field1,
-            min: item.minDate ? item.minDate : '',
-            istime: item.type1 == 'datetime',
-            format: item.type1 == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD'
-        });
-        laydate({
-            elem: '#' + item.field2,
-            min: item.minDate ? item.minDate : '',
-            istime: item.type1 == 'datetime',
-            format: item.type1 == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD'
-        });
-    }
+        (function(i) {
+            var item = dateTimeList[i];
+            var start = {
+                elem: '#' + item.field1,
+                min: item.minDate1 ? item.minDate1 : '',
+                istime: item.type == 'datetime',
+                format: item.type == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD',
+                choose: function(datas) {
+                    end.min = datas; //开始日选好后，重置结束日的最小日期
+                    end.start = datas //将结束日的初始值设定为开始日
+                }
+            };
+            var end = {
+                elem: '#' + item.field2,
+                min: item.minDate2 ? item.minDate2 : '',
+                istime: item.type == 'datetime',
+                format: item.type == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD',
+                choose: function(datas) {
+                    start.max = datas; //结束日选好后，重置开始日的最大日期
+                }
+            };
 
+            laydate(start);
+            laydate(end);
+        })(i);
+    }
+    // 单个日期搜索框
+    for (var i = 0, len = dateTimeList1.length; i < len; i++) {
+        (function(i) {
+            var item = dateTimeList1[i];
+            laydate({
+                elem: '#' + item.field,
+                min: item.minDate ? item.minDate : '',
+                istime: item.type == 'datetime',
+                format: item.type == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD'
+            });
+        })(i);
+    }
 
     for (var i = 0, len = dropDownList.length; i < len; i++) {
         var item = dropDownList[i];
@@ -1029,7 +1057,9 @@ function buildDetail(options) {
         if (item['amount']) {
             rules[item.field]['amount'] = item['amount'];
         }
-
+        if (item['amount1']) {
+            rules[item.field]['amount1'] = item['amount1'];
+        }
         if (item['tm']) {
             rules[item.field]['tm'] = item['tm'];
         }
@@ -1307,12 +1337,16 @@ function buildDetail(options) {
 
     for (var i = 0, len = dateTimeList.length; i < len; i++) {
         var item = dateTimeList[i];
-        laydate({
-            elem: '#' + item.field,
-            min: item.minDate ? item.minDate : '',
-            istime: item.type == 'datetime',
-            format: item.type == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD'
-        });
+        if (item.dateOption) {
+            laydate(item.dateOption);
+        } else {
+            laydate({
+                elem: '#' + item.field,
+                min: item.minDate ? item.minDate : '',
+                istime: item.type == 'datetime',
+                format: item.type == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD'
+            });
+        }
     }
 
     $("#city-group").citySelect && $("#city-group").citySelect({

@@ -119,7 +119,10 @@ $.validator.addMethod("amount", function(value, element) {
     var aint = '' + parseInt(value.replace(/[\,]/g, ''));
     return /^\d+$/.test(aint) && /^[\d\.\,]+$/.test(value + '') && aint.length <= 13;
 }, '金额必须>=0，且小于13位');
-
+$.validator.addMethod("amount1", function(value, element) {
+    var aint = '' + parseInt(value.replace(/[\,]/g, ''));
+    return /^\-?\d+$/.test(aint) && /^\-|\+?[\d\.\,]+$/.test(value + '') && aint.length <= 13;
+}, '金额须小于13位');
 //汉字
 jQuery.validator.addMethod("chinese", function(value, element) {
     var chinese = /^[\u4E00-\u9FFF]+$/;
@@ -155,19 +158,6 @@ jQuery.validator.addMethod("url", function(value, element) {
     return this.optional(element) || (url.test(value));
 }, "请输入正确的网址");
 
-//经度验证
-jQuery.validator.addMethod("west", function(value, element) {
-    var west =  /^(0?\d{1,2}\.\d{1,5}|1[0-7]?\d{1}\.\d{1,10}|180\.0{1,10})$/;
-    return this.optional(element) || (west.test(value));
-}, "请输入正确的经度格式");
-//纬度验证
-jQuery.validator.addMethod("north", function(value, element) {
-    var north = /([0-8]?\d{1}\.\d{1,10}|90\.0{1,10})$/;
-    return this.optional(element) || (north.test(value));
-}, "请输入正确的纬度格式");
-
-
-
 //ie6兼容after
 var $beforeAfter = function(dom) {
     if (document.querySelector || !dom && dom.nodeType !== 1) return;
@@ -186,7 +176,6 @@ var $beforeAfter = function(dom) {
 
 $beforeAfter($('.error'));
 
-//$.validator.setDefaults({ ignore: ":hidden:not(textarea)" });
 $.validator.setDefaults({
     errorPlacement: function(error, element) {
         if (element.parent('.input-group').length) {
@@ -198,16 +187,7 @@ $.validator.setDefaults({
         }
     }
 });
-//$('form').validate({
-//	highlight: function(element) {
-//        $(element).closest('.form-group').addClass('has-error');
-//    },
-//	unhighlight: function(element) {
-//	    $(element).closest('.form-group').removeClass('has-error');
-//	},
-//	errorElement: 'span',
-//	errorClass: 'help-block'
-//});
+
 
 setTimeout(function() {
     $('form').on('reset', function() {

@@ -1,6 +1,6 @@
 $(function() {
-
     var accountNumber = getQueryString('accountNumber');
+
 
     var fields = [{
         field: 'accountNumber',
@@ -19,7 +19,7 @@ $(function() {
         field: "payDatetime",
         type: "datetime",
         formatter: dateFormat,
-        required: true,
+        required: true
     }, {
         field: 'payCardInfo',
         title: '开户行',

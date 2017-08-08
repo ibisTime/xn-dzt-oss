@@ -18,7 +18,8 @@ $(function() {
 	buildList({
 		router: 'config',
 		columns: columns,
-		pageCode: '618915'
+		pageCode: '618915',
+		
 	});
 });
 

@@ -46,7 +46,6 @@ $(function() {
     }).done(function(data) {
         $("#amount-quaccess").text("￥" + data.totalAmount / 1000);
     });
-    //
     reqApi({
         code: '802900',
         json: {

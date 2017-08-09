@@ -52,10 +52,6 @@ $(function() {
     buildList({
         router: 'orderSearch',
         columns: columns,
-        pageCode: '620220',
-        // searchParams: {
-        //     status: "8"
-        // }
-
+        pageCode: '620220'
     });
 });

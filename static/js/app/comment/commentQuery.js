@@ -11,7 +11,7 @@ $(function() {
             if (v) {
                 return "私课教练：" + v;
             } else {
-                return "团课：" + data.courseName;
+                // return "团课：" + data.courseName;
             }
         }
     }, {
@@ -39,7 +39,7 @@ $(function() {
     buildList({
         router: 'comment',
         columns: columns,
-        pageCode: "622145",
+        pageCode: "660060",
         searchParams: {
             companyCode: OSS.company,
             statusList: ["A", "B", "C"]

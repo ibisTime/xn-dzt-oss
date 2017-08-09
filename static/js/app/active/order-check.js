@@ -73,7 +73,7 @@ $(function() {
                 data.orderCode = code;
                 data.remark = $('#remark').val();
                 reqApi({
-                    code: '622035',
+                    code: '660025',
                     json: data
                 }).done(function(data) {
                     sucDetail();
@@ -90,7 +90,7 @@ $(function() {
                 data.orderCode = code;
                 data.remark = $('#remark').val();
                 reqApi({
-                    code: '622035',
+                    code: '660025',
                     json: data
                 }).done(function(data) {
                     sucDetail();
@@ -106,7 +106,7 @@ $(function() {
     var options = {
         fields: fields,
         code: code,
-        detailCode: '622041',
+        detailCode: '660031',
         buttons: buttons
     };
     buildDetail(options);

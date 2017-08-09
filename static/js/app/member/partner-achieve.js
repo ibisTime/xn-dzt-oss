@@ -50,18 +50,14 @@ $(function() {
         field: "remark"
     }];
     buildList({
-        // router: 'quantity_achieve',
         columns: columns,
         pageCode: '620220',
         searchParams: {
             toUser: userId
         }
     });
-    $("#addBtn").remove();
-    $("#edit2Btn").remove();
-    $("#rockBtn").remove();
-    $("#activeBtn").remove();
-    $("#achieveBtn").remove();
-    $("#accountBtn").remove();
-    $("#ledgerBtn").remove();
+    $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    $('#backBtn').on('click', function() {
+        goBack();
+    });
 });

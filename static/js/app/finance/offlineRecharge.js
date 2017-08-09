@@ -43,25 +43,25 @@ $(function() {
         formatter: dateTimeFormat,
         field1: 'applyDateStart',
         title1: '申请日期',
-        type1: 'date',
+        type: 'date',
         field2: 'applyDateEnd',
-        type2: 'date',
+        twoDate:true,
         search: true
     }, {
-        field1: 'payDateStart',
-        title1: '审核日期',
-        type1: 'date',
-        field2: 'payDateEnd',
-        type2: 'date',
-        search: true,
-        visible: false
+       
     }, {
         field: 'payUser',
         title: '审核人'
     }, {
         field: 'payDatetime',
-        title: '审核时间',
-        formatter: dateTimeFormat
+        title: '审核日期',
+        formatter: dateTimeFormat,
+         field1: 'payDateStart',
+        title1: '审核日期',
+        type: 'date',
+        field2: 'payDateEnd',
+        search: true,
+        twoDate:true
     }, {
         field: 'status',
         title: '状态',

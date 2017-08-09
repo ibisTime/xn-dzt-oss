@@ -796,7 +796,11 @@ function buildList(options) {
             toastr.info("请选择一条记录");
             return;
         }
-
+        if (options.beforeDelete) {
+            if (!options.beforeDelete(selRecords[0])) {
+                return;
+            }
+        }
         confirm("确认是否删除该记录？").then(function() {
             var codeParams = {
                 code: selRecords[0].code,

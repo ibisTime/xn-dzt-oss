@@ -17,7 +17,7 @@ $(function() {
         title: "支付时间",
         field: "payDatetime",
         type: "datetime",
-        formatter: dateFormat,
+        formatter: dateTimeFormat,
         required: true,
     }, {
         field: 'payCardInfo',
@@ -39,7 +39,8 @@ $(function() {
         fields: fields,
         addCode: '802754',
         beforeSubmit: function(data) {
-            data.applyUser = getUserId();
+            data.applyUser = OSS.SYS_USER;
+            data.updaterId="";
             return data;
         }
     };

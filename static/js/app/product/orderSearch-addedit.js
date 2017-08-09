@@ -1,6 +1,5 @@
 $(function() {
     var code = getQueryString('code');
-    //var  view =getQueryString('v');
 
     var fields = [{
             title: '订单号',
@@ -75,7 +74,6 @@ $(function() {
         }, {
             title: "收件人地址",
             field: "reAddress",
-
             readonly: true
         }, {
             field: 'orderCode',
@@ -100,7 +98,6 @@ $(function() {
         }, {
             field: 'deliveryDatetime',
             title: '发货时间',
-            // type: "datetime",
             formatter: dateFormat,
             readonly: true,
         }, {

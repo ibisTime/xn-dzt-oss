@@ -38,7 +38,7 @@ $(function() {
             if (v) {
                 return "私课教练：" + v;
             } else {
-                return "团课：" + data.courseName;
+                // return "团课：" + data.courseName;
             }
         },
         readonly: true
@@ -87,7 +87,7 @@ $(function() {
                     data.approver = getUserName();
                     data.code = code;
                     reqApi({
-                        code: '622142',
+                        code: '660052',
                         json: data
                     }).done(function(data) {
                         sucDetail();
@@ -103,7 +103,7 @@ $(function() {
                     data.approver = getUserName();
                     data.code = code;
                     reqApi({
-                        code: '622142',
+                        code: '660052',
                         json: data
                     }).done(function(data) {
                         sucDetail();
@@ -122,7 +122,7 @@ $(function() {
         code: code,
         view: true,
         buttons: buttons,
-        detailCode: '622146',
+        detailCode: '660061',
     };
     buildDetail(options);
 });

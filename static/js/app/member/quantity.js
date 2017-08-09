@@ -49,8 +49,15 @@ $(function() {
         pageCode: '805054',
         searchParams: {
             kind: "f2"
+        },
+        beforeDetail: function(data) {
+            window.location.href = "quantity_addedit.html?v=1&userId=" + data.userId;
+        },
+        beforeEdit: function(data) {
+            window.location.href = "quantity_addedit.html?userId=" + data.userId;
         }
     });
+    //注销
     $('#rockBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -79,6 +86,7 @@ $(function() {
         });
 
     });
+    //激活
     $('#activeBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -102,34 +110,6 @@ $(function() {
             });
 
         });
-    });
-    $('#inteBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "member_inte.html?userId=" + selRecords[0].userId;
-
-    });
-
-    $("#detail2Btn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "member_addedit.html?userId=" + selRecords[0].userId;
-
-    });
-    $("#edit2Btn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "quantity_addedit.html?userId=" + selRecords[0].userId;
-
     });
     //业绩
     $("#achieveBtn").click(function() {
@@ -173,5 +153,4 @@ $(function() {
         window.location.href = "quantity_rate.html?userId=" + selRecords[0].userId;
 
     });
-    $("#ledgerBtn").remove();
 });

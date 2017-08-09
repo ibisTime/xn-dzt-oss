@@ -51,12 +51,6 @@ $(function() {
         code: code,
         addCode: '620200',
         beforeSubmit: function(data) {
-            // if (data.province == data.city && data.city == data.area) {
-            //     data.city = "";
-            //     data.area = "";
-            // } else if (data.province == data.city && data.city != data.area) {
-            //     data.city = data.area;
-            // }
             data.ltProvince = data.province;
             data.ltCity = data.city;
             data.ltArea = data.area;

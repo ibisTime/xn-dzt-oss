@@ -1,23 +1,16 @@
 $(function() {
-    var userKind = {
-        "f1": "C端用户",
-        "f2": "B端用户"
-    }
+
     var columns = [{
             field: '',
             title: '',
             checkbox: true
         }, {
             title: "昵称",
-            field: "nickname",
-            // search: true
+            field: "nickname"
         },
         {
             title: '姓名',
             field: 'realName',
-            // formatter: function(value, row, index) {
-            //     return row['realName'] ? row['realName'] : value;
-            // },
             search: true
         },
         {
@@ -49,8 +42,12 @@ $(function() {
         pageCode: '805054',
         searchParams: {
             kind: "f1"
+        },
+        beforeDetail: function(data) {
+            window.location.href = "custom_addedit.html?userId=" + data.userId;
         }
     });
+    //注销
     $('#rockBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -58,7 +55,7 @@ $(function() {
             return;
         }
         if (selRecords[0].status == 2) {
-            toastr.info("该账户已被注销");
+            toastr.warning("该账户已被注销");
             return;
         }
         var status = selRecords[0].status,
@@ -79,6 +76,7 @@ $(function() {
         });
 
     });
+    //激活
     $('#activeBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -86,7 +84,7 @@ $(function() {
             return;
         }
         if (selRecords[0].status == 0) {
-            toastr.info("该账户是已正常状态");
+            toastr.warning("该账户是已正常状态");
             return;
         }
         confirm("确定激活该账户？").then(function() {
@@ -103,24 +101,14 @@ $(function() {
 
         });
     });
+    //账户
     $('#accountBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
+            toastr.warning("请选择记录");
             return;
         }
         window.location.href = "account.html?userId=" + selRecords[0].userId;
 
     });
-
-    $("#orderBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "custom_achieve.html?userId=" + selRecords[0].userId;
-
-    });
-    $("#ledgerBtn").remove();
 });

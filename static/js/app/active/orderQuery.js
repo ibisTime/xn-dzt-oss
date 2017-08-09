@@ -75,7 +75,7 @@ $(function() {
     buildList({
         router: "order",
         columns: columns,
-        pageCode: '622040',
+        pageCode: '660030',
         searchParams: {
             companyCode: OSS.company,
             statusList: [2, 3, 5, 6, 7, 8]

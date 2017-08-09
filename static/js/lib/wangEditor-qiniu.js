@@ -144,7 +144,7 @@
         }
 
 
-        var qiniuUploadUrl;
+        var qiniuUploadUrl, isQiniuUploadUrlInit = false;
         if (window.location.protocol === 'https:') {
             qiniuUploadUrl = 'https://up.qbox.me';
         } else {
@@ -624,7 +624,10 @@
                             qiniuUpHosts.http = getHosts(res.http.up);
                             qiniuUpHosts.https = getHosts(res.https.up);
                             logger.debug("get new uphosts: ", qiniuUpHosts);
-                            that.resetUploadUrl();
+                            if(!isQiniuUploadUrlInit){
+                                isQiniuUploadUrlInit = true;
+                                that.resetUploadUrl();
+                            }
                         } else {
                             logger.error("get uphosts error: ", ajax.responseText);
                         }

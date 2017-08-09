@@ -20,16 +20,10 @@ $(function() {
         title: '支付渠道',
         type: 'select',
         key: 'channel_type',
-        // keyCode: '802006',
-        formatter: Dict.getNameForList('channel_type'),
-        // search: true
+        formatter: Dict.getNameForList('channel_type')
     }, {
         field: 'payCardInfo',
-        title: '开户行',
-        // type: "select",
-        // listCode: "802116",
-        // keyName: 'bankCode',
-        // valueName: 'bankName',
+        title: '开户行'
     }, {
         field: 'payCardNo',
         title: '银行卡号',
@@ -49,34 +43,31 @@ $(function() {
         formatter: dateTimeFormat,
         field1: 'applyDateStart',
         title1: '申请时间',
-        type1: 'date',
+        type: 'date',
         field2: 'applyDateEnd',
-        type2: 'date',
-        search: true
+        search: true,
+        twoDate:true
     }, {
         field: 'status',
         title: '状态',
         type: 'select',
         key: 'withdraw_status',
-        // keyCode: '802006',
         formatter: Dict.getNameForList('withdraw_status'),
         search: true
-    }, {
-        field1: 'approveDateStart',
-        title1: '审核日期',
-        type1: 'date',
-        field2: 'approveDateEnd',
-        type2: 'date',
-        search: true,
-        visible: false
-    }, {
+    },  {
         field: 'approveUser',
         title: '审核人'
-    }, {
+    },{
         field: 'approveDatetime',
-        title: '审核时间',
-        formatter: dateTimeFormat
-    }, {
+        title: '审核日期',
+        formatter: dateTimeFormat,
+        field1: 'approveDateStart',
+        title1: '审核日期',
+        type: 'date',
+        field2: 'approveDateEnd',
+        search: true,
+        twoDate:true
+    },{
         field: 'payUser',
         title: '回录人',
         formatter: function(v, data) {

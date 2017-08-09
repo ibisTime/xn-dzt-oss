@@ -70,32 +70,27 @@ $(function() {
 
     buildList({
         columns: columns,
-        pageCode: '622020',
+        pageCode: '660010',
         searchParams: {
             companyCode: OSS.company
         },
-        beforeDelete: function() {
-            var selRecords = $('#tableList').bootstrapTable('getSelections');
-            if (selRecords.length <= 0) {
-                toastr.info("请选择记录");
-                return;
-            } else if (selRecords[0].status != 0) {
+        beforeDelete: function(data) {
+             if (data.status != 0) {
                 toastr.warning("该活动不是可以删除的状态");
                 return;
             }
             confirm("确认是否删除该记录？").then(function() {
                 reqApi({
-                    code: '622011',
+                    code: '660001',
                     json: data
                 }).done(function(data) {
                     sucList();
                 });
             });
         },
-        beforeEdit: function() {
-            var selRecords = $('#tableList').bootstrapTable('getSelections');
-            if (selRecords[0].status == 0 || selRecords[0].status == 3) {
-                window.location.href = 'active_addedit.html?code=' + selRecords[0].code;
+        beforeEdit: function(data) {
+            if (data.status == 0 || data.status == 3) {
+                window.location.href = 'active_addedit.html?code=' + data.code;
             } else {
                 toastr.warning('只有草稿和已下架的状态才可以修改信息');
                 return;
@@ -127,7 +122,7 @@ $(function() {
         if (selRecords[0].status == 1) {
             confirm("确定下架该活动？").then(function() {
                 reqApi({
-                    code: '622014',
+                    code: '660004',
                     json: { "code": selRecords[0].code, updater: getUserName() }
                 }).then(function() {
                     toastr.info("操作成功");
@@ -150,10 +145,10 @@ $(function() {
         }
         if (selRecords[0].status == 1) {
 
-            confirm("确定提前截止该活动？").then(function() {
+            confirm("确定截止该活动？").then(function() {
                 reqApi({
-                    code: '622015',
-                    json: { "code": selRecords[0].code, remark: '提前截止活动' }
+                    code: '660005',
+                    json: { "code": selRecords[0].code, remark: '截止活动' }
                 }).then(function() {
                     toastr.info("操作成功");
                     $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
@@ -175,7 +170,7 @@ $(function() {
         if (selRecords[0].status == 2) {
             confirm("确定开始该活动？").then(function() {
                 reqApi({
-                    code: '622016',
+                    code: '660006',
                     json: { "code": selRecords[0].code, updater: getUserName(), remark: '开始活动' }
                 }).then(function() {
                     toastr.info("操作成功");
@@ -198,7 +193,7 @@ $(function() {
         if (selRecords[0].status == 4) {
             confirm("确定结束该活动？").then(function() {
                 reqApi({
-                    code: '622017',
+                    code: '660007',
                     json: { "code": selRecords[0].code, updater: getUserName(), remark: '结束活动' }
                 }).then(function() {
                     toastr.info("操作成功");

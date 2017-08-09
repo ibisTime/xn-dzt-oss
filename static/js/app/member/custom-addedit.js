@@ -1,70 +1,82 @@
 $(function() {
-    var code = getQueryString('code');
-    var view = !!getQueryString('v');
-    //  var userId = getQueryString('userId') || '';
+
+    var userId = getQueryString('userId');
+    var view = 1;
 
     var fields = [{
         field: 'loginName',
-        title: "合伙人姓名",
-        maxlength: 32,
-        required: true,
-        readonly: view
+        title: '登录名',
     }, {
-        field: 'province1',
-        title: '辖区',
-        required: true,
-        type: 'citySelect',
-        readonly: view,
-        afterSet: function(v, data) {
-            if (code) {
-                if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
-                    data.userExt.city = "";
-                    data.userExt.area = "";
-                } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
-                    data.userExt.city = data.userExt.area;
-                }
-                $('#province').val(data.userExt.province);
-                $("#province").trigger("change");
-                data.userExt.city && $('#city').val(data.userExt.city);
-                data.userExt.area && $('#area').val(data.userExt.area);
-            }
-        },
+        field: 'nickname',
+        title: '微信昵称',
     }, {
         field: 'mobile',
-        title: '联系方式',
-        mobile: true,
-        required: true,
-        readonly: view
+        title: '手机号',
+    }, {
+        field: 'realName',
+        title: '真实姓名',
+    }, {
+        field: 'userRefereeMobile',
+        title: '推荐人'
+    }, {
+        field: 'userRefereeKind',
+        title: '推荐人类型',
+        type: "select",
+        data: {
+            "f2": "B端用户",
+            "f1": "C端用户"
+        }
+    }, {
+        field: 'idKind',
+        title: '证件类型',
+        type: 'select',
+        key: 'id_kind',
+        keyCode: "807706"
     }, {
         field: 'idNo',
-        idCard: true,
-        title: '身份证号码',
-        required: true,
-        readonly: view
+        title: '证件号',
     }, {
-        title: "分成比例",
-        field: "divRate,
-        required: true,
-        readonly: view
+        field: 'createDatetime',
+        title: '注册时间',
+        formatter: dateTimeFormat
+    }, {
+        field: 'bankcardList',
+        title: '银行卡信息',
+        type: 'o2m',
+        pageCode: '802015',
+        o2mvalue: {
+            'userId': userId
+        },
+        columns: [{
+            field: 'realName',
+            title: '真实名称',
+        }, {
+            field: 'bankcardNumber',
+            title: '银行卡号',
+        }, {
+            field: 'bankName',
+            title: '银行名称',
+        }, {
+            field: 'subbranch',
+            title: '开户支行',
+        }, {
+            field: 'bindMobile',
+            title: '预留手机号',
+        }, {
+            field: 'createDatetime',
+            title: '创建时间',
+            formatter: dateTimeFormat
+        }]
     }];
 
-    var options = {
+    buildDetail({
         fields: fields,
-        code: code,
-        addCode: '805180',
-        editCode: "805181",
-        detailCode: "805056",
+        code: {
+            userId: userId
+        },
         view: view,
-        beforeSubmit: function(data) {
-            if (code) {
-                data.userId = code;
-                return data;
-            } else {
-                return data
-            }
-        }
-    };
+        detailCode: '805056'
+    });
 
-    buildDetail(options);
 
 });

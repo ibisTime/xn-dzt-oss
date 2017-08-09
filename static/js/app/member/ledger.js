@@ -13,7 +13,6 @@ $(function() {
         {
             field: 'channelType',
             title: '渠道类型',
-            //keyCode: "802006",
             type: "select",
             key: "channel_type",
             formatter: Dict.getNameForList('channel_type'),
@@ -57,18 +56,9 @@ $(function() {
         }
     });
 
-    $('#gobackBtn').click(function() {
+    $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    $('#backBtn').on('click', function() {
         goBack();
     });
-    $("#addBtn").remove();
-    $("#edit2Btn").remove();
-    $("#rockBtn").remove();
-    $("#activeBtn").remove();
-    $("#achieveBtn").remove();
-    $("#accountBtn").remove();
-    $("#ledgerBtn").remove();
-    $("#orderBtn").remove();
-    $("#cheBtn").remove();
-    $("#rateBtn").remove();
 
 });

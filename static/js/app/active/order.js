@@ -72,7 +72,7 @@ $(function() {
 
     buildList({
         columns: columns,
-        pageCode: '622040',
+        pageCode: '660030',
         searchParams: {
             companyCode: OSS.company,
             statusList: [0, 1, 4]
@@ -107,11 +107,10 @@ $(function() {
                     data.updater = getUserName();
                     data.remark = $("#remark").val();
                     reqApi({
-                        code: '622033',
+                        code: '660023',
                         json: data
                     }).done(function(data) {
                         toastr.info("操作成功");
-
                         $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
                         setTimeout(function() {
                             dw.close().remove();

@@ -1,8 +1,5 @@
 $(function() {
-    // var userKind = {
-    //     "f1": "C端用户",
-    //     "f2": "B端用户"
-    // }
+
     var columns = [{
         field: '',
         title: '',
@@ -10,9 +7,6 @@ $(function() {
     }, {
         title: '登录名',
         field: 'loginName',
-        // formatter: function(value, row, index) {
-        //     return row['realName'] ? row['realName'] : value;
-        // },
         search: true
     }, {
         title: "姓名",
@@ -59,8 +53,12 @@ $(function() {
         pageCode: '805054',
         searchParams: {
             kind: "11"
+        },
+        beforeEdit: function(data) {
+            window.location.href = "partner_addedit.html?userId=" + data.userId;
         }
     });
+    //注销
     $('#rockBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -89,6 +87,7 @@ $(function() {
         });
 
     });
+    //激活
     $('#activeBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -113,6 +112,7 @@ $(function() {
 
         });
     });
+    //业绩
     $("#achieveBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -122,6 +122,7 @@ $(function() {
         window.location.href = "partner_achieve.html?userId=" + selRecords[0].userId;
 
     });
+    //账户
     $("#accountBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -131,16 +132,4 @@ $(function() {
         window.location.href = "account.html?userId=" + selRecords[0].userId;
 
     });
-
-
-    $("#edit2Btn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "partner_addedit.html?userId=" + selRecords[0].userId;
-
-    });
-    $("#ledgerBtn").remove();
 });

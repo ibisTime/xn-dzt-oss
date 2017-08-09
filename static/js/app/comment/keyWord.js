@@ -24,19 +24,19 @@ $(function() {
 
     buildList({
         columns: columns,
-        pageCode: "622005",
-        deleteCode: "622001",
+        pageCode: "660045",
+        deleteCode: "660041",
         getImportData: function(list) {
             var reqList = list;
-            for (var i=0,length=reqList.length;i<length;i++){
-                reqList[i].updater=getUserName();
-                reqList[i].weight="1";
-                reqList[i].level="0";
-                reqList[i].reaction="3";
+            for (var i = 0, length = reqList.length; i < length; i++) {
+                reqList[i].updater = getUserName();
+                reqList[i].weight = "1";
+                reqList[i].level = "0";
+                reqList[i].reaction = "3";
             }
             reqApi({
-                code: "622003",
-                json: {reqList:reqList}
+                code: "660043",
+                json: { reqList: reqList }
             }).then(function() {
                 sucList();
             })

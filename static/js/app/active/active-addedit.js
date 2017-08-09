@@ -81,7 +81,7 @@ $(function() {
         field: 'startDatetime',
         type: "datetime",
         formatter: dateTimeFormat,
-        dateOption: start,
+        // dateOption: start,
         readonly: view,
         required: true
     }, {
@@ -89,7 +89,7 @@ $(function() {
         field: 'endDatetime',
         type: "datetime",
         formatter: dateTimeFormat,
-        dateOption: end,
+        // dateOption: end,
         readonly: view,
         required: true
     }, {
@@ -151,7 +151,7 @@ $(function() {
         title: '订单列表',
         field: 'order',
         type: 'o2m',
-        pageCode: "622040",
+        pageCode: "660030",
         readonly: true,
         o2mValue: {
             start: 0,
@@ -200,9 +200,9 @@ $(function() {
     buildDetail({
         fields: fields,
         code: code,
-        detailCode: '622021',
-        addCode: '622010',
-        editCode: '622012',
+        detailCode: '660011',
+        addCode: '660000',
+        editCode: '660002',
         view: view
     });
 

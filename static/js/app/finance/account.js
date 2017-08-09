@@ -17,7 +17,7 @@ $(function() {
     reqApi({
         code: '802503',
         json: {
-            userId: "SYS_USER_DZT_TG"
+            userId: OSS.SYS_USER+"_TG"
         }
     }).then(function(data) {
         $("#amount-TG").text("￥" + (data[0].amount / 1000).toFixed(2));

@@ -66,14 +66,7 @@ $(function() {
         title: '身份证号码',
         required: true,
         readonly: view
-    }
-    // , {
-    //     title: "分成比例",
-    //     field: "divRate",
-    //     required: true,
-    //     readonly: view
-    // }
-    ];
+    }];
 
     var options = {
         fields: fields,

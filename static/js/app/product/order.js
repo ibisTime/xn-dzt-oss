@@ -66,29 +66,17 @@ $(function() {
         pageCode: '620220',
         searchParams: {
             statusList: ["1", "2", "3", "4", "5", "6", "7", "9"]
-                // status: "!=8"
+        },
+        //派单
+        beforeEdit: function(data) {
+            window.location.href = 'order_dispatch.html?code=' + data.code;
         }
     });
-
+    //代复购
     $("#rePurchaseBtn").click(function() {
-        // if (selRecords.length <= 0) {
-        //     toastr.info("请选择记录");
-        //     return;
-        // }
-        // if (selRecords[0].status != 1) {
-        //     toastr.info("不是代定价的状态");
-        //     return;
-        // }
         window.location.href = 'order_rePurchase.html';
     });
-    $("#edit2Btn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = 'order_dispatch.html?code=' + selRecords[0].code;
-    });
+    //代定价
     $("#priceBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -99,7 +87,6 @@ $(function() {
             toastr.info("不是代定价的状态");
             return;
         }
-
         if (!selRecords[0].ltUser) {
             toastr.info("不是代定价的状态");
             return;
@@ -107,9 +94,8 @@ $(function() {
             window.location.href = 'order_price.html?code=' + selRecords[0].code;
         };
 
-
     });
-
+    //代支付
     $("#payBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -122,7 +108,7 @@ $(function() {
         }
         window.location.href = 'order_pay.html?code=' + selRecords[0].code;
     });
-
+    //数据录入
     $("#shuBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -135,69 +121,7 @@ $(function() {
         }
         window.location.href = 'order_shuju.html?code=' + selRecords[0].code;
     });
-    $("#cheBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 4) {
-            toastr.info("不是待复核的状态");
-            return;
-        }
-        window.location.href = 'order_partnerCheck.html?code=' + selRecords[0].code;
-    });
-    $("#subBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 5) {
-            toastr.info("不是待提交生产状态");
-            return;
-        }
-        window.location.href = 'order_submit.html?code=' + selRecords[0].code;
-    });
-
-    $("#sendBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 6) {
-            toastr.info("不是可以发货的状态");
-            return;
-        }
-        window.location.href = 'order_sendProduct.html?code=' + selRecords[0].code;
-    });
-    $("#receBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 7) {
-            toastr.info("不是可以确认收货的状态");
-            return;
-        }
-        window.location.href = 'order_receiveProduct.html?code=' + selRecords[0].code;
-    });
-
-    $("#calcelBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status == 8 || selRecords[0].status == 9) {
-            toastr.info("不是可以取消订单状态");
-            return;
-        }
-        window.location.href = 'order_cancel.html?code=' + selRecords[0].code;
-    });
-
+    //提交复核
     $("#tijiaoBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -210,6 +134,72 @@ $(function() {
         }
         window.location.href = 'order_tijiao.html?code=' + selRecords[0].code;
     });
+    //复核
+    $("#cheBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != 4) {
+            toastr.info("不是待复核的状态");
+            return;
+        }
+        window.location.href = 'order_partnerCheck.html?code=' + selRecords[0].code;
+    });
+    //提交工厂
+    $("#subBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != 5) {
+            toastr.info("不是待提交生产状态");
+            return;
+        }
+        window.location.href = 'order_submit.html?code=' + selRecords[0].code;
+    });
+    //物流发货
+    $("#sendBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != 6) {
+            toastr.info("不是可以发货的状态");
+            return;
+        }
+        window.location.href = 'order_sendProduct.html?code=' + selRecords[0].code;
+    });
+    //确认收货
+    $("#receBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != 7) {
+            toastr.info("不是可以确认收货的状态");
+            return;
+        }
+        window.location.href = 'order_receiveProduct.html?code=' + selRecords[0].code;
+    });
+    //取消订单
+    $("#calcelBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status == 8 || selRecords[0].status == 9) {
+            toastr.info("不是可以取消订单状态");
+            return;
+        }
+        window.location.href = 'order_cancel.html?code=' + selRecords[0].code;
+    });
+    //详情
     $("#detaBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {

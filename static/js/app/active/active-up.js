@@ -33,7 +33,7 @@ $(function() {
     buildDetail({
         fields: fields,
         code: code,
-        detailCode: '622021'
+        detailCode: '660011'
     });
 
     $("#subBtn").off("click").click(function() {
@@ -42,7 +42,7 @@ $(function() {
                 var data = $('#jsForm').serializeObject();
                 data.code = code;
                 reqApi({
-                    code: '622013',
+                    code: '660003',
                     json: data
                 }).then(function() {
                     sucDetail();

@@ -49,14 +49,8 @@ $(function() {
             ltUser: userId
         }
     });
-    $("#addBtn").remove();
-    $("#edit2Btn").remove();
-    $("#rockBtn").remove();
-    $("#activeBtn").remove();
-    $("#achieveBtn").remove();
-    $("#accountBtn").remove();
-    $("#ledgerBtn").remove();
-    $("#ledgerBtn").remove();
-    $("#cheBtn").remove();
-    $("#rateBtn").remove();
+    $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    $('#backBtn').on('click', function() {
+        goBack();
+    });
 });

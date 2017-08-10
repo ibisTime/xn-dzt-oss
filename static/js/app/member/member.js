@@ -80,7 +80,6 @@ $(function() {
         var status = selRecords[0].status,
             toStatus;
         status == 0 ? toStatus = 2 : toStatus = 0;
-        // var msg= selRecords[0].toStatus==0?"确定激活该账户？":"";
         confirm("确定注销该账户？").then(function() {
             reqApi({
                 code: '805052',

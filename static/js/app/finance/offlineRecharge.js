@@ -48,8 +48,6 @@ $(function() {
         twoDate:true,
         search: true
     }, {
-       
-    }, {
         field: 'payUser',
         title: '审核人'
     }, {

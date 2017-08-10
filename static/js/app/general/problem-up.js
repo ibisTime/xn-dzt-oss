@@ -15,7 +15,6 @@ $(function() {
             "1": "热门",
             "0": "普通"
         },
-        // key: "ui_location",
         required: true,
     }, {
         field: 'orderNo',
@@ -31,7 +30,7 @@ $(function() {
     buildDetail({
         fields: fields,
         code: code,
-        detailCode: '660011'
+        detailCode: ''
     });
 
     $("#subBtn").off("click").click(function() {
@@ -40,7 +39,7 @@ $(function() {
                 var data = $('#jsForm').serializeObject();
                 data.code = code;
                 reqApi({
-                    code: '660003',
+                    code: '',
                     json: data
                 }).then(function() {
                     sucDetail();

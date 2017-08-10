@@ -39,8 +39,8 @@ $(function() {
         title: "状态",
         field: "status",
         type: "select",
-        key: "user_status",
-        formatter: Dict.getNameForList("user_status"),
+        key: "partner_status",
+        formatter: Dict.getNameForList("partner_status"),
         search: true
     }, {
         field: 'createDatetime',

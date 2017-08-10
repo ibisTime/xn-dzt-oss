@@ -2,6 +2,18 @@ $(function() {
 
     var userId = getQueryString('userId');
     var view = 1;
+    var userStatus = {};
+ 
+    reqApi({
+         code: '807705',
+        json: {
+           "start":1,"limit":100,"parentKey":"user_sStatus"
+        }
+    }).then(function(res){
+        $.each(res, function(i, r){
+                userStatus[r.dkey] = r.dvalue;
+        });
+    });
 
     var fields = [{
         field: 'loginName',
@@ -39,6 +51,12 @@ $(function() {
         field: 'createDatetime',
         title: '注册时间',
         formatter: dateTimeFormat
+    },{
+        title:"状态",
+        field:"status",
+        type:"select",
+        key: "user_status",
+        formatter: Dict.getNameForList("user_status"),
     }, {
         field: 'bankcardList',
         title: '银行卡信息',

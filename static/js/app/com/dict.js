@@ -45,12 +45,6 @@ Dict.getName = function(type, key) {
         res = key ? (Dict.findName(data, key) || '-') : data;
     });
     return res;
-    //	if (!SYJDictCache[type]) {
-    //		doGetAjaxIsAsync($("#dictUrl").val(), {"parentKey": type}, false, function(res) {
-    //			SYJDictCache[type] = res.data;
-    //		});
-    //	}
-    //	return key ? (Dict.findName(SYJDictCache[type], key) || '-') : SYJDictCache[type];
 }
 
 Dict.getName1 = function(type, key, value) {
@@ -77,12 +71,5 @@ Dict.getNameForList = function(type, code) {
         }
     });
     return res;
-    //	if (!SYJDictCache[type]) {
-    //		doGetAjaxIsAsync($("#dictUrl").val(), {"parentKey": type}, false, function(res) {
-    //			SYJDictCache[type] = res.data;
-    //		});
-    //	}
-    //	return function(key) {
-    //		return key ? Dict.findName(SYJDictCache[type], key) : '-';
-    //	}
+   
 }

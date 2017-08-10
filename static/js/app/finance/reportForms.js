@@ -8,7 +8,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-totle").text("￥" + data.totalAmount / 1000);
+        $("#amount-totle").text("￥" + (data.totalAmount / 1000).toFixed(2));
     });
     reqApi({
         code: '802900',
@@ -17,7 +17,7 @@ $(function() {
             "accountNumber": OSS.companyCode
         }
     }).done(function(data) {
-        $("#amount-access").text("￥" + data.totalAmount / 1000);
+        $("#amount-access").text("￥" + (data.totalAmount / 1000).toFixed(2));
     });
     reqApi({
         code: '802900',
@@ -26,7 +26,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-Hhaccess").text("￥" + data.totalAmount / 1000);
+        $("#amount-Hhaccess").text("￥" +(data.totalAmount / 1000).toFixed(2));
     });
     reqApi({
         code: '802900',
@@ -35,7 +35,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-ltaccess").text("￥" + data.totalAmount / 1000);
+        $("#amount-ltaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
     });
     reqApi({
         code: '802900',
@@ -44,7 +44,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-quaccess").text("￥" + data.totalAmount / 1000);
+        $("#amount-quaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
     });
     reqApi({
         code: '802900',
@@ -53,6 +53,6 @@ $(function() {
             "accountNumber": OSS.companyCode
         }
     }).done(function(data) {
-        $("#amount-quxianaccess").text("￥" + data.totalAmount / 1000);
+        $("#amount-quxianaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
     });
 });

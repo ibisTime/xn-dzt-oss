@@ -1,15 +1,13 @@
 $(function() {
-
     var code = getQueryString('code');
+
     var typeKind = {
         "80支棉": "80支棉",
         "100支棉": "100支棉",
         "棉真丝": "棉真丝",
         "棉弹力": "棉弹力"
     };
-    // var number = ;
-    // var picParam =;
-    // var typeParam = ;
+
     var fields = [{
         title: "栏目项",
         field: "parentCode",
@@ -21,24 +19,21 @@ $(function() {
         title: "栏目值",
         field: "name",
         maxlength: 255,
-        required: true,
-
+        required: true
     }, {
         field: 'orderNo',
         title: '顺序',
         number: true,
         required: true,
         afterSet: function(v, data) {
-                if (v == undefined) {
-                    $("#orderNo").parent().css("display", 'none')
-                }
+            if (v == undefined) {
+                $("#orderNo").parent().css("display", 'none')
             }
-            // hidden: true
+        }
     }, {
         title: "图片",
         field: "pic",
         type: "img",
-        // hidden: true,
         required: true,
         afterSet: function(v, data) {
             if (v == undefined || v == "") {
@@ -52,11 +47,10 @@ $(function() {
         data: typeKind,
         required: true,
         afterSet: function(v, data) {
-                if (v == undefined) {
-                    $("#type").parent().css("display", 'none')
-                }
+            if (v == undefined) {
+                $("#type").parent().css("display", 'none')
             }
-            // hidden: true
+        }
     }];
 
     buildDetail({

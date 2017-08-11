@@ -33,14 +33,7 @@ $(function() {
     }];
     var fields = [{
         title: '针对内容',
-        field: 'coachRealName',
-        formatter: function(v, data) {
-            if (v) {
-                return "私课教练：" + v;
-            } else {
-                // return "团课：" + data.courseName;
-            }
-        },
+        field: 'topCode',
         readonly: true
     }, {
         title: "评论内容",
@@ -87,7 +80,7 @@ $(function() {
                     data.approver = getUserName();
                     data.code = code;
                     reqApi({
-                        code: '660052',
+                        code: '620162',
                         json: data
                     }).done(function(data) {
                         sucDetail();
@@ -103,7 +96,7 @@ $(function() {
                     data.approver = getUserName();
                     data.code = code;
                     reqApi({
-                        code: '660052',
+                        code: '620162',
                         json: data
                     }).done(function(data) {
                         sucDetail();
@@ -122,7 +115,7 @@ $(function() {
         code: code,
         view: true,
         buttons: buttons,
-        detailCode: '660061',
+        detailCode: '620171',
     };
     buildDetail(options);
 });

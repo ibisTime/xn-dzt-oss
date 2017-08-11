@@ -55,7 +55,20 @@ Dict.getName1 = function(type, key, value) {
     }
     return result;
 };
-
+Dict.getName2 = function(type, code, key) {
+    var res;
+    reqApi({
+        code: code || '807706',
+        cache: true,
+        sync: true,
+        json: {
+            parentKey: type,
+        }
+    }).then(function(data) {
+        res = key ? (Dict.findName(data, key) || '-') : data;
+    });
+    return res;
+}
 Dict.getNameForList = function(type, code) {
     var res;
     reqApi({
@@ -71,5 +84,5 @@ Dict.getNameForList = function(type, code) {
         }
     });
     return res;
-   
+
 }

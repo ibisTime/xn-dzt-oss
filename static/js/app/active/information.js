@@ -9,10 +9,6 @@ $(function() {
         maxlength: 255,
         search: true
     }, {
-        field: "holdPlace",
-        title: "活动地点",
-        maxlength: 255
-    }, {
         field: 'location',
         title: '位置',
         type: 'select',
@@ -46,18 +42,18 @@ $(function() {
 
     buildList({
         columns: columns,
-        pageCode: '',
+        pageCode: '620120',
         searchParams: {
             companyCode: OSS.company
         },
         beforeDelete: function(data) {
             if (data.status != 0) {
-                toastr.warning("该活动不是可以删除的状态");
+                toastr.warning("不是可以删除的状态");
                 return;
             }
             confirm("确认是否删除该记录？").then(function() {
                 reqApi({
-                    code: '',
+                    code: '620111',
                     json: data
                 }).done(function(data) {
                     sucList();
@@ -65,7 +61,7 @@ $(function() {
             });
         },
         beforeEdit: function(data) {
-            if (data.status == 0 || data.status == 3) {
+            if (data.status == 0 || data.status == 2) {
                 window.location.href = 'information_addedit.html?code=' + data.code;
             } else {
                 toastr.warning('只有草稿和已下架的状态才可以修改信息');
@@ -98,8 +94,8 @@ $(function() {
         if (selRecords[0].status == 1) {
             confirm("确定下架该资讯？").then(function() {
                 reqApi({
-                    code: '',
-                    json: { "code": selRecords[0].code, updater: getUserName() }
+                    code: '620114',
+                    json: { "code": selRecords[0].code, updater: getUserName(), remark: "下架" }
                 }).then(function() {
                     toastr.info("操作成功");
                     $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });

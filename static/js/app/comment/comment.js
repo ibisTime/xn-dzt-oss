@@ -7,14 +7,7 @@ $(function() {
         checkbox: true
     }, {
         title: '针对内容',
-        field: 'coachRealName',
-        formatter: function(v, data) {
-            if (v) {
-                return "私课教练：" + v;
-            } else {
-                return "团课：" + data.courseName;
-            }
-        }
+        field: 'topCode'
     }, {
         field: 'content',
         title: '评论内容',
@@ -37,7 +30,7 @@ $(function() {
     }];
     buildList({
         columns: columns,
-        pageCode: "660060",
+        pageCode: "620170",
         searchParams: {
             companyCode: OSS.company,
             status: "D"

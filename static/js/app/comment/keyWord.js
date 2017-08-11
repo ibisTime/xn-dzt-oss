@@ -24,8 +24,8 @@ $(function() {
 
     buildList({
         columns: columns,
-        pageCode: "660045",
-        deleteCode: "660041",
+        pageCode: "620155",
+        deleteCode: "620151",
         getImportData: function(list) {
             var reqList = list;
             for (var i = 0, length = reqList.length; i < length; i++) {
@@ -35,7 +35,7 @@ $(function() {
                 reqList[i].reaction = "3";
             }
             reqApi({
-                code: "660043",
+                code: "",
                 json: { reqList: reqList }
             }).then(function() {
                 sucList();

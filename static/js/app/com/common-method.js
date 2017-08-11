@@ -336,14 +336,17 @@ $.fn.serializeObject = function() {
 };
 
 $.fn.renderDropdown = function(data, keyName, valueName, defaultOption, filter) {
-    var value, listCode, params, dict, filter = filter || '';
+    var value, listCode, params, dict, filter = filter || '',
+        beforeData, keyCode1;
     if ($.isPlainObject(data)) {
         value = data.value;
         listCode = data.listCode;
+        keyCode1 = data.keyCode1;
         params = data.params || {};
         keyName = data.keyName;
         valueName = data.valueName;
         defaultOption = data.defaultOption;
+        beforeData = data.beforeData;
         dict = data.dict;
     }
     if (listCode) {
@@ -356,9 +359,16 @@ $.fn.renderDropdown = function(data, keyName, valueName, defaultOption, filter) 
         });
     }
     data = (data.data && data.data.list) || data.data || data || [];
+    beforeData && (data = beforeData(data));
+
     if (dict) {
         dict.forEach(function(item) {
-            var dictData = Dict.getName(item[1]);
+            if (keyCode1) {
+                var dictData = Dict.getName2(item[1], keyCode1);
+            } else {
+                var dictData = Dict.getName(item[1]);
+            }
+
             data.forEach(function(i) {
                 i[item[0] + 'Name'] = Dict.findName(dictData, i[item[0]]);
             });
@@ -372,16 +382,14 @@ $.fn.renderDropdown = function(data, keyName, valueName, defaultOption, filter) 
     for (var i = 0; i < data.length; i++) {
         if (filter && filters.indexOf(data[i][keyName]) > -1) {
             html += "<option value='" + data[i][keyName] + "'>" + (data[i][valueName] || valueName.temp(data[i])) + "</option>";
-        } else if (!filter && data[i][keyName]) {
+        } else if (!filter) {
             html += "<option value='" + data[i][keyName] + "'>" + (data[i][valueName] || valueName.temp(data[i])) + "</option>";
         }
     }
     this.html(html);
-    if (value) {
-        this.val(value);
-    }
     return data;
 };
+
 
 $.fn.renderDropdown2 = function(data, defaultOption) {
     var html = "<option value=''></option>" + (defaultOption || '');
@@ -732,6 +740,15 @@ function buildList(options) {
                     return d[v];
                 };
             })(dataDict);
+        }
+        if (item.onChange) {
+            (function(i, data) {
+                $('#' + i.field).on('change', function(e) {
+                    var record = Dict.findObj(data, this.value, i.keyName);
+                    i.onChange(this.value, record);
+                });
+            })(item, data);
+
         }
         if (item.value) {
             $('#' + item.field).val(item.value);

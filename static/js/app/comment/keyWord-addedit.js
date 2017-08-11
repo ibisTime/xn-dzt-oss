@@ -44,8 +44,8 @@ $(function() {
         fields: fields,
         code: code,
         view: view,
-        detailCode: '660046',
-        addCode: '660040',
-        editCode: '660042'
+        detailCode: '620156',
+        addCode: '620150',
+        editCode: '620152'
     });
 });

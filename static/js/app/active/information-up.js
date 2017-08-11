@@ -31,7 +31,7 @@ $(function() {
     buildDetail({
         fields: fields,
         code: code,
-        detailCode: ''
+        detailCode: '620121'
     });
 
     $("#subBtn").off("click").click(function() {
@@ -40,7 +40,7 @@ $(function() {
                 var data = $('#jsForm').serializeObject();
                 data.code = code;
                 reqApi({
-                    code: '',
+                    code: '620113',
                     json: data
                 }).then(function() {
                     sucDetail();

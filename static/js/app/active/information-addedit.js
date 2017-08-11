@@ -3,6 +3,12 @@ $(function() {
     var view = !!getQueryString('v');
 
     var fields = [{
+        title: "",
+        field: "type",
+        value: "1",
+        required: true,
+        hidden: true
+    }, {
         field: 'updater',
         type: 'hidden',
         value: getUserName()
@@ -24,24 +30,6 @@ $(function() {
         type: 'img',
         required: true,
         readonly: view
-    }, {
-        title: "广告语",
-        field: "slogan",
-        required: true,
-        readonly: view,
-        maxlength: 255
-    }, {
-        title: "联系方式",
-        field: "contact",
-        tm: true,
-        readonly: view,
-        required: true
-    }, {
-        title: "总人数",
-        field: "totalNum",
-        number: true,
-        readonly: view,
-        required: true
     }, {
         title: '图文详述',
         field: 'description',
@@ -86,9 +74,9 @@ $(function() {
     buildDetail({
         fields: fields,
         code: code,
-        detailCode: '',
-        addCode: '',
-        editCode: '',
+        detailCode: '620121',
+        addCode: '620110',
+        editCode: '620112',
         view: view
     });
 

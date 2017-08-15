@@ -2,11 +2,11 @@ $(function() {
     var code = getQueryString('code');
     var noteConfig = {
         title: '参数值',
-        field: 'note',
+        field: 'remark',
         required: true
     };
     reqApi({
-        code: '807716',
+        code: '805916',
         json: {
             id: code
         },
@@ -29,17 +29,13 @@ $(function() {
         field: 'cvalue',
         required: true,
         maxlength: 255
-    }, {
-        title: '备注',
-        field: 'remark',
-        maxlength: 250
     }];
 
     buildDetail({
         fields: fields,
         code: code,
-        addCode: "807710",
-        detailCode: '807716',
-        editCode: '807711'
+        addCode: "805910",
+        detailCode: '805916',
+        editCode: '805911'
     });
 });

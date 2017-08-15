@@ -624,7 +624,7 @@
                             qiniuUpHosts.http = getHosts(res.http.up);
                             qiniuUpHosts.https = getHosts(res.https.up);
                             logger.debug("get new uphosts: ", qiniuUpHosts);
-                            if(!isQiniuUploadUrlInit){
+                            if (!isQiniuUploadUrlInit) {
                                 isQiniuUploadUrlInit = true;
                                 that.resetUploadUrl();
                             }

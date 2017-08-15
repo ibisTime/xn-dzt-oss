@@ -6,7 +6,7 @@ $(function() {
 
     // 获取用户
     reqApi({
-        code: '805056',
+        code: '805121',
         cache: true,
         sync: true,
         json: {
@@ -71,7 +71,7 @@ $(function() {
                 window.sessionStorage.setItem('userId', '');
                 window.sessionStorage.setItem('userName', '');
                 window.sessionStorage.setItem('roleCode', '');
-                location.href = 'signin.html?kind=' + (sessionStorage.getItem('loginKind') || "01");
+                location.href = 'signin.html?kind=' + (sessionStorage.getItem('loginKind') || "P");
             }
         });
     })

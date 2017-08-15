@@ -1,11 +1,11 @@
 $(function() {
     var view = getQueryString('v');
     var code = getQueryString('code');
-
-    var userKind = Dict.getName('user_kind');
-    $.each(arr, function(i, d) {
-        userKind[d.dkey] = d.dvalue;
-    });
+    // var arr = [];
+    // var userKind = Dict.getName('user_kind');
+    // $.each(arr, function(i, d) {
+    //     userKind[d.dkey] = d.dvalue;
+    // });
 
     var fields = [{
         field: 'fromSystemCode',
@@ -23,8 +23,8 @@ $(function() {
         field: 'toKind',
         title: '针对人群',
         type: 'select',
-        data: userKind,
-        // key: "user_kind",
+        // data: userKind,
+        key: "user_kind",
         readonly: view,
         required: true
     }, {

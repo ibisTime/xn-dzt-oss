@@ -3,7 +3,7 @@ $(function() {
     reqApi({
         code: "805917",
         json: {
-            ckey: "aboutUs"
+            ckey: "someQuestions"
         },
         sync: true
     }).then(function(data) {
@@ -11,12 +11,12 @@ $(function() {
     });
 
     var fields = [{
-        title: '关于我们',
+        title: '常见问题',
         field: 'remark',
         type: "textarea",
     }, {
         field: 'cvalue',
-        value: "关于我们",
+        value: "常见问题",
         type: 'hidden'
     }, {
         field: "id",

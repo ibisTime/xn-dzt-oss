@@ -34,9 +34,9 @@ $(function() {
             $.each(t, function() {
                 data[this.name] = this.value;
             });
-            data.kind = getQueryString('kind') || '01';
+            data.kind = getQueryString('kind') || 'P';
             reqApi({
-                code: '805043',
+                code: '805050',
                 json: data
             }).then(function(data) {
                 sessionStorage.setItem('loginName', $('#loginName').val());

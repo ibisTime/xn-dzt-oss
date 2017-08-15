@@ -42,7 +42,7 @@ $(function() {
         field: 'name',
         required: true,
         readonly: view,
-        maxlength: 32 //
+        maxlength: 32
     }, {
         title: '位置',
         field: 'location',
@@ -69,9 +69,7 @@ $(function() {
     }, {
         title: 'url地址',
         field: "url",
-        //required: true,
-        readonly: view,
-        //maxlength: 255
+        readonly: view
     }, {
         title: '备注',
         field: 'remark',
@@ -83,9 +81,9 @@ $(function() {
         fields: fields,
         code: code,
         view: view,
-        addCode: "806040",
-        editCode: "806042",
-        detailCode: '806053'
+        addCode: "805800",
+        editCode: "805802",
+        detailCode: '805807'
     });
 
 });

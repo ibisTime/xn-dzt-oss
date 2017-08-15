@@ -1,63 +1,50 @@
 $(function() {
     var code = getQueryString('code');
 
-    var typeKind = {
-        "80支棉": "80支棉",
-        "100支棉": "100支棉",
-        "棉真丝": "棉真丝",
-        "棉弹力": "棉弹力"
-    };
-
     var fields = [{
-        title: "栏目项",
-        field: "parentCode",
-        type: 'select',
-        key: "measure",
-        required: true,
-
+        title: "产品型号",
+        field: "modelCode",
+        type: "select",
+        listCode: "620012",
+        keyName: "code",
+        valueName: "name",
+        searchName: "name",
+        required: true
     }, {
-        title: "栏目值",
+        title: "工艺名称",
         field: "name",
         maxlength: 255,
         required: true
     }, {
-        field: 'orderNo',
-        title: '顺序',
-        number: true,
-        required: true,
-        afterSet: function(v, data) {
-            if (v == undefined) {
-                $("#orderNo").parent().css("display", 'none')
-            }
-        }
+        title: "价格",
+        field: "price",
+        amount: true,
+        formatter: momneyFormat,
+        required: true
     }, {
         title: "图片",
         field: "pic",
         type: "img",
-        required: true,
-        afterSet: function(v, data) {
-            if (v == undefined || v == "") {
-                $("#pic").parent().css("display", 'none')
-            }
-        }
+        required: true
     }, {
         field: 'type',
         title: '类型',
         type: "select",
-        data: typeKind,
         required: true,
-        afterSet: function(v, data) {
-            if (v == undefined) {
-                $("#type").parent().css("display", 'none')
-            }
-        }
+        key: "craftwork_type",
+        formatter: Dict.getNameForList("craftwork_type")
+    }, {
+        title: "备注",
+        field: "remark",
+        maxlength: 255
     }];
 
     buildDetail({
         fields: fields,
         code: code,
-        detailCode: "620056",
-        editCode: '620052'
+        addCode: "620040",
+        detailCode: "620051",
+        editCode: '620042'
     });
 
 });

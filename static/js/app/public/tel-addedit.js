@@ -1,7 +1,7 @@
 $(function() {
     var code;
     reqApi({
-        code: '807717',
+        code: '805917',
         json: {
             ckey: 'telephone'
         },
@@ -16,15 +16,14 @@ $(function() {
         value: '服务热线'
     }, {
         title: '服务热线',
-        field: 'note',
+        field: 'remark',
         required: true
     }];
 
     var options = {
         fields: fields,
         code: code,
-        editCode: '807711',
-        detailCode: '807716',
+        detailCode: '805916',
         buttons: [{
             title: '保存',
             handler: function() {
@@ -32,7 +31,7 @@ $(function() {
                     var data = $('#jsForm').serializeObject();
                     data['id'] = data['code'];
                     reqApi({
-                        code: '807711',
+                        code: '805911',
                         json: data
                     }).done(function(data) {
                         toastr.success('操作成功');

@@ -1,7 +1,8 @@
 $(function() {
     var code = getQueryString('userId');
     var view = !!getQueryString('v');
-    // var userId = getQueryString('userId');
+    var loginName = getQueryString('loginName');
+
     var loginNameView = {
         field: 'loginName1',
         title: "登录名",
@@ -16,6 +17,7 @@ $(function() {
         maxlength: 32,
         required: true
     };
+
     if (code) {
         loginNameView.hidden = false;
         loginNameEdit.hidden = true;
@@ -26,7 +28,7 @@ $(function() {
 
     var fields = [{
             field: "kind",
-            value: "11",
+            value: "PA",
             type: "hidden",
             required: true
         }, loginNameView, loginNameEdit,
@@ -43,18 +45,18 @@ $(function() {
             type: 'citySelect',
             afterSet: function(v, data) {
                 if (code) {
-                    if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
-                        data.userExt.city = "";
-                        data.userExt.area = "";
-                    } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
-                        data.userExt.city = data.userExt.area;
+                    if (data.province == data.city && data.city == data.area) {
+                        data.city = "";
+                        data.area = "";
+                    } else if (data.province == data.city && data.city != data.area) {
+                        data.city = data.area;
                     }
-                    $('#province').val(data.userExt.province);
+                    $('#province').val(data.province);
                     $("#province").trigger("change");
-                    data.userExt.city && $('#city').val(data.userExt.city);
-                    data.userExt.area && $('#area').val(data.userExt.area);
-                    data.userExt.city ? $('#city').trigger('change') : $('#province').trigger('change');
-                    data.userExt.area && $('#area').val(data.userExt.area);
+                    data.city && $('#city').val(data.city);
+                    data.area && $('#area').val(data.area);
+                    data.city ? $('#city').trigger('change') : $('#province').trigger('change');
+                    data.area && $('#area').val(data.area);
                 }
             }
         }, {
@@ -82,21 +84,20 @@ $(function() {
         code: {
             userId: code
         },
-        addCode: '805180',
-        editCode: "805181",
-        detailCode: "805056",
+        addCode: '805042',
+        editCode: "805095",
+        detailCode: "805121",
         view: view,
         beforeSubmit: function(data) {
             if (code) {
+                data.loginName = loginName;
                 data.userId = code;
-                // data.loginName =
                 return data;
             } else {
                 return data
             }
         }
     };
-
     buildDetail(options);
 
 });

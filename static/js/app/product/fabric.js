@@ -7,9 +7,6 @@ $(function() {
     }, {
         title: "所属产品",
         field: "modelCode",
-        formatter: function(v, data) {
-            return data.model.name
-        },
         type: "select",
         listCode: "620012",
         keyName: "code",
@@ -17,12 +14,52 @@ $(function() {
         searchName: 'name',
         search: true
     }, {
-        field: 'pic',
-        title: '图片',
-        formatter: function(v, data) {
-            return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
-        }
+        title: "品牌",
+        field: "brand",
+        required: true,
+        maxlength: 255
     }, {
+        title: "类型",
+        field: "type",
+        type: "select",
+        key: "fabric_type",
+        formatter: Dict.getNameForList("fabric_type")
+    }, {
+        title: "色系",
+        field: "color",
+        type: "select",
+        key: "fabric_color",
+        formatter: Dict.getNameForList("fabric_color")
+    }, {
+        title: "花色",
+        field: "flowers",
+        type: "select",
+        key: "fabric_design",
+        formatter: Dict.getNameForList("fabric_design")
+    }, {
+        title: "成分",
+        field: "form",
+        type: "select",
+        key: "fabric_divide",
+        formatter: Dict.getNameForList("fabric_divide")
+    }, {
+        title: "规格编号",
+        field: "modelNum",
+        maxlength: 255,
+        required: true
+    }, {
+        title: "重量(g)",
+        field: "weight"
+    }, {
+        title: "纱支",
+        field: "yarn"
+    }, {
+        //     field: 'pic',
+        //     title: '图片',
+        //     formatter: function(v, data) {
+        //         return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
+        //     }
+        // }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -35,6 +72,7 @@ $(function() {
     }, {
         title: "UI位置",
         field: "location",
+        type: 'select',
         data: {
             "0": "普通",
             "1": "热门"
@@ -50,7 +88,28 @@ $(function() {
     buildList({
         columns: columns,
         pageCode: '620030',
-        deleteCode: "620021"
+        beforeDelete: function(data) {
+            if (data.status != 0) {
+                toastr.warning("只有草稿状态，才可以删除");
+                return;
+            }
+            confirm("确定删除？").then(function() {
+                reqApi({
+                    code: '620021',
+                    json: { "code": data.code }
+                }).then(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                });
+            }, function() {});
+        },
+        beforeEdit: function(data) {
+            if (data.status == 1) {
+                toastr.warning("已上架，不可修改");
+                return;
+            }
+            window.location.href = "fabric_addedit.html?code=" + data.code;
+        }
     });
     //上架
     $('#upBtn').click(function() {
@@ -60,7 +119,7 @@ $(function() {
             return;
         }
         if (selRecords[0].status == 0 || selRecords[0].status == 2) {
-            window.location.href = "paramater_up.html?code=" + selRecords[0].code;
+            window.location.href = "fabric_up.html?code=" + selRecords[0].code;
         } else {
             toastr.warning('不是可以上架的状态');
             return;

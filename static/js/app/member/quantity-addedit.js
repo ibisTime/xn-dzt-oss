@@ -29,11 +29,11 @@ $(function() {
         required: true
     }, {
         field: "kind",
-        value: 'f2',
+        value: 'B',
         type: 'hidden',
         required: true
     }, mobileView, mobileEdit, {
-        field: 'realName',
+        field: 'loginName',
         title: "量体师姓名",
         maxlength: 32,
         required: true,
@@ -46,18 +46,18 @@ $(function() {
         readonly: view,
         afterSet: function(v, data) {
             if (code) {
-                if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
-                    data.userExt.city = "";
-                    data.userExt.area = "";
-                } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
-                    data.userExt.city = data.userExt.area;
+                if (data.province == data.city && data.city == data.area) {
+                    data.city = "";
+                    data.area = "";
+                } else if (data.province == data.city && data.city != data.area) {
+                    data.city = data.area;
                 }
-                $('#province').val(data.userExt.province);
+                $('#province').val(data.province);
                 $("#province").trigger("change");
-                data.userExt.city && $('#city').val(data.userExt.city);
-                data.userExt.area && $('#area').val(data.userExt.area);
-                data.userExt.city ? $('#city').trigger('change') : $('#province').trigger('change');
-                data.userExt.area && $('#area').val(data.userExt.area);
+                data.city && $('#city').val(data.city);
+                data.area && $('#area').val(data.area);
+                data.city ? $('#city').trigger('change') : $('#province').trigger('change');
+                data.area && $('#area').val(data.area);
             }
         }
     }, {
@@ -75,8 +75,8 @@ $(function() {
             userId: code
         },
         addCode: '805042',
-        editCode: "805182",
-        detailCode: "805056",
+        editCode: "805095",
+        detailCode: "805121",
         view: view,
         beforeSubmit: function(data) {
             if (code) {

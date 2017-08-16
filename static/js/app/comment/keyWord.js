@@ -35,7 +35,7 @@ $(function() {
                 reqList[i].reaction = "3";
             }
             reqApi({
-                code: "",
+                code: "620153",
                 json: { reqList: reqList }
             }).then(function() {
                 sucList();

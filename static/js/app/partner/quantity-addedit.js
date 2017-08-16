@@ -6,7 +6,7 @@ $(function() {
     var city;
     var area;
     reqApi({
-        code: "805056",
+        code: "805121",
         json: { userId: sessionStorage.getItem('userId') },
         sync: true
     }).then(function(data) {
@@ -84,8 +84,8 @@ $(function() {
             userId: code
         },
         addCode: '805042',
-        editCode: "805182",
-        detailCode: "805056",
+        editCode: "805095",
+        detailCode: "805121",
         view: view,
         beforeSubmit: function(data) {
             if (code) {

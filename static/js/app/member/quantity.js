@@ -10,19 +10,19 @@ $(function() {
         field: 'mobile'
     }, {
         title: '姓名',
-        field: 'realName',
+        field: 'loginName',
         search: true
     }, {
         title: "辖区",
         field: "province2",
         formatter: function(v, data) {
-            if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
-                data.userExt.city = "";
-                data.userExt.area = "";
-            } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
-                data.userExt.city = '';
+            if (data.province == data.city && data.city == data.area) {
+                data.city = "";
+                data.area = "";
+            } else if (data.province == data.city && data.city != data.area) {
+                data.city = '';
             }
-            var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "") + (data.userExt.address || "");
+            var result = (data.province || "") + (data.city || "") + (data.area || "") + (data.address || "");
             return result || "-";
         }
     }, {
@@ -46,9 +46,10 @@ $(function() {
     buildList({
         router: 'quantity',
         columns: columns,
-        pageCode: '805054',
+        pageCode: '805120',
         searchParams: {
-            kind: "f2"
+            kind: "B",
+            companyCode: OSS.companyCode
         },
         beforeDetail: function(data) {
             window.location.href = "quantity_addedit.html?v=1&userId=" + data.userId;
@@ -73,7 +74,7 @@ $(function() {
         status == 0 ? toStatus = 2 : toStatus = 0;
         confirm("确定注销该账户？").then(function() {
             reqApi({
-                code: '805052',
+                code: '805091',
                 json: {
                     userId: selRecords[0].userId,
                     toStatus: toStatus
@@ -99,7 +100,7 @@ $(function() {
         }
         confirm("确定激活该账户？").then(function() {
             reqApi({
-                code: '805052',
+                code: '805091',
                 json: {
                     userId: selRecords[0].userId,
                     toStatus: '0'

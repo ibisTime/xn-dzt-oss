@@ -33,7 +33,7 @@ $(function() {
         type: 'hidden',
         required: true
     }, mobileView, mobileEdit, {
-        field: 'realName',
+        field: 'loginName',
         title: "量体师姓名",
         maxlength: 32,
         required: true,
@@ -42,16 +42,15 @@ $(function() {
         field: 'province1',
         title: '辖区',
         required: true,
-        // type: "citySelect",
         readonly: true,
         formatter: function(v, data) {
             if (code) {
-                if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
-                    return data.userExt.province
-                } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
-                    return data.userExt.province + data.userExt.area;
+                if (data.province == data.city && data.city == data.area) {
+                    return data.province
+                } else if (data.province == data.city && data.city != data.area) {
+                    return data.province + data.area;
                 } else {
-                    return data.userExt.province + data.userExt.city + data.userExt.area
+                    return data.province + data.city + data.area
                 }
             }
         }
@@ -72,7 +71,6 @@ $(function() {
     }, {
         title: "分成比例",
         field: "divRate",
-        // required: true,
         readonly: view
     }, {
         title: "备注",
@@ -87,8 +85,6 @@ $(function() {
         code: {
             userId: code
         },
-        addCode: '805042',
-        editCode: "805182",
         detailCode: "805056",
         view: view,
     };
@@ -103,7 +99,7 @@ $(function() {
                 data['divRate'] = $("#divRate").val();
                 data['remark'] = $("#remark").val();
                 reqApi({
-                    code: "805183",
+                    code: "805044",
                     json: data
                 }).done(function() {
                     sucDetail();

@@ -3,17 +3,19 @@ $(function() {
     var userId = getQueryString('userId');
     var view = 1;
     var userStatus = {};
- 
-    reqApi({
-         code: '807705',
-        json: {
-           "start":1,"limit":100,"parentKey":"user_sStatus"
-        }
-    }).then(function(res){
-        $.each(res, function(i, r){
-                userStatus[r.dkey] = r.dvalue;
-        });
-    });
+
+    // reqApi({
+    //     code: '807705',
+    //     json: {
+    //         "start": 1,
+    //         "limit": 100,
+    //         "parentKey": "user_sStatus"
+    //     }
+    // }).then(function(res) {
+    //     $.each(res, function(i, r) {
+    //         userStatus[r.dkey] = r.dvalue;
+    //     });
+    // });
 
     var fields = [{
         field: 'loginName',
@@ -42,8 +44,7 @@ $(function() {
         field: 'idKind',
         title: '证件类型',
         type: 'select',
-        key: 'id_kind',
-        keyCode: "807706"
+        key: 'id_kind'
     }, {
         field: 'idNo',
         title: '证件号',
@@ -51,10 +52,10 @@ $(function() {
         field: 'createDatetime',
         title: '注册时间',
         formatter: dateTimeFormat
-    },{
-        title:"状态",
-        field:"status",
-        type:"select",
+    }, {
+        title: "状态",
+        field: "status",
+        type: "select",
         key: "user_status",
         formatter: Dict.getNameForList("user_status"),
     }, {
@@ -93,7 +94,7 @@ $(function() {
             userId: userId
         },
         view: view,
-        detailCode: '805056'
+        detailCode: '805121'
     });
 
 

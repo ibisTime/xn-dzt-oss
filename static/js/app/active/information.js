@@ -44,7 +44,7 @@ $(function() {
         columns: columns,
         pageCode: '620120',
         searchParams: {
-            companyCode: OSS.company
+            companyCode: OSS.companyCode
         },
         beforeDelete: function(data) {
             if (data.status != 0) {
@@ -76,7 +76,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        if (selRecords[0].status == 0 || selRecords[0].status == 3) {
+        if (selRecords[0].status == 0 || selRecords[0].status == 2) {
             window.location.href = "information_up.html?code=" + selRecords[0].code;
         } else {
             toastr.warning('该资讯不是可以上架的状态');

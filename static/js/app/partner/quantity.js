@@ -48,7 +48,7 @@ $(function() {
         columns: columns,
         pageCode: '805054',
         searchParams: {
-            kind: "f2",
+            kind: "B",
             userReferee: sessionStorage.getItem('userId')
         }
     });

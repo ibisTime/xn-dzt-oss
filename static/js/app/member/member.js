@@ -1,7 +1,7 @@
 $(function() {
     var userKind = {
-        "f1": "C端用户",
-        "f2": "B端用户"
+        "C": "C端用户",
+        "B": "B端用户"
     }
     var columns = [{
             field: '',
@@ -46,9 +46,10 @@ $(function() {
     buildList({
         router: 'member',
         columns: columns,
-        pageCode: '805054',
+        pageCode: '805120',
         searchParams: {
-            kind: "ff3"
+            kind: "ff3",
+            companyCode: OSS.companyCode
         },
         beforeSearch: function(json) {
             if ($("#kind").val() == "") {

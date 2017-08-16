@@ -135,14 +135,6 @@ function editMoneyFormat(money, format) {
  */
 function percentFormat(percent, format) {
     return percent;
-    /*if(isNaN(percent)){
-     return '';
-     }
-     if(format == '' || format == null || format == undefined){
-     format = 5;
-     }
-     return parseFloat(percent).toFixed(format);
-     */
 }
 
 
@@ -191,6 +183,16 @@ function RateFormatByLargeHundred(rate) {
     }
     return parseFloat(rate * 100.0).toFixed(2);
 }
+
+/**
+ * 保留金额小数后2位,0.111 = 0.12
+ */
+//num是要处理的数字  v为要保留的小数位数
+function moneyFormatdecimal(num) {
+    var vv = Math.pow(10, 2);
+    return Math.ceil(num * vv) / vv;
+}
+
 
 /**
  * 显示遮罩
@@ -315,7 +317,16 @@ $.fn.serializeObject = function() {
             if (!o[this.name].push) {
                 o[this.name] = [o[this.name]];
             }
-            o[this.name].push(this.value || '');
+            var flag = 1;
+            for (var i = 0; i < o[this.name].length; i++) {
+                if (o[this.name][i] == this.value) {
+                    flag = 0;
+                    break;
+                }
+            }
+            if (flag) {
+                o[this.name].push(this.value || '');
+            }
         } else {
             var value = this.value || '';
             if ($('#' + this.name).parent('li').attr('type') == 'amount') {
@@ -389,7 +400,6 @@ $.fn.renderDropdown = function(data, keyName, valueName, defaultOption, filter) 
     this.html(html);
     return data;
 };
-
 
 $.fn.renderDropdown2 = function(data, defaultOption) {
     var html = "<option value=''></option>" + (defaultOption || '');
@@ -716,7 +726,10 @@ function buildList(options) {
             })(data);
 
         } else if (item.key) {
-            $('#' + item.field).renderDropdown(Dict.getName(item.key), '', '', item.defaultOption ? '<option value="0">' + item.defaultOption + '</option>' : '', item.filter || '');
+            if (item.keyCode)
+                $('#' + item.field).renderDropdown(Dict.getName2(item.key, item.keyCode), '', '', item.defaultOption ? '<option value="0">' + item.defaultOption + '</option>' : '', item.filter || '');
+            else
+                $('#' + item.field).renderDropdown(Dict.getName(item.key), '', '', item.defaultOption ? '<option value="0">' + item.defaultOption + '</option>' : '', item.filter || '');
         } else if (item.listCode) {
             var data = $('#' + item.field).renderDropdown($.extend({
                 listCode: item.listCode,
@@ -740,6 +753,30 @@ function buildList(options) {
                     return d[v];
                 };
             })(dataDict);
+        } else if (item.pageCode1) {
+            var pageParams = {
+                start: 1,
+                limit: 10
+            };
+            $.extend(pageParams, item.params || {});
+            data = $('#' + item.field).renderDropdown($.extend({
+                listCode: item.pageCode1,
+                keyCode1: item.keyCode1,
+                params: pageParams,
+                keyName: item.keyName,
+                valueName: item.valueName,
+                dict: item.dict
+            }, (item.defaultOption ? { defaultOption: '<option value="0">' + item.defaultOption + '</option>' } : {})));
+            $('#' + item.field)[0].pageOptions = {
+                pageCode: item.pageCode1,
+                keyCode1: item.keyCode1,
+                keyName: item.keyName,
+                valueName: item.valueName,
+                dict: item.dict,
+                searchName: item.searchName
+            };
+            $('#' + item.field)[0].pageParams = pageParams;
+            $('#' + item.field)[0].pageParams.start += 1;
         }
         if (item.onChange) {
             (function(i, data) {
@@ -961,11 +998,6 @@ function buildList(options) {
                     delete searchFormParams[p];
                 }
             }
-            //车贷权限控制
-            if (options.pageCode == "617015") {
-                json["userId"] = getUserId();
-                json["level"] = getRoleLevel();
-            }
             $.extend(json, options.searchParams, searchFormParams, {
                 token: sessionStorage.getItem('token'),
                 systemCode: sessionStorage.getItem('systemCode')
@@ -1034,7 +1066,6 @@ function buildDetail(options) {
             rules[item.field + 'Img'].isNotFace = false;
         }
         if (item.required) {
-
             rules[item.field].required = item.required;
         }
 
@@ -1094,11 +1125,9 @@ function buildDetail(options) {
         if (item['url']) {
             rules[item.field]['url'] = item['url'];
         }
-        if (item['west']) {
-            rules[item.field]['west'] = item['west'];
-        }
-        if (item['north']) {
-            rules[item.field]['north'] = item['north'];
+        var imgLabel = '';
+        if (item.type == 'img') {
+            imgLabel = item.single ? '（单）': '（可多）';
         }
         if (item.type == 'title') {
             html += '<div ' + (item.field ? 'id="' + item.field + '"' : '') + ' style="' + (item.hidden ? 'display:none;' : '') + '" class="form-title">' + item.title + '</div>';
@@ -1123,7 +1152,7 @@ function buildDetail(options) {
                 html += '<li class="clearfix" type="' + (item.amount ? 'amount' : '') + '" style="' + (item.width ? ('width: ' + item.width + ';display:inline-block;') : '') + (item.hidden ? 'display: none;' : '') + '"><label>' + item.title + ':</label><span id="' + item.field + '" name="' + item.field + '"></span></li>';
             }
         } else {
-            html += '<li class="clearfix" type="' + (item.amount ? 'amount' : '') + '" style="' + (item.width ? ('width: ' + item.width + ';display:inline-block;') : '') + (item.hidden ? 'display: none;' : '') + '"><label>' + (item.title ? ('<b>' + ((item.required && '*') || '') + '</b>' + item.title + ':') : '&nbsp;') + '</label>';
+            html += '<li class="clearfix" type="' + (item.amount ? 'amount' : '') + '" style="' + (item.width ? ('width: ' + item.width + ';display:inline-block;') : '') + (item.hidden ? 'display: none;' : '') + '"><label>' + (item.title ? ('<b>' + ((item.required && '*') || '') + '</b>' + item.title + imgLabel + ':') : '&nbsp;') + '</label>';
             if (item.type == 'radio') {
                 for (var k = 0, len1 = item.items.length; k < len1; k++) {
                     var rd = item.items[k];
@@ -1193,7 +1222,28 @@ function buildDetail(options) {
         html += '<li><input id="subBtn" type="button" class="btn margin-left-100" value="' + (options.saveText || "保存") + '"/><input id="backBtn" type="button" class="btn margin-left-20" value="返回"/></li>';
     }
 
-    $('#form-info').append(html);
+    if (options.container) {
+        options.container.append(html);
+    } else {
+        $('#form-info').append(html);
+    }
+
+    $(document).on('mouseenter', '.field-help', function() {
+        if (!$(this).attr('data-show')) {
+            var help = $(this).attr('data-help');
+            var me = this;
+            $(me).attr('data-show', '1');
+            var d = dialog({
+                align: 'top',
+                content: help,
+                quickClose: true,
+                onclose: function() {
+                    $(me).attr('data-show', '');
+                }
+            });
+            d.show(this);
+        }
+    });
 
     if (options.view) {
         $('#subBtn').remove();
@@ -1213,11 +1263,8 @@ function buildDetail(options) {
                 var values = [];
                 var imgs = $(el).find('.img-ctn');
                 imgs.each(function(index, img) {
-                    values.push($(img).attr('data-src') || $(img).find('img').attr('src'));
+                    values.push($(img).attr('data-src') || $(img).find('img').attr('data-src'));
                 });
-                // if (item.type == 'img' && item.passValue) {
-                //     data[item.field] = $('#' + item.field).find('option:selected').html();
-                // }
                 data[el.id] = values.join('||');
             });
             if ($('#jsForm').find('#province')[0]) {
@@ -1266,7 +1313,11 @@ function buildDetail(options) {
             });
         }
     });
-    $("#jsForm").validate({ 'rules': rules });
+    if (options.container) {
+        options.container.closest('form').validate({ 'rules': rules });
+    } else {
+        $("#jsForm").validate({ 'rules': rules });
+    }
 
     for (var i = 0, len = dropDownList.length; i < len; i++) {
         var item = dropDownList[i];
@@ -1274,7 +1325,11 @@ function buildDetail(options) {
         if (item.data) {
             data = $('#' + item.field).renderDropdown2(item.data);
         } else if (item.key) {
-            data = $('#' + item.field).renderDropdown(Dict.getName(item.key), '', '', item.defaultOption ? '<option value="0">' + item.defaultOption + '</option>' : '');
+            if (item.keyCode)
+                data = $('#' + item.field).renderDropdown(Dict.getName2(item.key, item.keyCode), '', '', item.defaultOption ? '<option value="0">' + item.defaultOption + '</option>' : '');
+            else
+                data = $('#' + item.field).renderDropdown(Dict.getName(item.key), '', '', item.defaultOption ? '<option value="0">' + item.defaultOption + '</option>' : '');
+
         } else if (item.listCode) {
             data = $('#' + item.field).renderDropdown($.extend({
                 listCode: item.listCode,
@@ -1305,6 +1360,7 @@ function buildDetail(options) {
             $.extend(pageParams, item.params || {});
             data = $('#' + item.field).renderDropdown($.extend({
                 listCode: item.pageCode,
+                keyCode1: item.keyCode1,
                 params: pageParams,
                 keyName: item.keyName,
                 valueName: item.valueName,
@@ -1312,6 +1368,7 @@ function buildDetail(options) {
             }, (item.defaultOption ? { defaultOption: '<option value="0">' + item.defaultOption + '</option>' } : {})));
             $('#' + item.field)[0].pageOptions = {
                 pageCode: item.pageCode,
+                keyCode1: item.keyCode1,
                 keyName: item.keyName,
                 valueName: item.valueName,
                 dict: item.dict,
@@ -1355,7 +1412,6 @@ function buildDetail(options) {
         //editor.config.uploadImgUrl = '/upload';
         editor.create();
     }
-
     for (var i = 0, len = dateTimeList.length; i < len; i++) {
         var item = dateTimeList[i];
         if (item.dateOption) {
@@ -1368,6 +1424,7 @@ function buildDetail(options) {
                 format: item.type == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD'
             });
         }
+
     }
 
     $("#city-group").citySelect && $("#city-group").citySelect({
@@ -1376,18 +1433,28 @@ function buildDetail(options) {
 
     for (var i = 0, len = fields.length; i < len; i++) {
         var item = fields[i];
+        (function(j) {
+            $('#' + j.field).length > 0 && ($('#' + j.field)[0].cfg = j);
+        })(item);
+
         if ('defaultValue' in item) {
             $('#' + item.field).val(item.defaultValue);
         }
 
         if (item.onBlur) {
-
             (function(i) {
                 $('#' + i.field).on('blur', function(e) {
                     i.onBlur(this.value);
                 });
             })(item);
+        }
 
+        if (item.onKeyup) {
+            (function(i) {
+                $('#' + i.field).on('keyup', function(e) {
+                    i.onKeyup(this.value);
+                });
+            })(item);
         }
 
     }
@@ -1442,7 +1509,6 @@ function buildDetail(options) {
                 var displayValue = data[item.field];
 
                 if (item.onKeyup) {
-
                     (function(i, d) {
                         $('#' + i.field).on('keyup', function() {
                             i.onKeyup(this.value, d);
@@ -1474,7 +1540,9 @@ function buildDetail(options) {
                         if (item.pageCode) {
                             $('#' + item.field).html('<table id="' + item.field + 'List"></table>');
                             var searchParams = {};
-                            searchParams[item['key']] = item.o2mvalue || $('#code').val();
+                            //                          searchParams[item['key']] = item.o2mvalue || $('#code').val();
+                            searchParams = item.o2mvalue || $('#code').val();
+                            item.searchParams1 && $.extend(searchParams, item.searchParams1);
                             var options1 = {
                                 columns: item.columns,
                                 pageCode: item.pageCode,
@@ -1523,8 +1591,13 @@ function buildDetail(options) {
                             }
                         }
                         if (!item.multiple) {
-                            list = Dict.getName(item.key);
-                            $('#' + item.field).html(Dict.getName(item.key, realValue || '0'));
+
+                            if (item.keyCode)
+                                list = Dict.getName2(item.key, item.keyCode),
+                                $('#' + item.field).html(Dict.getName2(item.key, item.keyCode, realValue || '0'));
+                            else
+                                list = Dict.getName(item.key),
+                                $('#' + item.field).html(Dict.getName(item.key, realValue || '0'));
                         } else {
                             var dv = '';
                             if (realValue) {
@@ -1685,7 +1758,66 @@ function buildDetail(options) {
 
                     }
                     if (item.formatter) {
-                        $('#' + item.field).html(item.formatter(displayValue, data));
+                        if (item.type == 'select' && item.data) {
+                            var realValue = item.formatter(displayValue, data);
+                            if (item.value) {
+                                if (item.value.call) {
+                                    realValue = item.value(data);
+                                } else {
+                                    realValue = item.value;
+                                }
+                            }
+                            $('#' + item.field).html(item.data[realValue] || '-');
+                            $('#' + item.field).attr('data-value', realValue);
+                            if (item.onChange) {
+                                item.onChange(realValue);
+                            }
+                        } else if (item.type == 'img') {
+                            var imgData = item.formatter(displayValue, data);
+                            var sp = imgData && imgData.split('||') || [];
+                            var imgsHtml = '';
+                            var defaultFile = getDefaultFileIcon();
+
+                            sp.length && sp.forEach(function(item) {
+                                var suffix = item.slice(item.lastIndexOf('.') + 1);
+                                var src = (item.indexOf('http://') > -1 ? item : (OSS.picBaseUrl + '/' + item));
+                                var src1 = (item.indexOf('http://') > -1 ? item.substring(item.lastIndexOf("/") + 1) : item);
+                                var name = src1.substring(0, src1.lastIndexOf("_")) + "." + suffix;
+                                if (isDocOrAviOrZip(suffix)) {
+
+                                    imgsHtml += '<div class="img-ctn" data-src="' + src1 + '" style="display: inline-block;position: relative;">' +
+                                        '<div class="center-img-wrap">' +
+                                        '<img width="100" src="' + getDocOrAviOrZipIcon(suffix) + '" />' +
+                                        '<i class="zmdi zmdi-download zmdi-hc-fw"></i></div>' +
+                                        '<div class="t_3dot w100p" title="' + name + '">' + name + '</div>' +
+                                        '</div>';
+                                } else if (isAcceptImg(suffix)) {
+                                    imgsHtml += '<div class="img-ctn" data-src="' + src1 + '" style="display: inline-block;position: relative;">' +
+                                        '<div class="center-img-wrap">' +
+                                        '<img src="' + src + OSS.picShow + '" class="center-img" />' +
+                                        '<i class="zmdi zmdi-download zmdi-hc-fw"></i>' +
+                                        '</div>' +
+                                        '<div class="t_3dot w100p" title="' + name + '">' + name + '</div>' +
+                                        '</div>';
+                                } else {
+                                    imgsHtml += '<div class="img-ctn" data-src="' + src1 + '" style="display: inline-block;position: relative;">' +
+                                        '<div class="center-img-wrap">' +
+                                        '<img width="100" src="' + defaultFile + '" />' +
+                                        '<i class="zmdi zmdi-download zmdi-hc-fw"></i>' +
+                                        '</div>' +
+                                        '<div class="t_3dot w100p" title="' + name + '">' + name + '</div>' +
+                                        '</div>';
+                                }
+                            });
+                            $('#' + item.field).html(imgsHtml);
+                            $('#' + item.field).find('.zmdi-download').on('click', function(e) {
+                                var dSrc = OSS.picBaseUrl + '/' + $(this).parents("[data-src]").attr('data-src');
+                                window.open(dSrc, '_blank');
+                            });
+
+                        } else {
+                            $('#' + item.field).html(item.formatter(displayValue, data));
+                        }
                     }
                     if (item['[value]']) {
                         if (item.type == 'img') {
@@ -1707,8 +1839,13 @@ function buildDetail(options) {
                         sp.length && sp.forEach(function(item) {
                             var suffix = item.slice(item.lastIndexOf('.') + 1);
                             var src = (item.indexOf('http://') > -1 ? item : (OSS.picBaseUrl + '/' + item));
-                            var src1 = (item.indexOf('http://') > -1 ? item.substring(item.lastIndexOf("/") + 1) : item);
-                            var name = src1.substring(0, src1.lastIndexOf("_")) + "." + suffix;
+                            //                          var src1 = (item.indexOf('http://') > -1 ? item.substring(item.lastIndexOf("/") + 1) : item);
+                            var src1 = item;
+                            if (item.indexOf('http://') > -1) {
+                                var name = src.substring(src.lastIndexOf("/") + 1);
+                            } else {
+                                var name = src1.substring(0, src1.lastIndexOf("_")) + "." + suffix;
+                            }
                             if (isDocOrAviOrZip(suffix)) {
                                 imgsHtml += '<div class="img-ctn" data-src="' + src1 + '" style="display: inline-block;position: relative;">' +
                                     '<div class="center-img-wrap">' +
@@ -1739,8 +1876,12 @@ function buildDetail(options) {
                             }
                         });
                         $('#' + item.field).html(imgsHtml);
+                        item.single && setImgDisabled($('#' + item.field));
                         $('#' + item.field).find('.zmdi-close-circle-o').on('click', function(e) {
-                            $(this).parents("[data-src]").remove();
+                            var el = $(this).parent().parent(), el_parent = el.parent();
+                            el.remove();
+                            el_parent[0].cfg.single && setImgDisabled(el_parent);
+                            // $(this).parents("[data-src]").remove();
                         });
                         $('#' + item.field).find('.zmdi-download').on('click', function(e) {
                             var dSrc = OSS.picBaseUrl + '/' + $(this).parents("[data-src]").attr('data-src');
@@ -1976,6 +2117,16 @@ $.fn.highlight = function(type) {
     }, 1);
 };
 
+function setImgDisabled(el) {
+    var count = el.find('.img-ctn').length;
+    if (count >= 1) {
+        el.prev().addClass('disabled');
+        el.prev().find('input').prop('disabled', true);
+    } else {
+        el.prev().removeClass('disabled');
+        el.prev().find('input').prop('disabled', false);
+    }
+}
 function uploadInit() {
     // this 即 editor 对象
     var editor = this;
@@ -1986,7 +2137,33 @@ function uploadInit() {
 
     var dropId = editor.id || (editor.attr && editor.attr('id')) || 'jsForm';
 
-    // var token;
+    var multi_selection = true;
+    if (editor[0] && editor[0].cfg && editor[0].cfg.single) {
+        multi_selection = false;
+    }
+
+    var token;
+    //上传文件类型 
+    var mime_types = [
+            //只允许上传图片 （注意，extensions中，逗号后面不要加空格）
+            {
+                title: "图片文件",
+                extensions: "jpg,jpeg,gif,png,bmp"
+            }
+        ]
+        //fileDocument:true;添加文件的时候这个要为真
+    if (editor[0] && editor[0].cfg && editor[0].cfg.fileDocument) {
+        mime_types = [
+            //只允许上传图片和文件（注意，extensions中，逗号后面不要加空格）
+            {
+                title: "图片文件",
+                extensions: "jpg,jpeg,gif,png,bmp"
+            }, {
+                title: '文件',
+                extensions: "docx,doc,xls,xlsx,pdf"
+            }
+        ]
+    }
 
     // reqApi({
     //     code: '807900',
@@ -2002,7 +2179,7 @@ function uploadInit() {
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4', //上传模式,依次退化
         browse_button: btnId, //上传选择的点选按钮，**必需**
-        uptoken_url: '807900',
+        uptoken_url: '805951',
         //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
         // uptoken: token,
         //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
@@ -2017,23 +2194,15 @@ function uploadInit() {
         max_file_size: '100mb', //最大文件体积限制
         // flash_swf_url: 'js/plupload/Moxie.swf', //引入flash,相对路径
         flash_swf_url: swfUrl,
-        // filters: {
-        //     mime_types: [
-        //         //只允许上传图片文件 （注意，extensions中，逗号后面不要加空格）
-        //         {
-        //             title: "图片文件",
-        //             extensions: "jpg,gif,png,bmp"
-        //         }, {
-        //             title: '文件',
-        //             extensions: "docx,doc,xls,xlsx,pdf,avi,mp4,zip,rar"
-        //         }
-        //     ]
-        // },
+        filters: {
+            mime_types: mime_types
+        }, //上传文件格式过滤
         max_retries: 3, //上传失败最大重试次数
         dragdrop: true, //开启可拖曳上传
         drop_element: dropId, //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
         chunk_size: '4mb', //分块上传时，每片的体积
         auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+        multi_selection: multi_selection,
         init: {
             'FilesAdded': function(up, files) {
                 if (editor.append) {
@@ -2104,7 +2273,6 @@ function uploadInit() {
                 }
             },
             'UploadProgress': function(up, file) {
-                //
                 // 显示进度条
                 if (editor.showUploadProgress) {
                     editor.showUploadProgress(file.percent);
@@ -2134,9 +2302,8 @@ function uploadInit() {
                 var sourceLink1 = res.key; //获取上传成功后的文件的Url
 
                 //printLog(sourceLink);
-
                 // 插入图片到editor
-                editor.command && editor.command(null, 'insertHtml', '<img src="' + sourceLink + '" style="max-width:100%;"/>');
+                editor.command && editor.command(null, 'insertHtml', '<img src="' + sourceLink + '" style="max-width:100%"/>');
                 if (editor.append) {
                     var imgCtn = editor.find("#" + file.id);
                     imgCtn.find(".progress-wrap").hide();
@@ -2151,6 +2318,13 @@ function uploadInit() {
                         imgCtn.attr("data-src", sourceLink1);
                     }
                     (function(imgCtn, sourceLink) {
+                        editor[0] && editor[0].cfg.single && setImgDisabled(editor);
+
+                        imgCtn.find('.zmdi-close-circle-o').on('click', function(e) {
+                            imgCtn.remove();
+                            editor[0] && editor[0].cfg.single && setImgDisabled(editor);
+                        });
+
                         imgCtn.find('.zmdi-download').on('click', function(e) {
                             window.open(sourceLink, '_blank');
                         }); //zmdi-name
@@ -2565,6 +2739,7 @@ function buildDetail1(options) {
         laydate({
             elem: '#' + item.field + "-model",
             min: item.minDate ? item.minDate : '',
+            istoday: true,
             istime: item.type == 'datetime',
             format: item.type == 'datetime' ? 'YYYY-MM-DD hh:mm:ss' : 'YYYY-MM-DD'
         });
@@ -3313,7 +3488,7 @@ function getDocOrAviOrZipIcon(suffix) {
 
 function isAcceptImg(suffix) {
     if (suffix == 'jpg' || suffix == 'gif' ||
-        suffix == 'png' || suffix == 'bmp') {
+        suffix == 'png' || suffix == 'bmp' || suffix == 'JPG' || suffix == "jpeg") {
         return true;
     }
     return false;

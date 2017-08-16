@@ -17,12 +17,20 @@ $(function() {
         searchName: 'name',
         search: true
     }, {
-        field: 'pic',
-        title: '图片',
-        formatter: function(v, data) {
-            return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
-        }
+        field: 'type',
+        title: '工艺类型',
+        type: "select",
+        required: true,
+        key: "craftwork_type",
+        formatter: Dict.getNameForList("craftwork_type"),
+        search: true
     }, {
+        //     field: 'pic',
+        //     title: '图片',
+        //     formatter: function(v, data) {
+        //         return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
+        //     }
+        // }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -52,7 +60,28 @@ $(function() {
         router: 'parameter',
         columns: columns,
         pageCode: '620050',
-        deleteCode: "620041"
+        beforeDelete: function(data) {
+            if (data.status != 0) {
+                toastr.warning("只有草稿状态，才可以删除");
+                return;
+            }
+            confirm("确定删除？").then(function() {
+                reqApi({
+                    code: '620041',
+                    json: { "code": data.code }
+                }).then(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                });
+            }, function() {});
+        },
+        beforeEdit: function(data) {
+            if (data.status == 1) {
+                toastr.warning("已上架，不可修改");
+                return;
+            }
+            window.location.href = "parameter_addedit.html?code=" + data.code;
+        }
     });
     //上架
     $('#upBtn').click(function() {
@@ -62,7 +91,7 @@ $(function() {
             return;
         }
         if (selRecords[0].status == 0 || selRecords[0].status == 2) {
-            window.location.href = "paramater_up.html?code=" + selRecords[0].code;
+            window.location.href = "parameter_up.html?code=" + selRecords[0].code;
         } else {
             toastr.warning('不是可以上架的状态');
             return;

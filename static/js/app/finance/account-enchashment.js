@@ -39,8 +39,8 @@ $(function() {
         fields: fields,
         addCode: '802754',
         beforeSubmit: function(data) {
-            data.applyUser = OSS.SYS_USER;
-            data.updaterId="";
+            data.applyUser = getUserId();
+            data.updaterId = "";
             return data;
         }
     };

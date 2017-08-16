@@ -36,6 +36,9 @@ $(function() {
         router: 'dict',
         columns: columns,
         pageCode: '805905',
-        deleteCode: '805901'
+        deleteCode: '805901',
+        searchParams: {
+            companyCode: OSS.companyCode
+        }
     });
 });

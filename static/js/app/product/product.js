@@ -14,12 +14,12 @@ $(function() {
         },
         search: true
     }, {
-        field: 'pic',
-        title: '图片',
-        formatter: function(v, data) {
-            return '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >'
-        }
-    }, {
+        //     field: 'pic',
+        //     title: '图片',
+        //     formatter: function(v, data) {
+        //         return '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >'
+        //     }
+        // }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -42,9 +42,6 @@ $(function() {
         field: "orderNo",
         title: "UI次序"
     }, {
-        title: "备注",
-        field: "remark"
-    }, {
         title: "创建时间",
         field: "createDatetime",
         formatter: dateTimeFormat
@@ -55,12 +52,36 @@ $(function() {
         field: 'updateDatetime',
         title: '最后修改时间',
         formatter: dateTimeFormat
+    }, {
+        title: "备注",
+        field: "remark"
     }];
     buildList({
         router: 'product',
         columns: columns,
         pageCode: '620010',
-        deleteCode: '620002'
+        beforeDelete: function(data) {
+            if (data.status != 0) {
+                toastr.warning("只有草稿状态，才可以删除");
+                return;
+            }
+            confirm("确定删除？").then(function() {
+                reqApi({
+                    code: '620001',
+                    json: { "code": data.code }
+                }).then(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                });
+            }, function() {});
+        },
+        beforeEdit: function(data) {
+            if (data.status == 1) {
+                toastr.warning("上架中不可修改");
+                return;
+            }
+            window.location.href = "product_addedit.html?code=" + data.code;
+        }
     });
     //上架
     $('#upBtn').click(function() {

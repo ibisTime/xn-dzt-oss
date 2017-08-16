@@ -39,9 +39,10 @@ $(function() {
     buildList({
         router: 'custom',
         columns: columns,
-        pageCode: '805054',
+        pageCode: '805120',
         searchParams: {
-            kind: "f1"
+            kind: "C",
+            companyCode: OSS.companyCode
         },
         beforeDetail: function(data) {
             window.location.href = "custom_addedit.html?userId=" + data.userId;
@@ -63,7 +64,7 @@ $(function() {
         status == 0 ? toStatus = 2 : toStatus = 0;
         confirm("确定注销该账户？").then(function() {
             reqApi({
-                code: '805052',
+                code: '805091',
                 json: {
                     userId: selRecords[0].userId,
                     toStatus: toStatus
@@ -89,7 +90,7 @@ $(function() {
         }
         confirm("确定激活该账户？").then(function() {
             reqApi({
-                code: '805052',
+                code: '805091',
                 json: {
                     userId: selRecords[0].userId,
                     toStatus: '0'

@@ -23,13 +23,15 @@ $(function() {
         field: 'pic',
         type: 'img',
         required: true,
-        readonly: view
+        readonly: view,
+        single: true
     }, {
         title: "广告图",
         field: "advPic",
         type: 'img',
         required: true,
-        readonly: view
+        readonly: view,
+        single: true
     }, {
         title: '图文详述',
         field: 'description',

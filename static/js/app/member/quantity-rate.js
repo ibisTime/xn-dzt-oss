@@ -15,9 +15,7 @@ $(function() {
         code: {
             userId: code
         },
-        addCode: '805042',
-        editCode: "805182",
-        detailCode: "805056",
+        detailCode: "805121",
         view: view,
     };
     options.buttons = [{
@@ -27,7 +25,7 @@ $(function() {
             data['userId'] = code;
             data['divRate'] = $("#divRate").val();
             reqApi({
-                code: "805184",
+                code: "805093",
                 json: data
             }).done(function() {
                 sucDetail();

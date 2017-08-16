@@ -16,13 +16,13 @@ $(function() {
         type: "select",
         field: "province",
         formatter: function(v, data) {
-            if (data.userExt.province == data.userExt.city && data.userExt.city == data.userExt.area) {
-                data.userExt.city = "";
-                data.userExt.area = "";
-            } else if (data.userExt.province == data.userExt.city && data.userExt.city != data.userExt.area) {
-                data.userExt.city = '';
+            if (data.province == data.city && data.city == data.area) {
+                data.city = "";
+                data.area = "";
+            } else if (data.province == data.city && data.city != data.area) {
+                data.city = '';
             }
-            var result = (data.userExt.province || "") + (data.userExt.city || "") + (data.userExt.area || "");
+            var result = (data.province || "") + (data.city || "") + (data.area || "");
             return result || "-";
         }
     }, {
@@ -50,12 +50,13 @@ $(function() {
     buildList({
         router: 'partner',
         columns: columns,
-        pageCode: '805054',
+        pageCode: '805120',
         searchParams: {
-            kind: "11"
+            kind: "PA",
+            companyCode: OSS.companyCode
         },
         beforeEdit: function(data) {
-            window.location.href = "partner_addedit.html?userId=" + data.userId;
+            window.location.href = "partner_addedit.html?userId=" + data.userId + "&loginName=" + data.loginName;
         }
     });
     //注销
@@ -74,7 +75,7 @@ $(function() {
         status == 0 ? toStatus = 2 : toStatus = 0;
         confirm("确定注销该账户？").then(function() {
             reqApi({
-                code: '805052',
+                code: '805091',
                 json: {
                     userId: selRecords[0].userId,
                     toStatus: toStatus
@@ -100,7 +101,7 @@ $(function() {
         }
         confirm("确定激活该账户？").then(function() {
             reqApi({
-                code: '805052',
+                code: '805091',
                 json: {
                     userId: selRecords[0].userId,
                     toStatus: '0'

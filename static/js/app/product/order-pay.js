@@ -52,7 +52,7 @@ $(function() {
     var options = {
         fields: fields,
         code: code,
-        detailCode: '620221'
+        detailCode: '620231'
     };
 
     options.buttons = [{
@@ -63,7 +63,7 @@ $(function() {
                 data['orderCode'] = code;
                 data['payType'] = "1";
                 reqApi({
-                    code: "620204",
+                    code: "620206",
                     json: data
                 }).done(function() {
                     sucDetail();

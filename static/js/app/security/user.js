@@ -36,7 +36,7 @@ $(function() {
             companyCode: OSS.companyCode
         }
     });
-
+    //设置角色
     $('#assignBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {

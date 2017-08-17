@@ -33,7 +33,7 @@ $(function() {
         type: 'hidden',
         required: true
     }, mobileView, mobileEdit, {
-        field: 'loginName',
+        field: 'realName',
         title: "量体师姓名",
         maxlength: 32,
         required: true,
@@ -83,6 +83,7 @@ $(function() {
                 data.userId = code;
                 return data;
             } else {
+                data.loginName = $("#mobile").val();
                 return data
             }
         }

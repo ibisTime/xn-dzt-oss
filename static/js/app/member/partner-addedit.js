@@ -1,7 +1,6 @@
 $(function() {
     var code = getQueryString('userId');
     var view = !!getQueryString('v');
-    var loginName = getQueryString('loginName');
 
     var loginNameView = {
         field: 'loginName1',
@@ -90,7 +89,6 @@ $(function() {
         view: view,
         beforeSubmit: function(data) {
             if (code) {
-                data.loginName = loginName;
                 data.userId = code;
                 return data;
             } else {

@@ -63,7 +63,7 @@ $(function() {
     buildList({
         router: 'order',
         columns: columns,
-        pageCode: '620220',
+        pageCode: '620230',
         searchParams: {
             statusList: ["1", "2", "3", "4", "5", "6", "7", "9"]
         },
@@ -90,7 +90,7 @@ $(function() {
         if (!selRecords[0].ltUser) {
             toastr.info("不是代定价的状态");
             return;
-        } else {
+        } else { //type=0是衬衫 1是h+
             window.location.href = 'order_price.html?code=' + selRecords[0].code;
         };
 
@@ -198,6 +198,30 @@ $(function() {
             return;
         }
         window.location.href = 'order_cancel.html?code=' + selRecords[0].code;
+    });
+    //归档
+    $('#guidangBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != 9) {
+            confirm("确定归档？").then(function() {
+                reqApi({
+                    code: ' ',
+                    json: { "code": selRecords[0].code }
+                }).then(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                });
+            }, function() {});
+
+        } else {
+            toastr.warning('不是可以归档的状态');
+            return;
+        }
+
     });
     //详情
     $("#detaBtn").click(function() {

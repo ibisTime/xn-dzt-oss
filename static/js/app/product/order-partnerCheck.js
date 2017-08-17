@@ -70,13 +70,12 @@ $(function() {
             field: "reAddress",
             readonly: true
         }, {
-            title: " 备注",
+            title: "备注",
             field: "remark",
             maxlength: 255,
             required: true,
             formatter: function() {
                 return "复核人：, 编号：";
-                // "复核人："+sessionStorage.getItem('loginName')+"，编号："+sessionStorage.getItem('userId');
             }
         }
     ];
@@ -84,7 +83,7 @@ $(function() {
     var options = {
         fields: fields,
         code: code,
-        detailCode: '620221'
+        detailCode: '620231'
     };
 
     options.buttons = [{
@@ -93,11 +92,10 @@ $(function() {
             if ($('#jsForm1').valid()) {
                 var data = {};
                 data['orderCode'] = code;
-                //  data['updater'] = sessionStorage.getItem('userName');
                 data["result"] = "1";
                 data["remark"] = $("#remark").val();
                 reqApi({
-                    code: "620207",
+                    code: "620210",
                     json: data
                 }).done(function() {
                     sucDetail();
@@ -110,11 +108,10 @@ $(function() {
             if ($('#jsForm1').valid()) {
                 var data = {};
                 data['orderCode'] = code;
-                // data['updater'] = sessionStorage.getItem('userName');
                 data["result"] = "0";
                 data["remark"] = $("#remark").val();
                 reqApi({
-                    code: "620207",
+                    code: "620210",
                     json: data
                 }).done(function() {
                     sucDetail();

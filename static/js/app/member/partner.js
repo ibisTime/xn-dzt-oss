@@ -56,7 +56,7 @@ $(function() {
             companyCode: OSS.companyCode
         },
         beforeEdit: function(data) {
-            window.location.href = "partner_addedit.html?userId=" + data.userId + "&loginName=" + data.loginName;
+            window.location.href = "partner_addedit.html?userId=" + data.userId;
         }
     });
     //注销

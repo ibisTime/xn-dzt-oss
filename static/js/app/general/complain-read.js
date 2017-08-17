@@ -2,46 +2,35 @@ $(function() {
     var code = getQueryString('code');
 
     var fields = [{
-        field: 'receiver',
-        title: '接收人',
-        search: true
+        title: "留言人",
+        field: "commenter",
+        readonly: true
+    }, {
+        title: "留言时间",
+        field: "commentDatetime",
+        formatter: dateTimeFormat,
+        readonly: true
     }, {
         field: "content",
-        title: "内容"
-    }, {
-        field: 'commenter',
-        title: '留言人',
-        search: true
-    }, {
-        field: 'status',
-        title: '状态',
-        search: true,
-        type: 'select',
-        data: {
-            "0": "未读",
-            "1": "已读"
-        }
+        title: "留言内容",
+        readonly: true
     }];
 
     var buttons = [];
     buttons = [{
-        title: "已阅",
+        title: "返回",
         handler: function() {
             if ($('#jsForm').valid()) {
                 var data = {};
                 data['code'] = code;
+                data["lookUser"] = "0";
                 reqApi({
                     code: "620143",
                     json: data
                 }).done(function() {
-                    sucDetail();
+                    goBack();
                 });
             }
-        }
-    }, {
-        title: "返回",
-        handler: function() {
-            goBack();
         }
     }]
     buildDetail({

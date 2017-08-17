@@ -81,12 +81,12 @@ $(function() {
                 }
             };
             $('#ltUser').renderDropdown({
-                listCode: '001403',
+                listCode: '805123',
                 keyName: 'userId',
                 valueName: '{{mobile.DATA}}--{{realName.DATA}}',
                 searchName: "mobile",
                 params: {
-                    kind: "f2",
+                    kind: "B",
                     province: province,
                     city: city,
                     area: area,
@@ -101,12 +101,16 @@ $(function() {
         field: 'ltUser',
         type: 'select',
         required: true
+    }, {
+        title: "备注",
+        field: "remark",
+        maxlength: 255
     }];
 
     var options = {
         fields: fields,
         code: code,
-        detailCode: '620221'
+        detailCode: '620231'
     };
 
     options.buttons = [{
@@ -115,10 +119,8 @@ $(function() {
             if ($('#jsForm').valid()) {
                 var data = {};
                 data['orderCode'] = code;
-                // data['province'] = $("#province").val();
-                // data['city'] = $("#city").val();
-                // data['area'] = $("#area").val();
                 data['ltUser'] = $("#ltUser").val();
+                data['remark'] = $("#remark").val();
                 reqApi({
                     code: "620202",
                     json: data

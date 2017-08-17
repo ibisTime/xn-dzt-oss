@@ -10,7 +10,7 @@ $(function() {
         field: 'mobile'
     }, {
         title: '姓名',
-        field: 'loginName',
+        field: 'realName',
         search: true
     }, {
         title: "辖区",

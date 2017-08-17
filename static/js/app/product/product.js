@@ -14,12 +14,9 @@ $(function() {
         },
         search: true
     }, {
-        //     field: 'pic',
-        //     title: '图片',
-        //     formatter: function(v, data) {
-        //         return '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >'
-        //     }
-        // }, {
+        field: 'name',
+        title: '名称'
+    }, {
         title: "状态",
         field: "status",
         type: "select",

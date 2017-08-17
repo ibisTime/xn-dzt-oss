@@ -4,7 +4,7 @@ $(function() {
     var productSpecsList;
     var modelCode;
     reqApi({
-        code: "620221",
+        code: "620231",
         json: { code },
         sync: true
     }).then(function(data) {
@@ -189,7 +189,7 @@ $(function() {
 
     function addListeners() {
 
-        
+
         $(".cxradio").click(function() {
             var dataid = $(this).attr("data-id");
             if (dataid == '03') {
@@ -224,15 +224,15 @@ $(function() {
             param[id] = self.attr("data-code");
         });
         // 头部tab切换
-        // $("#navUl").on("click", "span", function() {
-        //     var self = $(this),
-        //         index = self.index();
-        //     self.addClass("act")
-        //         .siblings("span.act").removeClass("act");
-        //     var tabs = $("#jsForm").find(".form-tab");
-        //     tabs.eq(index).addClass("act")
-        //         .siblings(".act").removeClass("act");
-        // });
+        $("#navUl").on("click", "span", function() {
+            var self = $(this),
+                index = self.index();
+            self.addClass("act")
+                .siblings("span.act").removeClass("act");
+            var tabs = $("#jsForm").find(".form-tab");
+            tabs.eq(index).addClass("act")
+                .siblings(".act").removeClass("act");
+        });
         // 点击选择面料按钮，弹出面料选择框
         $("#btn_select_fab").click(function() {
             $(".modalbg,.more-condition,.modal-chose").addClass("open");
@@ -510,8 +510,8 @@ $(function() {
             $(".param_30_zoom").val(parseFloat(val30).toFixed(2));
             $(".param_31_zoom").val(parseFloat(val31).toFixed(2));
             $(".param_32_zoom").val(parseFloat(val32).toFixed(2));
-            $(".param_33_zoom").val(parseFloat(val33*1 +9).toFixed(2));
-            $(".param_34_zoom").val(parseFloat(val34*1+6).toFixed(2));
+            $(".param_33_zoom").val(parseFloat(val33 * 1 + 9).toFixed(2));
+            $(".param_34_zoom").val(parseFloat(val34 * 1 + 6).toFixed(2));
         } else {
             $(".param_26_zoom").val(parseFloat(val26).toFixed(2));
             $(".param_27_zoom").val(parseFloat(val27 * 1.08).toFixed(2));
@@ -520,8 +520,8 @@ $(function() {
             $(".param_30_zoom").val(parseFloat(val30).toFixed(2));
             $(".param_31_zoom").val(parseFloat(val31).toFixed(2));
             $(".param_32_zoom").val(parseFloat(val32).toFixed(2));
-            $(".param_33_zoom").val(parseFloat(val33*1+7).toFixed(2));
-            $(".param_34_zoom").val(parseFloat(val34*1 +5).toFixed(2));
+            $(".param_33_zoom").val(parseFloat(val33 * 1 + 7).toFixed(2));
+            $(".param_34_zoom").val(parseFloat(val34 * 1 + 5).toFixed(2));
         }
     }
 

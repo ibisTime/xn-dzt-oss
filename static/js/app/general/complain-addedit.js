@@ -1,6 +1,8 @@
 $(function() {
     var commenter = getQueryString('commenter');
     var code = getQueryString('code');
+    var view = getQueryString('v');
+
 
     var fields = [{
         field: 'commenter',
@@ -25,6 +27,8 @@ $(function() {
         title: "回复内容",
         field: "content",
         required: true,
+        type: "textarea",
+        normalArea: true,
         readonly: false,
         maxlength: 255
     }];
@@ -43,10 +47,19 @@ $(function() {
                 data["commenter"] = "0";
                 data["receiver"] = commenter;
                 reqApi({
-                    code: "620140",
+                    code: "620141",
                     json: data
                 }).done(function() {
                     sucDetail();
+                });
+                var json = {};
+                json.code = code;
+                json.lookUser = "0"
+                reqApi({
+                    code: "620143",
+                    json: json
+                }).done(function() {
+                    goBack();
                 });
             }
         }

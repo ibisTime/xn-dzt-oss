@@ -4,16 +4,11 @@ $(function() {
         title: '',
         checkbox: true
     }, {
-        field: 'receiver',
-        title: '接收人',
-        search: true
+        field: 'commenter',
+        title: '留言人'
     }, {
         field: "content",
         title: "内容"
-    }, {
-        field: 'commenter',
-        title: '留言人',
-        search: true
     }, {
         field: 'status',
         title: '状态',
@@ -34,37 +29,11 @@ $(function() {
         searchParams: {
             companyCode: OSS.company,
             type: "0",
+            receiver: "0"
         },
-        deleteCode: "620142"
-            // beforeDelete: function(data) {
-            //     if (data.status != 0) {
-            //         toastr.warning("该活动不是可以删除的状态");
-            //         return;
-            //     }
-            //     confirm("确认是否删除该记录？").then(function() {
-            //         reqApi({
-            //             code: '',
-            //             json: data
-            //         }).done(function(data) {
-            //             sucList();
-            //         });
-            //     });
-            // }
-    });
-    //阅读
-    $('#readBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
+        beforeDetail: function(data) {
+            window.location.href = 'complain_read.html?code=' + data.code;
         }
-        if (selRecords[0].status == 0) {
-            window.location.href = "complain_read.html?code=" + selRecords[0].code;
-        } else {
-            toastr.warning('该留言是已读的状态');
-            return;
-        }
-
     });
     //回复
     $('#replyBtn').click(function() {
@@ -73,7 +42,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = './complain_addedit.html?commenter=' + selRecords[0].commenter;
+        window.location.href = './complain_addedit.html?code=' + selRecords[0].code + "&commenter=" + selRecords[0].commenter;
 
     });
 });

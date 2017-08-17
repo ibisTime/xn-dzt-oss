@@ -1,16 +1,18 @@
 $(function() {
-
     var code = getQueryString('code');
+
 
     var fields = [{
         field: 'applyUser',
         title: '下单人编号',
         type: 'select',
-        listCode: '805055',
+        listCode: '805120',
         params: {
-            kind: "f1",
+            kind: "C",
             status: "0",
-            updater: ""
+            updater: "",
+            limit: 10,
+            start: 0
         },
         keyName: 'userId',
         valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
@@ -21,8 +23,7 @@ $(function() {
 
     var options = {
         fields: fields,
-        code: code,
-        //  detailCode: '620221'
+        code: code
     };
 
     options.buttons = [{

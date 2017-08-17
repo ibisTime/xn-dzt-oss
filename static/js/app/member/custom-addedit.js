@@ -1,21 +1,6 @@
 $(function() {
-
     var userId = getQueryString('userId');
     var view = 1;
-    var userStatus = {};
-
-    // reqApi({
-    //     code: '807705',
-    //     json: {
-    //         "start": 1,
-    //         "limit": 100,
-    //         "parentKey": "user_sStatus"
-    //     }
-    // }).then(function(res) {
-    //     $.each(res, function(i, r) {
-    //         userStatus[r.dkey] = r.dvalue;
-    //     });
-    // });
 
     var fields = [{
         field: 'loginName',

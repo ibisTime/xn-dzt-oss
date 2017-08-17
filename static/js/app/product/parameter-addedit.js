@@ -31,8 +31,9 @@ $(function() {
     }, {
         title: "工艺名称",
         field: "name",
-        hidden: true,
-        value: "工艺名称",
+        maxlength: 255,
+        // hidden: true,
+        // value: "工艺名称",
         required: true
     }, {
         title: "工艺费",

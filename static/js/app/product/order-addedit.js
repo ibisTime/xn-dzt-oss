@@ -6,11 +6,13 @@ $(function() {
         field: 'applyUser',
         title: '下单人编号',
         type: 'select',
-        listCode: '805055',
+        listCode: '805120',
         params: {
-            kind: "f1",
+            kind: "C",
             status: "0",
-            updater: ""
+            updater: "",
+            limit: "100",
+            start: "0"
         },
         keyName: 'userId',
         valueName: '{{nickname.DATA}}--{{mobile.DATA}}',
@@ -24,6 +26,16 @@ $(function() {
         field: 'applyMobile',
         title: '下单人手机号',
         mobile: true,
+        required: true,
+    }, {
+        title: "身高(cm)",
+        field: "height",
+        maxlength: 255,
+        required: true,
+    }, {
+        title: "体重(kg)",
+        field: "weight",
+        maxlength: 255,
         required: true,
     }, {
         field: 'ltDatetime',
@@ -41,9 +53,9 @@ $(function() {
         maxlength: 64,
         required: true,
     }, {
-        field: 'applyNote',
-        title: '量体嘱咐',
-        maxlength: 250
+        field: 'remark',
+        title: '备注',
+        maxlength: 255
     }];
 
     buildDetail({
@@ -54,6 +66,10 @@ $(function() {
             data.ltProvince = data.province;
             data.ltCity = data.city;
             data.ltArea = data.area;
+            var height = data.height;
+            var weight = data.weight;
+            data.map = { "6-2": height, "6-3": weight };
+            console.log({ "6-2": height, "6-3": weight })
             return data
         }
     });

@@ -10,9 +10,9 @@ $(function() {
         json: { userId: sessionStorage.getItem('userId') },
         sync: true
     }).then(function(data) {
-        province = data.userExt.province;
-        city = data.userExt.city;
-        area = data.userExt.area;
+        province = data.province;
+        city = data.city;
+        area = data.area;
     });
 
 
@@ -60,7 +60,7 @@ $(function() {
         required: true
     }, {
         field: "kind",
-        value: 'f2',
+        value: 'B',
         type: 'hidden',
         required: true
     }, mobileView, mobileEdit, {
@@ -95,6 +95,7 @@ $(function() {
                 data.area = area;
                 return data;
             } else {
+                data.loginName = $("#mobile").val();
                 return data
             }
         }

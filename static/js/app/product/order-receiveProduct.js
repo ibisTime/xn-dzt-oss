@@ -115,7 +115,7 @@ $(function() {
     var options = {
         fields: fields,
         code: code,
-        detailCode: '620221'
+        detailCode: '620231'
     };
 
     options.buttons = [{
@@ -124,7 +124,7 @@ $(function() {
             if ($('#jsForm1').valid()) {
                 var data = $('#jsForm1').serializeObject();
                 reqApi({
-                    code: "620210",
+                    code: "620213",
                     json: data
                 }).done(function() {
                     sucDetail();

@@ -105,13 +105,19 @@ $(function() {
             field: 'pdf',
             title: '物流单',
             type: 'img',
+            single: true,
+            required: true,
+        }, {
+            title: "备注",
+            field: "remark",
+            maxlength: 255
         }
     ];
 
     var options = {
         fields: fields,
         code: code,
-        detailCode: '620221'
+        detailCode: '620231'
     };
 
     options.buttons = [{
@@ -146,7 +152,7 @@ $(function() {
                     }
                 }
                 reqApi({
-                    code: "620209",
+                    code: "620212",
                     json: data
                 }).done(function() {
                     sucDetail();

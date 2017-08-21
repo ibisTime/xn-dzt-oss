@@ -52,7 +52,9 @@ $(function() {
         field: "weight"
     }, {
         title: "纱支",
-        field: "yarn"
+        field: "yarn",
+        type: "select",
+        key: "fabric_yarn",
     }, {
         //     field: 'pic',
         //     title: '图片',

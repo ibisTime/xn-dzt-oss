@@ -29,9 +29,6 @@ $(function() {
         title: "身份证号",
         field: "idNo",
     }, {
-        title: "分成比例",
-        field: "divRate"
-    }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -144,14 +141,5 @@ $(function() {
         window.location.href = "quantity_check.html?userId=" + selRecords[0].userId;
 
     });
-    //修改分成比例
-    $('#rateBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "quantity_rate.html?userId=" + selRecords[0].userId;
 
-    });
 });

@@ -69,10 +69,6 @@ $(function() {
             return sessionStorage.getItem('loginName');
         }
     }, {
-        title: "分成比例",
-        field: "divRate",
-        readonly: view
-    }, {
         title: "备注",
         field: "remark",
         maxlength: 255,

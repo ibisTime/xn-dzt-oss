@@ -15,13 +15,7 @@ $(function() {
             if (data.type == 0) {
                 $("#price").parent().css("display", "none");
             }
-        },
-        // formatter: function(v, data) {
-        //     if (data.type == 0) {
-        //         $("#price").parent().css("display", "none");
-        //         return v;
-        //     }
-        // },
+        }
     }, {
         field: 'type',
         title: '工艺类型',
@@ -32,8 +26,6 @@ $(function() {
         title: "工艺名称",
         field: "name",
         maxlength: 255,
-        // hidden: true,
-        // value: "工艺名称",
         required: true
     }, {
         title: "工艺费",
@@ -45,7 +37,8 @@ $(function() {
         title: "工艺图片",
         field: "pic",
         type: "img",
-        required: true
+        required: true,
+        single: true
     }, {
         title: "备注",
         field: "remark",

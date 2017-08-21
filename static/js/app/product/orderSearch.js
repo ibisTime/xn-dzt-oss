@@ -17,9 +17,11 @@ $(function() {
         title: "订单状态",
         field: "status",
         type: "select",
-        key: "order_status",
-        search: true,
-        formatter: Dict.getNameForList("order_status")
+        data: {
+            "10": "已归档",
+            "11": "取消订单"
+        },
+        search: true
     }, {
         field: 'applyName',
         title: '下单用户',
@@ -52,6 +54,7 @@ $(function() {
     buildList({
         router: 'orderSearch',
         columns: columns,
-        pageCode: '620230'
+        pageCode: '620230',
+        searchParams: { statusList: ["10", "11"] }
     });
 });

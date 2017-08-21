@@ -1,6 +1,7 @@
 $(function() {
     var allData = {};
     var code = getQueryString('code');
+    var type = getQueryString('type');
     var productSpecsList;
     var modelCode;
     reqApi({
@@ -12,10 +13,11 @@ $(function() {
             modelCode = data.productList[0].modelCode;
             if (data.productList[0].productSpecsList &&
                 data.productList[0].productSpecsList.length) {
+                productList = data.productList[0];
                 productSpecsList = data.productList[0].productSpecsList;
                 var v51 = 0;
                 data.productList[0].productSpecsList.forEach(function(v, i) {
-                    if (v.parentCode == "5-1") {
+                    if (v.type == "5-1") {
                         v51 = 1;
                     }
                 });
@@ -31,129 +33,211 @@ $(function() {
                     $("#5-3 .param").removeClass("act");
                     $("#5-4 .param").removeClass("act");
                 }
-
             }
-
         }
-        // if (data.productList && data.productList.length &&
-        //     data.productList[0].productSpecsList &&
-        //     data.productList[0].productSpecsList.length) {
-        //     productSpecsList = data.productList[0].productSpecsList;
 
-        // }
 
     });
 
-
-
-    var ids = ["1-1", "1-3", "1-4", "1-5",
-        "1-6", "1-7", "1-8", "1-9", "1-10",
-        "1-11", "3-1", "3-5", "3-6", "3-7",
-        "3-8", '4-1', "4-2", "4-3", "4-4", "4-5",
-        "5-2", "5-3", "5-4", '4-6', '4-7', '4-8'
-    ];
-    var ids1 = [{
-        id: "1-2-1",
-        type: "80支棉"
-    }, {
-        id: "1-2-2",
-        type: "100支棉"
-    }, {
-        id: "1-2-3",
-        type: "棉真丝"
-    }, {
-        id: "1-2-4",
-        type: "棉弹力"
-    }];
+    var ids = ["4-1", "4-5", "4-6", "4-7", "4-8", "5-2"];
+    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "5-3", "5-4"];
     var param = {};
+    var codeList = {};
+    var globalDicts = {};
+    var fabricYarns = []; //纱支
+
+    var materials = {};
+    var technologys = {};
 
     getInfo();
 
     function getInfo() {
-        reqApi({
-            code: "620057",
-            json: { modelCode }
-        }).then(function(data) {
-            getData(data);
+        $.when(
+            reqApi({
+                code: "805906",
+                json: {}
+            }),
+            reqApi({
+                code: "620012",
+                json: {}
+            }),
+            reqApi({
+                code: "620032",
+                json: {}
+            }),
+            reqApi({
+                code: "620052",
+                json: {}
+            })
+        ).then(function(data0, data1, data3, data4) {
+            getData(data0);
+            // 面料
+            var html = '',
+                html1 = '';
+            for (var i = 0; i < fabricYarns.length; i++) {
+                html += '<span class="fab_type ' + (i === 0 ? 'act' : '') + '" data-name="' + fabricYarns[i].dvalue + '" style="width:70px; min-width: 70px;" fab_price_level="' + fabricYarns[i].dkey + '">' + fabricYarns[i].dvalue + '</span>';
+
+                html1 += '<ul class="fab_type_list ' + (i === 0 ? 'act' : '') + '" id="' + fabricYarns[i].dkey + '"></ul>';
+            }
+            html1 += '<p class="cb"></p>';
+            $("#select_fabric_div").find('.item-tab .case').html(html);
+            $("#select_fabric_div").find('.shell-con').html(html1);
+            for (var i = 0; i < data3.length; i++) {
+                var item = data3[i];
+                if (!materials[item.modelCode]) {
+                    materials[item.modelCode] = {};
+                }
+                if (!materials[item.modelCode][item.yarn]) {
+                    materials[item.modelCode][item.yarn] = [];
+                }
+                materials[item.modelCode][item.yarn].push(item);
+            }
+            // 工艺
+            for (var i = 0; i < data4.length; i++) {
+                var item = data4[i];
+                if (!technologys[item.modelCode]) {
+                    technologys[item.modelCode] = {};
+                }
+                if (!technologys[item.modelCode][item.type]) {
+                    technologys[item.modelCode][item.type] = [];
+                }
+                technologys[item.modelCode][item.type].push(item);
+            }
+            createPage2();
+            // 型号
+            var html = '';
+            for (var i = 0; i < data1.length; i++) {
+                html += '<option value="' + data1[i].code + '">' + data1[i].name + '</option>';
+            }
+            $("#1-1").html(html).trigger('change');
+            chosen();
+            if (modelCode) {
+                $("#1_1_chosen").remove();
+                $("#1-1").val(modelCode).trigger('change').css("visibility", "visible").prop('disabled', true);
+            }
+
+            if (productSpecsList) {
+                initData();
+            }
         });
         addListeners();
     }
 
     function getData(arr) {
         for (var i = 0; i < arr.length; i++) {
-            var parentCode = arr[i].parentCode;
-            if (parentCode == "1-2") {
-                parentCode = arr[i].type;
+            var dkey = arr[i].dkey;
+            var dvalue = arr[i].dvalue;
+            var parentKey = arr[i].parentKey;
+            if (parentKey === 'measure') {
+                if (!allData[dkey]) {
+                    allData[dkey] = [];
+                }
+                allData[dkey].push(arr[i]);
+            } else if (parentKey === '4-1') {
+                if (!globalDicts['4-1']) {
+                    globalDicts['4-1'] = [];
+                }
+                globalDicts['4-1'].push(arr[i]);
+            } else if (parentKey === '4-5') {
+                if (!globalDicts['4-5']) {
+                    globalDicts['4-5'] = [];
+                }
+                globalDicts['4-5'].push(arr[i]);
+            } else if (parentKey === '4-6') {
+                if (!globalDicts['4-6']) {
+                    globalDicts['4-6'] = [];
+                }
+                globalDicts['4-6'].push(arr[i]);
+            } else if (parentKey === '4-7') {
+                if (!globalDicts['4-7']) {
+                    globalDicts['4-7'] = [];
+                }
+                globalDicts['4-7'].push(arr[i]);
+            } else if (parentKey === '4-8') {
+                if (!globalDicts['4-8']) {
+                    globalDicts['4-8'] = [];
+                }
+                globalDicts['4-8'].push(arr[i]);
+            } else if (parentKey === '5-2') {
+                if (!globalDicts['5-2']) {
+                    globalDicts['5-2'] = [];
+                }
+                globalDicts['5-2'].push(arr[i]);
+            } else if (parentKey === 'fabric_yarn') {
+                fabricYarns.push(arr[i]);
             }
-            if (!allData[parentCode]) {
-                allData[parentCode] = [];
-            }
-            allData[parentCode].push(arr[i]);
         }
         createPage1();
-        caretePage2();
-        if (productSpecsList) {
-            initData();
-        }
     }
 
     function initData() {
         $.each(productSpecsList, function(index, spec) {
-            if (spec.parentCode == "1-2") {
+            if (spec.type == "1-2") {
                 $("#modal-chose").find(".fab_type[data-name=" + spec.type + "]").click()
                     .end().find("li[data-code=" + spec.code + "]").click();
-            } else if (spec.name) {
-                $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]").click();
-                // var ele = $("#" + spec.parentCode).find(".param[data-code=" + spec.code + "]");
-                // spec.pic && ele.find("img").attr("src", getImg(spec.pic));
-                // ele.click();
-
+            } else if (_findIndex(ids, spec.type) != -1) {
+                $("#" + spec.type).find(".param[data-code=" + spec.code + "]").click();
+            } else if (_findIndex(ids1, spec.type) != -1) {
+                $("#" + spec.type).find(".param[data-code=" + spec.code + "]").click();
             } else {
-                $("#" + spec.parentCode).val(spec.code);
+                $("#" + spec.type).val(spec.code);
             }
-        })
+        });
+    }
+
+    function _findIndex(data, value) {
+        return data.findIndex(function(item) {
+            return item == value;
+        });
     }
 
     function createPage1() {
-        for (var i = 0; i < ids.length; i++) {
-            createHtml(ids[i]);
+        for (var key in allData) {
+            var id = key.split("-").join('');
+            $("#" + id).html(allData[key][0].dvalue);
         }
     }
 
-    function caretePage2() {
-        for (var i = 0; i < ids1.length; i++) {
-            createModelHtml(ids1[i]);
+    function createModelAndTechHtml(maters, techs) {
+        var _warp = $("#select_fabric_div");
+        if (!maters || !techs) {
+            $("#fTab1").hide();
+            return;
         }
-    }
-
-    function createModelHtml(option) {
-        var data = allData[option.type];
-        var html = "";
-        for (var i = 0; i < data.length; i++) {
-            html += '<li data-code="' + data[i].code + '" data-name="' + data[i].name + '" data-type="' + data[i].type + '" class="one_fab">' +
-                '<img src="' + getImg(data[i].pic) + '"><br>' + data[i].name +
-                '</li>';
-        }
-        $("#" + option.id).html(html);
-    }
-
-    function createHtml(id) {
-        var data = allData[id];
-        if (data) {
-            if (data[0].pic) {
-                createImgHtmls(id, data);
-            } else if (id == "1-8") {
-                if (data[0].code > data[1].code) {
-                    var temp = data[0];
-                    data[0] = data[1];
-                    data[1] = temp;
-                }
-                createCheckHtml(id, data);
+        for (var i = 0; i < fabricYarns.length; i++) {
+            var html = "";
+            var _dict = fabricYarns[i];
+            var data = maters[_dict.dkey];
+            if (!data) {
+                _warp.find("[fab_price_level=" + _dict.dkey + "]").hide();
+                $("#" + _dict.dkey).empty();
             } else {
-                createCheckHtml(id, data);
+                _warp.find("[fab_price_level=" + _dict.dkey + "]").show();
+                for (var j = 0; j < data.length; j++) {
+                    html += '<li data-code="' + data[j].code + '" data-name="' + data[j].code + '" data-type="' + data[j].type + '" class="one_fab">' +
+                        '<img src="' + getImg(data[j].pic) + '"><br>' + data[j].code +
+                        '</li>';
+                }
+                $("#" + _dict.dkey).html(html);
             }
         }
+        for (var i = 0; i < ids1.length; i++) {
+            var html = '';
+            var id = ids1[i];
+            var data = techs[id];
+            if (!data) {
+                $("#" + id).empty();
+            } else {
+                createImgHtmls(id, data);
+            }
+        }
+        $("#fTab1").show();
+    }
 
+    function createPage2() {
+        for (var i = 0; i < ids.length; i++) {
+            createCheckHtml(ids[i], globalDicts[ids[i]]);
+        }
     }
 
     function createImgHtmls(id, data) {
@@ -164,7 +248,11 @@ $(function() {
             if (i == 0) {
                 cls += " act";
                 cls0 += " show";
-                param[id] = data[i].code;
+                if (id.split("-")[0] == "1") {
+                    codeList[id] = data[i].code;
+                } else {
+                    param[id] = data[i].code;
+                }
             }
             html += '<div class="' + cls + '" data-code="' + data[i].code + '">' +
                 '<p><img src="' + getImg(data[i].pic) + '">' + '<span class = "' + cls0 + '"></span> ' + '</p>' + data[i].name +
@@ -180,16 +268,14 @@ $(function() {
             var cls = "param";
             if (i == 0) {
                 cls += " act";
-                param[id] = data[i].code;
+                param[id] = data[i].dkey;
             }
-            html += '<span class="' + cls + '" data-code="' + data[i].code + '">' + data[i].name + '</span>';
+            html += '<span class="' + cls + '" data-code="' + data[i].dkey + '">' + data[i].dvalue + '</span>';
         }
         $("#" + id).html(html);
     }
 
     function addListeners() {
-
-
         $(".cxradio").click(function() {
             var dataid = $(this).attr("data-id");
             if (dataid == '03') {
@@ -202,26 +288,27 @@ $(function() {
                 $("#5-4 .param").removeClass("act");
             }
         });
-
-
-
-        // 页面参数按钮点击
-        // $("#jsForm").on("click", ".param", function(e) {
-        //     var self = $(this);
-        //     self.addClass("act").find("span").addClass("show")
-        //         .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
-        //     id = self.closest(".case").attr("id");
-        //     param[id] = self.attr("data-code");
-        // });
+        // 型号change事件
+        $("#1-1").on('change', function() {
+            var _value = $(this).val();
+            createModelAndTechHtml(materials[_value], technologys[_value]);
+            codeList['1-1'] = _value;
+        });
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
+
+            // if (衬衫订单 && 状态是已支付 || (h+订单 && 状态是未支付) || (h+订单 && 状态是已支付 && id.split("-")[0] != "1"))
             var self = $(this);
             self.addClass("act").find("span").addClass("show")
                 .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
             self.addClass("act").siblings(".act").removeClass("act");
 
             id = self.closest(".case").attr("id");
-            param[id] = self.attr("data-code");
+            if (id.split("-")[0] == "1") {
+                codeList[id] = self.attr("data-code");
+            } else {
+                param[id] = self.attr("data-code");
+            }
         });
         // 头部tab切换
         $("#navUl").on("click", "span", function() {
@@ -238,17 +325,16 @@ $(function() {
             $(".modalbg,.more-condition,.modal-chose").addClass("open");
         });
         // 面料tab切换
-        $(".fab_type").click(function() {
-            var v_idx = $(".fab_type").index(this);
+        $("#select_fabric_div").on("click", ".fab_type", function() {
+            var fab_price_level = $(this).attr('fab_price_level');
             $(".fab_type").removeClass("act");
             $(this).addClass("act");
 
             $(".fab_type_list.act").removeClass("act");
-            $(".fab_type_list").eq(v_idx).addClass("act");
+            $("#" + fab_price_level).addClass("act");
 
         });
         // 面料选择
-
         $("#select_fabric_div").on("click", ".one_fab", function(e) {
             var self = $(this);
             var code = self.attr('data-code');
@@ -263,6 +349,7 @@ $(function() {
 
             $(".modalbg,.more-condition,.modal-chose").removeClass("open");
             $("#1-2").attr("data-code", code).attr("data-name", name);
+            codeList['1-2'] = code;
         });
         // 点击背景隐藏面料弹出框
         $(".modalbg").click(function() {
@@ -308,7 +395,25 @@ $(function() {
             goPage(0);
         });
         $("#to_pre_step_2").on("click", function() {
-            goPage(1);
+            if (type == "0") {
+                goPage(1);
+            } else if (type == "1") {
+                var data = {};
+                var _codelist = [];
+                for (var key in codeList) {
+                    _codelist.push(codeList[key]);
+                }
+                data.quantity = "1";
+                data.orderCode = code;
+                data.codeList = _codelist;
+                reqApi({
+                    code: "620205",
+                    json: data
+                }).then(function() {
+                    goPage(0);
+                })
+            }
+            // goPage(1);
         });
 
         $("#to_nex_step_4").on("click", function() {
@@ -433,16 +538,6 @@ $(function() {
                     maxlength: 5,
                     number: true
                 },
-                '6-2': {
-                    required: true,
-                    maxlength: 10,
-                    number: true
-                },
-                '6-3': {
-                    required: true,
-                    maxlength: 7,
-                    number: true
-                },
                 '6-4': {
                     required: true,
                     maxlength: 255,
@@ -475,13 +570,24 @@ $(function() {
                 var data3 = $('#form-tab3').serializeObject();
                 var data4 = $('#form-tab4').serializeObject();
                 var data5 = $('#form-tab5').serializeObject();
+                var map = $.extend(param, data2, data3, data4, data5);
 
-                param = $.extend(param, data2, data3, data4, data5);
+                var _codelist = [];
+                for (var key in codeList) {
+                    _codelist.push(codeList[key]);
+                };
+                for (var key in param) {
+                    if (key == "5-3" || key == "5-4") {
+                        _codelist.push(param[key]);
+                    }
+                };
+
                 data['orderCode'] = code;
-                data['map'] = param;
+                data['map'] = map;
+                data['codeList'] = _codelist
 
                 reqApi({
-                    code: "620205",
+                    code: "620207",
                     json: data
                 }).done(function() {
                     sucDetail();

@@ -18,6 +18,9 @@ $(function() {
         search: true,
         visible: false
     }, {
+        title: "联系方式",
+        field: "applyMobile"
+    }, {
         title: "订单状态",
         field: "status",
         type: "select",
@@ -30,13 +33,11 @@ $(function() {
             "5": "待生产",
             "6": "生产中",
             "7": "已发货",
-            "9": '已取消'
+            "9": "已评价",
+            "10": "已归档"
         },
         formatter: Dict.getNameForList("order_status"),
         search: true
-    }, {
-        title: "联系方式",
-        field: "applyMobile"
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
@@ -65,7 +66,7 @@ $(function() {
         columns: columns,
         pageCode: '620230',
         searchParams: {
-            statusList: ["1", "2", "3", "4", "5", "6", "7", "9"]
+            statusList: ["1", "2", "3", "4", "5", "6", "7", "9", "10"]
         },
         //派单
         beforeEdit: function(data) {
@@ -115,11 +116,11 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        if (selRecords[0].status != 3) {
-            toastr.info("不是可以数据录入的状态");
-            return;
-        }
-        window.location.href = 'order_shuju.html?code=' + selRecords[0].code;
+        // if (selRecords[0].status != 3) {
+        //     toastr.info("不是可以数据录入的状态");
+        //     return;
+        // }
+        window.location.href = 'order_shuju.html?code=' + selRecords[0].code + "&type=" + selRecords[0].type;
     });
     //提交复核
     $("#tijiaoBtn").click(function() {
@@ -206,11 +207,11 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        if (selRecords[0].status != 9) {
+        if (selRecords[0].status == 9) {
             confirm("确定归档？").then(function() {
                 reqApi({
-                    code: ' ',
-                    json: { "code": selRecords[0].code }
+                    code: '620215',
+                    json: { "orderCode": selRecords[0].code, remark: "归档" }
                 }).then(function() {
                     toastr.info("操作成功");
                     $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });

@@ -28,13 +28,13 @@ $(function() {
         field: "type",
         type: "select",
         key: "fabric_type",
+        required: true,
         readonly: view
     }, {
         title: "广告图",
         field: "advPic",
         type: "img",
-        single: true,
-        required: view,
+        required: true,
         readonly: view
     }, {
         field: 'pic',
@@ -78,14 +78,16 @@ $(function() {
         required: true,
         readonly: view
     }, {
-        title: "重量(g)",
-        field: "weight",
-        maxlength: 255,
+        title: "纱支",
+        field: "yarn",
+        type: "select",
+        key: "fabric_yarn",
         required: true,
         readonly: view
     }, {
-        title: "纱支",
-        field: "yarn",
+        title: "重量(g)",
+        field: "weight",
+        maxlength: 255,
         required: true,
         readonly: view
     }, {

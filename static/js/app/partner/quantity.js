@@ -29,9 +29,6 @@ $(function() {
         title: "身份证号",
         field: "idNo",
     }, {
-        title: "分成比例",
-        field: "divRate"
-    }, {
         title: "状态",
         field: "status",
         type: "select",

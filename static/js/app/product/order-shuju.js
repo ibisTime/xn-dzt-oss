@@ -39,7 +39,7 @@ $(function() {
 
     });
 
-    var ids = ["4-1", "4-5", "4-6", "4-7", "4-8", "5-2"];
+    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12', "5-2"];
     var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "5-3", "5-4"];
     var param = {};
     var codeList = {};
@@ -55,19 +55,19 @@ $(function() {
         $.when(
             reqApi({
                 code: "805906",
-                json: {}
+                json: { updater: "" }
             }),
             reqApi({
                 code: "620012",
-                json: {}
+                json: { updater: "" }
             }),
             reqApi({
                 code: "620032",
-                json: {}
+                json: { updater: "" }
             }),
             reqApi({
                 code: "620052",
-                json: {}
+                json: { updater: "" }
             })
         ).then(function(data0, data1, data3, data4) {
             getData(data0);
@@ -148,6 +148,21 @@ $(function() {
                     globalDicts['4-6'] = [];
                 }
                 globalDicts['4-6'].push(arr[i]);
+            } else if (parentKey === '4-2') {
+                if (!globalDicts['4-2']) {
+                    globalDicts['4-2'] = [];
+                }
+                globalDicts['4-2'].push(arr[i]);
+            } else if (parentKey === '4-3') {
+                if (!globalDicts['4-3']) {
+                    globalDicts['4-3'] = [];
+                }
+                globalDicts['4-3'].push(arr[i]);
+            } else if (parentKey === '4-4') {
+                if (!globalDicts['4-4']) {
+                    globalDicts['4-4'] = [];
+                }
+                globalDicts['4-4'].push(arr[i]);
             } else if (parentKey === '4-7') {
                 if (!globalDicts['4-7']) {
                     globalDicts['4-7'] = [];
@@ -158,6 +173,26 @@ $(function() {
                     globalDicts['4-8'] = [];
                 }
                 globalDicts['4-8'].push(arr[i]);
+            } else if (parentKey === '4-9') {
+                if (!globalDicts['4-9']) {
+                    globalDicts['4-9'] = [];
+                }
+                globalDicts['4-9'].push(arr[i]);
+            } else if (parentKey === '4-10') {
+                if (!globalDicts['4-10']) {
+                    globalDicts['4-10'] = [];
+                }
+                globalDicts['4-10'].push(arr[i]);
+            } else if (parentKey === '4-11') {
+                if (!globalDicts['4-11']) {
+                    globalDicts['4-11'] = [];
+                }
+                globalDicts['4-11'].push(arr[i]);
+            } else if (parentKey === '4-12') {
+                if (!globalDicts['4-12']) {
+                    globalDicts['4-12'] = [];
+                }
+                globalDicts['4-12'].push(arr[i]);
             } else if (parentKey === '5-2') {
                 if (!globalDicts['5-2']) {
                     globalDicts['5-2'] = [];
@@ -395,25 +430,7 @@ $(function() {
             goPage(0);
         });
         $("#to_pre_step_2").on("click", function() {
-            if (type == "0") {
-                goPage(1);
-            } else if (type == "1") {
-                var data = {};
-                var _codelist = [];
-                for (var key in codeList) {
-                    _codelist.push(codeList[key]);
-                }
-                data.quantity = "1";
-                data.orderCode = code;
-                data.codeList = _codelist;
-                reqApi({
-                    code: "620205",
-                    json: data
-                }).then(function() {
-                    goPage(0);
-                })
-            }
-            // goPage(1);
+            goPage(1);
         });
 
         $("#to_nex_step_4").on("click", function() {
@@ -427,96 +444,91 @@ $(function() {
             'rules': {
                 '2-1': {
                     required: true,
-                    max: 60,
-                    min: 30
+
                 },
-                // '2-11': {
-                //     required: true
-                // },
+                '2-11': {
+                    required: true
+                },
                 '2-2': {
-                    required: true,
-                    max: 180,
-                    min: 60
+                    required: true
                 },
-                // '2-12': {
-                //     required: true
-                // },
+                '2-12': {
+                    required: true
+                },
                 '2-3': {
-                    required: true,
-                    max: 170,
-                    min: 50
+                    required: true
                 },
-                // '2-13': {
-                //     required: true
-                // },
+                '2-13': {
+                    required: true
+                },
                 '2-4': {
-                    required: true,
-                    max: 170,
-                    min: 50
+                    required: true
                 },
-                // '2-14': {
-                //     required: true
-                // },
+                '2-14': {
+                    required: true
+                },
                 '2-5': {
-                    required: true,
-                    max: 70,
-                    min: 35
+                    required: true
                 },
-                // '2-15': {
-                //     required: true
-                // },
+                '2-15': {
+                    required: true
+                },
                 '2-6': {
-                    required: true,
-                    max: 90,
-                    min: 50
+                    required: true
                 },
-                // '2-16': {
-                //     required: true
-                // },
+                '2-16': {
+                    required: true
+                },
                 '2-7': {
-                    required: true,
-                    max: 80,
-                    min: 15
+                    required: true
                 },
-                // '2-17': {
-                //     required: true
-                // },
+                '2-17': {
+                    required: true
+                },
                 '2-8': {
-                    required: true,
-                    max: 65,
-                    min: 20
+                    required: true
                 },
-                // '2-18': {
-                //     required: true
-                // },
+                '2-18': {
+                    required: true
+                },
                 '2-9': {
-                    required: true,
-                    max: 30,
-                    min: 15
+                    required: true
                 },
-                // '2-10': {
-                //     required: true
-                // },
+                '2-10': {
+                    required: true
+                },
+                '2-19': {
+                    required: true
+                },
+                '2-20': {
+                    required: true
+                },
+                '2-21': {
+                    required: true
+                },
+                '2-22': {
+                    required: true
+                },
+                '2-23': {
+                    required: true
+                },
+                '2-24': {
+                    required: true
+                },
             }
         });
 
         $("#form-tab3").validate({
             'rules': {
                 '4-3': {
-                    min: 10,
-                    max: 100,
                     number: true,
                     // required: true
                 },
                 '4-4': {
-                    min: 15,
-                    max: 70,
                     number: true,
                     // required: true
                 },
                 '4-2': {
-                    min: 10,
-                    max: 100,
                     number: true,
                     // required: true
                 }
@@ -597,39 +609,6 @@ $(function() {
         });
     }
 
-    function createDimeByRules() {
-        var dataCode = $("input[type='radio']:checked").attr("data-code");
-        var val26 = $(".param_26").val()
-        var val27 = $(".param_27").val();
-        var val28 = $(".param_28").val();
-        // var val29 = $(".param_29").val();
-        var val30 = $(".param_30").val();
-        var val31 = $(".param_31").val();
-        var val32 = $(".param_32").val();
-        var val33 = $(".param_33").val();
-        var val34 = $(".param_34").val();
-        if (dataCode == "01") {
-            $(".param_26_zoom").val(parseFloat(val26).toFixed(2));
-            $(".param_27_zoom").val(parseFloat(val27 * 1.1).toFixed(2));
-            $(".param_28_zoom").val(parseFloat(val28 * 1.1).toFixed(2));
-            $(".param_29_zoom").val(parseFloat(val27 * 1.1 - 2).toFixed(2))
-            $(".param_30_zoom").val(parseFloat(val30).toFixed(2));
-            $(".param_31_zoom").val(parseFloat(val31).toFixed(2));
-            $(".param_32_zoom").val(parseFloat(val32).toFixed(2));
-            $(".param_33_zoom").val(parseFloat(val33 * 1 + 9).toFixed(2));
-            $(".param_34_zoom").val(parseFloat(val34 * 1 + 6).toFixed(2));
-        } else {
-            $(".param_26_zoom").val(parseFloat(val26).toFixed(2));
-            $(".param_27_zoom").val(parseFloat(val27 * 1.08).toFixed(2));
-            $(".param_28_zoom").val(parseFloat(val28 * 1.07).toFixed(2));
-            $(".param_29_zoom").val(parseFloat(val27 * 1.08 - 4).toFixed(2));
-            $(".param_30_zoom").val(parseFloat(val30).toFixed(2));
-            $(".param_31_zoom").val(parseFloat(val31).toFixed(2));
-            $(".param_32_zoom").val(parseFloat(val32).toFixed(2));
-            $(".param_33_zoom").val(parseFloat(val33 * 1 + 7).toFixed(2));
-            $(".param_34_zoom").val(parseFloat(val34 * 1 + 5).toFixed(2));
-        }
-    }
 
     function goPage(index) {
         $("#navUl").find("span:eq(" + index + ")").addClass("act")

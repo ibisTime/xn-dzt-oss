@@ -1,17 +1,17 @@
 $(function() {
     var code = getQueryString('code');
-    // var province;
-    // var city;
-    // var area;
-    // reqApi({
-    //     code: "805056",
-    //     json: { userId: sessionStorage.getItem('userId') },
-    //     sync: true
-    // }).then(function(data) {
-    //     province = data.userExt.province;
-    //     city = data.userExt.city;
-    //     area = data.userExt.area;
-    // });
+    var province;
+    var city;
+    var area;
+    reqApi({
+        code: "805121",
+        json: { userId: sessionStorage.getItem('userId') },
+        sync: true
+    }).then(function(data) {
+        province = data.province;
+        city = data.city;
+        area = data.area;
+    });
 
     var fields = [{
             title: '订单号',
@@ -58,49 +58,23 @@ $(function() {
             title: "量体嘱咐",
             field: "applyNote",
             readonly: true
-        },
-        //  {
-        //     title: "选择量体师",
-        //     type: "citySelect",
-        //     required: true,
-        //     onChange: function(v, r) {
-        //         var province = $("#province").val();
-        //         var city = $("#city").val();
-        //         var area = $("#area").val();
-
-        //         $('#ltUser').renderDropdown({
-        //             listCode: '001403',
-        //             keyName: 'userId',
-        //             valueName: '{{realName.DATA}}--{{mobile.DATA}}',
-        //             searchName: "mobile",
-        //             params: {
-        //                 kind: "f2",
-        //                 province: province,
-        //                 city: city,
-        //                 area: area,
-        //                 //status: '0',
-        //                 userRefere: sessionStorage.getItem('userId'),
-        //                 updater: ''
-        //             }
-        //         });
-        //     }
-        // },
-        {
+        }, {
             title: "选择量体师",
             field: 'ltUser',
             type: 'select',
-            listCode: '001403',
+            pageCode: '805120',
             keyName: 'userId',
             valueName: '{{realName.DATA}}--{{mobile.DATA}}',
             searchName: "mobile",
             params: {
-                kind: "f2",
-                // province: province,
-                // city: city,
-                // area: area,
+                kind: "B",
+                province: province,
+                city: city,
+                area: area,
                 status: '0',
                 userReferee: sessionStorage.getItem('userId'),
-                updater: ''
+                updater: '',
+
             },
             required: true
         }
@@ -109,7 +83,7 @@ $(function() {
     var options = {
         fields: fields,
         code: code,
-        detailCode: '620221'
+        detailCode: '620231'
     };
 
     options.buttons = [{

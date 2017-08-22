@@ -120,7 +120,7 @@ $(function() {
         field: 'applyUser',
         title: '申请人',
         formatter: function(v, data) {
-            if (data.user.kind == '01') {
+            if (data.user.kind == 'P') {
                 return data.user.loginName;
             } else {
                 return data.user.mobile;

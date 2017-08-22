@@ -41,10 +41,6 @@ $(function() {
             title: "量体嘱咐",
             field: "applyNote",
             readonly: true
-        }, {
-            title: "备注",
-            field: "remark",
-            maxlength: 255
         }
     ];
 

@@ -46,17 +46,21 @@ $(function() {
     }];
     buildList({
         columns: columns,
-        pageCode: '620220',
+        pageCode: '620230',
         searchParams: {
             ltUser: userId
         }
     });
-    $("#addBtn").remove();
-    $("#edit2Btn").remove();
-    $("#rockBtn").remove();
-    $("#activeBtn").remove();
-    $("#achieveBtn").remove();
-    $("#accountBtn").remove();
-    $("#ledgerBtn").remove();
-
+    $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li><li style="display:block;" id="detailBtn"><span><img src="/static/images/t01.png"></span>详情</li>');
+    $('#backBtn').on('click', function() {
+        window.location.href = "quantity.html";
+    });
+    $('#detailBtn').on('click', function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        window.location.href = '../product/orderSearch_addedit.html?code=' + selRecords[0].code;
+    });
 });

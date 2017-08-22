@@ -9,6 +9,13 @@ $(function() {
         field: "code",
         search: true
     }, {
+        field: 'applyName',
+        title: '下单用户',
+        search: true
+    }, {
+        title: "联系方式",
+        field: "applyMobile"
+    }, {
         title: '量体师',
         field: "ltName",
         search: true,
@@ -22,13 +29,6 @@ $(function() {
             "11": "取消订单"
         },
         search: true
-    }, {
-        field: 'applyName',
-        title: '下单用户',
-        search: true
-    }, {
-        title: "联系方式",
-        field: "applyMobile"
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',

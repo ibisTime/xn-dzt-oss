@@ -21,6 +21,7 @@ $(function() {
             "5": "待生产",
             "6": "生产中",
             "7": "已发货",
+            "8": "已收货",
             "9": '已取消'
         },
         formatter: Dict.getNameForList("order_status"),
@@ -65,15 +66,17 @@ $(function() {
     buildList({
         router: 'order',
         columns: columns,
-        pageCode: '620220',
+        pageCode: '620230',
         searchParams: {
             toUser: sessionStorage.getItem('userId'),
-            statusList: ["1", "2", "3", "4", "5", "6", "7", "9"]
+            statusList: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+            companyCode: OSS.companyCode
+        },
+        beforeDetail: function(data) {
+            window.location.href = '../product/orderSearch_addedit.html?code=' + data.code;
         }
     });
-    $("#rePurchaseBtn").click(function() {
-        window.location.href = 'order_rePurchase.html';
-    });
+    //派单
     $("#edit2Btn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -87,7 +90,7 @@ $(function() {
         window.location.href = 'order_dispatch.html?code=' + selRecords[0].code;
     });
 
-
+    //复核
     $("#tijiaoBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -98,15 +101,7 @@ $(function() {
             toastr.info("不是可以复核的状态");
             return;
         }
-        window.location.href = 'order_tijiao.html?code=' + selRecords[0].code;
+        window.location.href = '../product/order_partnerCheck.html?code=' + selRecords[0].code;
     });
-    $("#detaBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
 
-        window.location.href = 'orderSearch_addedit.html?code=' + selRecords[0].code;
-    });
 });

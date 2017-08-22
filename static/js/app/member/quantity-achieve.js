@@ -44,7 +44,7 @@ $(function() {
     }];
     buildList({
         columns: columns,
-        pageCode: '620220',
+        pageCode: '620230',
         searchParams: {
             ltUser: userId
         }

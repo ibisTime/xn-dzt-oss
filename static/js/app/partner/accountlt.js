@@ -42,13 +42,10 @@ $(function() {
         }
     });
 
-    $('#addBtn').remove();
-    $("#edit2Btn").remove();
-    $('#rockBtn').remove();
-    $('#activeBtn').remove();
-    $('#achieveBtn').remove();
-    $('#accountBtn').remove();
-    $('#orderBtn').remove();
+    $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+    $('#backBtn').on('click', function() {
+        goBack();
+    });
     $('#ledgerBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {

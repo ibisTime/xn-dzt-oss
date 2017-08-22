@@ -31,7 +31,7 @@ $(function() {
         field: 'applyUser',
         title: '申请人',
         formatter: function(v, data) {
-            if (data.user.kind == '01') {
+            if (data.user.kind == 'P') {
                 return data.user.loginName;
             } else {
                 return data.user.mobile;
@@ -46,7 +46,7 @@ $(function() {
         type: 'date',
         field2: 'applyDateEnd',
         search: true,
-        twoDate:true
+        twoDate: true
     }, {
         field: 'status',
         title: '状态',
@@ -54,10 +54,10 @@ $(function() {
         key: 'withdraw_status',
         formatter: Dict.getNameForList('withdraw_status'),
         search: true
-    },  {
+    }, {
         field: 'approveUser',
         title: '审核人'
-    },{
+    }, {
         field: 'approveDatetime',
         title: '审核日期',
         formatter: dateTimeFormat,
@@ -66,8 +66,8 @@ $(function() {
         type: 'date',
         field2: 'approveDateEnd',
         search: true,
-        twoDate:true
-    },{
+        twoDate: true
+    }, {
         field: 'payUser',
         title: '回录人',
         formatter: function(v, data) {

@@ -33,6 +33,7 @@ $(function() {
             "5": "待生产",
             "6": "生产中",
             "7": "已发货",
+            "8": "已收货",
             "9": "已评价",
             "10": "已归档"
         },
@@ -59,6 +60,9 @@ $(function() {
     }, {
         title: "量体嘱咐",
         field: 'applyNote'
+    }, {
+        title: "备注",
+        field: "remark"
     }];
 
     buildList({
@@ -66,7 +70,7 @@ $(function() {
         columns: columns,
         pageCode: '620230',
         searchParams: {
-            statusList: ["1", "2", "3", "4", "5", "6", "7", "9", "10"]
+            statusList: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
         },
         //派单
         beforeEdit: function(data) {
@@ -116,10 +120,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        // if (selRecords[0].status != 3) {
-        //     toastr.info("不是可以数据录入的状态");
-        //     return;
-        // }
+
         window.location.href = 'order_shuju.html?code=' + selRecords[0].code + "&type=" + selRecords[0].type;
     });
     //提交复核
@@ -188,17 +189,64 @@ $(function() {
         window.location.href = 'order_receiveProduct.html?code=' + selRecords[0].code;
     });
     //取消订单
-    $("#calcelBtn").click(function() {
+    // $("#calcelBtn").click(function() {
+    //     var selRecords = $('#tableList').bootstrapTable('getSelections');
+    //     if (selRecords.length <= 0) {
+    //         toastr.info("请选择记录");
+    //         return;
+    //     }
+    //     if (selRecords[0].status == 8 || selRecords[0].status == 9) {
+    //         toastr.info("不是可以取消订单状态");
+    //         return;
+    //     }
+    //     window.location.href = 'order_cancel.html?code=' + selRecords[0].code;
+    // });
+    //取消
+    $('#calcelBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
         if (selRecords[0].status == 8 || selRecords[0].status == 9) {
-            toastr.info("不是可以取消订单状态");
+            toastr.info("不是可以取消订单的状态");
             return;
         }
-        window.location.href = 'order_cancel.html?code=' + selRecords[0].code;
+        var dw = dialog({
+            content: '<form class="pop-form" id="popForm" novalidate="novalidate">' +
+                '<ul class="form-info" id="formContainer"><li style="text-align:center;font-size: 15px;">取消订单</li></ul>' +
+                '</form>'
+        });
+        dw.showModal();
+        buildDetail({
+            fields: [{
+                field: 'remark',
+                title: '备注',
+                maxlength: 255
+            }],
+            container: $('#formContainer'),
+            buttons: [{
+                title: '确定',
+                handler: function() {
+                    var data = $('#popForm').serializeObject();
+                    data.orderCode = selRecords[0].code;
+                    data.remark = $("#remark").val();
+                    reqApi({
+                        code: "620216",
+                        json: data
+                    }).done(function() {
+                        sucList()
+                    });
+
+                }
+            }, {
+                title: '返回',
+                handler: function() {
+                    dw.close().remove();
+                }
+            }]
+        });
+        dw.__center();
     });
     //归档
     $('#guidangBtn').click(function() {
@@ -231,6 +279,6 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = 'orderSearch_addedit.html?code=' + selRecords[0].code;
+        window.location.href = 'orderSearch_addedit.html?v=1&code=' + selRecords[0].code;
     });
 });

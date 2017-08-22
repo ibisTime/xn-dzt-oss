@@ -47,10 +47,14 @@ $(function() {
     buildList({
         router: 'orderSearch',
         columns: columns,
-        pageCode: '620220',
+        pageCode: '620230',
         searchParams: {
             ltUser: sessionStorage.getItem('userId'),
-            // status: "8"
+            companyCode: OSS.companyCode,
+            statusList: ["10", "11"]
+        },
+        beforeDetail: function(data) {
+            window.location.href = '../product/orderSearch_addedit.html?code=' + data.code;
         }
     });
 });

@@ -53,41 +53,19 @@ $(function() {
         field: "remark"
     }];
     buildList({
-        // router: 'order',
+
         columns: columns,
-        pageCode: '620220',
+        pageCode: '620230',
         searchParams: {
             toUser: sessionStorage.getItem('userId'),
-            // status: "8"
+            companyCode: OSS.companyCode,
+            statusList: ["10", "11"]
+        },
+        beforeDetail: function(data) {
+            window.location.href = '../product/orderSearch_addedit.html?code=' + data.code;
         }
-    });
-    $("#rePurchaseBtn").click(function() {
-        window.location.href = 'order_rePurchase.html';
-    });
-    $("#edit2Btn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 1) {
-            toastr.info("不是可派单的状态");
-            return;
-        }
-        window.location.href = 'order_dispatch.html?code=' + selRecords[0].code;
+
     });
 
 
-    $("#tijiaoBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 4) {
-            toastr.info("不是可以复核的状态");
-            return;
-        }
-        window.location.href = 'order_tijiao.html?code=' + selRecords[0].code;
-    });
 });

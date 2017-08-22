@@ -31,7 +31,7 @@ $(function() {
         field: 'applyUser',
         title: '申请人',
         formatter: function(v, data) {
-            if (data.user.kind == '01') {
+            if (data.user.kind == 'P') {
                 return data.user.loginName;
             } else {
                 return data.user.mobile;
@@ -45,7 +45,7 @@ $(function() {
         title1: '申请日期',
         type: 'date',
         field2: 'applyDateEnd',
-        twoDate:true,
+        twoDate: true,
         search: true
     }, {
         field: 'payUser',
@@ -54,12 +54,12 @@ $(function() {
         field: 'payDatetime',
         title: '审核日期',
         formatter: dateTimeFormat,
-         field1: 'payDateStart',
+        field1: 'payDateStart',
         title1: '审核日期',
         type: 'date',
         field2: 'payDateEnd',
         search: true,
-        twoDate:true
+        twoDate: true
     }, {
         field: 'status',
         title: '状态',

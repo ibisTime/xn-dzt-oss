@@ -44,6 +44,9 @@ $(function() {
         field: "modelCode",
         type: "select",
         listCode: "620012",
+        params: {
+            updater: ""
+        },
         searchName: "name",
         valueName: "name",
         keyName: "code",

@@ -1127,7 +1127,7 @@ function buildDetail(options) {
         }
         var imgLabel = '';
         if (item.type == 'img') {
-            imgLabel = item.single ? '（单）': '（可多）';
+            imgLabel = item.single ? '（单）' : '（可多）';
         }
         if (item.type == 'title') {
             html += '<div ' + (item.field ? 'id="' + item.field + '"' : '') + ' style="' + (item.hidden ? 'display:none;' : '') + '" class="form-title">' + item.title + '</div>';
@@ -1878,7 +1878,8 @@ function buildDetail(options) {
                         $('#' + item.field).html(imgsHtml);
                         item.single && setImgDisabled($('#' + item.field));
                         $('#' + item.field).find('.zmdi-close-circle-o').on('click', function(e) {
-                            var el = $(this).parent().parent(), el_parent = el.parent();
+                            var el = $(this).parent().parent(),
+                                el_parent = el.parent();
                             el.remove();
                             el_parent[0].cfg.single && setImgDisabled(el_parent);
                             // $(this).parents("[data-src]").remove();
@@ -2127,6 +2128,7 @@ function setImgDisabled(el) {
         el.prev().find('input').prop('disabled', false);
     }
 }
+
 function uploadInit() {
     // this 即 editor 对象
     var editor = this;

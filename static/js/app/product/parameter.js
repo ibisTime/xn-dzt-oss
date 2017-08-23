@@ -25,12 +25,23 @@ $(function() {
         formatter: Dict.getNameForList("craftwork_type"),
         search: true
     }, {
-        //     field: 'pic',
-        //     title: '图片',
-        //     formatter: function(v, data) {
-        //         return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
-        //     }
-        // }, {
+        title: "工艺名称",
+        field: "name",
+        maxlength: 255,
+        required: true
+    }, {
+        title: "工艺费",
+        field: "price",
+        amount: true,
+        formatter: moneyFormat,
+        required: true
+    }, {
+        field: 'pic',
+        title: '图片',
+        formatter: function(v, data) {
+            return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
+        }
+    }, {
         title: "状态",
         field: "status",
         type: "select",

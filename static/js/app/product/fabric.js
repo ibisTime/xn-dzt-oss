@@ -55,6 +55,7 @@ $(function() {
         field: "yarn",
         type: "select",
         key: "fabric_yarn",
+        formatter: Dict.getNameForList("fabric_yarn")
     }, {
         //     field: 'pic',
         //     title: '图片',

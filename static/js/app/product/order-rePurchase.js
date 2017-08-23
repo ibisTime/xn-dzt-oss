@@ -1,22 +1,19 @@
 $(function() {
     var code = getQueryString('code');
 
-
     var fields = [{
         field: 'applyUser',
         title: '下单人编号',
         type: 'select',
-        listCode: '805120',
+        pageCode: '805120',
         params: {
             kind: "C",
             status: "0",
             updater: "",
-            limit: 10,
-            start: 0
         },
         keyName: 'userId',
-        valueName: '{{mobile.DATA}}--{{nickname.DATA}}',
-        searchName: 'mobile',
+        valueName: '{{nickname.DATA}}--{{mobile.DATA}}',
+        searchName: 'nickname',
         required: true
     }];
 

@@ -6,10 +6,7 @@ $(function() {
         title: "类型",
         field: "type",
         type: "select",
-        data: {
-            "0": "衬衫",
-            "1": "H+产品"
-        },
+        key: "chanpin_type",
         required: true,
         onChange: function(v, data) {
             if (v == 1) {

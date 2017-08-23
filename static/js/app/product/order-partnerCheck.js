@@ -166,8 +166,8 @@ $(function() {
 
     });
 
-    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12', "5-2"];
-    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "5-3", "5-4"];
+    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
+    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "5-2", "5-3", "5-4"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -320,11 +320,6 @@ $(function() {
                     globalDicts['4-12'] = [];
                 }
                 globalDicts['4-12'].push(arr[i]);
-            } else if (parentKey === '5-2') {
-                if (!globalDicts['5-2']) {
-                    globalDicts['5-2'] = [];
-                }
-                globalDicts['5-2'].push(arr[i]);
             } else if (parentKey === 'fabric_yarn') {
                 fabricYarns.push(arr[i]);
             }

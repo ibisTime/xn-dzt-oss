@@ -40,6 +40,12 @@ $(function() {
         required: true,
         single: true
     }, {
+        title: "工艺选中图片",
+        field: "advPic",
+        type: "img",
+        required: true,
+        single: true
+    }, {
         title: "备注",
         field: "remark",
         maxlength: 255

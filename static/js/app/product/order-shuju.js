@@ -1,7 +1,6 @@
 $(function() {
     var allData = {};
     var code = getQueryString('code');
-    var type = getQueryString('type');
     var productSpecsList;
     var modelCode;
     reqApi({
@@ -39,8 +38,8 @@ $(function() {
 
     });
 
-    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12', "5-2"];
-    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "5-3", "5-4"];
+    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
+    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "5-2", "5-3", "5-4"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -193,11 +192,6 @@ $(function() {
                     globalDicts['4-12'] = [];
                 }
                 globalDicts['4-12'].push(arr[i]);
-            } else if (parentKey === '5-2') {
-                if (!globalDicts['5-2']) {
-                    globalDicts['5-2'] = [];
-                }
-                globalDicts['5-2'].push(arr[i]);
             } else if (parentKey === 'fabric_yarn') {
                 fabricYarns.push(arr[i]);
             }
@@ -331,8 +325,6 @@ $(function() {
         });
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
-
-            // if (衬衫订单 && 状态是已支付 || (h+订单 && 状态是未支付) || (h+订单 && 状态是已支付 && id.split("-")[0] != "1"))
             var self = $(this);
             self.addClass("act").find("span").addClass("show")
                 .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
@@ -589,7 +581,7 @@ $(function() {
                     _codelist.push(codeList[key]);
                 };
                 for (var key in param) {
-                    if (key == "5-3" || key == "5-4") {
+                    if (key == "5-2" || key == "5-3" || key == "5-4") {
                         _codelist.push(param[key]);
                     }
                 };

@@ -166,8 +166,8 @@ $(function() {
 
     });
 
-    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12', "5-2"];
-    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "5-3", "5-4"];
+    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
+    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "5-2", "5-3", "5-4"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -320,11 +320,6 @@ $(function() {
                     globalDicts['4-12'] = [];
                 }
                 globalDicts['4-12'].push(arr[i]);
-            } else if (parentKey === '5-2') {
-                if (!globalDicts['5-2']) {
-                    globalDicts['5-2'] = [];
-                }
-                globalDicts['5-2'].push(arr[i]);
             } else if (parentKey === 'fabric_yarn') {
                 fabricYarns.push(arr[i]);
             }
@@ -346,7 +341,6 @@ $(function() {
             }
         });
         $("#jsForm").off("click");
-
     }
 
     function _findIndex(data, value) {
@@ -550,34 +544,30 @@ $(function() {
                 goPage(2);
             }
         });
-        $("#complete").on("click", function() {
-            if (validatePageYan()) {
-                createDimeByRules();
-            }
-        });
+
         $("#to_step_1").on("click", function() {
             goPage(0);
         });
         $("#to_pre_step_2").on("click", function() {
-            // if (type == "0") {
-            //     goPage(1);
-            // } else if (type == "1") {
-            //     var data = {};
-            //     var _codelist = [];
-            //     for (var key in codeList) {
-            //         _codelist.push(codeList[key]);
-            //     }
-            //     data.quantity = "1";
-            //     data.orderCode = code;
-            //     data.codeList = _codelist;
-            //     reqApi({
-            //         code: "620205",
-            //         json: data
-            //     }).then(function() {
-            //         goPage(0);
-            //     })
-            // }
-            goPage(1);
+            if (type == "0") {
+                goPage(1);
+            } else if (type == "1") {
+                var data = {};
+                var _codelist = [];
+                for (var key in codeList) {
+                    _codelist.push(codeList[key]);
+                }
+                data.quantity = "1";
+                data.orderCode = code;
+                data.codeList = _codelist;
+                reqApi({
+                    code: "620205",
+                    json: data
+                }).then(function() {
+                    goPage(0);
+                })
+            }
+            // goPage(1);
         });
 
         $("#to_nex_step_4").on("click", function() {
@@ -714,19 +704,7 @@ $(function() {
                 }
             }
         });
-        $("#to_pre_step_3").on("click", function() {
-            goPage(2);
-        });
 
-        $("#to_next_step_5").on("click", function() {
-            if (validatePage4()) {
-                goPage(4);
-            }
-        });
-
-        $("#to_pre_step_4").on("click", function() {
-            goPage(3);
-        });
         $("#submit").on("click", function() {
             if (validatePage5()) {
                 var data = {};
@@ -761,39 +739,7 @@ $(function() {
         });
     }
 
-    function createDimeByRules() {
-        var dataCode = $("input[type='radio']:checked").attr("data-code");
-        var val26 = $(".param_26").val()
-        var val27 = $(".param_27").val();
-        var val28 = $(".param_28").val();
-        // var val29 = $(".param_29").val();
-        var val30 = $(".param_30").val();
-        var val31 = $(".param_31").val();
-        var val32 = $(".param_32").val();
-        var val33 = $(".param_33").val();
-        var val34 = $(".param_34").val();
-        if (dataCode == "01") {
-            $(".param_26_zoom").val(parseFloat(val26).toFixed(2));
-            $(".param_27_zoom").val(parseFloat(val27 * 1.1).toFixed(2));
-            $(".param_28_zoom").val(parseFloat(val28 * 1.1).toFixed(2));
-            $(".param_29_zoom").val(parseFloat(val27 * 1.1 - 2).toFixed(2))
-            $(".param_30_zoom").val(parseFloat(val30).toFixed(2));
-            $(".param_31_zoom").val(parseFloat(val31).toFixed(2));
-            $(".param_32_zoom").val(parseFloat(val32).toFixed(2));
-            $(".param_33_zoom").val(parseFloat(val33 * 1 + 9).toFixed(2));
-            $(".param_34_zoom").val(parseFloat(val34 * 1 + 6).toFixed(2));
-        } else {
-            $(".param_26_zoom").val(parseFloat(val26).toFixed(2));
-            $(".param_27_zoom").val(parseFloat(val27 * 1.08).toFixed(2));
-            $(".param_28_zoom").val(parseFloat(val28 * 1.07).toFixed(2));
-            $(".param_29_zoom").val(parseFloat(val27 * 1.08 - 4).toFixed(2));
-            $(".param_30_zoom").val(parseFloat(val30).toFixed(2));
-            $(".param_31_zoom").val(parseFloat(val31).toFixed(2));
-            $(".param_32_zoom").val(parseFloat(val32).toFixed(2));
-            $(".param_33_zoom").val(parseFloat(val33 * 1 + 7).toFixed(2));
-            $(".param_34_zoom").val(parseFloat(val34 * 1 + 5).toFixed(2));
-        }
-    }
+
 
     function goPage(index) {
         $("#navUl").find("span:eq(" + index + ")").addClass("act")

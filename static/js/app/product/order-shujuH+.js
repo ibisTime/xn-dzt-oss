@@ -40,7 +40,7 @@ $(function() {
     });
 
     var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
-    var ids1 = ["1-1", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "5-2", "5-3", "5-4"];
+    var ids1 = ["1-1", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-11", "5-2", "5-3", "5-4"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -48,6 +48,8 @@ $(function() {
 
     var materials = {};
     var technologys = {};
+
+    var first = true;
 
     getInfo();
 
@@ -221,8 +223,9 @@ $(function() {
             } else {
                 $("#" + spec.type).val(spec.code);
             }
-
         });
+        first = false;
+        $(".cxradio").prop('disabled', true);
     }
 
     function _findIndex(data, value) {
@@ -337,6 +340,11 @@ $(function() {
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
             var self = $(this);
+            var id = self.closest('.case').attr('id');
+            var _type = id.split('-')[0];
+            if ((_type == '1' || _type == '5') && !first) {
+              return;
+            }
             self.addClass("act").find("span").addClass("show")
                 .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
             self.addClass("act").siblings(".act").removeClass("act");
@@ -359,9 +367,9 @@ $(function() {
                 .siblings(".act").removeClass("act");
         });
         // 点击选择面料按钮，弹出面料选择框
-        $("#btn_select_fab").click(function() {
-            $(".modalbg,.more-condition,.modal-chose").addClass("open");
-        });
+        // $("#btn_select_fab").click(function() {
+        //     $(".modalbg,.more-condition,.modal-chose").addClass("open");
+        // });
         // 面料tab切换
         $("#select_fabric_div").on("click", ".fab_type", function() {
             var fab_price_level = $(this).attr('fab_price_level');

@@ -29,7 +29,6 @@ $(function() {
         title: '渠道类型',
         type: 'select',
         key: 'channel_type',
-        // keyCode: '802006',
         formatter: Dict.getNameForList('channel_type'),
         readonly: true
     }, {
@@ -37,7 +36,6 @@ $(function() {
         title: '业务类型',
         type: 'select',
         key: 'biz_type',
-        // keyCode: '802006',
         formatter: Dict.getNameForList('biz_type'),
         readonly: true
     }, {

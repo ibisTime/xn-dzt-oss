@@ -25,6 +25,11 @@ $(function() {
         key: "fabric_type",
         formatter: Dict.getNameForList("fabric_type")
     }, {
+        title: "价格",
+        field: "price",
+        amount: true,
+        formatter: moneyFormat
+    }, {
         title: "色系",
         field: "color",
         type: "select",

@@ -12,10 +12,10 @@ $(function() {
 
     var fields = [{
         title: '关于我们',
-        field: 'remark',
+        field: 'cvalue',
         type: "textarea",
     }, {
-        field: 'cvalue',
+        field: 'remark',
         value: "关于我们",
         type: 'hidden'
     }, {

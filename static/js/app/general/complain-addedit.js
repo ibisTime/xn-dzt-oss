@@ -5,8 +5,17 @@ $(function() {
 
 
     var fields = [{
-        field: 'commenter',
+        field: 'commentMobile',
         title: '留言人',
+        formatter: function(v, data) {
+            if (v) {
+                return v
+            } else if (data.commentName) {
+                return data.commentName
+            } else {
+                return data.commenter
+            }
+        },
         readonly: true
     }, {
         field: "content",

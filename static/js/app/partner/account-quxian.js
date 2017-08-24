@@ -1,7 +1,7 @@
 $(function() {
     var code = getQueryString('code');
     var view = !!getQueryString('v');
-    // var userId = sessionStorage.getItem('userId');
+    var userId = sessionStorage.getItem('userId');
     var accountNumber;
     reqApi({
         code: "802503",

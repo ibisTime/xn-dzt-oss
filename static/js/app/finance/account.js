@@ -2,6 +2,7 @@ $(function() {
     var accountNumberCNY;
     var accountNumberJF;
     var accountNumberTG;
+    var accountNumberJYZ;
     reqApi({
         code: '802503',
         json: {
@@ -12,12 +13,14 @@ $(function() {
         accountNumberCNY = data[0].accountNumber;
         $("#amount-JF").text((data[1].amount / 1000).toFixed(2));
         accountNumberJF = data[1].accountNumber;
+        $("#amount-JYZ").text((data[2].amount / 1000).toFixed(2));
+        accountNumberJYZ = data[2].accountNumber;
     });
 
     reqApi({
         code: '802503',
         json: {
-            userId: OSS.SYS_USER+"_TG"
+            userId: OSS.SYS_USER + "_TG"
         }
     }).then(function(data) {
         $("#amount-TG").text("￥" + (data[0].amount / 1000).toFixed(2));
@@ -29,6 +32,9 @@ $(function() {
     })
     $("#JFls-Btn").click(function() {
         location.href = "ledger.html?accountNumber=" + accountNumberJF;
+    })
+    $("#JYZ-Btn").click(function() {
+        location.href = "ledger.html?accountNumber=" + accountNumberJYZ;
     })
     $("#accoutGrantBtn").click(function() {
         location.href = "ledger.html?accountNumber=" + accountNumberTG;

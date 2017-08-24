@@ -7,7 +7,7 @@ $(function() {
         checkbox: true
     }, {
         title: '针对内容',
-        field: 'topCode'
+        field: 'name'
     }, {
         field: 'content',
         title: '评论内容',
@@ -19,7 +19,6 @@ $(function() {
         data: {
             "D": "被过滤"
         }
-        // key: 'comment_status'
     }, {
         field: 'commerRealName',
         title: '评论人'

@@ -6,15 +6,14 @@ $(function() {
         field: 'applyUser',
         title: '下单人编号',
         type: 'select',
-        listCode: '805120',
+        pageCode: '805120',
         params: {
             kind: "C",
             status: "0",
-            updater: "",
-            limit: "100",
-            start: "0"
+            updater: ""
         },
         keyName: 'userId',
+        searchName: 'nickname',
         valueName: '{{nickname.DATA}}--{{mobile.DATA}}',
         required: true
     }, {
@@ -69,7 +68,6 @@ $(function() {
             var height = data.height;
             var weight = data.weight;
             data.map = { "6-2": height, "6-3": weight };
-            console.log({ "6-2": height, "6-3": weight })
             return data
         }
     });

@@ -10,15 +10,15 @@ $(function() {
         title: '户名',
         search: true
     }, {
+        field: 'currency',
+        title: '币种',
+        type: 'select',
+        key: 'currency_type',
+        formatter: Dict.getNameForList('currency_type'),
+        search: true
+    }, {
         field: 'accountNumber',
         title: '账号'
-    }, {
-        field: 'status',
-        title: '状态',
-        type: 'select',
-        key: 'account_status',
-        formatter: Dict.getNameForList('account_status'),
-        search: true
     }, {
         field: 'amount',
         title: '余额',
@@ -27,6 +27,13 @@ $(function() {
         field: 'frozenAmount',
         title: '冻结金额',
         formatter: moneyFormat
+    }, {
+        field: 'status',
+        title: '状态',
+        type: 'select',
+        key: 'account_status',
+        formatter: Dict.getNameForList('account_status'),
+        search: true
     }, {
         field: 'createDatetime',
         title: '创建时间',
@@ -37,20 +44,19 @@ $(function() {
         columns: columns,
         pageCode: '802503',
         searchParams: {
-            currency: "CNY",
             userId: userId
         }
     });
 
-    
+
     $('.tools .toolbar').html('<li style="display:block;" id="ledgerBtn"><span><img src="/static/images/t01.png"></span>查看明细</li>');
-    
+
     $('#ledgerBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "lengder.html?accountNumber=" + selRecords[0].accountNumber;
+        window.location.href = "ledger.html?accountNumber=" + selRecords[0].accountNumber;
     });
 });

@@ -2,7 +2,7 @@ $(function() {
     var code = getQueryString('code');
     var noteConfig = {
         title: '参数值',
-        field: 'remark',
+        field: 'cvalue',
         required: true
     };
     reqApi({
@@ -12,10 +12,8 @@ $(function() {
         },
         sync: true
     }).then(function(data) {
-        if (data.ckey == "aboutUs") {
+        if (data.ckey == "memIntro" || data.ckey == "memWelfare") {
             noteConfig.type = "textarea";
-        } else if (data.ckey == "fugouPic" || data.ckey == "yuyuePic") {
-            noteConfig.type = "img";
         }
     })
 
@@ -26,7 +24,7 @@ $(function() {
         maxlength: 20
     }, noteConfig, {
         title: '参数说明',
-        field: 'cvalue',
+        field: 'remark',
         required: true,
         maxlength: 255
     }];

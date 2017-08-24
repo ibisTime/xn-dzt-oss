@@ -30,7 +30,6 @@ $(function() {
             title: '流水状态',
             type: 'select',
             key: "jour_status",
-            // keyCode: "802006",
             formatter: Dict.getNameForList("jour_status"),
             search: true
         }, {

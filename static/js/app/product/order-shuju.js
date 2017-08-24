@@ -39,7 +39,7 @@ $(function() {
     });
 
     var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
-    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "5-2", "5-3", "5-4"];
+    var ids1 = ["1-1", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "5-2", "5-3", "5-4"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -58,15 +58,24 @@ $(function() {
             }),
             reqApi({
                 code: "620012",
-                json: { updater: "" }
+                json: {
+                    updater: "",
+                    status: "1"
+                }
             }),
             reqApi({
                 code: "620032",
-                json: { updater: "" }
+                json: {
+                    updater: "",
+                    status: "1"
+                }
             }),
             reqApi({
                 code: "620052",
-                json: { updater: "" }
+                json: {
+                    updater: "",
+                    status: "1"
+                }
             })
         ).then(function(data0, data1, data3, data4) {
             getData(data0);
@@ -108,11 +117,11 @@ $(function() {
             for (var i = 0; i < data1.length; i++) {
                 html += '<option value="' + data1[i].code + '">' + data1[i].name + '</option>';
             }
-            $("#1-1").html(html).trigger('change');
+            $("#1-0").html(html).trigger('change');
             chosen();
             if (modelCode) {
-                $("#1_1_chosen").remove();
-                $("#1-1").val(modelCode).trigger('change').css("visibility", "visible").prop('disabled', true);
+                $("#1_0_chosen").remove();
+                $("#1-0").val(modelCode).trigger('change').css("visibility", "visible").prop('disabled', true);
             }
 
             if (productSpecsList) {
@@ -318,10 +327,10 @@ $(function() {
             }
         });
         // 型号change事件
-        $("#1-1").on('change', function() {
+        $("#1-0").on('change', function() {
             var _value = $(this).val();
             createModelAndTechHtml(materials[_value], technologys[_value]);
-            codeList['1-1'] = _value;
+            codeList['1-0'] = _value;
         });
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {

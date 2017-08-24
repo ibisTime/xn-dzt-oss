@@ -101,16 +101,11 @@ $(function() {
         title: '支付渠道',
         type: 'select',
         key: 'channel_type',
-        // keyCode: '802006',
         formatter: Dict.getNameForList('channel_type'),
         search: true
     }, {
         field: 'payCardInfo',
-        title: '开户行',
-        // type: "select",
-        // listCode: "802116",
-        // keyName: 'bankCode',
-        // valueName: 'bankName',
+        title: '开户行'
     }, {
         field: 'payCardNo',
         title: '银行卡号',
@@ -119,7 +114,6 @@ $(function() {
         title: '状态',
         type: 'select',
         key: 'withdraw_status',
-        // keyCode: '802006',
         formatter: Dict.getNameForList('withdraw_status'),
         search: true
     }, {

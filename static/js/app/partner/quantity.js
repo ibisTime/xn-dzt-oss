@@ -108,16 +108,7 @@ $(function() {
 
         });
     });
-
-    $("#detail2Btn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = "member_addedit.html?userId=" + selRecords[0].userId;
-
-    });
+    //修改
     $("#edit2Btn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -127,6 +118,7 @@ $(function() {
         window.location.href = "quantity_addedit.html?userId=" + selRecords[0].userId;
 
     });
+    //业绩
     $("#achieveBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -135,13 +127,14 @@ $(function() {
         }
         window.location.href = "quantity_achieve.html?userId=" + selRecords[0].userId;
     });
+    //账户
     $("#accountBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "accountlt.html?userId=" + selRecords[0].userId;
+        window.location.href = "../member/account.html?userId=" + selRecords[0].userId;
     });
     $("#ledgerBtn").remove();
 });

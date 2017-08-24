@@ -3,16 +3,26 @@ $(function() {
 
     var fields = [{
         title: "留言人",
-        field: "commenter",
+        field: "commentMobile",
+        formatter: function(v, data) {
+            if (v) {
+                return v
+            } else if (data.commentName) {
+                return data.commentName
+            } else {
+                return data.commenter
+            }
+        },
+        readonly: true
+    }, {
+        field: "content",
+        title: "留言内容",
+        type: "textarea",
         readonly: true
     }, {
         title: "留言时间",
         field: "commentDatetime",
         formatter: dateTimeFormat,
-        readonly: true
-    }, {
-        field: "content",
-        title: "留言内容",
         readonly: true
     }];
 

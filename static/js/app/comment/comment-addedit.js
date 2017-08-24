@@ -33,7 +33,7 @@ $(function() {
     }];
     var fields = [{
         title: '针对内容',
-        field: 'topCode',
+        field: 'name',
         readonly: true
     }, {
         title: "评论内容",

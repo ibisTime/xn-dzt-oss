@@ -4,11 +4,21 @@ $(function() {
         title: '',
         checkbox: true
     }, {
-        field: 'commenter',
-        title: '留言人'
+        field: 'commentMobile',
+        title: '留言人',
+        formatter: function(v, data) {
+            if (v) {
+                return v
+            } else if (data.commentName) {
+                return data.commentName
+            } else {
+                return data.commenter
+            }
+        }
     }, {
         field: "content",
-        title: "内容"
+        title: "内容",
+        type: "textarea"
     }, {
         field: 'status',
         title: '状态',

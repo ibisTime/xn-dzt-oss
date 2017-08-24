@@ -6,7 +6,7 @@ $(function() {
         checkbox: true
     }, {
         title: '针对内容',
-        field: 'topCode'
+        field: 'name'
     }, {
         field: 'content',
         title: '评论内容',

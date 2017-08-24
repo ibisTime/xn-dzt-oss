@@ -12,12 +12,12 @@ $(function() {
 
     var fields = [{
         field: 'cvalue',
-        type: 'hidden',
-        value: '服务热线'
+        title: '服务热线',
+        required: true
     }, {
         title: '服务热线',
         field: 'remark',
-        required: true
+        type: "hidden"
     }];
 
     var options = {

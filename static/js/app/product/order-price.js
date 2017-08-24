@@ -45,6 +45,9 @@ $(function() {
         field: "modelCode",
         type: "select",
         listCode: "620012",
+        params: {
+            status: "1"
+        },
         keyName: "code",
         valueName: "name",
         searchName: "name",
@@ -52,8 +55,6 @@ $(function() {
         onChange: function(v, data) {
             if (data) {
                 if (data.type == 1) {
-                    modelCode = $("#modelCode").val();
-
                     $("#jsForm").css("display", "block");
                     $("#btn-0").css("display", "none");
                     $("#btn-1").css("display", "none");
@@ -116,7 +117,7 @@ $(function() {
         sync: true
     }).then(function(data) {
         if (data.productList && data.productList.length) {
-            // modelCode = data.productList[0].modelCode;
+            modelCode = data.productList[0].modelCode;
             if (data.productList[0].productSpecsList &&
                 data.productList[0].productSpecsList.length) {
                 productList = data.productList[0];
@@ -130,7 +131,6 @@ $(function() {
                 if (v51) {
                     $(".cxradio").eq(0).attr("checked", "checked");
                     $("#wrap").css("display", "block")
-
                 } else {
                     $(".cxradio").eq(1).attr("checked", "checked");
                     $("#wrap").css("display", "none");
@@ -146,7 +146,7 @@ $(function() {
     });
 
     var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
-    var ids1 = ["1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", '5-2', "5-3", "5-4"];
+    var ids1 = ["1-1", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", '5-2', "5-3", "5-4"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -161,21 +161,30 @@ $(function() {
         $.when(
             reqApi({
                 code: "805906",
-                json: { updater: "" }
+                json: {
+                    updater: ""
+                }
             }),
             reqApi({
                 code: "620012",
-                json: { updater: "" }
+                json: {
+                    updater: "",
+                    status: "1"
+                }
             }),
             reqApi({
                 code: "620032",
                 json: {
                     updater: "",
+                    status: '1'
                 }
             }),
             reqApi({
                 code: "620052",
-                json: { updater: "" }
+                json: {
+                    updater: "",
+                    status: "1"
+                }
             })
         ).then(function(data0, data1, data3, data4) {
             getData(data0);
@@ -217,12 +226,12 @@ $(function() {
             for (var i = 0; i < data1.length; i++) {
                 html += '<option value="' + data1[i].code + '">' + data1[i].name + '</option>';
             }
-            $("#1-1").html(html).trigger('change');
+            $("#1-0").html(html).trigger('change');
             chosen();
             var modelCode = $("#modelCode").val();
             if (modelCode) {
-                $("#1_1_chosen").remove();
-                $("#1-1").val(modelCode).trigger('change').css("visibility", "visible").prop('disabled', true);
+                $("#1_0_chosen").remove();
+                $("#1-0").val(modelCode).trigger('change').css("visibility", "visible").prop('disabled', true);
             }
 
             if (productSpecsList) {
@@ -346,12 +355,28 @@ $(function() {
     }
 
     function addListeners() {
-
+        $(".cxradio").click(function() {
+            var dataid = $(this).attr("data-id");
+            if (dataid == '03') {
+                $("#wrap").css("display", "block")
+            } else if (dataid == '04') {
+                $("#wrap").css("display", "none");
+                $("#5-1").val("");
+                $("#5-2 .param").removeClass("act");
+                $("#5-3 .param").removeClass("act");
+                $("#5-4 .param").removeClass("act");
+            }
+        });
         // 型号change事件
-        $("#1-1").on('change', function() {
+        // $("#1-1").on('change', function() {
+        //     var _value = $(this).val();
+        //     createModelAndTechHtml(materials[_value], technologys[_value]);
+        //     codeList['1-1'] = _value;
+        // });
+        $("#modelCode").on('change', function() {
             var _value = $(this).val();
             createModelAndTechHtml(materials[_value], technologys[_value]);
-            codeList['1-1'] = _value;
+            codeList['1-0'] = _value;
         });
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
@@ -441,44 +466,13 @@ $(function() {
         $("#to_pre_step_3").on("click", function() {
             goPage(0);
         });
-        $("#form-tab1").validate({
-            'rules': {
-                '1-3': {
-                    required: true,
 
-                },
-                '1-4': {
-                    required: true
-                },
-                '1-5': {
-                    required: true
-                },
-                '1-6': {
-                    required: true
-                },
-                '1-7': {
-                    required: true
-                },
-                '1-8': {
-                    required: true
-                },
-                '1-9': {
-                    required: true
-                },
-                '1-10': {
-                    required: true
-                },
-                '1-11': {
-                    required: true
-                },
-            }
-        });
 
 
         $("#submit").on("click", function() {
             if (validatePage1()) {
                 var data = {};
-                var data4 = $('#form-tab4').serializeObject();
+                // var data4 = $('#form-tab4').serializeObject();
                 // var map = $.extend(param, data2, data3, data4, data5);
 
                 var _codelist = [];
@@ -519,18 +513,15 @@ $(function() {
     }
 
     function validatePage1() {
-        if ($('#form-tab1').valid()) {
-            var ele = $("#1-2");
-            var code = ele.attr("data-code");
-            if (!code) {
-                toastr.info("衬衫面料不能为空");
-                return false;
-            }
-
-            param['1-2'] = code;
-            return true;
+        var ele = $("#1-2");
+        var code = ele.attr("data-code");
+        if (!code) {
+            toastr.info("衬衫面料不能为空");
+            return false;
         }
-        return false;
+
+        param['1-2'] = code;
+        return true;
     }
 
     function getImg(src) {

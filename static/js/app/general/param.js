@@ -9,10 +9,10 @@ $(function() {
         title: '参数键',
         search: true
     }, {
-        field: 'remark',
+        field: 'cvalue',
         title: '参数值'
     }, {
-        field: 'cvalue',
+        field: 'remark',
         title: '参数说明'
     }];
     buildList({

@@ -11,13 +11,13 @@ $(function() {
     });
 
     var fields = [{
+        title: "服务时间",
         field: 'cvalue',
-        type: 'hidden',
-        value: '服务时间'
+        required: true
     }, {
         title: '时间',
         field: 'remark',
-        required: true
+        hidden: true
     }];
 
     var options = {

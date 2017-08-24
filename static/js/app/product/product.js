@@ -17,6 +17,19 @@ $(function() {
         field: 'name',
         title: '名称'
     }, {
+        title: "价格",
+        field: "price",
+        amount: true,
+        formatter: moneyFormat
+    }, {
+        title: "面料损耗",
+        field: "loss",
+    }, {
+        title: "加工费",
+        field: "processFee",
+        amount: true,
+        formatter: moneyFormat,
+    }, {
         title: "状态",
         field: "status",
         type: "select",

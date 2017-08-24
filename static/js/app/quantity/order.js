@@ -72,17 +72,7 @@ $(function() {
         }
     });
 
-    $("#rePurchaseBtn").click(function() {
-        window.location.href = 'order_rePurchase.html';
-    });
-    $("#edit2Btn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = 'order_dispatch.html?code=' + selRecords[0].code;
-    });
+    //定价
     $("#priceBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -97,7 +87,7 @@ $(function() {
     });
 
 
-
+    //数据录入
     $("#shuBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -108,10 +98,15 @@ $(function() {
             toastr.info("不是可以数据录入的状态");
             return;
         }
-        window.location.href = '../product/order_shuju.html?code=' + selRecords[0].code;
+        if (selRecords[0].type == 1) {
+            window.location.href = '../product/order_shujuH+.html?code=' + selRecords[0].code;
+        } else {
+            window.location.href = '../product/order_shuju.html?code=' + selRecords[0].code;
+        }
+
     });
 
-
+    //提交复核
     $("#tijiaoBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -125,13 +120,5 @@ $(function() {
 
         window.location.href = '../product/order_tijiao.html?code=' + selRecords[0].code;
     });
-    $("#detaBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
 
-        window.location.href = '../product/orderSearch_addedit.html?code=' + selRecords[0].code;
-    });
 });

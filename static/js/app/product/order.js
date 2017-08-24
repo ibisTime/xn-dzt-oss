@@ -34,8 +34,7 @@ $(function() {
             "6": "生产中",
             "7": "已发货",
             "8": "已收货",
-            "9": "已评价",
-            "10": "已归档"
+            "9": "已评价"
         },
         formatter: Dict.getNameForList("order_status"),
         search: true
@@ -70,11 +69,14 @@ $(function() {
         columns: columns,
         pageCode: '620230',
         searchParams: {
-            statusList: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+            statusList: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         },
         //派单
         beforeEdit: function(data) {
             window.location.href = 'order_dispatch.html?code=' + data.code;
+        },
+        beforeDetail: function(data) {
+            window.location.href = 'orderSearch_addedit.html?v=1&code=' + data.code;
         }
     });
     //代复购
@@ -268,13 +270,5 @@ $(function() {
         }
 
     });
-    //详情
-    $("#detaBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        window.location.href = 'orderSearch_addedit.html?v=1&code=' + selRecords[0].code;
-    });
+
 });

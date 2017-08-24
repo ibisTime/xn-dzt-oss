@@ -51,8 +51,7 @@ $(function() {
         title: '状态',
         type: 'select',
         key: 'hl_status',
-        keyCode: '802006',
-        formatter: Dict.getNameForList('hl_status', '802006'),
+        formatter: Dict.getNameForList('hl_status'),
         search: true
     }];
 

@@ -156,7 +156,7 @@ $(function() {
                 productSpecsList = data.productList[0].productSpecsList;
                 var v51 = 0;
                 data.productList[0].productSpecsList.forEach(function(v, i) {
-                    if (v.type == "5-1") {
+                    if (v.type == "5-01") {
                         v51 = 1;
                     }
                 });
@@ -167,10 +167,10 @@ $(function() {
                 } else {
                     $(".cxradio").eq(1).attr("checked", "checked");
                     $("#wrap").css("display", "none");
-                    $("#5-1").val("");
-                    $("#5-2 .param").removeClass("act");
-                    $("#5-3 .param").removeClass("act");
-                    $("#5-4 .param").removeClass("act");
+                    $("#5-01").val("");
+                    $("#5-02 .param").removeClass("act");
+                    $("#5-03 .param").removeClass("act");
+                    $("#5-04 .param").removeClass("act");
                 }
             }
         }
@@ -178,8 +178,8 @@ $(function() {
 
     });
 
-    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
-    var ids1 = ["1-1", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "1-10", "1-11", "5-2", "5-3", "5-4"];
+    var ids = ["4-01", "4-02", "4-03", "4-04", "4-05", "4-06", "4-07", "4-08", '4-09', '4-10', '4-11', '4-12'];
+    var ids1 = ["1-01", "1-03", "1-04", "1-05", "1-06", "1-07", "1-08", "5-02", "5-03", "5-04"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -187,13 +187,14 @@ $(function() {
 
     var materials = {};
     var technologys = {};
+    var first = true;
 
     getInfo();
 
     function getInfo() {
         $.when(
             reqApi({
-                code: "805906",
+                code: "620906",
                 json: { updater: "" }
             }),
             reqApi({
@@ -207,8 +208,11 @@ $(function() {
             reqApi({
                 code: "620052",
                 json: { updater: "" }
-            })
-        ).then(function(data0, data1, data3, data4) {
+            }), reqApi({
+                code: "805906",
+                json: { updater: "" }
+            }),
+        ).then(function(data0, data1, data3, data4, data5) {
             getData(data0);
             // 面料
             var html = '',
@@ -341,7 +345,7 @@ $(function() {
 
     function initData() {
         $.each(productSpecsList, function(index, spec) {
-            if (spec.type == "1-2") {
+            if (spec.type == "1-02") {
                 $("#modal-chose").find(".fab_type[data-name=" + spec.type + "]").click()
                     .end().find("li[data-code=" + spec.code + "]").click();
             } else if (_findIndex(ids, spec.type) != -1) {
@@ -353,6 +357,8 @@ $(function() {
             }
         });
         $("#jsForm").off("click");
+        first = false;
+        $(".cxradio").prop('disabled', true);
     }
 
     function _findIndex(data, value) {
@@ -452,10 +458,10 @@ $(function() {
                 $("#wrap").css("display", "block")
             } else if (dataid == '04') {
                 $("#wrap").css("display", "none");
-                $("#5-1").val("");
-                $("#5-2 .param").removeClass("act");
-                $("#5-3 .param").removeClass("act");
-                $("#5-4 .param").removeClass("act");
+                $("#5-01").val("");
+                $("#5-02 .param").removeClass("act");
+                $("#5-03 .param").removeClass("act");
+                $("#5-04 .param").removeClass("act");
             }
         });
         // 型号change事件
@@ -518,13 +524,13 @@ $(function() {
             $("#selected_fab_full_info").html(name + "　　" + type + "　　");
 
             $(".modalbg,.more-condition,.modal-chose").removeClass("open");
-            $("#1-2").attr("data-code", code).attr("data-name", name);
-            codeList['1-2'] = code;
+            $("#1-02").attr("data-code", code).attr("data-name", name);
+            codeList['1-02'] = code;
         });
         // 点击背景隐藏面料弹出框
-        $(".modalbg").click(function() {
-            $(".modalbg,.more-condition,.modal-chose").removeClass("open");
-        });
+        // $(".modalbg").click(function() {
+        //     $(".modalbg,.more-condition,.modal-chose").removeClass("open");
+        // });
         // 面料弹出框搜索框点击确认
         $("#confirm_input_code").click(function() {
             var v_input = $("#input_fab_code").val();

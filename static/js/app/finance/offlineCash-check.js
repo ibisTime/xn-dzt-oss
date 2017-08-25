@@ -66,7 +66,14 @@ $(function() {
             title: '审核意见'
         }, {
             field: 'payUser',
-            title: '回录人'
+            title: '回录人',
+            formatter: function(v, data) {
+                if (v == "CDZT201700000000000001") {
+                    return "admin"
+                } else {
+                    return v
+                }
+            }
         }, {
             field: 'payDatetime',
             title: '回录时间',
@@ -95,6 +102,10 @@ $(function() {
     }, {
         field: 'amount',
         title: '金额',
+        formatter: moneyFormat
+    }, {
+        field: 'fee',
+        title: '手续费',
         formatter: moneyFormat
     }, {
         field: 'channelType',

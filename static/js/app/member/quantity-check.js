@@ -29,7 +29,7 @@ $(function() {
         required: true
     }, {
         field: "kind",
-        value: 'f2',
+        value: 'B',
         type: 'hidden',
         required: true
     }, mobileView, mobileEdit, {

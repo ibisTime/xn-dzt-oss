@@ -40,7 +40,6 @@ $(function() {
         addCode: '802754',
         beforeSubmit: function(data) {
             data.applyUser = getUserId();
-            data.updaterId = "";
             return data;
         }
     };

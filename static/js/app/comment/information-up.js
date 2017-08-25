@@ -10,13 +10,15 @@ $(function() {
     }, {
         field: 'location',
         title: '位置',
-        type: 'select',
-        data: {
-            "1": "热门",
-            "0": "普通"
-        },
+        // type: 'select',
+        // data: {
+        //     "1": "热门",
+        //     "0": "普通"
+        // },
         // key: "ui_location",
         required: true,
+        hidden: true,
+        value: "0"
     }, {
         field: 'orderNo',
         title: 'UI次序',
@@ -25,7 +27,10 @@ $(function() {
     }, {
         title: "备注",
         field: "remark",
-        maxlength: 255
+        maxlength: 255,
+        formatter: function(v, data) {
+            return ""
+        }
     }];
 
     buildDetail({

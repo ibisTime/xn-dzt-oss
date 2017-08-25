@@ -3512,7 +3512,7 @@ $(function() {
         clearTimeout(validTimer);
         validTimer = setTimeout(function() {
             sessionStorage.setItem('token', '');
-            location.href = '../signin.html?kind=' + (sessionStorage.getItem('loginKind') || '01');
+            location.href = '../signin.html?kind=' + (sessionStorage.getItem('loginKind') || 'P');
         }, +OSS.userValidTime * 60 * 1000);
     });
 });

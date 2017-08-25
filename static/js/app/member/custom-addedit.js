@@ -12,9 +12,6 @@ $(function() {
         field: 'mobile',
         title: '手机号',
     }, {
-        field: 'realName',
-        title: '真实姓名',
-    }, {
         field: 'userRefereeMobile',
         title: '推荐人'
     }, {
@@ -26,14 +23,14 @@ $(function() {
             "f1": "C端用户"
         }
     }, {
-        field: 'idKind',
-        title: '证件类型',
-        type: 'select',
-        key: 'id_kind'
-    }, {
-        field: 'idNo',
-        title: '证件号',
-    }, {
+        //     field: 'idKind',
+        //     title: '证件类型',
+        //     type: 'select',
+        //     key: 'id_kind'
+        // }, {
+        //     field: 'idNo',
+        //     title: '证件号',
+        // }, {
         field: 'createDatetime',
         title: '注册时间',
         formatter: dateTimeFormat

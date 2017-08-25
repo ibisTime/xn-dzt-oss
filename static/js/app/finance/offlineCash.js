@@ -71,7 +71,7 @@ $(function() {
         field: 'payUser',
         title: '回录人',
         formatter: function(v, data) {
-            if (v == OSS.SYS_USER) {
+            if (v == "CDZT201700000000000001") {
                 return 'admin';
             } else {
                 return v

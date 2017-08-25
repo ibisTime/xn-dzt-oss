@@ -46,7 +46,8 @@ $(function() {
         type: "select",
         listCode: "620012",
         params: {
-            status: "1"
+            status: "1",
+            updater: ""
         },
         keyName: "code",
         valueName: "name",
@@ -124,7 +125,7 @@ $(function() {
                 productSpecsList = data.productList[0].productSpecsList;
                 var v51 = 0;
                 data.productList[0].productSpecsList.forEach(function(v, i) {
-                    if (v.type == "5-1") {
+                    if (v.type == "5-01") {
                         v51 = 1;
                     }
                 });
@@ -134,10 +135,10 @@ $(function() {
                 } else {
                     $(".cxradio").eq(1).attr("checked", "checked");
                     $("#wrap").css("display", "none");
-                    $("#5-1").val("");
-                    $("#5-2 .param").removeClass("act");
-                    $("#5-3 .param").removeClass("act");
-                    $("#5-4 .param").removeClass("act");
+                    $("#5-01").val("");
+                    $("#5-02 .param").removeClass("act");
+                    $("#5-03 .param").removeClass("act");
+                    $("#5-04 .param").removeClass("act");
                 }
             }
         }
@@ -145,8 +146,8 @@ $(function() {
 
     });
 
-    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
-    var ids1 = ["1-1", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", '5-2', "5-3", "5-4"];
+    var ids = ["4-01", "4-02", "4-03", "4-04", "4-05", "4-06", "4-07", "4-08", '4-09', '4-10', '4-11', '4-12'];
+    var ids1 = ["1-01", "1-03", "1-04", "1-05", "1-06", "1-07", "1-08", "5-02", "5-03", "5-04"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -160,7 +161,7 @@ $(function() {
     function getInfo() {
         $.when(
             reqApi({
-                code: "805906",
+                code: "620906",
                 json: {
                     updater: ""
                 }
@@ -185,8 +186,12 @@ $(function() {
                     updater: "",
                     status: "1"
                 }
-            })
-        ).then(function(data0, data1, data3, data4) {
+            }),
+            reqApi({
+                code: "805906",
+                json: { updater: "" }
+            }),
+        ).then(function(data0, data1, data3, data4, data5) {
             getData(data0);
             // 面料
             var html = '',
@@ -246,11 +251,66 @@ $(function() {
             var dkey = arr[i].dkey;
             var dvalue = arr[i].dvalue;
             var parentKey = arr[i].parentKey;
-            if (parentKey === 'measure') {
-                if (!allData[dkey]) {
-                    allData[dkey] = [];
+            if (parentKey === '4-01') {
+                if (!globalDicts['4-01']) {
+                    globalDicts['4-01'] = [];
                 }
-                allData[dkey].push(arr[i]);
+                globalDicts['4-01'].push(arr[i]);
+            } else if (parentKey === '4-05') {
+                if (!globalDicts['4-05']) {
+                    globalDicts['4-05'] = [];
+                }
+                globalDicts['4-05'].push(arr[i]);
+            } else if (parentKey === '4-06') {
+                if (!globalDicts['4-06']) {
+                    globalDicts['4-06'] = [];
+                }
+                globalDicts['4-06'].push(arr[i]);
+            } else if (parentKey === '4-02') {
+                if (!globalDicts['4-02']) {
+                    globalDicts['4-02'] = [];
+                }
+                globalDicts['4-02'].push(arr[i]);
+            } else if (parentKey === '4-03') {
+                if (!globalDicts['4-03']) {
+                    globalDicts['4-03'] = [];
+                }
+                globalDicts['4-03'].push(arr[i]);
+            } else if (parentKey === '4-04') {
+                if (!globalDicts['4-04']) {
+                    globalDicts['4-04'] = [];
+                }
+                globalDicts['4-04'].push(arr[i]);
+            } else if (parentKey === '4-07') {
+                if (!globalDicts['4-07']) {
+                    globalDicts['4-07'] = [];
+                }
+                globalDicts['4-07'].push(arr[i]);
+            } else if (parentKey === '4-08') {
+                if (!globalDicts['4-08']) {
+                    globalDicts['4-08'] = [];
+                }
+                globalDicts['4-08'].push(arr[i]);
+            } else if (parentKey === '4-09') {
+                if (!globalDicts['4-09']) {
+                    globalDicts['4-09'] = [];
+                }
+                globalDicts['4-09'].push(arr[i]);
+            } else if (parentKey === '4-10') {
+                if (!globalDicts['4-10']) {
+                    globalDicts['4-10'] = [];
+                }
+                globalDicts['4-10'].push(arr[i]);
+            } else if (parentKey === '4-11') {
+                if (!globalDicts['4-11']) {
+                    globalDicts['4-11'] = [];
+                }
+                globalDicts['4-11'].push(arr[i]);
+            } else if (parentKey === '4-12') {
+                if (!globalDicts['4-12']) {
+                    globalDicts['4-12'] = [];
+                }
+                globalDicts['4-12'].push(arr[i]);
             } else if (parentKey === 'fabric_yarn') {
                 fabricYarns.push(arr[i]);
             }
@@ -260,7 +320,7 @@ $(function() {
 
     function initData() {
         $.each(productSpecsList, function(index, spec) {
-            if (spec.type == "1-2") {
+            if (spec.type == "1-02") {
                 $("#modal-chose").find(".fab_type[data-name=" + spec.type + "]").click()
                     .end().find("li[data-code=" + spec.code + "]").click();
             } else if (_findIndex(ids1, spec.type) != -1) {
@@ -361,10 +421,10 @@ $(function() {
                 $("#wrap").css("display", "block")
             } else if (dataid == '04') {
                 $("#wrap").css("display", "none");
-                $("#5-1").val("");
-                $("#5-2 .param").removeClass("act");
-                $("#5-3 .param").removeClass("act");
-                $("#5-4 .param").removeClass("act");
+                $("#5-01").val("");
+                $("#5-02 .param").removeClass("act");
+                $("#5-03 .param").removeClass("act");
+                $("#5-04 .param").removeClass("act");
             }
         });
         // 型号change事件
@@ -480,16 +540,16 @@ $(function() {
                     _codelist.push(codeList[key]);
                 };
                 for (var key in param) {
-                    if (key == "5-2" || key == "5-3" || key == "5-4") {
+                    if (key == "5-02" || key == "5-03" || key == "5-04") {
                         _codelist.push(param[key]);
                     }
                 };
-                var v51 = $("#5-1").val()
+                var v51 = $("#5-01").val()
                 data['orderCode'] = code;
                 data['codeList'] = _codelist
                 data["quantity"] = $("#quantity").val();
                 data["ramark"] = $("#ramark").val();
-                data.map = { "5-1": v51 }
+                data.map = { "5-01": v51 }
                 reqApi({
                     code: "620205",
                     json: data
@@ -520,7 +580,7 @@ $(function() {
             return false;
         }
 
-        param['1-2'] = code;
+        param['1-02'] = code;
         return true;
     }
 

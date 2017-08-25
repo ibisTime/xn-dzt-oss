@@ -144,7 +144,7 @@ $(function() {
                 productSpecsList = data.productList[0].productSpecsList;
                 var v51 = 0;
                 data.productList[0].productSpecsList.forEach(function(v, i) {
-                    if (v.type == "5-1") {
+                    if (v.type == "5-01") {
                         v51 = 1;
                     }
                 });
@@ -155,10 +155,10 @@ $(function() {
                 } else {
                     $(".cxradio").eq(1).attr("checked", "checked");
                     $("#wrap").css("display", "none");
-                    $("#5-1").val("");
-                    $("#5-2 .param").removeClass("act");
-                    $("#5-3 .param").removeClass("act");
-                    $("#5-4 .param").removeClass("act");
+                    $("#5-01").val("");
+                    $("#5-02 .param").removeClass("act");
+                    $("#5-03 .param").removeClass("act");
+                    $("#5-04 .param").removeClass("act");
                 }
             }
         }
@@ -166,8 +166,8 @@ $(function() {
 
     });
 
-    var ids = ["4-1", "4-2", "4-3", "4-4", "4-5", "4-6", "4-7", "4-8", '4-9', '4-10', '4-11', '4-12'];
-    var ids1 = ["1-1", "1-3", "1-4", "1-5", "1-6", "1-7", "1-8", "1-9", "5-2", "5-3", "5-4"];
+    var ids = ["4-01", "4-02", "4-03", "4-04", "4-05", "4-06", "4-07", "4-08", '4-09', '4-10', '4-11', '4-12'];
+    var ids1 = ["1-01", "1-03", "1-04", "1-05", "1-06", "1-07", "1-08", "5-02", "5-03", "5-04"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -175,13 +175,14 @@ $(function() {
 
     var materials = {};
     var technologys = {};
+    var first = true;
 
     getInfo();
 
     function getInfo() {
         $.when(
             reqApi({
-                code: "805906",
+                code: "620906",
                 json: { updater: "" }
             }),
             reqApi({
@@ -195,8 +196,12 @@ $(function() {
             reqApi({
                 code: "620052",
                 json: { updater: "" }
-            })
-        ).then(function(data0, data1, data3, data4) {
+            }),
+            reqApi({
+                code: "805906",
+                json: { updater: "" }
+            }),
+        ).then(function(data0, data1, data3, data4, datas5) {
             getData(data0);
             // 面料
             var html = '',
@@ -255,56 +260,51 @@ $(function() {
             var dkey = arr[i].dkey;
             var dvalue = arr[i].dvalue;
             var parentKey = arr[i].parentKey;
-            if (parentKey === 'measure') {
-                if (!allData[dkey]) {
-                    allData[dkey] = [];
+            if (parentKey === '4-01') {
+                if (!globalDicts['4-01']) {
+                    globalDicts['4-01'] = [];
                 }
-                allData[dkey].push(arr[i]);
-            } else if (parentKey === '4-1') {
-                if (!globalDicts['4-1']) {
-                    globalDicts['4-1'] = [];
+                globalDicts['4-01'].push(arr[i]);
+            } else if (parentKey === '4-05') {
+                if (!globalDicts['4-05']) {
+                    globalDicts['4-05'] = [];
                 }
-                globalDicts['4-1'].push(arr[i]);
-            } else if (parentKey === '4-5') {
-                if (!globalDicts['4-5']) {
-                    globalDicts['4-5'] = [];
+                globalDicts['4-05'].push(arr[i]);
+            } else if (parentKey === '4-06') {
+                if (!globalDicts['4-06']) {
+                    globalDicts['4-06'] = [];
                 }
-                globalDicts['4-5'].push(arr[i]);
-            } else if (parentKey === '4-6') {
-                if (!globalDicts['4-6']) {
-                    globalDicts['4-6'] = [];
+                globalDicts['4-06'].push(arr[i]);
+            } else if (parentKey === '4-02') {
+                if (!globalDicts['4-02']) {
+                    globalDicts['4-02'] = [];
                 }
-                globalDicts['4-6'].push(arr[i]);
-            } else if (parentKey === '4-2') {
-                if (!globalDicts['4-2']) {
-                    globalDicts['4-2'] = [];
+                globalDicts['4-02'].push(arr[i]);
+            } else if (parentKey === '4-03') {
+                if (!globalDicts['4-03']) {
+                    globalDicts['4-03'] = [];
                 }
-                globalDicts['4-2'].push(arr[i]);
-            } else if (parentKey === '4-3') {
-                if (!globalDicts['4-3']) {
-                    globalDicts['4-3'] = [];
+                globalDicts['4-03'].push(arr[i]);
+            } else if (parentKey === '4-04') {
+                if (!globalDicts['4-04']) {
+                    globalDicts['4-04'] = [];
                 }
-                globalDicts['4-3'].push(arr[i]);
-            } else if (parentKey === '4-4') {
-                if (!globalDicts['4-4']) {
-                    globalDicts['4-4'] = [];
+                globalDicts['4-04'].push(arr[i]);
+            } else if (parentKey === '4-07') {
+                if (!globalDicts['4-07']) {
+                    globalDicts['4-07'] = [];
                 }
-                globalDicts['4-4'].push(arr[i]);
-            } else if (parentKey === '4-7') {
-                if (!globalDicts['4-7']) {
-                    globalDicts['4-7'] = [];
+                globalDicts['4-07'].push(arr[i]);
+            } else if (parentKey === '4-08') {
+                if (!globalDicts['4-08']) {
+                    globalDicts['4-08'] = [];
                 }
-                globalDicts['4-7'].push(arr[i]);
-            } else if (parentKey === '4-8') {
-                if (!globalDicts['4-8']) {
-                    globalDicts['4-8'] = [];
+                globalDicts['4-08'].push(arr[i]);
+            } else if (parentKey === '4-09') {
+                if (!globalDicts['4-09']) {
+                    globalDicts['4-09'] = [];
                 }
-                globalDicts['4-8'].push(arr[i]);
-            } else if (parentKey === '4-9') {
-                if (!globalDicts['4-9']) {
-                    globalDicts['4-9'] = [];
-                }
-                globalDicts['4-9'].push(arr[i]);
+                globalDicts['4-09'].push(arr[i]);
             } else if (parentKey === '4-10') {
                 if (!globalDicts['4-10']) {
                     globalDicts['4-10'] = [];
@@ -329,7 +329,7 @@ $(function() {
 
     function initData() {
         $.each(productSpecsList, function(index, spec) {
-            if (spec.type == "1-2") {
+            if (spec.type == "1-02") {
                 $("#modal-chose").find(".fab_type[data-name=" + spec.type + "]").click()
                     .end().find("li[data-code=" + spec.code + "]").click();
             } else if (_findIndex(ids, spec.type) != -1) {
@@ -341,6 +341,8 @@ $(function() {
             }
         });
         $("#jsForm").off("click");
+        first = false;
+        $(".cxradio").prop('disabled', true);
     }
 
     function _findIndex(data, value) {
@@ -440,10 +442,10 @@ $(function() {
                 $("#wrap").css("display", "block")
             } else if (dataid == '04') {
                 $("#wrap").css("display", "none");
-                $("#5-1").val("");
-                $("#5-2 .param").removeClass("act");
-                $("#5-3 .param").removeClass("act");
-                $("#5-4 .param").removeClass("act");
+                $("#5-01").val("");
+                $("#5-02 .param").removeClass("act");
+                $("#5-03 .param").removeClass("act");
+                $("#5-04 .param").removeClass("act");
             }
         });
         // 型号change事件
@@ -455,7 +457,6 @@ $(function() {
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
 
-            // if (衬衫订单 && 状态是已支付 || (h+订单 && 状态是未支付) || (h+订单 && 状态是已支付 && id.split("-")[0] != "1"))
             var self = $(this);
             self.addClass("act").find("span").addClass("show")
                 .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
@@ -479,9 +480,9 @@ $(function() {
                 .siblings(".act").removeClass("act");
         });
         // 点击选择面料按钮，弹出面料选择框
-        $("#btn_select_fab").click(function() {
-            $(".modalbg,.more-condition,.modal-chose").addClass("open");
-        });
+        // $("#btn_select_fab").click(function() {
+        //     $(".modalbg,.more-condition,.modal-chose").addClass("open");
+        // });
         // 面料tab切换
         $("#select_fabric_div").on("click", ".fab_type", function() {
             var fab_price_level = $(this).attr('fab_price_level');
@@ -506,8 +507,8 @@ $(function() {
             $("#selected_fab_full_info").html(name + "　　" + type + "　　");
 
             $(".modalbg,.more-condition,.modal-chose").removeClass("open");
-            $("#1-2").attr("data-code", code).attr("data-name", name);
-            codeList['1-2'] = code;
+            $("#1-02").attr("data-code", code).attr("data-name", name);
+            codeList['1-02'] = code;
         });
         // 点击背景隐藏面料弹出框
         $(".modalbg").click(function() {
@@ -549,25 +550,7 @@ $(function() {
             goPage(0);
         });
         $("#to_pre_step_2").on("click", function() {
-            if (type == "0") {
-                goPage(1);
-            } else if (type == "1") {
-                var data = {};
-                var _codelist = [];
-                for (var key in codeList) {
-                    _codelist.push(codeList[key]);
-                }
-                data.quantity = "1";
-                data.orderCode = code;
-                data.codeList = _codelist;
-                reqApi({
-                    code: "620205",
-                    json: data
-                }).then(function() {
-                    goPage(0);
-                })
-            }
-            // goPage(1);
+            goPage(1);
         });
 
         $("#to_nex_step_4").on("click", function() {
@@ -744,13 +727,13 @@ $(function() {
     }
 
     function validatePage1() {
-        var ele = $("#1-2");
+        var ele = $("#1-02");
         var code = ele.attr("data-code");
         if (!code) {
             toastr.info("衬衫面料不能为空");
             return false;
         }
-        param['1-2'] = code;
+        param['1-02'] = code;
         return true;
     }
 

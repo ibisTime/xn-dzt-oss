@@ -1,6 +1,7 @@
 $(function() {
     var code = getQueryString('code');
     var view = getQueryString('v');
+    var chanpinType = Dict.getNameForList("chanpin_type");
 
     var fields = [{
         title: "类型",
@@ -16,14 +17,14 @@ $(function() {
                 $("#loss").parent().css("display", "none");
             }
         },
-        formatter: function(v, data) {
+        afterSet: function(v, data) {
             if (v == 1) {
                 $("#price").parent().css("display", "none");
-                return v;
+                return chanpinType[v];
             } else if (v == 0) {
                 $("#processFee").parent().css("display", "none");
                 $("#loss").parent().css("display", "none");
-                return v;
+                return chanpinType[v];
             }
 
         },

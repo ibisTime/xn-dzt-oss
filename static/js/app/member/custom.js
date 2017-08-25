@@ -1,41 +1,31 @@
 $(function() {
 
     var columns = [{
-            field: '',
-            title: '',
-            checkbox: true
-        }, {
-            title: "昵称",
-            field: "nickname"
-        },
-        {
-            title: '姓名',
-            field: 'realName',
-            search: true
-        },
-        {
-            title: "身份证号",
-            field: "idNo",
-        }, {
-            title: '手机号',
-            field: 'mobile',
-            search: true
-        }, {
-            title: "状态",
-            field: "status",
-            type: "select",
-            key: "user_status",
-            formatter: Dict.getNameForList("user_status"),
-            search: true
-        }, {
-            title: "注册时间",
-            field: "createDatetime",
-            formatter: dateTimeFormat
-        }, {
-            title: '备注',
-            field: 'remark'
-        }
-    ];
+        field: '',
+        title: '',
+        checkbox: true
+    }, {
+        title: "昵称",
+        field: "nickname"
+    }, {
+        title: '手机号',
+        field: 'mobile',
+        search: true
+    }, {
+        title: "状态",
+        field: "status",
+        type: "select",
+        key: "user_status",
+        formatter: Dict.getNameForList("user_status"),
+        search: true
+    }, {
+        title: "注册时间",
+        field: "createDatetime",
+        formatter: dateTimeFormat
+    }, {
+        title: '备注',
+        field: 'remark'
+    }];
     buildList({
         router: 'custom',
         columns: columns,

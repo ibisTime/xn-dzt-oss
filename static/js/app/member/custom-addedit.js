@@ -19,8 +19,9 @@ $(function() {
         title: '推荐人类型',
         type: "select",
         data: {
-            "f2": "B端用户",
-            "f1": "C端用户"
+            "B": "B端用户",
+            "PA": "合伙人",
+            "C": "C端用户"
         }
     }, {
         //     field: 'idKind',

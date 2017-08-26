@@ -35,7 +35,8 @@ $(function() {
 
     buildList({
         columns: columns,
-        pageCode: '620145',
+        // pageCode: '620148',
+        pageCode: "620145",
         searchParams: {
             companyCode: OSS.company,
             type: "0",
@@ -52,7 +53,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = './complain_addedit.html?code=' + selRecords[0].code + "&commenter=" + selRecords[0].commenter;
+        window.location.href = './complain_addedit.html?code=' + selRecords[0].code + "&commenter=" + selRecords[0].commenter + "&commenter=" + selRecords[0].commenter;
 
     });
 });

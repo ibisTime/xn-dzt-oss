@@ -3,79 +3,65 @@ $(function() {
     //var  view =getQueryString('v');
 
     var fields = [{
-            title: '订单号',
-            field: 'code1',
-            formatter: function(v, data) {
-                return data.code
-            },
-            readonly: true
-        }, {
-            title: '状态',
-            field: 'status',
-            key: "order_status",
-            formatter: Dict.getNameForList("order_status"),
-            readonly: true
-        }, {
-            title: '下单人',
-            field: 'applyName',
-            readonly: true
-        }, {
-            title: '联系方式',
-            field: 'applyMobile',
-            readonly: true
-        }, {
-            title: '量体地址',
-            field: 'province1',
-            formatter: function(v, data) {
-                var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
-                return result || "-";
-            },
-            readonly: true
-        }, {
-            title: '量体时间',
-            field: 'ltDatetime',
-            formatter: dateFormat,
-            readonly: true
-        }, {
-            title: "量体嘱咐",
-            field: "applyNote",
-            readonly: true
-        }, {
-            title: "量体师",
-            field: "ltUser",
-            readonly: true,
-            formatter: function(v, data) {
-                if (data.ltUserDO) {
-                    return data.ltUserDO.realName
-                } else {
-                    return "-"
-                }
-            },
-        }, {
-            title: '价格',
-            field: "amount",
-            formatter: moneyFormat,
-            readonly: true
-        }, {
-            title: "收件人姓名",
-            field: "receiver",
-            type: "select",
-            readonly: true
-        }, {
-            title: "收件人联系方式",
-            field: 'reMobile',
-            readonly: true
-        }, {
-            title: "收件人地址",
-            field: "reAddress",
-            readonly: true
+        title: '订单号',
+        field: 'code1',
+        formatter: function(v, data) {
+            return data.code
         },
-        // {
-        //     title: "复核意见",
-        //     field: "remark",
-        //     readonly: true
-        // }
-    ];
+        readonly: true
+    }, {
+        title: '状态',
+        field: 'status',
+        key: "order_status",
+        formatter: Dict.getNameForList("order_status"),
+        readonly: true
+    }, {
+        title: '下单人',
+        field: 'applyName',
+        readonly: true
+    }, {
+        title: '联系方式',
+        field: 'applyMobile',
+        readonly: true
+    }, {
+        title: '量体地址',
+        field: 'province1',
+        formatter: function(v, data) {
+            var result = (data.ltProvince || "") + (data.ltCity || "") + (data.ltArea || "") + (data.ltAddress || "");
+            return result || "-";
+        },
+        readonly: true
+    }, {
+        title: '量体时间',
+        field: 'ltDatetime',
+        formatter: dateFormat,
+        readonly: true
+    }, {
+        title: "量体师",
+        field: "ltUser",
+        readonly: true,
+        formatter: function(v, data) {
+            if (data.ltUserDO) {
+                return data.ltUserDO.realName
+            } else {
+                return "-"
+            }
+        },
+    }, {
+        title: '价格',
+        field: "amount",
+        formatter: moneyFormat,
+        readonly: true
+    }, {
+        title: "收件人姓名",
+        field: "receiver",
+        type: "select",
+        readonly: true
+    }, {
+        title: "收件人联系方式",
+        field: 'reMobile',
+        readonly: true
+    }];
 
     var options = {
         fields: fields,
@@ -161,7 +147,7 @@ $(function() {
     function getInfo() {
         $.when(
             reqApi({
-                code: "805906",
+                code: "620906",
                 json: { updater: "" }
             }),
             reqApi({
@@ -178,9 +164,20 @@ $(function() {
             }),
             reqApi({
                 code: "805906",
-                json: { updater: "" }
+                json: {
+                    updater: "",
+                    parentKey: "fabric_yarn"
+                }
             }),
-        ).then(function(data0, data1, data3, data4) {
+        ).then(function(data0, data1, data3, data4, data5) {
+            for (var i = 0; i < data5.length; i++) {
+                var dkey = data5[i].dkey;
+                var dvalue = data5[i].dvalue;
+                var parentKey = data5[i].parentKey;
+                if (parentKey === 'fabric_yarn') {
+                    fabricYarns.push(data5[i]);
+                }
+            }
             getData(data0);
             // 面料
             var html = '',
@@ -299,8 +296,6 @@ $(function() {
                     globalDicts['4-12'] = [];
                 }
                 globalDicts['4-12'].push(arr[i]);
-            } else if (parentKey === 'fabric_yarn') {
-                fabricYarns.push(arr[i]);
             }
         }
         createPage1();
@@ -421,10 +416,10 @@ $(function() {
                 $("#wrap").css("display", "block")
             } else if (dataid == '04') {
                 $("#wrap").css("display", "none");
-                $("#5-1").val("");
-                $("#5-2 .param").removeClass("act");
-                $("#5-3 .param").removeClass("act");
-                $("#5-4 .param").removeClass("act");
+                $("#5-01").val("");
+                $("#5-02 .param").removeClass("act");
+                $("#5-03 .param").removeClass("act");
+                $("#5-04 .param").removeClass("act");
             }
         });
         // 型号change事件
@@ -435,6 +430,7 @@ $(function() {
         });
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
+
             var self = $(this);
             self.addClass("act").find("span").addClass("show")
                 .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
@@ -482,11 +478,11 @@ $(function() {
             self.addClass("act");
 
             $("#select_fab_img").attr("src", self.children("img").attr("src"));
-            $("#selected_fab_full_info").html(name + "　　" + type + "　　");
+            $("#selected_fab_full_info").html(name + "　　" + fabricYarns[type].dvalue + "　　");
 
             $(".modalbg,.more-condition,.modal-chose").removeClass("open");
-            $("#1-2").attr("data-code", code).attr("data-name", name);
-            codeList['1-2'] = code;
+            $("#1-02").attr("data-code", code).attr("data-name", name);
+            codeList['1-02'] = code;
         });
         // 点击背景隐藏面料弹出框
         $(".modalbg").click(function() {
@@ -528,25 +524,7 @@ $(function() {
             goPage(0);
         });
         $("#to_pre_step_2").on("click", function() {
-            if (type == "0") {
-                goPage(1);
-            } else if (type == "1") {
-                var data = {};
-                var _codelist = [];
-                for (var key in codeList) {
-                    _codelist.push(codeList[key]);
-                }
-                data.quantity = "1";
-                data.orderCode = code;
-                data.codeList = _codelist;
-                reqApi({
-                    code: "620205",
-                    json: data
-                }).then(function() {
-                    goPage(0);
-                })
-            }
-            // goPage(1);
+            goPage(1);
         });
 
         $("#to_nex_step_4").on("click", function() {
@@ -697,11 +675,6 @@ $(function() {
                 for (var key in codeList) {
                     _codelist.push(codeList[key]);
                 };
-                for (var key in param) {
-                    if (key == "5-3" || key == "5-4") {
-                        _codelist.push(param[key]);
-                    }
-                };
 
                 data['orderCode'] = code;
                 data['map'] = map;
@@ -728,13 +701,13 @@ $(function() {
     }
 
     function validatePage1() {
-        var ele = $("#1-2");
+        var ele = $("#1-02");
         var code = ele.attr("data-code");
         if (!code) {
             toastr.info("衬衫面料不能为空");
             return false;
         }
-        param['1-2'] = code;
+        param['1-02'] = code;
         return true;
     }
 
@@ -806,5 +779,4 @@ $(function() {
             return OSS.picBaseUrl + "/" + src;
         }
     }
-
 });

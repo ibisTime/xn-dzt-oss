@@ -43,10 +43,6 @@ $(function() {
         formatter: dateFormat,
         readonly: true
     }, {
-        title: "量体嘱咐",
-        field: "applyNote",
-        readonly: true
-    }, {
         title: "选择量体师",
         type: "citySelect",
         field: "liangti",

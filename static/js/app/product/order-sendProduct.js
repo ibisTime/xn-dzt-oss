@@ -38,10 +38,6 @@ $(function() {
             formatter: dateFormat,
             readonly: true
         }, {
-            title: "量体嘱咐",
-            field: "applyNote",
-            readonly: true
-        }, {
             title: "量体师",
             type: "ltUser",
             readonly: true,
@@ -239,9 +235,20 @@ $(function() {
             }),
             reqApi({
                 code: "805906",
-                json: { updater: "" }
+                json: {
+                    updater: "",
+                    parentKey: 'fabric_yarn'
+                }
             }),
-        ).then(function(data0, data1, data3, data4) {
+        ).then(function(data0, data1, data3, data4, data5) {
+            for (var i = 0; i < data5.length; i++) {
+                var dkey = data5[i].dkey;
+                var dvalue = data5[i].dvalue;
+                var parentKey = data5[i].parentKey;
+                if (parentKey === 'fabric_yarn') {
+                    fabricYarns.push(data5[i]);
+                }
+            }
             getData(data0);
             // 面料
             var html = '',
@@ -544,7 +551,7 @@ $(function() {
             self.addClass("act");
 
             $("#select_fab_img").attr("src", self.children("img").attr("src"));
-            $("#selected_fab_full_info").html(name + "　　" + type + "　　");
+            $("#selected_fab_full_info").html(name + "　　" + fabricYarns[type].dvalue + "　　");
 
             $(".modalbg,.more-condition,.modal-chose").removeClass("open");
             $("#1-2").attr("data-code", code).attr("data-name", name);

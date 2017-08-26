@@ -12,7 +12,7 @@ $(function() {
         },
         sync: true
     }).then(function(data) {
-        if (data.ckey == "memIntro" || data.ckey == "memWelfare") {
+        if (data.ckey == "memIntro" || data.ckey == "memWelfare" || "commend") {
             noteConfig.type = "textarea";
         }
     })

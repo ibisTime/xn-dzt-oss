@@ -38,10 +38,6 @@ $(function() {
             formatter: dateFormat,
             readonly: true
         }, {
-            title: "量体嘱咐",
-            field: "applyNote",
-            readonly: true
-        }, {
             title: "量体师",
             field: "ltUser",
             readonly: true,
@@ -64,10 +60,6 @@ $(function() {
         }, {
             title: "收件人联系方式",
             field: 'reMobile',
-            readonly: true
-        }, {
-            title: "收件人地址",
-            field: "reAddress",
             readonly: true
         }, {
             title: "备注",
@@ -167,7 +159,7 @@ $(function() {
     });
 
     var ids = ["4-01", "4-02", "4-03", "4-04", "4-05", "4-06", "4-07", "4-08", '4-09', '4-10', '4-11', '4-12'];
-    var ids1 = ["1-01", "1-03", "1-04", "1-05", "1-06", "1-07", "1-08", "5-2", "5-3", "5-4"];
+    var ids1 = ["1-01", "1-03", "1-04", "1-05", "1-06", "1-07", "1-08", "5-02", "5-03", "5-04"];
     var param = {};
     var codeList = {};
     var globalDicts = {};
@@ -199,9 +191,20 @@ $(function() {
             }),
             reqApi({
                 code: "805906",
-                json: { updater: "" }
+                json: {
+                    updater: "",
+                    parentKey: "fabric_yarn"
+                }
             }),
         ).then(function(data0, data1, data3, data4, data5) {
+            for (var i = 0; i < data5.length; i++) {
+                var dkey = data5[i].dkey;
+                var dvalue = data5[i].dvalue;
+                var parentKey = data5[i].parentKey;
+                if (parentKey === 'fabric_yarn') {
+                    fabricYarns.push(data5[i]);
+                }
+            }
             getData(data0);
             // 面料
             var html = '',
@@ -320,8 +323,6 @@ $(function() {
                     globalDicts['4-12'] = [];
                 }
                 globalDicts['4-12'].push(arr[i]);
-            } else if (parentKey === 'fabric_yarn') {
-                fabricYarns.push(arr[i]);
             }
         }
         createPage1();
@@ -339,7 +340,6 @@ $(function() {
             } else {
                 $("#" + spec.type).val(spec.code).prop("disabled", 1);
             }
-
         });
         $("#jsForm").off("click");
         first = false;
@@ -458,7 +458,6 @@ $(function() {
         // 页面参数按钮点击
         $("#jsForm").on("click", ".param", function(e) {
 
-            // if (衬衫订单 && 状态是已支付 || (h+订单 && 状态是未支付) || (h+订单 && 状态是已支付 && id.split("-")[0] != "1"))
             var self = $(this);
             self.addClass("act").find("span").addClass("show")
                 .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
@@ -506,11 +505,11 @@ $(function() {
             self.addClass("act");
 
             $("#select_fab_img").attr("src", self.children("img").attr("src"));
-            $("#selected_fab_full_info").html(name + "　　" + type + "　　");
+            $("#selected_fab_full_info").html(name + "　　" + fabricYarns[type].dvalue + "　　");
 
             $(".modalbg,.more-condition,.modal-chose").removeClass("open");
-            $("#1-2").attr("data-code", code).attr("data-name", name);
-            codeList['1-2'] = code;
+            $("#1-02").attr("data-code", code).attr("data-name", name);
+            codeList['1-02'] = code;
         });
         // 点击背景隐藏面料弹出框
         $(".modalbg").click(function() {
@@ -564,7 +563,7 @@ $(function() {
 
         $("#form-tab2").validate({
             'rules': {
-                '2-01': {
+                '2-1': {
                     required: true,
                     max: 60,
                     min: 30
@@ -572,7 +571,7 @@ $(function() {
                 // '2-11': {
                 //     required: true
                 // },
-                '2-02': {
+                '2-2': {
                     required: true,
                     max: 180,
                     min: 60
@@ -580,7 +579,7 @@ $(function() {
                 // '2-12': {
                 //     required: true
                 // },
-                '2-03': {
+                '2-3': {
                     required: true,
                     max: 170,
                     min: 50
@@ -588,7 +587,7 @@ $(function() {
                 // '2-13': {
                 //     required: true
                 // },
-                '2-04': {
+                '2-4': {
                     required: true,
                     max: 170,
                     min: 50
@@ -596,7 +595,7 @@ $(function() {
                 // '2-14': {
                 //     required: true
                 // },
-                '2-05': {
+                '2-5': {
                     required: true,
                     max: 70,
                     min: 35
@@ -604,7 +603,7 @@ $(function() {
                 // '2-15': {
                 //     required: true
                 // },
-                '2-06': {
+                '2-6': {
                     required: true,
                     max: 90,
                     min: 50
@@ -612,7 +611,7 @@ $(function() {
                 // '2-16': {
                 //     required: true
                 // },
-                '2-07': {
+                '2-7': {
                     required: true,
                     max: 80,
                     min: 15
@@ -620,7 +619,7 @@ $(function() {
                 // '2-17': {
                 //     required: true
                 // },
-                '2-08': {
+                '2-8': {
                     required: true,
                     max: 65,
                     min: 20
@@ -628,7 +627,7 @@ $(function() {
                 // '2-18': {
                 //     required: true
                 // },
-                '2-09': {
+                '2-9': {
                     required: true,
                     max: 30,
                     min: 15
@@ -638,9 +637,32 @@ $(function() {
                 // },
             }
         });
+
+        $("#form-tab3").validate({
+            'rules': {
+                '4-3': {
+                    min: 10,
+                    max: 100,
+                    number: true,
+                    // required: true
+                },
+                '4-4': {
+                    min: 15,
+                    max: 70,
+                    number: true,
+                    // required: true
+                },
+                '4-2': {
+                    min: 10,
+                    max: 100,
+                    number: true,
+                    // required: true
+                }
+            }
+        });
         $("#form-tab4").validate({
             'rules': {
-                '5-01': {
+                '5-1': {
                     required: true,
                     maxlength: 10,
                     isNotFace: true
@@ -649,17 +671,17 @@ $(function() {
         });
         $("#form-tab5").validate({
             'rules': {
-                '6-01': {
+                '6-1': {
                     required: true,
                     maxlength: 5,
                     number: true
                 },
-                '6-04': {
+                '6-4': {
                     required: true,
                     maxlength: 255,
                     isNotFace: true
                 },
-                '6-05': {
+                '6-5': {
                     maxlength: 255,
                     isNotFace: true,
                     required: true,
@@ -681,7 +703,6 @@ $(function() {
                     _codelist.push(codeList[key]);
                 };
 
-
                 data['orderCode'] = code;
                 data['map'] = map;
                 data['codeList'] = _codelist
@@ -696,6 +717,7 @@ $(function() {
             }
         });
     }
+
 
 
     function goPage(index) {

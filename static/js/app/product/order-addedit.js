@@ -67,7 +67,7 @@ $(function() {
             data.ltArea = data.area;
             var height = data.height;
             var weight = data.weight;
-            data.map = { "6-2": height, "6-3": weight };
+            data.map = { "6-02": height, "6-03": weight };
             return data
         }
     });

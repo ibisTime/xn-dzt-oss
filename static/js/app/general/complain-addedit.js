@@ -2,9 +2,11 @@ $(function() {
     var commenter = getQueryString('commenter');
     var code = getQueryString('code');
     var view = getQueryString('v');
-
-
-    var fields = [{
+    var columns = [{
+        field: '',
+        title: '',
+        checkbox: true
+    }, {
         field: 'commentMobile',
         title: '留言人',
         formatter: function(v, data) {
@@ -15,13 +17,11 @@ $(function() {
             } else {
                 return data.commenter
             }
-        },
-        readonly: true
+        }
     }, {
         field: "content",
         title: "内容",
-        type: "textarea",
-        readonly: true
+        type: "textarea"
     }, {
         field: 'status',
         title: '状态',
@@ -30,53 +30,23 @@ $(function() {
         data: {
             "0": "未读",
             "1": "已读"
+        }
+    }, {
+        title: '备注',
+        field: 'remark'
+    }];
+
+    buildList({
+        columns: columns,
+        pageCode: '620149',
+        searchParams: {
+            companyCode: OSS.company,
+            type: "0",
+            receiver: "0",
+            commenter: commenter
         },
-        readonly: true
-    }, {
-        title: "回复内容",
-        field: "content",
-        required: true,
-        type: "textarea",
-        normalArea: true,
-        readonly: false,
-        maxlength: 255
-    }];
-    var options = {
-        fields: fields,
-        code: code,
-        detailCode: '620146'
-    };
-    options.buttons = [{
-        title: "回复",
-        handler: function() {
-            if ($('#jsForm').valid()) {
-                var data = {};
-                data['code'] = code;
-                var data = $('#jsForm').serializeObject();
-                data["commenter"] = "0";
-                data["receiver"] = commenter;
-                reqApi({
-                    code: "620141",
-                    json: data
-                }).done(function() {
-                    sucDetail();
-                });
-                var json = {};
-                json.code = code;
-                json.lookUser = "0"
-                reqApi({
-                    code: "620143",
-                    json: json
-                }).done(function() {
-                    goBack();
-                });
-            }
+        beforeDetail: function(data) {
+            window.location.href = 'complain_read.html?code=' + data.code;
         }
-    }, {
-        title: "返回",
-        handler: function() {
-            goBack();
-        }
-    }];
-    buildDetail(options);
+    });
 });

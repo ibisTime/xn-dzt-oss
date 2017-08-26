@@ -38,10 +38,6 @@ $(function() {
             formatter: dateFormat,
             readonly: true
         }, {
-            title: "量体嘱咐",
-            field: "applyNote",
-            readonly: true
-        }, {
             title: '价格',
             field: "amount",
             formatter: moneyFormat,

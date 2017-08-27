@@ -15,10 +15,12 @@ $(function() {
         title: '角色',
         field: 'roleCode',
         required: true,
-        type: 'select',
-        listCode: '805021',
-        keyName: 'code',
-        valueName: 'name'
+        hidden: true,
+        // type: 'select',
+        value: "ZTSR2017041310190267791"
+            // listCode: '805021',
+            // keyName: 'code',
+            // valueName: 'name'
     }, {
         title: '备注',
         field: 'remark',

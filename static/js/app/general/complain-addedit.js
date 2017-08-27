@@ -1,5 +1,21 @@
 $(function() {
-    var commenter = getQueryString('commenter');
+    // var commenter = getQueryString('commenter');
+    // var commentData;
+    // reqApi({
+    //     code: '620149',
+    //     json: {
+    //         companyCode: OSS.company,
+    //         type: "0",
+    //         receiver: "0",
+    //         commenter: commenter,
+    //         limit: "100",
+    //         start: "0"
+    //     }
+    // }).then(function(data) {
+    //     commentData = data.list;
+    //     console.log(commentData);
+
+    // });
     var code = getQueryString('code');
     var view = getQueryString('v');
     var columns = [{

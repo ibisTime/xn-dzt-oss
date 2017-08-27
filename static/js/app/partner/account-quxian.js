@@ -1,17 +1,9 @@
 $(function() {
     var code = getQueryString('code');
-    var view = !!getQueryString('v');
-    var userId = sessionStorage.getItem('userId');
-    var accountNumber;
-    reqApi({
-        code: "802503",
-        json: { userId: sessionStorage.getItem('userId') },
-        sync: true
-    }).then(function(data) {
-        accountNumber = data[0].accountNumber;
-    });
+    var accountAmount = getQueryString('accountAmount')
+    var accountNumber = getQueryString('accountNumber');
 
-
+    $("#accountAmount").html("账户余额：" + accountAmount + "元");
     var fields = [{
         field: 'bizType',
         type: 'hidden',
@@ -49,7 +41,7 @@ $(function() {
         code: code,
         addCode: '802751',
         detailCode: '802756',
-        view: view,
+
         beforeSubmit: function(data) {
             data.applyUser = getUserId();
             return data;

@@ -26,7 +26,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-Hhaccess").text("￥" +(data.totalAmount / 1000).toFixed(2));
+        $("#amount-Hhaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
     });
     reqApi({
         code: '802900',
@@ -54,5 +54,13 @@ $(function() {
         }
     }).done(function(data) {
         $("#amount-quxianaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
+    });
+    reqApi({
+        code: '802503',
+        json: {
+            userId: OSS.SYS_USER
+        }
+    }).done(function(data) {
+        $("#amount-PTquaccess").text("￥" + (data[0].amount / 1000).toFixed(2));
     });
 });

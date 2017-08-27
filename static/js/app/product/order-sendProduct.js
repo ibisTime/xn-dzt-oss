@@ -121,6 +121,7 @@ $(function() {
         handler: function() {
             if ($('#jsForm1').valid()) {
                 var data = $('#jsForm1').serializeObject();
+                // data.logisticsCompany = ("#logisticsCompany  option:selected").text();
                 $('#jsForm1').find('.btn-file [type=file]').parent().next().each(function(i, el) {
                     var values = [];
                     var imgs = $(el).find('.img-ctn');

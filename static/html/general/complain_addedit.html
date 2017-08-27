@@ -1,9 +1,12 @@
 <link rel="import" href="../head.html?__inline">
 <script src="../../js/app/general/complain-addedit1.js"></script>
 <style>
-    .commentMobile {
-        /*text-align: center;
-        margin-left: 30px;*/
+    .commentMobile,
+    .commentName {
+        font-size: 14px;
+        margin-top: 20px;
+        margin-left: 20px;
+        background: url(/static/images/righttop.gif);
     }
 </style>
 <!--<div class="place">
@@ -12,14 +15,15 @@
     </ul>
 </div>-->
 <!--<div class="content">
-    <div>
-        <span class="commentMobile">留言人：</span>
-        <span id='commentMobile'></span>
-        <span>留言内容：</span>
+    <div class="commenter">
+        <label class="commentMobile">留言人：</label>
+        <span id='commentName' class="commentName"></span>
+        <label class="commentMobile">留言内容：</label>
         <div class="content" id="content"></div>
     </div>
-    <div>
-        <span>回复：</span>
+    <div class="commentReceiver">
+        <label class="">回复人</label>
+        <span>回复内容：</span>
         <form id="jsForm" name="jsForm">
             <input class="commentReceiver" id="commentReceiver" name="commentReceiver"></input>
         </form>

@@ -71,6 +71,10 @@ $(function() {
         router: 'parameter',
         columns: columns,
         pageCode: '620050',
+        searchParams: {
+            orderColumn: "code",
+            orderDir: "desc"
+        },
         beforeDelete: function(data) {
             if (data.status != 0) {
                 toastr.warning("只有草稿状态，才可以删除");

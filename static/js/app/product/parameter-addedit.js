@@ -41,7 +41,7 @@ $(function() {
         single: true
     }, {
         title: "工艺选中图片",
-        field: "advPic",
+        field: "selected",
         type: "img",
         required: true,
         single: true

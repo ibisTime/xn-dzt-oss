@@ -65,6 +65,7 @@ $(function() {
         field: "pic",
         type: "img",
         required: true,
+        single: true,
         readonly: view
     }, {
         title: 'url地址',

@@ -22,8 +22,8 @@ $(function() {
             userId: userId
         },
         keyName: 'accountNumber',
-        valueName: '{{realName.DATA}} - {{typeName.DATA}}-{{currencyName.DATA}}',
-        searchName: 'realName',
+        valueName: '{{mobile.DATA}} - {{typeName.DATA}}-{{currencyName.DATA}}',
+        searchName: 'mobile',
         help: '支持户名查询'
     }, {
         field: 'amount',

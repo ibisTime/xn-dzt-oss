@@ -6,26 +6,12 @@ $(function() {
         checkbox: true
     }, {
         title: "订单编号",
-        field: "code",
-        search: true
+        field: "code"
     }, {
-        title: "订单状态",
-        field: "status",
-        type: "select",
-        key: "order_status",
-        data: {
-            "1": "待量体",
-            "2": "已定价",
-            "3": "已支付",
-            "4": "待复核",
-            "5": "待生产",
-            "6": "生产中",
-            "7": "已发货",
-            "8": "已收货",
-            "9": '已取消'
-        },
-        formatter: Dict.getNameForList("order_status"),
-        search: true
+        title: "订单编号",
+        field: "codeForQuery",
+        search: true,
+        visible: false
     }, {
         field: 'applyName',
         title: '下单用户',
@@ -56,6 +42,24 @@ $(function() {
         title: "订单金额",
         field: "amount",
         formatter: moneyFormat
+    }, {
+        title: "订单状态",
+        field: "status",
+        type: "select",
+        key: "order_status",
+        data: {
+            "1": "待量体",
+            "2": "已定价",
+            "3": "已支付",
+            "4": "待复核",
+            "5": "待生产",
+            "6": "生产中",
+            "7": "已发货",
+            "8": "已收货",
+            "9": "已评价"
+        },
+        formatter: Dict.getNameForList("order_status"),
+        search: true
     }, {
         title: "备注",
         field: "remark"
@@ -99,6 +103,58 @@ $(function() {
             return;
         }
         window.location.href = '../product/order_partnerCheck.html?code=' + selRecords[0].code;
+    });
+    //取消
+    $('#cancelBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status == 8 || selRecords[0].status == 9) {
+            toastr.info("不是可以取消订单的状态");
+            return;
+        }
+        var dw = dialog({
+            content: '<form class="pop-form" id="popForm" novalidate="novalidate">' +
+                '<ul class="form-info" id="formContainer"><li style="text-align:center;font-size: 15px;">取消订单</li>' +
+                '<li><label>*备注：</label><input id="remark" name="remark" class="control-def"></input></li>' +
+                '<li><input id="subBtn" name="subBtn"type="button" class="btn margin-left-100" value="确定"><li><input id="goBackBtn" name="goBackBtn" type="button" class=" btn margin-left-20 goBack" value="返回"></ul>' +
+                '</form>'
+        });
+        dw.showModal();
+        $(document).on('click', '#subBtn', function() {
+            $('#popForm').validate({
+                'rules': {
+                    remark: {
+                        required: true,
+                        maxlength: 255
+                    }
+                }
+            });
+            if ($('#popForm').valid()) {
+                var data = $('#popForm').serializeObject();
+                data.orderCode = selRecords[0].code;
+                data.remark = $("#remark").val();
+                reqApi({
+                    code: "620216",
+                    json: data
+                }).done(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    setTimeout(function() {
+                        dw.close().remove();
+                    }, 500)
+                });
+            }
+        });
+        $(document).on('click', '#goBackBtn', function() {
+            setTimeout(function() {
+                dw.close().remove();
+            }, 500)
+
+        });
+        dw.__center();
     });
 
 });

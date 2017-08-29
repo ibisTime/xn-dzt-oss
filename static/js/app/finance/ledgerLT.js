@@ -1,7 +1,22 @@
 $(function() {
     var currency = getQueryString('currency') || "";
     var accountNumber = getQueryString('accountNumber') || "";
-    var kind = getQueryString('kind') || "";
+    var bizTypeDict = {
+        "11": "充值",
+        "-11": "取现",
+        "19": "蓝补",
+        "-19": "红冲",
+        "GW": "购物付款",
+        "GWTK": "购物退款",
+        "LTSFC": "量体师分成",
+        "SCTJ": "首次推荐加积分",
+        "DCTJ": "多次推荐加积分",
+        "YHJY": "用户消费送积分",
+        "02": "每日签到",
+        "HL": "红冲蓝补",
+        "201": "同币种的划转",
+        "200": "币种兑换"
+    };
 
 
 
@@ -30,8 +45,7 @@ $(function() {
         title: '业务类型',
         type: 'select',
         search: true,
-        key: 'biz_type',
-        formatter: Dict.getNameForList('biz_type'),
+        data: bizTypeDict
     }, {
         field: 'transAmount',
         title: '变动金额',
@@ -70,7 +84,7 @@ $(function() {
         }
     });
 
-    // $('.tools .toolbar').html('<li style="display:block;" id="backBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
+
     $('#goBackBtn').on('click', function() {
         goBack();
     });

@@ -1,5 +1,4 @@
 ﻿@charset "utf-8";
-
 * {
     border: 0;
     margin: 0;
@@ -40,14 +39,18 @@ img {
     max-width: 800px;
 }
 
-dl, dt, dd, span {
+dl,
+dt,
+dd,
+span {
     font-size: 9pt;
     margin: 0;
     padding: 0;
     display: block
 }
 
-a, a:focus {
+a,
+a:focus {
     text-decoration: none;
     color: #000;
     outline: none;
@@ -130,11 +133,13 @@ body p {
     width: 100% !important;
 }
 
-.form-info .btn + .btn {
+.form-info .btn+.btn {
     margin-left: 60px;
 }
 
+
 /*遮罩层*/
+
 .mask-pop {
     left: 0;
     top: 0;
@@ -146,7 +151,9 @@ body p {
     background: rgba(0, 0, 0, .3) url(../images/loader.gif) center center no-repeat;
 }
 
+
 /*控件样式*/
+
 input.error {
     border-color: red;
     margin: 0;
@@ -216,7 +223,9 @@ textarea.error {
     width: 504px;
 }
 
+
 /*时间控件样式*/
+
 .lay-input {
     position: relative;
     height: 34px;
@@ -248,7 +257,9 @@ textarea.error {
     border: none;
 }
 
+
 /*导航栏*/
+
 .place {
     margin-top: -10px;
     height: 40px;
@@ -274,7 +285,9 @@ textarea.error {
     background: none;
 }
 
+
 /*搜索表单*/
+
 .right-info {
     padding: 8px;
 }
@@ -332,7 +345,9 @@ textarea.error {
     margin-right: 8px;
 }
 
+
 /*操作按钮*/
+
 .tools {
     clear: both;
     height: 0px;
@@ -361,7 +376,9 @@ textarea.error {
     margin-right: 5px;
 }
 
+
 /*操作按钮-二级页面*/
+
 .toolbar_children {
     float: left;
 }
@@ -384,7 +401,9 @@ textarea.error {
     margin-top: 5px;
 }
 
+
 /*编辑表单*/
+
 .form-body {
     padding: 10px 18px;
 }
@@ -430,7 +449,7 @@ textarea.error {
     clear: both;
 }
 
-.form-info input[type=checkbox] + input[type=checkbox] {
+.form-info input[type=checkbox]+input[type=checkbox] {
     margin-left: 20px;
 }
 
@@ -533,7 +552,9 @@ textarea.error {
     display: inline-block
 }
 
+
 /*Tab切换页*/
+
 .itab {
     height: 36px;
     border-bottom: solid 1px #d0dee5;
@@ -583,7 +604,9 @@ textarea.error {
     padding-left: 3px;
 }
 
+
 /*table*/
+
 .filetable {
     width: 100%;
 }
@@ -622,7 +645,9 @@ td {
     word-wrap: break-word
 }
 
+
 /*table*/
+
 .common-table {
     width: 1000px;
 }
@@ -648,7 +673,9 @@ td {
     text-indent: 0px;
 }
 
+
 /*imgtable*/
+
 .imgtable {
     width: 95%;
     border: solid 1px #cbcbcb;
@@ -698,7 +725,9 @@ td {
     background: #e5ebee;
 }
 
+
 /*布局*/
+
 .flex {
     display: -webkit-box;
     display: flex;
@@ -751,7 +780,7 @@ td {
     justify-content: space-between;
 }
 
-.flex > a {
+.flex>a {
     display: block;
 }
 
@@ -792,13 +821,14 @@ a:hover {
     width: 110px;
 }
 
-.btn-file:active, .btn-file:focus {
+.btn-file:active,
+.btn-file:focus {
     color: #333;
     background-color: #e6e6e6;
     border-color: #adadad;
 }
 
-.btn-file > input {
+.btn-file>input {
     position: absolute;
     top: 0;
     right: 0;
@@ -812,7 +842,7 @@ a:hover {
     cursor: pointer;
 }
 
-.btn-file > span {
+.btn-file>span {
     cursor: pointer;
     text-align: center;
     width: 100%;
@@ -822,7 +852,7 @@ input[type=file] {
     display: block;
 }
 
-.btn-file + img {
+.btn-file+img {
     display: block;
     max-width: 300px;
     position: relative;
@@ -832,7 +862,7 @@ input[type=file] {
     max-width: 300px;
 }
 
-.btn-file + img:hover {
+.btn-file+img:hover {
     outline: 1px solid #949494;
     box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.072);
 }
@@ -971,7 +1001,7 @@ li input[type="radio"] {
     color: red;
 }
 
-.img-ctn img + .zmdi-close-circle-o {
+.img-ctn img+.zmdi-close-circle-o {
     display: none;
     padding-left: 0px;
     margin: auto;
@@ -998,11 +1028,13 @@ li input[type="radio"] {
     cursor: pointer;
 }
 
-.img-ctn:hover .zmdi-close-circle-o, .img-ctn:hover .zmdi-download {
+.img-ctn:hover .zmdi-close-circle-o,
+.img-ctn:hover .zmdi-download {
     display: block;
 }
 
-.img-ctn .zmdi-close-circle-o:hover, .img-ctn .zmdi-download:hover {
+.img-ctn .zmdi-close-circle-o:hover,
+.img-ctn .zmdi-download:hover {
     display: block;
 }
 
@@ -1010,7 +1042,8 @@ li input[type="radio"] {
     -webkit-filter: grayscale(1);
 }
 
-.img-ctn + .img-ctn, .form-info img + img {
+.img-ctn+.img-ctn,
+.form-info img+img {
     margin-left: 10px;
 }
 
@@ -1025,20 +1058,24 @@ li input[type="radio"] {
 .clearfix {
     zoom: 1
 }
-.t_3dot{
+
+.t_3dot {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.w100p{
-	width: 100px;
+
+.w100p {
+    width: 100px;
 }
+
 .center-img-wrap {
     width: 100px;
     height: 100px;
     overflow: hidden;
     position: relative;
 }
+
 .center-img {
     position: absolute;
     top: 50%;
@@ -1048,7 +1085,8 @@ li input[type="radio"] {
     -ms-transform: translate(-50%, -50%);
     -moz-transform: translate(-50%, -50%);
 }
-.lay-input1{
+
+.lay-input1 {
     width: 175px !important;
     background-position: 145px center !important;
 }

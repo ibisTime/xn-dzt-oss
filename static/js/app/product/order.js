@@ -6,8 +6,12 @@ $(function() {
         checkbox: true
     }, {
         title: "订单编号",
-        field: "code",
-        search: true
+        field: "code"
+    }, {
+        title: "订单编号",
+        field: "codeForQuery",
+        search: true,
+        visible: false
     }, {
         field: 'applyName',
         title: '下单用户',
@@ -20,24 +24,6 @@ $(function() {
     }, {
         title: "联系方式",
         field: "applyMobile"
-    }, {
-        title: "订单状态",
-        field: "status",
-        type: "select",
-        key: "order_status",
-        data: {
-            "1": "待量体",
-            "2": "已定价",
-            "3": "已支付",
-            "4": "待复核",
-            "5": "待生产",
-            "6": "生产中",
-            "7": "已发货",
-            "8": "已收货",
-            "9": "已评价"
-        },
-        formatter: Dict.getNameForList("order_status"),
-        search: true
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
@@ -56,6 +42,24 @@ $(function() {
         title: "订单金额",
         field: "amount",
         formatter: moneyFormat
+    }, {
+        title: "订单状态",
+        field: "status",
+        type: "select",
+        key: "order_status",
+        data: {
+            "1": "待量体",
+            "2": "已定价",
+            "3": "已支付",
+            "4": "待复核",
+            "5": "待生产",
+            "6": "生产中",
+            "7": "已发货",
+            "8": "已收货",
+            "9": "已评价"
+        },
+        formatter: Dict.getNameForList("order_status"),
+        search: true
     }, {
         title: "备注",
         field: "remark"
@@ -209,37 +213,42 @@ $(function() {
         }
         var dw = dialog({
             content: '<form class="pop-form" id="popForm" novalidate="novalidate">' +
-                '<ul class="form-info" id="formContainer"><li style="text-align:center;font-size: 15px;">取消订单</li></ul>' +
+                '<ul class="form-info" id="formContainer"><li style="text-align:center;font-size: 15px;">取消订单</li>' +
+                '<li><label>*备注：</label><input id="remark" name="remark" class="control-def"></input></li>' +
+                '<li><input id="subBtn" name="subBtn"type="button" class="btn margin-left-100" value="确定"><li><input id="goBackBtn" name="goBackBtn" type="button" class=" btn margin-left-20 goBack" value="返回"></ul>' +
                 '</form>'
         });
         dw.showModal();
-        buildDetail({
-            fields: [{
-                field: 'remark',
-                title: '备注',
-                maxlength: 255
-            }],
-            container: $('#formContainer'),
-            buttons: [{
-                title: '确定',
-                handler: function() {
-                    var data = $('#popForm').serializeObject();
-                    data.orderCode = selRecords[0].code;
-                    data.remark = $("#remark").val();
-                    reqApi({
-                        code: "620216",
-                        json: data
-                    }).done(function() {
-                        sucList()
-                    });
+        $(document).on('click', '#subBtn', function() {
+            $('#popForm').validate({
+                'rules': {
+                    remark: {
+                        required: true,
+                        maxlength: 255
+                    }
+                }
+            });
+            if ($('#popForm').valid()) {
+                var data = $('#popForm').serializeObject();
+                data.orderCode = selRecords[0].code;
+                data.remark = $("#remark").val();
+                reqApi({
+                    code: "620216",
+                    json: data
+                }).done(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    setTimeout(function() {
+                        dw.close().remove();
+                    }, 500)
+                });
+            }
+        });
+        $(document).on('click', '#goBackBtn', function() {
+            setTimeout(function() {
+                dw.close().remove();
+            }, 500)
 
-                }
-            }, {
-                title: '返回',
-                handler: function() {
-                    dw.close().remove();
-                }
-            }]
         });
         dw.__center();
     });
@@ -262,7 +271,7 @@ $(function() {
             }, function() {});
 
         } else {
-            toastr.warning('不是可以归档的状态');
+            toastr.warning('只有已评价的状态才可以归档');
             return;
         }
 

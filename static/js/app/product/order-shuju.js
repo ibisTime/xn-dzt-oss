@@ -606,8 +606,11 @@ $(function() {
                     if (key == "5-02" || key == "5-03" || key == "5-04") {
                         _codelist.push(param[key]);
                     }
-                };
 
+                };
+                // map.attr("5-02", "");
+                // map.attr("5-03", "");
+                // map.attr("5-04", "")
                 data['orderCode'] = code;
                 data['map'] = map;
                 data['codeList'] = _codelist

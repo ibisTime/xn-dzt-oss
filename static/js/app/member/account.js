@@ -1,5 +1,7 @@
 $(function() {
     var userId = getQueryString('userId') || '';
+    var kind = getQueryString('kind') || '';
+
 
     var columns = [{
         field: '',
@@ -7,15 +9,14 @@ $(function() {
         checkbox: true
     }, {
         field: 'realName',
-        title: '户名',
-        search: true
+        title: '户名'
     }, {
         field: 'currency',
         title: '币种',
         type: 'select',
         key: 'currency_type',
         formatter: Dict.getNameForList('currency_type'),
-        search: true
+        // search: true
     }, {
         field: 'accountNumber',
         title: '账号'
@@ -33,7 +34,7 @@ $(function() {
         type: 'select',
         key: 'account_status',
         formatter: Dict.getNameForList('account_status'),
-        search: true
+        // search: true
     }, {
         field: 'createDatetime',
         title: '创建时间',
@@ -44,12 +45,13 @@ $(function() {
         columns: columns,
         pageCode: '802503',
         searchParams: {
-            userId: userId
+            userId: userId,
+            currency: "CNY"
         }
     });
 
 
-    $('.tools .toolbar').html('<li style="display:block;" id="ledgerBtn"><span><img src="/static/images/t01.png"></span>查看明细</li>');
+    $('.tools .toolbar').html('<li style="display:block;" id="ledgerBtn"><span><img src="/static/images/t01.png"></span>查看明细</li><li style="display:block;" id="goBackBtn"><span><img src="/static/images/t01.png"></span>返回</li>');
 
     $('#ledgerBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -58,5 +60,14 @@ $(function() {
             return;
         }
         window.location.href = "ledger.html?accountNumber=" + selRecords[0].accountNumber;
+    });
+    $('#goBackBtn').click(function() {
+        if (kind == "B") {
+            window.location.href = "quantity.html";
+        } else if (kind == "C") {
+            window.location.href = "custom.html";
+        } else if (kind == "PA") {
+            window.location.href = "partner.html";
+        }
     });
 });

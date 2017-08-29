@@ -55,10 +55,11 @@ $(function() {
                     $("#jsForm").css("display", "block");
                     $("#btn-0").css("display", "none");
                     $("#btn-1").css("display", "none");
-                    $("#btn-1").css("display", "none");
                     $("#tab11").css("display", "none");
                 } else if (data.type == 0) {
                     $("#jsForm").css("display", "none");
+                    $("#btn-0").css("display", "block");
+                    $("#btn-1").css("display", "block").addClass("gobackBtn");
                 }
             }
         }

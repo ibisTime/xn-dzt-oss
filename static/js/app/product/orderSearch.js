@@ -6,8 +6,12 @@ $(function() {
         checkbox: true
     }, {
         title: "订单编号",
-        field: "code",
-        search: true
+        field: "code"
+    }, {
+        title: "订单编号",
+        field: "codeForQuery",
+        search: true,
+        visible: false
     }, {
         field: 'applyName',
         title: '下单用户',
@@ -20,15 +24,6 @@ $(function() {
         field: "ltName",
         search: true,
         visible: false
-    }, {
-        title: "订单状态",
-        field: "status",
-        type: "select",
-        data: {
-            "10": "已归档",
-            "11": "取消订单"
-        },
-        search: true
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
@@ -47,6 +42,15 @@ $(function() {
         title: "订单金额",
         field: "amount",
         formatter: moneyFormat
+    }, {
+        title: "订单状态",
+        field: "status",
+        type: "select",
+        data: {
+            "10": "已归档",
+            "11": "取消订单"
+        },
+        search: true
     }, {
         title: "备注",
         field: "remark"

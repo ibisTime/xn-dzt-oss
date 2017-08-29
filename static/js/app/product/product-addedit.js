@@ -36,18 +36,18 @@ $(function() {
         maxlength: 255,
         readonly: view
     }, {
-        title: "广告图",
-        field: "advPic",
-        type: "img",
-        required: true,
-        readonly: view
-    }, {
         field: 'pic',
         title: '缩略图',
         type: "img",
         required: true,
         readonly: view,
         single: true
+    }, {
+        title: "广告图",
+        field: "advPic",
+        type: "img",
+        required: true,
+        readonly: view
     }, {
         title: "价格",
         field: "price",

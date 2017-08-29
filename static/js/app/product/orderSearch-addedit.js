@@ -107,12 +107,12 @@ $(function() {
             maxlength: 255,
             readonly: true
         }, {
-            title: "评价",
+            title: "评价内容",
             field: "comment",
             readonly: true,
             formatter: function(v, data) {
                 if (v) {
-                    return v
+                    return v.content
                 } else {
                     $("#comment").parent().css("display", "none");
                 }

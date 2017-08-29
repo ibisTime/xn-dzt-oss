@@ -1,6 +1,22 @@
 <link rel="import" href="../head.html?__inline">
-<script src="../../js/app/general/complain-addedit1.js"></script>
+<script src="../../js/app/general/complain-addedit.js"></script>
 <style>
+    .content {
+        border-top: solid 1px #ced9df;
+        border-left: solid 1px #ced9df;
+        border-right: solid 1px #ced9df;
+        border-bottom: solid 1px #ced9df;
+    }
+    
+    .commentContent {
+        border-top: solid 1px #ced9df;
+        border-left: solid 1px #ced9df;
+        border-right: solid 1px #ced9df;
+        border-bottom: solid 1px #ced9df;
+        /*width: 300px;
+        height: 300px;*/
+    }
+    
     .commentMobile,
     .commentName {
         font-size: 14px;
@@ -8,28 +24,39 @@
         margin-left: 20px;
         background: url(/static/images/righttop.gif);
     }
+    
+    .commentReceiver {
+        width: 300px;
+        height: 200px;
+        outline: none;
+        border-top: solid 1px #ced9df;
+        border-left: solid 1px #ced9df;
+        border-right: solid 1px #ced9df;
+        border-bottom: solid 1px #ced9df;
+    }
 </style>
-<!--<div class="place">
+<div class="place">
     <span>位置：</span>
     <ul>
     </ul>
-</div>-->
-<!--<div class="content">
+</div>
+<div class="content">
     <div class="commenter">
-        <label class="commentMobile">留言人：</label>
         <span id='commentName' class="commentName"></span>
-        <label class="commentMobile">留言内容：</label>
-        <div class="content" id="content"></div>
+        <div class="commentContent" id="content"></div>
     </div>
-    <div class="commentReceiver">
+    <div class="comment">
         <label class="">回复人</label>
         <span>回复内容：</span>
         <form id="jsForm" name="jsForm">
-            <input class="commentReceiver" id="commentReceiver" name="commentReceiver"></input>
+            <textarea class="commentReceiver" id="commentReceiver" name="commentReceiver"></textarea>
+            <input type="button" value="回复" class="form-info btn ">
+            <input type="button" value="返回" class="form-info btn">
+
         </form>
     </div>
-</div>-->
-<div class="place">
+</div>
+<!--<div class="place">
     <span>位置：</span>
     <ul>
     </ul>
@@ -41,14 +68,6 @@
 
         </ul>
     </div>
-</form>
-<!--<div class="right-info">
-    <form class="search-form">
-    </form>
-    <div class="tools">
-        <ul class="toolbar">
-        </ul>
-    </div>
-    <table id="tableList"></table>
-</div>-->
+</form>-->
+
 <link rel="import" href="../foot.html?__inline">

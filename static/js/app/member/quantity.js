@@ -9,8 +9,17 @@ $(function() {
         title: '登录名/手机号',
         field: 'mobile'
     }, {
+        title: '登录名/手机号',
+        field: 'mobileForQuery',
+        visible: false,
+        search: true
+    }, {
         title: '姓名',
-        field: 'realName',
+        field: 'realName'
+    }, {
+        title: '姓名',
+        field: 'realNameForQuery',
+        visible: false,
         search: true
     }, {
         title: "辖区",
@@ -125,7 +134,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "account.html?userId=" + selRecords[0].userId;
+        window.location.href = "account.html?userId=" + selRecords[0].userId + "&kind=B";
     });
     //审核
     $('#cheBtn').click(function() {

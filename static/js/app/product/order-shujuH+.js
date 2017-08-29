@@ -564,11 +564,6 @@ $(function() {
         });
         $("#form-tab5").validate({
             'rules': {
-                // '6-01': {
-                //     required: true,
-                //     maxlength: 5,
-                //     number: true
-                // },
                 '6-04': {
                     required: true,
                     maxlength: 255,
@@ -598,24 +593,14 @@ $(function() {
             if (validatePage5()) {
                 var data = {};
                 var data2 = $('#form-tab2').serializeObject();
-                var data3 = $('#form-tab3').serializeObject();
-                var data4 = $('#form-tab4').serializeObject();
                 var data5 = $('#form-tab5').serializeObject();
-                var map = $.extend(param, data2, data3, data4, data5);
-
-                var _codelist = [];
-                for (var key in codeList) {
-                    _codelist.push(codeList[key]);
-                };
-                for (var key in param) {
-                    if (key == "5-02" || key == "5-03" || key == "5-04") {
-                        _codelist.push(param[key]);
-                    }
-                };
+                delete param["5-02"];
+                delete param["5-03"];
+                delete param["5-04"];
+                var map = $.extend(param, data2, data5);
 
                 data['orderCode'] = code;
                 data['map'] = map;
-                data['codeList'] = _codelist
 
                 reqApi({
                     code: "620208",

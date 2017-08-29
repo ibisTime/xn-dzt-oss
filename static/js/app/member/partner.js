@@ -6,11 +6,20 @@ $(function() {
         checkbox: true
     }, {
         title: '登录名',
-        field: 'loginName',
-        search: true
+        field: 'loginName'
+    }, {
+        title: "登录名",
+        field: "loginNameForQuery",
+        search: true,
+        visible: false
     }, {
         title: "姓名",
         field: "realName"
+    }, {
+        title: "姓名",
+        field: "realNameForQuery",
+        search: true,
+        visible: false
     }, {
         title: "辖区",
         type: "select",
@@ -30,7 +39,11 @@ $(function() {
         field: "idNo",
     }, {
         title: '手机号',
-        field: 'mobile',
+        field: 'mobile'
+    }, {
+        title: '手机号',
+        field: 'mobileForQuery',
+        visible: false,
         search: true
     }, {
         title: "状态",
@@ -127,7 +140,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "account.html?userId=" + selRecords[0].userId;
+        window.location.href = "account.html?userId=" + selRecords[0].userId + "&kind=PA";
 
     });
 });

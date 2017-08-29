@@ -9,8 +9,12 @@ $(function() {
         field: "nickname"
     }, {
         title: '手机号',
-        field: 'mobile',
-        search: true
+        field: 'mobile'
+    }, {
+        title: "手机号",
+        field: "mobileForQuery",
+        search: true,
+        visible: false
     }, {
         title: "状态",
         field: "status",
@@ -99,7 +103,7 @@ $(function() {
             toastr.warning("请选择记录");
             return;
         }
-        window.location.href = "account.html?userId=" + selRecords[0].userId;
+        window.location.href = "account.html?userId=" + selRecords[0].userId + "&kind=C";
 
     });
 });

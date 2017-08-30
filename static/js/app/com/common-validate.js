@@ -148,7 +148,6 @@ jQuery.validator.addMethod("idCard", function(value, element) {
 }, "身份证格式不对");
 
 jQuery.validator.addMethod("isNotFace", function(value, element) {
-    //var idCard = /^(\d{6})()?(\d{4})(\d{2})(\d{2})(\d{3})(\w)$/;
     return this.optional(element) || /^[\s0-9a-zA-Z\u4e00-\u9fa5\u00d7\u300a\u2014\u2018\u2019\u201c\u201d\u2026\u3001\u3002\u300b\u300e\u300f\u3010\u3011\uff01\uff08\uff09\uff0c\uff1a\uff1b\uff1f\uff0d\uff03\uffe5\x21-\x7e]*$/.test(value);
 }, "请输入合法字符");
 

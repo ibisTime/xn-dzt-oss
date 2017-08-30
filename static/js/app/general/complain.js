@@ -35,8 +35,8 @@ $(function() {
 
     buildList({
         columns: columns,
-        pageCode: "620145",
-        // pageCode: '620148',
+        // pageCode: "620145",
+        pageCode: '620148',
         searchParams: {
             companyCode: OSS.company,
             type: "0",

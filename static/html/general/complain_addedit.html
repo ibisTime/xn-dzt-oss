@@ -1,11 +1,8 @@
 <link rel="import" href="../head.html?__inline">
-<script src="../../js/app/general/complain-addedit.js"></script>
+<script src="../../js/app/general/complain-addedit1.js"></script>
 <style>
     .content {
-        border-top: solid 1px #ced9df;
-        border-left: solid 1px #ced9df;
-        border-right: solid 1px #ced9df;
-        border-bottom: solid 1px #ced9df;
+        margin-left: 200px;
     }
     
     .commentContent {
@@ -35,19 +32,20 @@
         border-bottom: solid 1px #ced9df;
     }
 </style>
-<div class="place">
+<!--<div class="place">
     <span>位置：</span>
     <ul>
     </ul>
 </div>
 <div class="content">
     <div class="commenter">
+        <label for="">留言人</label>
         <span id='commentName' class="commentName"></span>
+        <label for="">留言内容</label>
         <div class="commentContent" id="content"></div>
     </div>
     <div class="comment">
-        <label class="">回复人</label>
-        <span>回复内容：</span>
+        <span>回复内容</span>
         <form id="jsForm" name="jsForm">
             <textarea class="commentReceiver" id="commentReceiver" name="commentReceiver"></textarea>
             <input type="button" value="回复" class="form-info btn ">
@@ -56,11 +54,11 @@
         </form>
     </div>
 </div>
-<!--<div class="place">
+<div class="place">
     <span>位置：</span>
     <ul>
     </ul>
-</div>
+</div>-->
 <form id="jsForm">
     <div class="form-body">
         <div class="form-title"><span id="page-title"></span></div>
@@ -68,6 +66,6 @@
 
         </ul>
     </div>
-</form>-->
+</form>
 
 <link rel="import" href="../foot.html?__inline">

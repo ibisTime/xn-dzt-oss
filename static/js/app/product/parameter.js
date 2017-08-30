@@ -73,7 +73,7 @@ $(function() {
         pageCode: '620050',
         searchParams: {
             orderColumn: "code",
-            orderDir: "desc"
+            orderDir: "asc"
         },
         beforeDelete: function(data) {
             if (data.status != 0) {

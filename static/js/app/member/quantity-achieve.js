@@ -6,8 +6,12 @@ $(function() {
         checkbox: true
     }, {
         title: "订单编号",
-        field: "code",
-        search: true
+        field: "code"
+    }, {
+        title: "订单编号",
+        field: "codeForQuery",
+        search: true,
+        visible: false
     }, {
         title: "订单状态",
         field: "status",

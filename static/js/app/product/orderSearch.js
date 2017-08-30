@@ -27,7 +27,9 @@ $(function() {
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
-        formatter: dateFormat
+        type: "date",
+        formatter: dateFormat,
+        search: true
     }, {
         title: "量体师",
         field: "ltUser",
@@ -59,6 +61,15 @@ $(function() {
         router: 'orderSearch',
         columns: columns,
         pageCode: '620230',
-        searchParams: { statusList: ["10", "11"] }
+        searchParams: { statusList: ["10", "11"] },
+        beforeSearch: function(data) {
+            if (data.ltDatetime) {
+                console.log(data.ltDatetime)
+                data.ltDatetime = data.ltDatetime.concat(" 00:00:00")
+                return data;
+            } else {
+                return data;
+            }
+        },
     });
 });

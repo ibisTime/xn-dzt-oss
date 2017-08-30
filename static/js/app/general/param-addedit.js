@@ -21,6 +21,7 @@ $(function() {
         title: '参数键',
         field: 'ckey',
         required: true,
+        readonly: true,
         maxlength: 20
     }, noteConfig, {
         title: '参数说明',

@@ -16,6 +16,20 @@ $(function() {
         search: true,
         visible: false
     }, {
+        title: "用户等级",
+        field: "level",
+        type: "select",
+        key: "user_level",
+        formatter: Dict.getNameForList("user_level"),
+        search: true
+    }, {
+        title: "用户活跃度",
+        field: "frequent",
+        type: "select",
+        key: "user_frequent",
+        formatter: Dict.getNameForList("user_frequent"),
+        search: true
+    }, {
         title: "状态",
         field: "status",
         type: "select",

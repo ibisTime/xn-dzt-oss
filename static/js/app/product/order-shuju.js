@@ -265,8 +265,8 @@ $(function() {
             } else {
                 _warp.find("[fab_price_level=" + _dict.dkey + "]").show();
                 for (var j = 0; j < data.length; j++) {
-                    html += '<li data-code="' + data[j].code + '" data-name="' + data[j].code + '" data-type="' + data[j].type + '" class="one_fab">' +
-                        '<img src="' + getImg(data[j].pic) + '"><br>' + data[j].code +
+                    html += '<li data-code="' + data[j].code + '" data-name="' + data[j].modelNum + '" data-type="' + data[j].type + '" class="one_fab">' +
+                        '<img src="' + getImg(data[j].pic) + '"><br>' + data[j].modelNum +
                         '</li>';
                 }
                 $("#" + _dict.dkey).html(html);
@@ -360,15 +360,15 @@ $(function() {
             }
         });
         // 头部tab切换
-        $("#navUl").on("click", "span", function() {
-            var self = $(this),
-                index = self.index();
-            self.addClass("act")
-                .siblings("span.act").removeClass("act");
-            var tabs = $("#jsForm").find(".form-tab");
-            tabs.eq(index).addClass("act")
-                .siblings(".act").removeClass("act");
-        });
+        // $("#navUl").on("click", "span", function() {
+        //     var self = $(this),
+        //         index = self.index();
+        //     self.addClass("act")
+        //         .siblings("span.act").removeClass("act");
+        //     var tabs = $("#jsForm").find(".form-tab");
+        //     tabs.eq(index).addClass("act")
+        //         .siblings(".act").removeClass("act");
+        // });
         // 点击选择面料按钮，弹出面料选择框
         $("#btn_select_fab").click(function() {
             $(".modalbg,.more-condition,.modal-chose").addClass("open");

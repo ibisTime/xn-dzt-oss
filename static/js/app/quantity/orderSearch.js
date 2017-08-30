@@ -22,7 +22,9 @@ $(function() {
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
-        formatter: dateFormat
+        type: "date",
+        formatter: dateFormat,
+        search: true
     }, {
         title: "量体师",
         field: "ltUser",
@@ -61,6 +63,15 @@ $(function() {
         },
         beforeDetail: function(data) {
             window.location.href = '../product/orderSearch_addedit.html?code=' + data.code;
-        }
+        },
+        beforeSearch: function(data) {
+            if (data.ltDatetime) {
+                console.log(data.ltDatetime)
+                data.ltDatetime = data.ltDatetime.concat(" 00:00:00")
+                return data;
+            } else {
+                return data;
+            }
+        },
     });
 });

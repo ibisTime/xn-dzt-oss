@@ -2561,9 +2561,9 @@ function buildDetail1(options) {
             rules[item.field].max = item.max;
         }
 
-        if ('isNotFace' in item) {
-            rules[item.field].isNotFace = item.isNotFace;
-        }
+        // if ('isNotFace' in item) {
+        //     rules[item.field].isNotFace = item.isNotFace;
+        // }
 
         if ('mobile' in item) {
             rules[item.field].mobile = item.mobile;

@@ -61,6 +61,10 @@ $(function() {
         title: "收件人联系方式",
         field: 'reMobile',
         readonly: true
+    }, {
+        title: "备注",
+        field: "remark",
+        maxlength: 255
     }];
 
     var options = {
@@ -75,6 +79,7 @@ $(function() {
             if ($('#jsForm1').valid()) {
                 var data = {};
                 data['orderCode'] = code;
+                data['remark'] = $("#remark").val();
                 reqApi({
                     code: "620209",
                     json: data
@@ -348,8 +353,8 @@ $(function() {
             } else {
                 _warp.find("[fab_price_level=" + _dict.dkey + "]").show();
                 for (var j = 0; j < data.length; j++) {
-                    html += '<li data-code="' + data[j].code + '" data-name="' + data[j].code + '" data-type="' + data[j].type + '" class="one_fab">' +
-                        '<img src="' + getImg(data[j].pic) + '"><br>' + data[j].code +
+                    html += '<li data-code="' + data[j].code + '" data-name="' + data[j].modelNum + '" data-type="' + data[j].type + '" class="one_fab">' +
+                        '<img src="' + getImg(data[j].pic) + '"><br>' + data[j].modelNum +
                         '</li>';
                 }
                 $("#" + _dict.dkey).html(html);

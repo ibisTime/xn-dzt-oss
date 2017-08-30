@@ -12,29 +12,29 @@ $(function() {
         field: 'mobile',
         title: '手机号',
     }, {
-        field: 'userRefereeMobile',
-        title: '推荐人'
-    }, {
-        field: 'userRefereeKind',
-        title: '推荐人类型',
-        type: "select",
-        data: {
-            "B": "B端用户",
-            "PA": "合伙人",
-            "C": "C端用户"
+        field: 'refereeUser',
+        title: '推荐人',
+        formatter: function(v, data) {
+            return refereeUser.nickname;
         }
     }, {
-        //     field: 'idKind',
-        //     title: '证件类型',
-        //     type: 'select',
-        //     key: 'id_kind'
-        // }, {
-        //     field: 'idNo',
-        //     title: '证件号',
-        // }, {
         field: 'createDatetime',
         title: '注册时间',
         formatter: dateTimeFormat
+    }, {
+        title: "用户等级",
+        field: "level",
+        type: "select",
+        key: "user_level",
+        formatter: Dict.getNameForList("user_level"),
+        search: true
+    }, {
+        title: "用户活跃度",
+        field: "frequent",
+        type: "select",
+        key: "user_frequent",
+        formatter: Dict.getNameForList("user_frequent"),
+        search: true
     }, {
         title: "状态",
         field: "status",

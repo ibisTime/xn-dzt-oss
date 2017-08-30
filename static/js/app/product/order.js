@@ -27,7 +27,9 @@ $(function() {
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
-        formatter: dateFormat
+        type: "date",
+        formatter: dateFormat,
+        search: true
     }, {
         title: "量体师",
         field: "ltUser",
@@ -71,6 +73,15 @@ $(function() {
         pageCode: '620230',
         searchParams: {
             statusList: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        },
+        beforeSearch: function(data) {
+            if (data.ltDatetime) {
+                console.log(data.ltDatetime)
+                data.ltDatetime = data.ltDatetime.concat(" 00:00:00")
+                return data;
+            } else {
+                return data;
+            }
         },
         //派单
         beforeEdit: function(data) {
@@ -141,7 +152,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        if (selRecords[0].status != 3) {
+        if (selRecords[0].checkOrder != 1) {
             toastr.warning("不是可以提交复核的状态");
             return;
         }
@@ -215,7 +226,7 @@ $(function() {
             content: '<form class="pop-form" id="popForm" novalidate="novalidate">' +
                 '<ul class="form-info" id="formContainer"><li style="text-align:center;font-size: 15px;">取消订单</li>' +
                 '<li><label>*备注：</label><input id="remark" name="remark" class="control-def"></input></li>' +
-                '<li><input id="subBtn" name="subBtn"type="button" class="btn margin-left-100" value="确定"><li><input id="goBackBtn" name="goBackBtn" type="button" class=" btn margin-left-20 goBack" value="返回"></ul>' +
+                '<li><input id="subBtn" name="subBtn"type="button" class="btn margin-left-100 submit" value="确定"><li><input id="goBackBtn" name="goBackBtn" type="button" class=" btn margin-left-20 goBack" value="返回"></ul>' +
                 '</form>'
         });
         dw.showModal();

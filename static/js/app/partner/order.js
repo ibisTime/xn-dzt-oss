@@ -27,7 +27,9 @@ $(function() {
     }, {
         field: 'ltDatetime',
         title: '预约量体时间',
-        formatter: dateFormat
+        type: "date",
+        formatter: dateFormat,
+        search: true
     }, {
         title: "量体师",
         field: "ltUser1",
@@ -75,7 +77,16 @@ $(function() {
         },
         beforeDetail: function(data) {
             window.location.href = '../product/orderSearch_addedit.html?code=' + data.code;
-        }
+        },
+        beforeSearch: function(data) {
+            if (data.ltDatetime) {
+                console.log(data.ltDatetime)
+                data.ltDatetime = data.ltDatetime.concat(" 00:00:00")
+                return data;
+            } else {
+                return data;
+            }
+        },
     });
     //派单
     $("#edit2Btn").click(function() {
@@ -119,7 +130,7 @@ $(function() {
             content: '<form class="pop-form" id="popForm" novalidate="novalidate">' +
                 '<ul class="form-info" id="formContainer"><li style="text-align:center;font-size: 15px;">取消订单</li>' +
                 '<li><label>*备注：</label><input id="remark" name="remark" class="control-def"></input></li>' +
-                '<li><input id="subBtn" name="subBtn"type="button" class="btn margin-left-100" value="确定"><li><input id="goBackBtn" name="goBackBtn" type="button" class=" btn margin-left-20 goBack" value="返回"></ul>' +
+                '<li><input id="subBtn" name="subBtn"type="button" class="btn margin-left-100 submit" value="确定"><li><input id="goBackBtn" name="goBackBtn" type="button" class=" btn margin-left-20 goBack" value="返回"></ul>' +
                 '</form>'
         });
         dw.showModal();

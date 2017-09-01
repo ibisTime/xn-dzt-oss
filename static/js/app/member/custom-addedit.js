@@ -3,9 +3,6 @@ $(function() {
     var view = 1;
 
     var fields = [{
-        field: 'loginName',
-        title: '登录名',
-    }, {
         field: 'nickname',
         title: '微信昵称',
     }, {
@@ -15,7 +12,9 @@ $(function() {
         field: 'refereeUser',
         title: '推荐人',
         formatter: function(v, data) {
-            return refereeUser.nickname;
+            if (v) {
+                return v.nickname;
+            } else { return "" }
         }
     }, {
         field: 'createDatetime',

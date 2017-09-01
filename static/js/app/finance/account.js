@@ -9,12 +9,24 @@ $(function() {
             userId: OSS.SYS_USER
         }
     }).done(function(data) {
-        $("#amount-CNY").text("￥" + (data[0].amount / 1000).toFixed(2));
+        var accountAmountCNY = data[0].amount;
+        accountAmountCNY = (accountAmountCNY / 1000).toString();
+        accountAmountCNY = accountAmountCNY.replace(/(\.\d\d)\d+/ig, "$1");
+        accountAmountCNY = parseFloat(accountAmountCNY).toFixed(2);
         accountNumberCNY = data[0].accountNumber;
-        $("#amount-JF").text((data[1].amount / 1000).toFixed(2));
+        $("#amount-CNY").text("￥" + accountAmountCNY);
+        var accountAmountJF = data[1].amount;
+        accountAmountJF = (accountAmountJF / 1000).toString();
+        accountAmountCNY = accountAmountJF.replace(/(\.\d\d)\d+/ig, "$1");
+        accountAmountJF = parseFloat(accountAmountJF).toFixed(2);
         accountNumberJF = data[1].accountNumber;
-        $("#amount-JYZ").text((data[2].amount / 1000).toFixed(2));
+        $("#amount-JF").text("￥" + accountAmountJF);
+        var accountAmountJYZ = data[2].amount;
+        accountAmountJYZ = (accountAmountJYZ / 1000).toString();
+        accountAmountJYZ = accountAmountJYZ.replace(/(\.\d\d)\d+/ig, "$1");
+        accountAmountJYZ = parseFloat(accountAmountJYZ).toFixed(2);
         accountNumberJYZ = data[2].accountNumber;
+        $("#amount-JYZ").text("￥" + accountAmountJYZ);
     });
 
     reqApi({
@@ -23,13 +35,18 @@ $(function() {
             userId: OSS.SYS_USER + "_TG"
         }
     }).then(function(data) {
-        $("#amount-TG").text("￥" + (data[0].amount / 1000).toFixed(2));
+        var accountAmount = data[0].amount;
+        accountAmount = (accountAmount / 1000).toString();
+        accountAmount = accountAmount.replace(/(\.\d\d)\d+/ig, "$1");
+        accountAmount = parseFloat(accountAmount).toFixed(2);
+        $("#amount-TG").text("￥" + accountAmount);
         accountNumberTG = data[0].accountNumber;
     });
 
     $("#CNYls-Btn").click(function() {
         location.href = "ledger.html?accountNumber=" + accountNumberCNY;
     })
+
     $("#JFls-Btn").click(function() {
         location.href = "ledger.html?accountNumber=" + accountNumberJF;
     })

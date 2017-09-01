@@ -10,12 +10,9 @@ $(function() {
     }, {
         field: 'location',
         title: '位置',
-        type: 'select',
-        data: {
-            "1": "热门",
-            "0": "普通"
-        },
-        required: true,
+        value: "0",
+        hidden: true,
+        required: true
     }, {
         field: 'orderNo',
         title: 'UI次序',

@@ -62,6 +62,10 @@ $(function() {
         field: 'reMobile',
         readonly: true
     }, {
+        title: "收件人地址",
+        field: "reAddress",
+        readonly: true
+    }, {
         title: "备注",
         field: "remark",
         maxlength: 255

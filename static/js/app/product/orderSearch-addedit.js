@@ -278,6 +278,12 @@ $(function() {
             var dkey = arr[i].dkey;
             var dvalue = arr[i].dvalue;
             var parentKey = arr[i].parentKey;
+            if (parentKey === 'measure') {
+                if (!globalDicts['measure']) {
+                    globalDicts['measure'] = [];
+                }
+                globalDicts['measure'].push(arr[i]);
+            }
             if (parentKey === '4-01') {
                 if (!globalDicts['4-01']) {
                     globalDicts['4-01'] = [];

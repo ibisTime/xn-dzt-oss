@@ -557,8 +557,7 @@ $(function() {
             'rules': {
                 '5-01': {
                     required: true,
-                    maxlength: 10,
-                    isNotFace: true
+                    maxlength: 10
                 }
             }
         });

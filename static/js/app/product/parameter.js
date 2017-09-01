@@ -52,15 +52,6 @@ $(function() {
         },
         search: true
     }, {
-        title: "UI位置",
-        field: "location",
-        type: "select",
-        data: {
-            "0": "普通",
-            "1": "热门"
-        },
-        search: true
-    }, {
         field: "orderNo",
         title: "UI次序"
     }, {

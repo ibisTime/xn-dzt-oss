@@ -420,9 +420,10 @@
                     </select>
                 </div>
                 <div style="display: none;" id="fTab1">
+
                     <div class="item-tab">
-                        <span id="101">规格</span>
-                        <div class="case caseimg imgcenter" id="1-01">
+                        <span id="107">着装风格</span>
+                        <div class="case caseimg imgcenter" id="1-07">
                         </div>
                     </div>
                     <div class="item-tab">
@@ -431,6 +432,16 @@
                             <label id="selected_fab_full_info"></label>
                             <img id="select_fab_img" src="" width="50px">
                             <span class="more act" id="btn_select_fab">选择面料</span> </div>
+                    </div>
+                    <div class="item-tab">
+                        <span id="101">规格</span>
+                        <div class="case caseimg imgcenter" id="1-01">
+                        </div>
+                    </div>
+                    <div class="item-tab">
+                        <span id="105">门襟选择</span>
+                        <div class="case caseimg imgcenter" id="1-05">
+                        </div>
                     </div>
                     <div class="item-tab">
                         <span id="103">领型选择</span>
@@ -443,23 +454,13 @@
                         </div>
                     </div>
                     <div class="item-tab">
-                        <span id="105">门襟选择</span>
-                        <div class="case caseimg imgcenter" id="1-05">
+                        <span id="108">口袋选择</span>
+                        <div class="case caseimg imgcenter" id="1-08">
                         </div>
                     </div>
                     <div class="item-tab">
                         <span id="106">收省选择</span>
                         <div class="case caseimg imgcenter" id="1-06">
-                        </div>
-                    </div>
-                    <div class="item-tab">
-                        <span id="107">着装风格</span>
-                        <div class="case caseimg imgcenter" id="1-07">
-                        </div>
-                    </div>
-                    <div class="item-tab">
-                        <span id="108">口袋选择</span>
-                        <div class="case caseimg imgcenter" id="1-08">
                         </div>
                     </div>
                 </div>
@@ -530,14 +531,7 @@
                         <!--<a id="param_33_desc">范围: 20.00-65.00</a>-->
                     </div>
                 </div>
-                <div class="item-tab tab-input item-tab-fl">
-                    <span clas="span_left" id="224">腕围</span>
-                    <div class="case">
-                        <input type="number" id="2-24" name="2-24" class="param_34" style="width:80px;">
-                        <!--<a id="param_34_desc">范围: 15.00-30.00</a>-->
-                    </div>
-                </div>
-                <!--腕围-->
+
                 <div class="item-tab tab-input item-tab-fl">
                     <span clas="span_left" id="209">总肩宽</span>
                     <div class="case">
@@ -553,7 +547,6 @@
                         <a id="param_26_desc">&nbsp;</a>
                     </div>
                 </div>
-
                 <div class="item-tab tab-input item-tab-fl">
                     <span class="span_right" id="211">前肩宽</span>
                     <div class="case">
@@ -561,9 +554,6 @@
                         <a id="param_27_desc">&nbsp;</a>
                     </div>
                 </div>
-
-
-
                 <div class="item-tab tab-input item-tab-fl">
                     <span class="span_right" id="212">后腰节长</span>
                     <div class="case">
@@ -571,8 +561,6 @@
                         <a id="param_28_desc">&nbsp;</a>
                     </div>
                 </div>
-
-
                 <div class="item-tab tab-input item-tab-fl">
                     <span class="span_right" id="213">后腰高</span>
                     <div class="case">
@@ -580,10 +568,6 @@
                         <a id="param_29_desc">&nbsp;</a>
                     </div>
                 </div>
-
-
-
-
                 <div class="item-tab tab-input item-tab-fl">
                     <span class="span_right" id="214">后衣高</span>
                     <div class="case">
@@ -591,10 +575,6 @@
                         <a id="param_30_desc">&nbsp;</a>
                     </div>
                 </div>
-
-
-
-
                 <div class="item-tab tab-input item-tab-fl">
                     <span class="span_right" id="215">前腰节长</span>
                     <div class="case">
@@ -602,9 +582,6 @@
                         <a id="param_31_desc">&nbsp;</a>
                     </div>
                 </div>
-
-
-
                 <div class="item-tab tab-input item-tab-fl">
                     <span class="span_right" id="216">前腰高</span>
                     <div class="case">
@@ -612,9 +589,6 @@
                         <a id="param_32_desc">&nbsp;</a>
                     </div>
                 </div>
-
-
-
                 <div class="item-tab tab-input item-tab-fl">
                     <span class="span_right" id="217">裤长</span>
                     <div class="case">
@@ -622,9 +596,6 @@
                         <a id="param_33_desc">&nbsp;</a>
                     </div>
                 </div>
-
-
-
                 <div class="item-tab tab-input item-tab-fl">
                     <span class="span_right" id="218">小腿围</span>
                     <div class="case">
@@ -667,10 +638,17 @@
                         <!--<a id="param_34_desc">范围: 15.00-30.00</a>-->
                     </div>
                 </div>
+                <div class="item-tab tab-input item-tab-fl">
+                    <span clas="span_left" id="224">腕围</span>
+                    <div class="case">
+                        <input type="number" id="2-24" name="2-24" class="param_34" style="width:80px;">
+                        <!--<a id="param_34_desc">范围: 15.00-30.00</a>-->
+                    </div>
+                </div>
+                <!--腕围-->
                 <div class="item-tab tabtn-full">
                     <div class="case casebtn">
                         <input class="min" type="button" name="" value="上一步" id="to_step_1">
-                        <!--<input class="min" type="button" name="" value="生成放码尺寸" id="complete">-->
                         <input class="min" type="button" name="" value="下一步" id="to_step_3">
                     </div>
                 </div>
@@ -689,8 +667,6 @@
                 <div class="item-tab tab-input item-tab-fl">
                     <span id="402">背型</span>
                     <div class="case" id="4-02" name="4-02">
-                        <!--<input type="number" placeholder="" class="param_43" id="4-2" name="4-2" min_val="10.00" max_val="100.00" style="width:80px;">-->
-                        <!--<a id="param_43_desc">范围: 10.00-100.00</a>-->
                     </div>
                 </div>
                 <div class="item-tab tab-input item-tab-fl" style="float: left;width: 70%;clear: none;">
@@ -719,8 +695,6 @@
                 <div class="item-tab tab-input">
                     <span id="407">肚型</span>
                     <div class="case" id="4-07" name="4-07">
-                        <!--<span class="param_48 act" param_value="正常">正常</span>
-                        <span class="param_48" param_value="短脖" style="display: none;">短脖</span>-->
                     </div>
                 </div>
 
@@ -784,16 +758,14 @@
                             <a>客户刺绣文字</a>
                         </div>
                     </div>
-
-                    <div class="item-tab ">
-                        <span id="502">刺绣位置</span>
-                        <div class="case caseimg imgcenter" id="5-02" name='5-02'>
-                        </div>
-                    </div>
-
                     <div class="item-tab ">
                         <span id="503">刺绣字体</span>
                         <div class="case caseimg imgcenter" id="5-03" name='5-03'>
+                        </div>
+                    </div>
+                    <div class="item-tab ">
+                        <span id="502">刺绣位置</span>
+                        <div class="case caseimg imgcenter" id="5-02" name='5-02'>
                         </div>
                     </div>
                     <div class="item-tab ">
@@ -814,10 +786,6 @@
         <div class="form-tab">
             <form id='form-tab5' name='form-tab5'>
                 <div class="form-content">
-                    <!--<div class="item-form">
-                        <span id="601">年龄</span>
-                        <input type="text" class="param_23" id='6-01' name='6-01'>
-                    </div>-->
                     <div class="item-form">
                         <span id="602">身高(cm)</span>
                         <input type="text" class="param_23" id='6-02' name='6-02' readonly="readonly">

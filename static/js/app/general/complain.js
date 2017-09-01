@@ -11,8 +11,8 @@ $(function() {
                 return v
             } else if (data.commentName) {
                 return data.commentName
-            } else {
-                return data.commenter
+            } else if (data.commenter == "0") {
+                return "平台"
             }
         }
     }, {
@@ -20,23 +20,22 @@ $(function() {
         title: "内容",
         type: "textarea"
     }, {
-        field: 'status',
-        title: '状态',
-        search: true,
-        type: 'select',
-        data: {
-            "0": "未读",
-            "1": "已读"
+        title: "接收人",
+        field: "receiveMobile",
+        formatter: function(v, data) {
+            if (v) {
+                return v
+            } else if (data.receiveName) {
+                return data.receiveName
+            } else if (data.receiver == "0") {
+                return "平台"
+            }
         }
-    }, {
-        title: '备注',
-        field: 'remark'
     }];
 
     buildList({
         columns: columns,
-        // pageCode: "620145",
-        pageCode: '620148',
+        pageCode: '620148', //B 
         searchParams: {
             companyCode: OSS.company,
             type: "0",

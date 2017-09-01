@@ -30,6 +30,14 @@ $(function() {
         formatter: Dict.getNameForList("user_frequent"),
         search: true
     }, {
+        field: 'refereeUser',
+        title: '推荐人',
+        formatter: function(v, data) {
+            if (v) {
+                return v.nickname;
+            } else { return "" }
+        }
+    }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -40,9 +48,6 @@ $(function() {
         title: "注册时间",
         field: "createDatetime",
         formatter: dateTimeFormat
-    }, {
-        title: '备注',
-        field: 'remark'
     }];
     buildList({
         router: 'custom',

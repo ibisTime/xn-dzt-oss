@@ -1,6 +1,11 @@
 $(function() {
     var commenter = getQueryString('commenter');
+    var receiver = getQueryString('receiver');
     var code = getQueryString('code');
+    if(commenter=="0"){
+        commenter=receiver;
+    }
+
     var commentData = {};
     reqApi({
         code: '620149',
@@ -28,15 +33,16 @@ $(function() {
             }
         });
 
-        html += '<label  class="commentTitle">回复：</label><textarea id="content" name="content" class="commentReceiver"></textarea><input type="button" id="submit" class="btn margin-left-20 goBack" value="确定">' +
+        html += '<label  class="commentTitle">回复：</label><textarea id="contentHF" name="content" class="commentReceiver"></textarea><input type="button" id="submit" class="btn margin-left-20 goBack" value="确定">' +
             '<input type="button" id="goBackBtn" class="btn margin-left-20 goBack" value="返回">';
         $('.content').html(html)
         $("#submit").click(function() {
-            var content = $("#commentReceiver").val();
+            var content = $("#contentHF").val();
             if (content == "") {
                 toastr.warning("回复内容必填");
                 return "";
             }
+           
             var data = {};
             data["commenter"] = "0";
             data["content"] = content;

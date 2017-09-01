@@ -4,14 +4,12 @@ $(function() {
         title: '',
         checkbox: true
     }, {
-        field: 'commentMobile',
+        field: 'commentName',
         title: '留言人',
         formatter: function(v, data) {
             if (v) {
                 return v
-            } else if (data.commentName) {
-                return data.commentName
-            } else if (data.commenter == "0") {
+            }  else if (data.commenter == "0") {
                 return "平台"
             }
         }
@@ -21,13 +19,11 @@ $(function() {
         type: "textarea"
     }, {
         title: "接收人",
-        field: "receiveMobile",
+        field: "receiveName",
         formatter: function(v, data) {
             if (v) {
                 return v
-            } else if (data.receiveName) {
-                return data.receiveName
-            } else if (data.receiver == "0") {
+            }  else if (data.receiver == "0") {
                 return "平台"
             }
         }
@@ -52,7 +48,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = './complain_addedit.html?code=' + selRecords[0].code + "&commenter=" + selRecords[0].commenter + "&commenter=" + selRecords[0].commenter;
+        window.location.href = './complain_addedit.html?code=' + selRecords[0].code + "&receiver=" + selRecords[0].receiver + "&commenter=" + selRecords[0].commenter;
 
     });
 });

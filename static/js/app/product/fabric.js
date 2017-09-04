@@ -23,7 +23,8 @@ $(function() {
         field: "type",
         type: "select",
         key: "fabric_type",
-        formatter: Dict.getNameForList("fabric_type")
+        formatter: Dict.getNameForList("fabric_type"),
+        search: true
     }, {
         title: "价格",
         field: "price",
@@ -34,19 +35,22 @@ $(function() {
         field: "color",
         type: "select",
         key: "fabric_color",
-        formatter: Dict.getNameForList("fabric_color")
+        formatter: Dict.getNameForList("fabric_color"),
+        search: true
     }, {
         title: "花色",
         field: "flowers",
         type: "select",
         key: "fabric_design",
-        formatter: Dict.getNameForList("fabric_design")
+        formatter: Dict.getNameForList("fabric_design"),
+        search: true
     }, {
         title: "成分",
         field: "form",
         type: "select",
         key: "fabric_divide",
-        formatter: Dict.getNameForList("fabric_divide")
+        formatter: Dict.getNameForList("fabric_divide"),
+        search: true
     }, {
         title: "规格编号",
         field: "modelNum",
@@ -60,7 +64,8 @@ $(function() {
         field: "yarn",
         type: "select",
         key: "fabric_yarn",
-        formatter: Dict.getNameForList("fabric_yarn")
+        formatter: Dict.getNameForList("fabric_yarn"),
+        search: true
     }, {
         //     field: 'pic',
         //     title: '图片',

@@ -265,7 +265,7 @@ $(function() {
             } else {
                 _warp.find("[fab_price_level=" + _dict.dkey + "]").show();
                 for (var j = 0; j < data.length; j++) {
-                    html += '<li data-code="' + data[j].code + '" data-name="' + data[j].modelNum + '" data-type="' + data[j].type + '" class="one_fab">' +
+                    html += '<li data-code="' + data[j].code + '" data-name="' + data[j].modelNum + '" data-yarn="' + data[j].yarn + '" class="one_fab">' +
                         '<img src="' + getImg(data[j].pic) + '"><br>' + data[j].modelNum +
                         '</li>';
                 }
@@ -364,20 +364,7 @@ $(function() {
                 param[id] = self.attr("data-code");
             }
         });
-        // 头部tab切换
-        // $("#navUl").on("click", "span", function() {
-        //     var self = $(this),
-        //         index = self.index();
-        //     self.addClass("act")
-        //         .siblings("span.act").removeClass("act");
-        //     var tabs = $("#jsForm").find(".form-tab");
-        //     tabs.eq(index).addClass("act")
-        //         .siblings(".act").removeClass("act");
-        // });
-        // 点击选择面料按钮，弹出面料选择框
-        // $("#btn_select_fab").click(function() {
-        //     $(".modalbg,.more-condition,.modal-chose").addClass("open");
-        // });
+
         // 面料tab切换
         $("#select_fabric_div").on("click", ".fab_type", function() {
             var fab_price_level = $(this).attr('fab_price_level');
@@ -393,13 +380,19 @@ $(function() {
             var self = $(this);
             var code = self.attr('data-code');
             var name = self.attr('data-name');
-            var type = self.attr('data-type');
+            var yarn = self.attr('data-yarn');
 
             $(".one_fab.act").removeClass("act");
             self.addClass("act");
+            var fabricYarnsName;
+            for (var i = 0; i < fabricYarns.length; i++) {
+                if (fabricYarns[i].dkey == yarn) {
+                    fabricYarnsName = fabricYarns[i].dvalue;
+                }
+            };
 
             $("#select_fab_img").attr("src", self.children("img").attr("src"));
-            $("#selected_fab_full_info").html(name + "　　" + fabricYarns[type].dvalue + "　　");
+            $("#selected_fab_full_info").html(name + "　　" + fabricYarnsName + "　　");
 
             $(".modalbg,.more-condition,.modal-chose").removeClass("open");
             $("#1-02").attr("data-code", code).attr("data-name", name);

@@ -165,8 +165,9 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
+        
         if (selRecords[0].status != 4) {
-            toastr.info("不是待复核的状态");
+            toastr.warning("不是待复核的状态");
             return;
         }
         window.location.href = 'order_partnerCheck.html?code=' + selRecords[0].code;

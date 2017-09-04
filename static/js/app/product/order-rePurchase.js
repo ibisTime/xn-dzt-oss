@@ -15,6 +15,11 @@ $(function() {
         valueName: '{{nickname.DATA}}--{{mobile.DATA}}',
         searchName: 'nickname',
         required: true
+    }, {
+        title: "量体时间",
+        field: "ltDatetime",
+        type: "date",
+        required: true
     }];
 
 
@@ -29,6 +34,7 @@ $(function() {
             if ($('#jsForm').valid()) {
                 var data = {};
                 data['applyUser'] = $("#applyUser").val();
+                data['ltDatetime'] = $("#ltDatetime").val();
                 reqApi({
                     code: "620201",
                     json: data

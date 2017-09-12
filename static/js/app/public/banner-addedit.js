@@ -4,7 +4,7 @@ $(function() {
 
     var fields = [{
         field: "status",
-        required: 'true',
+        required: true,
         value: 1,
         hidden: true
     }, {
@@ -14,27 +14,31 @@ $(function() {
     }, {
         field: "type",
         value: 2,
-        required: 'true',
+        required: true,
         hidden: true
     }, {
         field: "belong",
-        title: '属于',
-        value: 1,
-        required: 'true',
-        hidden: true
+        title: '类型',
+        type: "select",
+        data: {
+            "0": "C端用户",
+            "1": "量体师端用户"
+        },
+        required: true,
+        readonly: view
     }, {
         field: "parentCode",
         value: 0,
-        required: 'true',
+        required: true,
         hidden: true
     }, {
         field: "contentType",
-        required: 'true',
+        required: true,
         value: 1,
         hidden: true
     }, {
         field: "isCompanyEdit",
-        required: 'true',
+        required: true,
         value: 0,
         hidden: true
     }, {

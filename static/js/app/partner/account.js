@@ -9,13 +9,9 @@ $(function() {
             userId: sessionStorage.getItem('userId')
         }
     }).done(function(data) {
-        accountAmount = data[0].amount;
-        accountAmount = (accountAmount / 1000).toString();
-        accountAmount = accountAmount.replace(/(\.\d\d)\d+/ig, "$1");
-        accountAmount = parseFloat(accountAmount).toFixed(2);
+        accountAmount = moneyFormat(data[0].amount);
         $("#amount-CNY").text("￥" + accountAmount);
         accountNumberCNY = data[0].accountNumber;
-
     });
 
 

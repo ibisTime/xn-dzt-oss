@@ -38,6 +38,12 @@ $(function() {
         title: "身份证号",
         field: "idNo",
     }, {
+        title: "等级",
+        field: "level",
+        type: "lt_level",
+        formatter: Dict.getNameForList("lt_level"),
+        search: true
+    }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -146,4 +152,18 @@ $(function() {
         window.location.href = "../member/account.html?userId=" + selRecords[0].userId;
     });
     $("#ledgerBtn").remove();
+    //设置等级
+    $('#levelBtn').click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.info("请选择记录");
+            return;
+        }
+        if (selRecords[0].status != 0) {
+            toastr.info("只有正常状态的用户才可以设置等级");
+            return;
+        }
+        window.location.href = "../member/quantity_rate.html?userId=" + selRecords[0].userId;
+
+    });
 });

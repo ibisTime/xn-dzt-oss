@@ -5,6 +5,14 @@ $(function() {
         title: '',
         checkbox: true
     }, {
+        field: "belong",
+        title: '类型',
+        type: "select",
+        data: {
+            "0": "C端用户",
+            "1": "量体师端用户"
+        },
+    }, {
         title: 'banner名称',
         field: 'name',
         search: true

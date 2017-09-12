@@ -3,10 +3,12 @@ $(function() {
     var view = !!getQueryString('v');
 
     var fields = [{
-        title: "修改分成比例",
-        field: "divRate",
+        title: "设置等级",
+        field: "level",
+        type: "select",
         required: true,
-
+        key: "lt_level",
+        formatter: Dict.getNameForList("lt_level"),
     }];
 
     var options = {
@@ -23,9 +25,9 @@ $(function() {
         handler: function() {
             var data = {};
             data['userId'] = code;
-            data['divRate'] = $("#divRate").val();
+            data['level'] = $("#level").val();
             reqApi({
-                code: "805093",
+                code: "805094",
                 json: data
             }).done(function() {
                 sucDetail();

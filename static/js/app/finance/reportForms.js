@@ -8,7 +8,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-totle").text("￥" + (data.totalAmount / 1000).toFixed(2));
+        $("#amount-totle").text("￥" + moneyFormat(data.totalAmount));
     });
     reqApi({
         code: '802900',
@@ -17,7 +17,7 @@ $(function() {
             "accountNumber": OSS.companyCode
         }
     }).done(function(data) {
-        $("#amount-access").text("￥" + (data.totalAmount / 1000).toFixed(2));
+        $("#amount-access").text("￥" + moneyFormat(data.totalAmount));
     });
     reqApi({
         code: '802900',
@@ -26,7 +26,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-Hhaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
+        $("#amount-Hhaccess").text("￥" + moneyFormat(data.totalAmount));
     });
     reqApi({
         code: '802900',
@@ -35,7 +35,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-ltaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
+        $("#amount-ltaccess").text("￥" + moneyFormat(data.totalAmount / 1000));
     });
     reqApi({
         code: '802900',
@@ -44,7 +44,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-quaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
+        $("#amount-quaccess").text("￥" + moneyFormat(data.totalAmount));
     });
     reqApi({
         code: '802900',
@@ -53,7 +53,7 @@ $(function() {
             "accountNumber": OSS.companyCode
         }
     }).done(function(data) {
-        $("#amount-quxianaccess").text("￥" + (data.totalAmount / 1000).toFixed(2));
+        $("#amount-quxianaccess").text("￥" + moneyFormat(data.totalAmount));
     });
     reqApi({
         code: '802503',
@@ -61,6 +61,6 @@ $(function() {
             userId: OSS.SYS_USER
         }
     }).done(function(data) {
-        $("#amount-PTquaccess").text("￥" + (data[0].amount / 1000).toFixed(2));
+        $("#amount-PTquaccess").text("￥" + moneyFormat(data[0].amount));
     });
 });

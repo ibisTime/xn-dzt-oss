@@ -9,33 +9,26 @@ $(function() {
         defaultValue: '0'
     }, {
         title: "所属规格",
-        field: "modelCode",
+        field: "modelSpecsCode",
         type: "select",
         listCode: "620287",
         required: true,
         keyName: "code",
-        valueName: "name",
+        valueName: "{{name.DATA}}--{{modelName.DATA}}",
         searchName: "name",
-        readonly: view,
+        readonly: !!code,
     }, {
         title: '种类',
         field: 'parentKey',
-        required: true,
-        type: 'select',
-        listCode: '620257',
-        params: {
-            type: 0
-        },
-        keyName: 'dkey',
-        valueName: 'dvalue',
-        readonly: view,
-        defaultOption: '选此创建种类'
+        value: "0",
+        type: "hidden",
+        required: true
     }, {
         title: '参数键',
         field: 'dkey',
         required: true,
         maxlength: 255,
-        readonly: view,
+        readonly: !!code,
     }, {
         title: '参数值',
         field: 'dvalue',

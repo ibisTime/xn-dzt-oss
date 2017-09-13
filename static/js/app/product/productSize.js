@@ -37,6 +37,9 @@ $(function() {
         },
         beforeEdit: function(data) {
             window.location.href = "productSize_addedit.html?&modelCode=" + modelCode + "&code=" + data.code;
+        },
+        searchParams: {
+            modelCode: modelCode
         }
     });
     //新增

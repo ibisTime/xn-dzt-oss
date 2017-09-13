@@ -5,15 +5,12 @@ $(function() {
         title: '',
         checkbox: true
     }, {
-        title: "所属产品",
-        field: "modelCode",
-        formatter: function(v, data) {
-            return data.model.name
-        },
+        title: "所属规格",
+        field: "modelSpecsCode",
         type: "select",
-        listCode: "620012",
+        listCode: "620287",
         keyName: "code",
-        valueName: 'name',
+        valueName: "{{name.DATA}}--{{modelName.DATA}}",
         searchName: 'name',
         search: true
     }, {
@@ -21,8 +18,10 @@ $(function() {
         title: '工艺类型',
         type: "select",
         required: true,
-        key: "craftwork_type",
-        formatter: Dict.getNameForList("craftwork_type"),
+        listCode: "620257",
+        keyName: "dkey",
+        valueName: "dvalue",
+        searchName: "dvalue",
         search: true
     }, {
         title: "工艺名称",
@@ -52,9 +51,6 @@ $(function() {
         },
         search: true
     }, {
-        field: "orderNo",
-        title: "UI次序"
-    }, {
         title: "备注",
         field: "remark"
     }];
@@ -64,7 +60,7 @@ $(function() {
         pageCode: '620050',
         searchParams: {
             orderColumn: "code",
-            orderDir: "asc"
+            orderDir: "desc"
         },
         beforeDelete: function(data) {
             if (data.status != 0) {
@@ -97,12 +93,19 @@ $(function() {
             return;
         }
         if (selRecords[0].status == 0 || selRecords[0].status == 2) {
-            window.location.href = "parameter_up.html?code=" + selRecords[0].code;
+            confirm("确定上架？").then(function() {
+                reqApi({
+                    code: '620043',
+                    json: { "code": selRecords[0].code, location: "0", orderNo: "0", remark: "上架" }
+                }).then(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                });
+            }, function() {});
         } else {
             toastr.warning('不是可以上架的状态');
             return;
         }
-
     });
     //下架
     $('#downBtn').click(function() {
@@ -121,11 +124,9 @@ $(function() {
                     $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
                 });
             }, function() {});
-
         } else {
             toastr.warning('不是可以下架的状态');
             return;
         }
-
     });
 });

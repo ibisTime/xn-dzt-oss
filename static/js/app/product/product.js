@@ -17,19 +17,6 @@ $(function() {
         field: 'name',
         title: '名称'
     }, {
-        title: "价格",
-        field: "price",
-        amount: true,
-        formatter: moneyFormat
-    }, {
-        title: "面料损耗",
-        field: "loss",
-    }, {
-        title: "加工费",
-        field: "processFee",
-        amount: true,
-        formatter: moneyFormat,
-    }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -39,18 +26,6 @@ $(function() {
             "2": "已下架"
         },
         search: true
-    }, {
-        title: "UI位置",
-        field: "location",
-        type: 'select',
-        data: {
-            "0": "普通",
-            "1": "热门"
-        },
-        search: true
-    }, {
-        field: "orderNo",
-        title: "UI次序"
     }, {
         title: "创建时间",
         field: "createDatetime",
@@ -101,7 +76,16 @@ $(function() {
             return;
         }
         if (selRecords[0].status == 0 || selRecords[0].status == 2) {
-            window.location.href = "product_up.html?code=" + selRecords[0].code;
+            // window.location.href = "product_up.html?code=" + selRecords[0].code;
+            confirm("确定上架？").then(function() {
+                reqApi({
+                    code: '620003',
+                    json: { "code": selRecords[0].code, location: "0", orderNo: "0" }
+                }).then(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                });
+            }, function() {});
         } else {
             toastr.warning('不是可以上架的状态');
             return;

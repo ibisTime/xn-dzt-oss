@@ -3,19 +3,14 @@ $(function() {
     var view = getQueryString('v');
 
     var fields = [{
-        title: "所属产品",
-        field: "modelCode",
+        title: "所属规格",
+        field: "modelSpecsCode",
         type: "select",
-        required: true,
-        listCode: "620012",
+        listCode: "620287",
         keyName: "code",
-        valueName: "name",
+        valueName: "{{name.DATA}}--{{modelName.DATA}}",
         searchName: "name",
-        onChange: function(v, data) {
-            if (data.type == 0) {
-                $("#price").parent().css("display", "none");
-            }
-        },
+        required: true,
         readonly: view
     }, {
         title: "品牌",
@@ -106,11 +101,6 @@ $(function() {
             "1": "上架",
             "2": "下架"
         }
-    }, {
-        field: 'orderNo',
-        title: 'UI次序',
-        number: true,
-        readonly: view
     }]
     if (view) {
         fields = fields.concat(viewList)

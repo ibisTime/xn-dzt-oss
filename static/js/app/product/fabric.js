@@ -5,13 +5,13 @@ $(function() {
         title: '',
         checkbox: true
     }, {
-        title: "所属产品",
-        field: "modelCode",
+        title: "所属规格",
+        field: "modelSpecsCode",
         type: "select",
-        listCode: "620012",
+        listCode: "620287",
         keyName: "code",
-        valueName: 'name',
-        searchName: 'name',
+        valueName: "{{name.DATA}}--{{modelName.DATA}}",
+        searchName: "name",
         search: true
     }, {
         title: "品牌",
@@ -67,12 +67,6 @@ $(function() {
         formatter: Dict.getNameForList("fabric_yarn"),
         search: true
     }, {
-        //     field: 'pic',
-        //     title: '图片',
-        //     formatter: function(v, data) {
-        //         return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
-        //     }
-        // }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -82,9 +76,6 @@ $(function() {
             "2": "已下架"
         },
         search: true
-    }, {
-        field: "orderNo",
-        title: "UI次序"
     }, {
         title: "备注",
         field: "remark"
@@ -123,7 +114,15 @@ $(function() {
             return;
         }
         if (selRecords[0].status == 0 || selRecords[0].status == 2) {
-            window.location.href = "fabric_up.html?code=" + selRecords[0].code;
+            confirm("确定上架？").then(function() {
+                reqApi({
+                    code: '620023',
+                    json: { "code": selRecords[0].code, location: "0", orderNo: "0", remark: "上架" }
+                }).then(function() {
+                    toastr.info("操作成功");
+                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                });
+            }, function() {});
         } else {
             toastr.warning('不是可以上架的状态');
             return;
@@ -147,7 +146,6 @@ $(function() {
                     $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
                 });
             }, function() {});
-
         } else {
             toastr.warning('不是可以下架的状态');
             return;

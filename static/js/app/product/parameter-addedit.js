@@ -3,25 +3,43 @@ $(function() {
     var view = getQueryString('v');
 
     var fields = [{
-        title: "所属产品",
-        field: "modelCode",
+        title: "所属规格",
+        field: "modelSpecsCode",
         type: "select",
-        listCode: "620012",
+        listCode: "620287",
         keyName: "code",
-        valueName: "name",
+        valueName: "{{name.DATA}}--{{modelName.DATA}}",
         searchName: "name",
         required: true,
         onChange: function(v, data) {
-            if (data.type == 0) {
-                $("#price").parent().css("display", "none");
-            }
+            reqApi({
+                code: '620257',
+                json: {
+                    modelSpecsCode: v
+                },
+                sync: true
+            }).done(function(d) {
+                var data1 = {};
+                if (d.length && v) {
+                    d.forEach(function(v, i) {
+                        data1[v.dkey] = v.dvalue;
+                    })
+                }
+                $("#type").renderDropdown2(data1);
+            });
         }
     }, {
         field: 'type',
         title: '工艺类型',
         type: "select",
         required: true,
-        key: "craftwork_type"
+        // listCode: "620257",
+        // params: {
+        //     modelSpecsCode: $("#modelSpecsCode").val()
+        // },
+        // keyName: "code",
+        // valueName: "dvalue",
+        // searchName: "dvalue"
     }, {
         title: "工艺名称",
         field: "name",
@@ -60,11 +78,6 @@ $(function() {
             "1": "上架",
             "2": "下架"
         }
-    }, {
-        field: 'orderNo',
-        title: 'UI次序',
-        number: true,
-        readonly: true
     }]
     if (view) {
         fields = fields.concat(viewList)

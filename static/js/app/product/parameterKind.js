@@ -5,11 +5,11 @@ $(function() {
         checkbox: true
     }, {
         title: "所属规格",
-        field: "modelCode",
+        field: "modelSpecsCode",
         type: "select",
         listCode: "620287",
         keyName: "code",
-        valueName: "name",
+        valueName: "{{name.DATA}}--{{modelName.DATA}}",
         searchName: "name",
         search: true
     }, {

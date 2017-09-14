@@ -13,6 +13,25 @@ $(function() {
         searchName: "name",
         search: true
     }, {
+        title: '种类',
+        field: 'parentKey',
+        type: 'select',
+        listCode: '620257',
+        params: {
+            // type: 0
+        },
+        keyName: 'dkey',
+        valueName: 'dvalue',
+        searchName: "dvalue",
+        search: true
+    }, {
+        title: "类别",
+        field: "kind",
+        type: "select",
+        key: "category_kind",
+        formatter: Dict.getNameForList("category_kind"),
+        search: true
+    }, {
         field: 'dkey',
         title: '参数键'
     }, {

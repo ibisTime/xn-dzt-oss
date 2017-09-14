@@ -80,17 +80,20 @@ $(function() {
     options.buttons = [{
         title: '确认',
         handler: function() {
-            if ($('#jsForm1').valid()) {
-                var data = {};
-                data['orderCode'] = code;
-                data['remark'] = $("#remark").val();
-                reqApi({
-                    code: "620211",
-                    json: data
-                }).done(function() {
-                    sucDetail();
-                });
-            }
+            confirm("确定提交工厂？").then(function() {
+                if ($('#jsForm1').valid()) {
+                    var data = {};
+                    data['orderCode'] = code;
+                    data['remark'] = $("#remark").val();
+                    reqApi({
+                        code: "620208",
+                        json: data
+                    }).done(function() {
+                        sucDetail();
+                    });
+                }
+            }, function() {})
+
         }
     }, {
         title: '返回',

@@ -9,25 +9,16 @@ $(function() {
         type: "select",
         key: "chanpin_type",
         required: true,
-        onChange: function(v, data) {
-            if (v == 1) {
-                $("#price").parent().css("display", "none");
-            } else if (v == 0) {
-                $("#processFee").parent().css("display", "none");
-                $("#loss").parent().css("display", "none");
-            }
+        readonly: view
+    }, {
+        title: "类别",
+        field: "kind",
+        type: "select",
+        data:{
+            "0":"单品",
+            "1":"套装"
         },
-        afterSet: function(v, data) {
-            if (v == 1) {
-                $("#price").parent().css("display", "none");
-                return chanpinType[v];
-            } else if (v == 0) {
-                $("#processFee").parent().css("display", "none");
-                $("#loss").parent().css("display", "none");
-                return chanpinType[v];
-            }
-
-        },
+        required: true,
         readonly: view
     }, {
         title: "名称",

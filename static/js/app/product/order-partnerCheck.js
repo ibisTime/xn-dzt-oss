@@ -91,7 +91,7 @@ $(function() {
                 data["result"] = "1";
                 data["remark"] = $("#remark").val();
                 reqApi({
-                    code: "620210",
+                    code: "620207",
                     json: data
                 }).done(function() {
                     sucDetail();
@@ -107,7 +107,7 @@ $(function() {
                 data["result"] = "0";
                 data["remark"] = $("#remark").val();
                 reqApi({
-                    code: "620210",
+                    code: "620207",
                     json: data
                 }).done(function() {
                     sucDetail();

@@ -189,7 +189,7 @@ $(function() {
     function getInfo() {
         $.when(
             reqApi({
-                code: "620906",
+                code: "620257",
                 json: { updater: "" }
             }),
             reqApi({

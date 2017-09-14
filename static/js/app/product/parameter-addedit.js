@@ -32,15 +32,18 @@ $(function() {
         field: 'type',
         title: '工艺类型',
         type: "select",
-        required: true,
-        // listCode: "620257",
-        // params: {
-        //     modelSpecsCode: $("#modelSpecsCode").val()
-        // },
-        // keyName: "code",
-        // valueName: "dvalue",
-        // searchName: "dvalue"
+        required: true
     }, {
+        title:"是否撞色",
+        type:"select",
+        field:"isHit",
+        data:{
+            "0":"否",
+            "1":"是"
+        },  
+        value:"0",
+        required: true
+    },{
         title: "工艺名称",
         field: "name",
         maxlength: 255,

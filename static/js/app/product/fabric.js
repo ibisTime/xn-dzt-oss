@@ -67,6 +67,10 @@ $(function() {
         formatter: Dict.getNameForList("fabric_yarn"),
         search: true
     }, {
+        title: "产地",
+        field: "area",
+        search: true
+    }, {
         title: "状态",
         field: "status",
         type: "select",

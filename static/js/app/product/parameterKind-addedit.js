@@ -17,12 +17,44 @@ $(function() {
         valueName: "{{name.DATA}}--{{modelName.DATA}}",
         searchName: "name",
         readonly: !!code,
+        onChange: function(v, data) {
+            reqApi({
+                code: '620257',
+                json: {
+                    modelSpecsCode: v
+                },
+                sync: true
+            }).done(function(d) {
+                var data1 = {};
+                if (d.length && v) {
+                    d.forEach(function(v, i) {
+                        data1[v.dkey] = v.dvalue;
+                    })
+                }
+                console.log(data1)
+                var value = "点此创建种类";
+                data0 = { "0": value };
+                data2 = $.extend(data0, data1)
+                    // data1.push
+                    // data1.v01="点此创建种类";
+                $("#parentKey").renderDropdown2(data2);
+            });
+        }
     }, {
         title: '种类',
         field: 'parentKey',
-        value: "0",
-        type: "hidden",
-        required: true
+        required: true,
+        type: 'select',
+        readonly: !!code,
+        defaultOption: '选此创建种类'
+    }, {
+        title: "类别",
+        field: "kind",
+        type: "select",
+        key: "category_kind",
+        formatter: Dict.getNameForList("category_kind"),
+        required: true,
+        readonly: !!code,
     }, {
         title: '参数键',
         field: 'dkey',

@@ -19,6 +19,12 @@ $(function() {
         maxlength: 255,
         readonly: view
     }, {
+        title: "产地",
+        field: "area",
+        maxlength: 255,
+        required: true,
+        readonly: view
+    }, {
         title: "类型",
         field: "type",
         type: "select",

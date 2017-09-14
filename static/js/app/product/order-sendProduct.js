@@ -149,7 +149,7 @@ $(function() {
                     }
                 }
                 reqApi({
-                    code: "620212",
+                    code: "620209",
                     json: data
                 }).done(function() {
                     sucDetail();

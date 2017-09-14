@@ -119,12 +119,14 @@ $(function() {
         handler: function() {
             if ($('#jsForm1').valid()) {
                 var data = $('#jsForm1').serializeObject();
-                reqApi({
-                    code: "620213",
-                    json: data
-                }).done(function() {
-                    sucDetail();
-                });
+                confirm("确定用户已经收货？").then(function() {
+                    reqApi({
+                        code: "620210",
+                        json: data
+                    }).done(function() {
+                        sucDetail();
+                    });
+                }, function() {})
             }
         }
     }, {

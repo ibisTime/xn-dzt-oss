@@ -14,9 +14,9 @@ $(function() {
         title: "类别",
         field: "kind",
         type: "select",
-        data:{
-            "0":"单品",
-            "1":"套装"
+        data: {
+            "0": "单品",
+            "1": "套装"
         },
         required: true,
         readonly: view
@@ -42,9 +42,9 @@ $(function() {
     }, {
         title: "图文详述",
         field: "description",
-        type: "textarea",
+        type: "hidden",
         required: true,
-        readonly: view
+        value: "0"
     }, {
         title: "备注",
         field: "remark",
@@ -73,5 +73,8 @@ $(function() {
         detailCode: "620011",
         editCode: '620002'
     });
-
+    var htmlPic = "<p style='color:red;margin-left:210px;'>缩略图展示在用户列表页</p>";
+    var htmlAdv = "<p style='color:red;margin-left:210px;'>广告图展示在用户商品详情页</p>";
+    $("#pic").after(htmlPic);
+    $("#advPic").after(htmlAdv);
 });

@@ -7,8 +7,7 @@ $(function() {
         field: "level",
         type: "select",
         required: true,
-        key: "lt_level",
-        formatter: Dict.getNameForList("lt_level"),
+        key: "lt_level"
     }];
 
     var options = {

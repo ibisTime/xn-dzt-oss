@@ -13,7 +13,7 @@ $(function() {
         searchName: "name",
         search: true
     }, {
-        title: '种类',
+        title: '大类',
         field: 'parentKey',
         type: 'select',
         listCode: '620257',
@@ -32,18 +32,11 @@ $(function() {
         formatter: Dict.getNameForList("category_kind"),
         search: true
     }, {
+        title: '类别英文名称',
         field: 'dkey',
-        title: '参数键'
     }, {
-        field: 'dvalue',
-        title: '参数值'
-    }, {
-        field: 'updater',
-        title: '更新人'
-    }, {
-        field: 'updateDatetime',
-        title: '更新时间',
-        formatter: dateTimeFormat
+        title: '类别名称',
+        field: 'dvalue'
     }, {
         field: 'remark',
         title: '备注'
@@ -54,8 +47,6 @@ $(function() {
         deleteCode: '620251',
         searchParams: {
             companyCode: OSS.companyCode
-                // orderColumn: "code",
-                // orderDir: "asc"
         }
     });
 });

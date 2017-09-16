@@ -24,14 +24,16 @@ $(function() {
         type: 'img',
         required: true,
         readonly: view,
-        single: true
+        single: true,
+        help: "缩略图展示在商品列表页"
     }, {
         title: "广告图",
         field: "advPic",
         type: 'img',
         required: true,
         readonly: view,
-        single: true
+        single: true,
+        help: "广告图商品详情页上面的banner"
     }, {
         title: '图文详述',
         field: 'description',
@@ -55,15 +57,6 @@ $(function() {
             "2": "下架"
         }
     }, {
-        //     field: 'location',
-        //     title: '位置',
-        //     type: 'select',
-        //     data: {
-        //         "1": "热门",
-        //         "0": "普通"
-        //     },
-        //     readonly: true
-        // }, {
         field: 'orderNo',
         title: 'UI次序',
         number: true,
@@ -81,5 +74,4 @@ $(function() {
         editCode: '620112',
         view: view
     });
-
 });

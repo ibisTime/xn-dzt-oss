@@ -27,23 +27,32 @@ $(function() {
                 }
                 $("#type").renderDropdown2(data1);
             });
-        }
+        },
+        help: "第一列是规格名称，第二列是他所属的产品"
     }, {
         field: 'type',
         title: '工艺类型',
         type: "select",
-        required: true
+        required: true,
+        formatter: function(v, data) {
+            if (view != null) {
+                return data.productCategoryName;
+            } else {
+                return v
+            }
+        }
     }, {
-        title:"是否撞色",
-        type:"select",
-        field:"isHit",
-        data:{
-            "0":"否",
-            "1":"是"
-        },  
-        value:"0",
-        required: true
-    },{
+        title: "是否撞色",
+        type: "select",
+        field: "isHit",
+        data: {
+            "0": "否",
+            "1": "是"
+        },
+        value: "0",
+        required: true,
+        help: "例：无口袋工艺不需要颜色撞色，则选“无”；<br>标准口袋工艺需要颜色撞色则选“是”。"
+    }, {
         title: "工艺名称",
         field: "name",
         maxlength: 255,

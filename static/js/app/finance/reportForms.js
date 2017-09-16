@@ -4,7 +4,7 @@ $(function() {
     reqApi({
         code: '802900',
         json: {
-            "bizType": "GW",
+            "bizTypeList": ["GW", "HYCZ"],
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {

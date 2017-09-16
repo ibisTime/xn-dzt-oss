@@ -1149,10 +1149,21 @@ function buildDetail(options) {
                 }
                 html += '</li>';
             } else {
-                html += '<li class="clearfix" type="' + (item.amount ? 'amount' : '') + '" style="' + (item.width ? ('width: ' + item.width + ';display:inline-block;') : '') + (item.hidden ? 'display: none;' : '') + '"><label>' + item.title + ':</label><span id="' + item.field + '" name="' + item.field + '"></span></li>';
+                html += '<li class="clearfix" type="' + ((item.amount || item.amount1) ? 'amount' : '') +
+                    '" style="' + (item.width ? ('width: ' + item.width + ';display:inline-block;') : '') +
+                    (item.hidden ? 'display: none;' : '') + '"><label>' +
+                    (item.help ? '<i data-help="' + item.help + '" class="zmdi zmdi-help-outline field-help"></i>' : '') +
+                    item.title + ':</label><span id="' + item.field + '" name="' + item.field + '" class="' +
+                    (item.type + 'Cls' || '') + '"></span></li>';
             }
         } else {
-            html += '<li class="clearfix" type="' + (item.amount ? 'amount' : '') + '" style="' + (item.width ? ('width: ' + item.width + ';display:inline-block;') : '') + (item.hidden ? 'display: none;' : '') + '"><label>' + (item.title ? ('<b>' + ((item.required && '*') || '') + '</b>' + item.title + imgLabel + ':') : '&nbsp;') + '</label>';
+            html += '<li class="clearfix" type="' + ((item.amount || item.amount1) ? 'amount' : '') +
+                '" style="' + (item.width ? ('width: ' + item.width + ';display:inline-block;') : '') +
+                (item.hidden ? 'display: none;' : '') + '"><label>' + (item.help ?
+                    '<i data-help="' + item.help + '" class="zmdi zmdi-help-outline field-help"></i>' : '') +
+                (item.title ?
+                    ('<b>' + ((item.required && '*') || '') + '</b>' + item.title + imgLabel + ':') :
+                    '&nbsp;') + '</label>';
             if (item.type == 'radio') {
                 for (var k = 0, len1 = item.items.length; k < len1; k++) {
                     var rd = item.items[k];

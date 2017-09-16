@@ -17,8 +17,9 @@ $(function() {
             ['currency', 'currency_type']
         ],
         params: {
-            currency: 'CNY',
-            userId: userId
+            currencyList: ["CNY", "HYB"],
+            userId: userId,
+            updater: ""
         },
         keyName: 'accountNumber',
         valueName: '{{realName.DATA}} - {{typeName.DATA}}--{{currencyName.DATA}}',

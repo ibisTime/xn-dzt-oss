@@ -158,12 +158,12 @@ $(function() {
             for (var i = 0, length = orderSizeData.length; i < length; i++) {
                 if (orderSizeData[i].ckey.indexOf("4") == 0) {
                     html2 += '<div class="item-tab tab-input item-tab-fl">' +
-                        '<span clas="span_left">' + orderSizeData[i].cvalue + '</span>' +
+                        '<span clas="span_left">' + orderSizeData[i].cvalue + "：" + '</span>' +
                         '<div class="case">' + orderSizeData[i].dvalue + '</div>' +
                         '</div>';
                 } else {
                     html1 += '<div class="item-tab tab-input item-tab-fl">' +
-                        '<span clas="span_left">' + orderSizeData[i].cvalue + '</span>' +
+                        '<span clas="span_left">' + orderSizeData[i].cvalue + "：" + '</span>' +
                         '<div class="case">' + orderSizeData[i].dkey + '</div>' +
                         '</div>';
                 }
@@ -182,13 +182,12 @@ $(function() {
                 tabTitileHtml += '<span class="tabTitle">' + productVarList[i].name + '</span>';
                 for (var j = 0; j < productCategory.length; j++) {
                     if (productCategory[j].productCraft) {
-                        tabContent += '<div class="item-tab"><span>' + productCategory[j].dvalue + '</span>' +
+                        tabContent += '<div class="item-tab"><span>' + productCategory[j].dvalue + "：" + '</span>' +
                             '<div class="case caseimg"> ' + (productCategory[j].productCraft && productCategory[j].productCraft.name || '') + '</div></div>';
                     }
                 }
-                tabContent = '<div class="item-tab"><span>面料</span>' +
+                tabContent = '<div class="item-tab"><span>面料：</span>' +
                     '<div class="case caseimg">' + productSpecs[0].modelNum + '</div></div>' + tabContent;
-
                 $('#content').append('<div class="form-tab">' + tabContent + '</div>');
             }
             $("#navUl").append(tabTitileHtml);
@@ -203,88 +202,6 @@ $(function() {
                     .siblings(".act").removeClass("act");
             }).find('span').eq(0).trigger('click');
         }
-        addListeners();
+
     });
-
-
-
-    function initData() {
-        $.each(productSpecs, function(index, spec) {
-            if (spec.type == "1-02") {
-                $("#modal-chose").find(".fab_type[data-name=" + spec.type + "]").click()
-                    .end().find("li[data-code=" + spec.code + "]").click();
-            } else if (_findIndex(ids, spec.type) != -1) {
-                $("#" + spec.type).find(".param[data-code=" + spec.code + "]").click();
-            } else if (_findIndex(ids1, spec.type) != -1) {
-                $("#" + spec.type).find(".param[data-code=" + spec.code + "]").click();
-            } else {
-                $("#" + spec.type).val(spec.code).prop("disabled", 1);
-            }
-        });
-        $("#jsForm").off("click");
-        first = false;
-        $(".cxradio").prop('disabled', true);
-    }
-
-    function _findIndex(data, value) {
-        return data.findIndex(function(item) {
-            return item == value;
-        });
-    }
-
-    function addListeners() {
-        $(".cxradio").click(function() {
-            var dataid = $(this).attr("data-id");
-            if (dataid == '03') {
-                $("#wrap").css("display", "block")
-            } else if (dataid == '04') {
-                $("#wrap").css("display", "none");
-                $("#5-01").val("");
-                $("#5-02 .param").removeClass("act");
-                $("#5-03 .param").removeClass("act");
-                $("#5-04 .param").removeClass("act");
-            }
-        });
-        // // 型号change事件
-        // $("#1-0").on('change', function() {
-        //     var _value = $(this).val();
-        //     createModelAndTechHtml(materials[_value], technologys[_value]);
-        //     code['1-0'] = _value;
-        // });
-        // 页面参数按钮点击
-        // $("#jsForm").on("click", ".param", function(e) {
-
-        //     var self = $(this);
-        //     self.addClass("act").find("span").addClass("show")
-        //         .parents(".param").siblings(".act").removeClass("act").find("span").removeClass("show");
-        //     self.addClass("act").siblings(".act").removeClass("act");
-
-        //     id = self.closest(".case").attr("id");
-        //     if (id.split("-")[0] == "1") {
-        //         code[id] = self.attr("data-code");
-        //     } else {
-        //         param[id] = self.attr("data-code");
-        //     }
-        // });
-
-
-    }
-
-
-
-    function goPage(index) {
-        $("#navUl").find("span:eq(" + index + ")").addClass("act")
-            .siblings("span.act").removeClass("act");
-        $("#jsForm").find(".form-tab").eq(index).addClass("act")
-            .siblings(".act").removeClass("act");
-    }
-
-
-    function getImg(src) {
-        if (/^http/.test(src)) {
-            return src;
-        } else {
-            return OSS.picBaseUrl + "/" + src;
-        }
-    }
 });

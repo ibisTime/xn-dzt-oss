@@ -11,7 +11,8 @@ $(function() {
         valueName: "{{name.DATA}}--{{modelName.DATA}}",
         searchName: "name",
         required: true,
-        readonly: view
+        readonly: view,
+        help: "第一列是规格名称，第二列是他所属的产品"
     }, {
         title: "品牌",
         field: "brand",
@@ -37,13 +38,15 @@ $(function() {
         type: "img",
         required: true,
         single: true,
-        readonly: view
+        readonly: view,
+        help: "缩略图展示在商品列表页"
     }, {
         title: "广告图",
         field: "advPic",
         type: "img",
         required: true,
-        readonly: view
+        readonly: view,
+        help: "广告图商品详情页上面的banner"
     }, {
         title: "价格",
         field: "price",
@@ -77,7 +80,8 @@ $(function() {
         field: "modelNum",
         maxlength: 255,
         required: true,
-        readonly: view
+        readonly: view,
+        help: "请输入面料唯一的规格编号，用于识别面料"
     }, {
         title: "纱支",
         field: "yarn",
@@ -119,5 +123,4 @@ $(function() {
         detailCode: "620031",
         editCode: '620022'
     });
-
 });

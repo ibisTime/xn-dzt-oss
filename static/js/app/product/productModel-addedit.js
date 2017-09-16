@@ -17,13 +17,15 @@ $(function() {
         type: "img",
         required: true,
         readonly: view,
-        single: true
+        single: true,
+        help: "缩略图展示在商品列表页"
     }, {
         title: "广告图",
         field: "advPic",
         type: "img",
         required: true,
-        readonly: view
+        readonly: view,
+        help: "广告图商品详情页上面的banner"
     }, {
         title: "图文详述",
         field: "description",
@@ -72,5 +74,4 @@ $(function() {
         detailCode: "620271",
         editCode: '620262'
     });
-
 });

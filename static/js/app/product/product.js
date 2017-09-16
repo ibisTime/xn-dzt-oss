@@ -17,6 +17,22 @@ $(function() {
         field: 'name',
         title: '名称'
     }, {
+        title: "类别",
+        field: "kind",
+        type: "select",
+        data: {
+            "0": "单品",
+            "1": "套装"
+        },
+        required: true
+    }, {
+        field: 'pic',
+        title: '缩略图',
+        type: "img",
+        formatter: function(v, data) {
+            return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
+        }
+    }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -26,17 +42,6 @@ $(function() {
             "2": "已下架"
         },
         search: true
-    }, {
-        title: "创建时间",
-        field: "createDatetime",
-        formatter: dateTimeFormat
-    }, {
-        title: "最后修改人",
-        field: "updater"
-    }, {
-        field: 'updateDatetime',
-        title: '最后修改时间',
-        formatter: dateTimeFormat
     }, {
         title: "备注",
         field: "remark"

@@ -165,7 +165,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        
+
         if (selRecords[0].status != 4) {
             toastr.warning("不是待复核的状态");
             return;
@@ -245,7 +245,7 @@ $(function() {
                 data.orderCode = selRecords[0].code;
                 data.remark = $("#remark").val();
                 reqApi({
-                    code: "620216",
+                    code: "620213",
                     json: data
                 }).done(function() {
                     toastr.info("操作成功");
@@ -274,7 +274,7 @@ $(function() {
         if (selRecords[0].status == 9) {
             confirm("确定归档？").then(function() {
                 reqApi({
-                    code: '620215',
+                    code: '620212',
                     json: { "orderCode": selRecords[0].code, remark: "归档" }
                 }).then(function() {
                     toastr.info("操作成功");

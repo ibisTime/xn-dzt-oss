@@ -31,24 +31,22 @@ $(function() {
                         data1[v.dkey] = v.dvalue;
                     })
                 }
-                console.log(data1)
-                var value = "点此创建种类";
+                var value = "无";
                 data0 = { "0": value };
                 data2 = $.extend(data0, data1)
-                    // data1.push
-                    // data1.v01="点此创建种类";
                 $("#parentKey").renderDropdown2(data2);
             });
-        }
+        },
+        help: "第一列是规格名称，第二列是他所属的产品"
     }, {
-        title: '种类',
+        title: '大类',
         field: 'parentKey',
         required: true,
         type: 'select',
         readonly: !!code,
-        defaultOption: '选此创建种类'
+        help: "若大类选择“无”时，则在下面的类别名称和<br>英文名称填写要添加的大类名称"
     }, {
-        title: "类别",
+        title: "类型",
         field: "kind",
         type: "select",
         key: "category_kind",
@@ -56,13 +54,13 @@ $(function() {
         required: true,
         readonly: !!code,
     }, {
-        title: '参数键',
+        title: '类别英文名称',
         field: 'dkey',
         required: true,
         maxlength: 255,
         readonly: !!code,
     }, {
-        title: '参数值',
+        title: '类别名称',
         field: 'dvalue',
         required: true,
         maxlength: 255,

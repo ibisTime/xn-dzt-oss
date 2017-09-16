@@ -32,20 +32,20 @@ $(function() {
     });
 
     $("#CNYls-Btn").click(function() {
-        location.href = "ledger.html?accountNumber=" + accountNumberCNY;
+        location.href = "ledger.html?accountNumber=" + accountNumberCNY + "&kind=CNY";
     });
 
     $("#JFls-Btn").click(function() {
-        location.href = "ledger.html?accountNumber=" + accountNumberJF;
+        location.href = "ledger.html?accountNumber=" + accountNumberJF + "&kind=JF";
     });
     $("#JYZ-Btn").click(function() {
-        location.href = "ledger.html?accountNumber=" + accountNumberJYZ;
+        location.href = "ledger.html?accountNumber=" + accountNumberJYZ + "&kind=JYZ";
     });
     $("#HYB-Btn").click(function() {
-        location.href = "ledger.html?accountNumber=" + accountNumberHYB;
+        location.href = "ledger.html?accountNumber=" + accountNumberHYB + "&kind=HYB";
     });
     $("#accoutGrantBtn").click(function() {
-        location.href = "ledger.html?accountNumber=" + accountNumberTG;
+        location.href = "ledger.html?accountNumber=" + accountNumberTG + "&kind=TG";
     });
     $("#accouBtn").click(function() {
         window.location.href = 'account_enchashment.html?accountNumber=' + accountNumberTG;

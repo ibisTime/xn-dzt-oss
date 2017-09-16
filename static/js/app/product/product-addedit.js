@@ -11,12 +11,12 @@ $(function() {
         required: true,
         readonly: view
     }, {
-        title: "类别",
+        title: "是否套装",
         field: "kind",
         type: "select",
         data: {
-            "0": "单品",
-            "1": "套装"
+            "0": "否",
+            "1": "是"
         },
         required: true,
         readonly: view
@@ -32,13 +32,14 @@ $(function() {
         type: "img",
         required: true,
         readonly: view,
-        single: true
+        single: true,
+        help: "缩略图展示在商品列表页"
     }, {
         title: "广告图",
         field: "advPic",
-        type: "img",
+        type: "hidden",
         required: true,
-        readonly: view
+        value: "0",
     }, {
         title: "图文详述",
         field: "description",
@@ -73,8 +74,5 @@ $(function() {
         detailCode: "620011",
         editCode: '620002'
     });
-    var htmlPic = "<p style='color:red;margin-left:210px;'>缩略图展示在用户列表页</p>";
-    var htmlAdv = "<p style='color:red;margin-left:210px;'>广告图展示在用户商品详情页</p>";
-    $("#pic").after(htmlPic);
-    $("#advPic").after(htmlAdv);
+
 });

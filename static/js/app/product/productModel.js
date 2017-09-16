@@ -42,13 +42,6 @@ $(function() {
         },
         search: true
     }, {
-        title: "最后修改人",
-        field: "updater"
-    }, {
-        field: 'updateDatetime',
-        title: '最后修改时间',
-        formatter: dateTimeFormat
-    }, {
         title: "备注",
         field: "remark"
     }];
@@ -103,7 +96,7 @@ $(function() {
         if (selRecords[0].status == 1) {
             confirm("确定下架？").then(function() {
                 reqApi({
-                    code: '620004',
+                    code: '620264',
                     json: { "code": selRecords[0].code, updater: getUserName(), remark: "下架" }
                 }).then(function() {
                     toastr.info("操作成功");

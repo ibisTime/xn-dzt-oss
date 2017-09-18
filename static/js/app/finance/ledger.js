@@ -33,7 +33,8 @@ $(function() {
     };
     var bizTypeDictHYB = {
         "GW": "购物付款",
-        "GWTK": "购物退款"
+        "GWTK": "购物退款",
+        "11": "充值",
     };
     if (kind == "CNY" || kind == "TG") {
         bizTypeDict = bizTypeDictCNY;

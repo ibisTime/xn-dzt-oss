@@ -1,6 +1,5 @@
 $(function() {
     var code = getQueryString('code');
-    //var  view =getQueryString('v');
 
     var fields = [{
         title: '订单号',

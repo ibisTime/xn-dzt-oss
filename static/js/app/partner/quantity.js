@@ -149,7 +149,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "../member/account.html?userId=" + selRecords[0].userId;
+        window.location.href = "../member/account.html?userId=" + selRecords[0].userId + "&kind=PA";
     });
     $("#ledgerBtn").remove();
     //设置等级

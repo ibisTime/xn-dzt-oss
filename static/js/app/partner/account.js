@@ -21,9 +21,9 @@ $(function() {
 
     $("#accoutBtn").click(function() {
         if (kind == "Bl") {
-            window.location.href = '../finance/ledgerLT.html?accountNumber=' + accountNumberCNY;
+            window.location.href = '../finance/ledgerLT.html?accountNumber=' + accountNumberCNY + "&kind=CNY";
         } else {
-            window.location.href = '../finance/ledger.html?accountNumber=' + accountNumberCNY;
+            window.location.href = '../finance/ledger.html?accountNumber=' + accountNumberCNY + "&kind=CNY";
         }
 
     });

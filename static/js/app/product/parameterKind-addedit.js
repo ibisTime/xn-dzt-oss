@@ -39,12 +39,11 @@ $(function() {
         },
         help: "第一列是规格名称，第二列是他所属的产品"
     }, {
-        title: '大类',
+        title: '父类',
         field: 'parentKey',
         required: true,
         type: 'select',
-        readonly: !!code,
-        help: "若大类选择“无”时，则在下面的类别名称和<br>英文名称填写要添加的大类名称"
+        readonly: !!code
     }, {
         title: "类型",
         field: "kind",

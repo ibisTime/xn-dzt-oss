@@ -1,7 +1,17 @@
 $(function() {
     var userId = getQueryString('userId') || '';
     var kind = getQueryString('kind') || '';
-
+    var searchParams;
+    if (kind == "C") {
+        searchParams = {
+            userId: userId
+        }
+    } else {
+        searchParams = {
+            userId: userId,
+            currency: "CNY"
+        }
+    }
 
     var columns = [{
         field: '',
@@ -44,10 +54,7 @@ $(function() {
         router: 'account',
         columns: columns,
         pageCode: '802503',
-        searchParams: {
-            userId: userId,
-            currency: "CNY"
-        }
+        searchParams: searchParams
     });
 
 
@@ -59,7 +66,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        window.location.href = "ledger.html?accountNumber=" + selRecords[0].accountNumber;
+        window.location.href = "ledger.html?accountNumber=" + selRecords[0].accountNumber + "&kind=" + selRecords[0].currency;
     });
     $('#goBackBtn').click(function() {
         if (kind == "B") {

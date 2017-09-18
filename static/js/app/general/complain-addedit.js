@@ -2,8 +2,8 @@ $(function() {
     var commenter = getQueryString('commenter');
     var receiver = getQueryString('receiver');
     var code = getQueryString('code');
-    if(commenter=="0"){
-        commenter=receiver;
+    if (commenter == "0") {
+        commenter = receiver;
     }
 
     var commentData = {};
@@ -19,7 +19,7 @@ $(function() {
         },
         sync: true
     }).then(function(data) {
-        commentData = data.list;
+        commentData = data.list.reverse();
         var html = '';
         commentData.forEach(function(d, i) {
             if (d.commenter == '0') {
@@ -42,7 +42,7 @@ $(function() {
                 toastr.warning("回复内容必填");
                 return "";
             }
-           
+
             var data = {};
             data["commenter"] = "0";
             data["content"] = content;

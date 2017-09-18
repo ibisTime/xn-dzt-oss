@@ -16,6 +16,15 @@ $(function() {
         title: '充值金额',
         formatter: moneyFormat
     }, {
+        field: 'currency',
+        title: '币种',
+        type: 'select',
+        data: {
+            "CNY": "人民币",
+            "HYB": "合衣币"
+        },
+        search: true
+    }, {
         field: 'channelType',
         title: '支付渠道',
         type: 'select',

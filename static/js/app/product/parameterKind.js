@@ -13,7 +13,7 @@ $(function() {
         searchName: "name",
         search: true
     }, {
-        title: '大类',
+        title: '父类',
         field: 'parentKey',
         type: 'select',
         listCode: '620257',

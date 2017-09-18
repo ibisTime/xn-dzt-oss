@@ -1,6 +1,5 @@
 $(function() {
     var code = getQueryString('code');
-    //var  view =getQueryString('v');
 
     var fields = [{
         title: '订单号',
@@ -124,12 +123,22 @@ $(function() {
             for (var i = 0, length = orderSizeData.length; i < length; i++) {
                 if (orderSizeData[i].ckey.indexOf("4") == 0) {
                     html2 += '<div class="item-tab tab-input item-tab-fl">' +
-                        '<span clas="span_left">' + orderSizeData[i].cvalue + '</span>' +
+                        '<span clas="span_left">' + orderSizeData[i].cvalue + "：" + '</span>' +
                         '<div class="case">' + orderSizeData[i].dvalue + '</div>' +
                         '</div>';
-                } else {
+                } else if (orderSizeData[i].ckey.indexOf("6-02") != -1) {
                     html1 += '<div class="item-tab tab-input item-tab-fl">' +
-                        '<span clas="span_left">' + orderSizeData[i].cvalue + '</span>' +
+                        '<span clas="span_left">' + orderSizeData[i].cvalue + "(cm)：" + '</span>' +
+                        '<div class="case">' + orderSizeData[i].dkey + '</div>' +
+                        '</div>';
+                } else if (orderSizeData[i].ckey.indexOf("6-03") != -1) {
+                    html1 += '<div class="item-tab tab-input item-tab-fl">' +
+                        '<span clas="span_left">' + orderSizeData[i].cvalue + "(kg)：" + '</span>' +
+                        '<div class="case">' + orderSizeData[i].dkey + '</div>' +
+                        '</div>';
+                } else if (orderSizeData[i].ckey.indexOf("6") != 0) {
+                    html1 += '<div class="item-tab tab-input item-tab-fl">' +
+                        '<span clas="span_left">' + orderSizeData[i].cvalue + "：" + '</span>' +
                         '<div class="case">' + orderSizeData[i].dkey + '</div>' +
                         '</div>';
                 }
@@ -137,38 +146,40 @@ $(function() {
             $('#ltsj').html(html1);
             $('#ttsj').html(html2);
         }
-        if (data.product.productVarList && data.product.productVarList) {
-            productVarList = data.product.productVarList;
-            var tabTitileHtml = "";
+        if (data.product) {
+            if (data.product.productVarList && data.product.productVarList.length) {
+                productVarList = data.product.productVarList;
+                var tabTitileHtml = "";
 
-            for (var i = 0; i < productVarList.length; i++) {
-                var tabContent = "";
-                var productCategory = productVarList[i].productCategory;
-                var productSpecs = productVarList[i].productSpecs;
-                tabTitileHtml += '<span class="tabTitle">' + productVarList[i].name + '</span>';
-                for (var j = 0; j < productCategory.length; j++) {
-                    if (productCategory[j].productCraft) {
-                        tabContent += '<div class="item-tab"><span>' + productCategory[j].dvalue + '</span>' +
-                            '<div class="case caseimg"> ' + (productCategory[j].productCraft && productCategory[j].productCraft.name || '') + '</div></div>';
+                for (var i = 0; i < productVarList.length; i++) {
+                    var tabContent = "";
+                    var productCategory = productVarList[i].productCategory;
+                    var productSpecs = productVarList[i].productSpecs;
+                    tabTitileHtml += '<span class="tabTitle">' + productVarList[i].name + '</span>';
+                    for (var j = 0; j < productCategory.length; j++) {
+                        if (productCategory[j].productCraft) {
+                            tabContent += '<div class="item-tab"><span>' + productCategory[j].dvalue + "：" + '</span>' +
+                                '<div class="case caseimg"> ' + (productCategory[j].productCraft && productCategory[j].productCraft.name || '') + '</div></div>';
+                        }
                     }
+                    tabContent = '<div class="item-tab"><span>面料：</span>' +
+                        '<div class="case caseimg">' + productSpecs[0].modelNum + '</div></div>' + tabContent;
+                    $('#content').append('<div class="form-tab">' + tabContent + '</div>');
                 }
-                tabContent = '<div class="item-tab"><span>面料</span>' +
-                    '<div class="case caseimg">' + productSpecs[0].modelNum + '</div></div>' + tabContent;
-
-                $('#content').append('<div class="form-tab">' + tabContent + '</div>');
+                $("#navUl").append(tabTitileHtml);
+                // 头部tab切换
+                $("#navUl").on("click", "span", function() {
+                    var self = $(this),
+                        index = self.index();
+                    self.addClass("act")
+                        .siblings("span.act").removeClass("act");
+                    var tabs = $("#content").find('.form-tab');
+                    tabs.eq(index).addClass("act")
+                        .siblings(".act").removeClass("act");
+                }).find('span').eq(0).trigger('click');
+            } else {
+                $("#navUl").css("display", "none");
             }
-            $("#navUl").append(tabTitileHtml);
-            // 头部tab切换
-            $("#navUl").on("click", "span", function() {
-                var self = $(this),
-                    index = self.index();
-                self.addClass("act")
-                    .siblings("span.act").removeClass("act");
-                var tabs = $("#content").find('.form-tab');
-                tabs.eq(index).addClass("act")
-                    .siblings(".act").removeClass("act");
-            }).find('span').eq(0).trigger('click');
         }
-
     });
 });

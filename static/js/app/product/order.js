@@ -198,6 +198,7 @@ $(function() {
         }
         window.location.href = 'order_sendProduct.html?code=' + selRecords[0].code;
     });
+
     //确认收货
     $("#receBtn").click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
@@ -211,7 +212,6 @@ $(function() {
         }
         window.location.href = 'order_receiveProduct.html?code=' + selRecords[0].code;
     });
-
     //取消
     $('#calcelBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');

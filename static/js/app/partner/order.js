@@ -148,7 +148,7 @@ $(function() {
                 data.orderCode = selRecords[0].code;
                 data.remark = $("#remark").val();
                 reqApi({
-                    code: "620216",
+                    code: "620213",
                     json: data
                 }).done(function() {
                     toastr.info("操作成功");

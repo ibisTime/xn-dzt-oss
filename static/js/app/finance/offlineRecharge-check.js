@@ -59,11 +59,6 @@ $(function() {
             field: 'payNote',
             maxlength: 250
         };
-        // approveCodeField = {
-        //     title: '支付渠道号',
-        //     field: 'payCode',
-        //     maxlength: 250,
-        // };
         buttons = "";
         payList = [{
             field: 'payUser',

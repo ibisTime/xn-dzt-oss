@@ -1,7 +1,7 @@
 $(function() {
     var code = getQueryString('code');
     var view = getQueryString('v');
-    var chanpinType = Dict.getNameForList("chanpin_type");
+
 
     var fields = [{
         title: "类型",

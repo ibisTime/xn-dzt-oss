@@ -45,11 +45,11 @@ $(function() {
         title: "是否撞色",
         type: "select",
         field: "isHit",
+        defaultValue: "0",
         data: {
             "0": "否",
             "1": "是"
         },
-        value: "0",
         required: true,
         help: "例：无口袋工艺不需要颜色撞色，则选“无”；<br>标准口袋工艺需要颜色撞色则选“是”。"
     }, {

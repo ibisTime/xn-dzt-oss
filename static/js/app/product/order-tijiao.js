@@ -92,6 +92,7 @@ $(function() {
                 var data = {};
                 data['orderCode'] = code;
                 data['remark'] = $("#remark").val();
+                data["token"] = sessionStorage.getItem('token');
                 reqApi({
                     code: "620206",
                     json: data

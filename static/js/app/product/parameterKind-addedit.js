@@ -59,7 +59,7 @@ $(function() {
         maxlength: 255,
         readonly: !!code,
     }, {
-        title: '类别名称',
+        title: '类别中文名称',
         field: 'dvalue',
         required: true,
         maxlength: 255,

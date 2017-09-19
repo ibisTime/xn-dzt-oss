@@ -35,7 +35,7 @@ $(function() {
         title: '类别英文名称',
         field: 'dkey',
     }, {
-        title: '类别名称',
+        title: '类别中文名称',
         field: 'dvalue'
     }, {
         field: 'remark',

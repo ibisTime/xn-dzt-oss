@@ -275,7 +275,7 @@ $(function() {
             confirm("确定归档？").then(function() {
                 reqApi({
                     code: '620212',
-                    json: { "orderCode": selRecords[0].code, remark: "归档" }
+                    json: { "orderCode": selRecords[0].code, remark: "归档", token: sessionStorage.getItem('token') }
                 }).then(function() {
                     toastr.info("操作成功");
                     $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });

@@ -13,6 +13,16 @@ $(function() {
     reqApi({
         code: '802900',
         json: {
+            "bizTypeList": ["GW", "HYCZ"],
+            "accountNumber": "DZTA2017100000000000003"
+        }
+    }).done(function(data) {
+        $("#amount-totleHYB").text("￥" + moneyFormat(data.totalAmount));
+    });
+
+    reqApi({
+        code: '802900',
+        json: {
             "bizType": "11",
             "accountNumber": OSS.companyCode
         }
@@ -35,7 +45,7 @@ $(function() {
             "accountNumber": OSS.SYS_ACCOUNT
         }
     }).done(function(data) {
-        $("#amount-ltaccess").text("￥" + moneyFormat(data.totalAmount / 1000));
+        $("#amount-ltaccess").text("￥" + moneyFormat(data.totalAmount));
     });
     reqApi({
         code: '802900',

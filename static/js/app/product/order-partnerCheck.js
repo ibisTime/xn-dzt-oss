@@ -93,6 +93,7 @@ $(function() {
                 data['orderCode'] = code;
                 data["result"] = "1";
                 data["remark"] = $("#remark").val();
+                data["token"] = sessionStorage.getItem('token');
                 reqApi({
                     code: "620207",
                     json: data
@@ -109,6 +110,7 @@ $(function() {
                 data['orderCode'] = code;
                 data["result"] = "0";
                 data["remark"] = $("#remark").val();
+                data["token"] = sessionStorage.getItem('token');
                 reqApi({
                     code: "620207",
                     json: data

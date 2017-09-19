@@ -105,7 +105,6 @@ $(function() {
         editCode: '802800',
         beforeSubmit: function(data) {
             data.order = data.code;
-            data.checkAmount = data.checkAmount * 1000;
             return data;
         }
     };

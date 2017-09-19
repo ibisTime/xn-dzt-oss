@@ -24,10 +24,20 @@ $(function() {
         keyName: 'accountNumber',
         valueName: '{{realName.DATA}} - {{typeName.DATA}}--{{currencyName.DATA}}',
         searchName: 'realName',
+        onChange: function(v, data) {
+            var accountNumValue = $('#accountNumber option:selected').text();
+            if (accountNumValue.indexOf("人民币") != -1) {
+                $("#payCardInfo").parent().css("display", "block");
+                $("#payCardNo").parent().css("display", "block");
+            } else {
+                $("#payCardInfo").parent().css("display", "none");
+                $("#payCardNo").parent().css("display", "none");
+            }
+        },
         help: '支持户名查询'
     }, {
         field: 'amount',
-        title: '充值金额',
+        title: '充值数量',
         required: true,
         amount: true,
         formatter: moneyFormat

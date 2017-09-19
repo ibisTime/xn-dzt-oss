@@ -104,6 +104,7 @@ $(function() {
                 data['modelCode'] = $("#modelCode").val();
                 data["quantity"] = $("#quantity").val();
                 data["ramark"] = $("#ramark").val();
+                data["token"] = sessionStorage.getItem('token');
                 reqApi({
                     code: "620203",
                     json: data
@@ -512,6 +513,7 @@ $(function() {
                 data['codeList'] = _codelist
                 data["quantity"] = $("#quantity").val();
                 data["ramark"] = $("#ramark").val();
+                data["token"] = sessionStorage.getItem('token');
                 data.map = { "5-01": v51 }
                 reqApi({
                     code: "620205",

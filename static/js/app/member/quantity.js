@@ -40,7 +40,8 @@ $(function() {
     }, {
         title: "等级",
         field: "level",
-        type: "lt_level",
+        type: "select",
+        key: "lt_level",
         formatter: Dict.getNameForList("lt_level"),
         search: true
     }, {

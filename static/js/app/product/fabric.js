@@ -55,7 +55,8 @@ $(function() {
         title: "规格编号",
         field: "modelNum",
         maxlength: 255,
-        required: true
+        required: true,
+        search: true
     }, {
         title: "重量(g)",
         field: "weight"
@@ -69,6 +70,9 @@ $(function() {
     }, {
         title: "产地",
         field: "area",
+        type: "select",
+        key: "produce_area",
+        formatter: Dict.getNameForList("produce_area"),
         search: true
     }, {
         title: "状态",
@@ -87,6 +91,7 @@ $(function() {
     buildList({
         columns: columns,
         pageCode: '620030',
+        singleSelect: false,
         beforeDelete: function(data) {
             if (data.status != 0) {
                 toastr.warning("只有草稿状态，才可以删除");
@@ -117,11 +122,15 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
+        if (selRecords.length > 1) {
+            toastr.info("请选择一条记录");
+            return;
+        }
         if (selRecords[0].status == 0 || selRecords[0].status == 2) {
             confirm("确定上架？").then(function() {
                 reqApi({
                     code: '620023',
-                    json: { "code": selRecords[0].code, location: "0", orderNo: "0", remark: "上架" }
+                    json: { "codeList": [selRecords[0].code], location: "0", orderNo: "0", remark: "上架" }
                 }).then(function() {
                     toastr.info("操作成功");
                     $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
@@ -140,11 +149,15 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
+        if (selRecords.length > 1) {
+            toastr.info("请选择一条记录");
+            return;
+        }
         if (selRecords[0].status == 1) {
             confirm("确定下架？").then(function() {
                 reqApi({
                     code: '620024',
-                    json: { "code": selRecords[0].code, updater: getUserName(), remark: "下架" }
+                    json: { "codeList": [selRecords[0].code], updater: getUserName(), remark: "下架" }
                 }).then(function() {
                     toastr.info("操作成功");
                     $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
@@ -155,5 +168,55 @@ $(function() {
             return;
         }
 
+    });
+    //批量上架
+    $("#multipleUpBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.warning("请选择记录");
+            return;
+        }
+        var codeList = [];
+        for (var i = 0; i < selRecords.length; i++) {
+            codeList.push(selRecords[i].code)
+            if (selRecords[i].status == 1) {
+                toastr.warning("面料规格是：" + selRecords[i].modelNum + "&nbsp;&nbsp;的记录已上架，无需再次上架");
+                return;
+            }
+        };
+        confirm("确定批量上架？").then(function() {
+            reqApi({
+                code: '620023',
+                json: { "codeList": codeList, location: "0", orderNo: "0", remark: "批量上架" }
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+        }, function() {});
+    });
+    //批量下架
+    $("#multipleDownBtn").click(function() {
+        var selRecords = $('#tableList').bootstrapTable('getSelections');
+        if (selRecords.length <= 0) {
+            toastr.warning("请选择记录");
+            return;
+        }
+        var codeList = [];
+        for (var i = 0; i < selRecords.length; i++) {
+            codeList.push(selRecords[i].code)
+            if (selRecords[i].status != 1) {
+                toastr.warning("面料规格是：" + selRecords[i].modelNum + "&nbsp;&nbsp;的记录不是可以下架的状态!");
+                return;
+            }
+        };
+        confirm("确定批量下架？").then(function() {
+            reqApi({
+                code: '620024',
+                json: { "codeList": codeList, location: "0", orderNo: "0", remark: "批量下架" }
+            }).then(function() {
+                toastr.info("操作成功");
+                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+            });
+        }, function() {});
     });
 });

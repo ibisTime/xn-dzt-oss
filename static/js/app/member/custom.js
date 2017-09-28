@@ -1,5 +1,8 @@
 $(function() {
-
+    var tjKind = {
+        "C": "会员",
+        "B": "量体师"
+    };
     var columns = [{
         field: '',
         title: '',
@@ -30,12 +33,23 @@ $(function() {
         formatter: Dict.getNameForList("user_frequent"),
         search: true
     }, {
-        field: 'refereeUser',
+        title: "推荐人类型",
+        field: "22",
+        type: "select",
+        formatter: function(v, data) {
+            if (data.refereeUser) {
+                return tjKind[data.refereeUser.kind]
+            }
+        }
+    }, {
+        field: 'refereeUser11',
         title: '推荐人',
         formatter: function(v, data) {
-            if (v) {
-                return v.nickname;
-            } else { return "" }
+            if (data.refereeUser) {
+                return data.refereeUser.realName;
+            } else {
+                return "";
+            }
         }
     }, {
         title: "状态",

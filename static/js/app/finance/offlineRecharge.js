@@ -20,10 +20,8 @@ $(function() {
         title: '币种',
         type: 'select',
         data: {
-            "CNY": "人民币",
-            "HYB": "合衣币"
-        },
-        search: true
+            "CNY": "人民币"
+        }
     }, {
         field: 'channelType',
         title: '支付渠道',
@@ -82,7 +80,8 @@ $(function() {
         pageCode: '802705',
         searchParams: {
             channelType: '90',
-            companyCode: OSS.companyCode
+            companyCode: OSS.companyCode,
+            currency: "CNY"
         },
         beforeDetail: function(data) {
             location.href = "offlineRecharge_check.html?code=" + data.code + "&detail=1";

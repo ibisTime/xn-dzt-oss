@@ -1,7 +1,10 @@
 $(function() {
     var userId = getQueryString('userId');
     var view = 1;
-
+    var tjKind = {
+        "C": "会员",
+        "B": "量体师"
+    };
     var fields = [{
         field: 'nickname',
         title: '微信昵称',
@@ -9,12 +12,23 @@ $(function() {
         field: 'mobile',
         title: '手机号',
     }, {
+        title: "推荐人类型",
+        field: "22",
+        type: "select",
+        formatter: function(v, data) {
+            if (data.refereeUser) {
+                return tjKind[data.refereeUser.kind]
+            }
+        }
+    }, {
         field: 'refereeUser',
         title: '推荐人',
         formatter: function(v, data) {
-            if (v) {
-                return v.nickname;
-            } else { return "" }
+            if (data.refereeUser) {
+                return data.refereeUser.realName;
+            } else {
+                return "";
+            }
         }
     }, {
         field: 'createDatetime',
@@ -32,8 +46,7 @@ $(function() {
         field: "frequent",
         type: "select",
         key: "user_frequent",
-        formatter: Dict.getNameForList("user_frequent"),
-        search: true
+        formatter: Dict.getNameForList("user_frequent")
     }, {
         title: "状态",
         field: "status",

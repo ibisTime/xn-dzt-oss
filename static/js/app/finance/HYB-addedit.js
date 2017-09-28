@@ -3,12 +3,8 @@ $(function() {
     var userId = getQueryString('userId') || '';
 
     var fields = [{
-        field: 'bizType',
-        type: 'hidden',
-        value: '11'
-    }, {
-        field: 'accountNumber',
-        title: '用户账户',
+        field: 'toUserId',
+        title: '申请人',
         required: true,
         type: 'select',
         pageCode: userId ? '802503' : '802500',
@@ -17,45 +13,35 @@ $(function() {
             ['currency', 'currency_type']
         ],
         params: {
-            currencyList: ["CNY"],
+            currencyList: ["HYB"],
             userId: userId,
             updater: ""
         },
-        keyName: 'accountNumber',
+        keyName: 'userId',
         valueName: '{{realName.DATA}} - {{typeName.DATA}}--{{currencyName.DATA}}',
         searchName: 'realName',
-        help: '支持户名查询'
+        readonly: view
     }, {
         field: 'amount',
         title: '充值数量',
         required: true,
         amount: true,
-        formatter: moneyFormat
-    }, {
-        field: 'payCardInfo',
-        title: '开户行',
-        required: true,
-        maxlength: 255
-    }, {
-        field: 'payCardNo',
-        title: '银行卡号',
-        required: true,
-        bankCard: true
+        formatter: moneyFormat,
+        readonly: view
     }];
 
     var options = {
         fields: fields,
-        addCode: '802700',
+        addCode: '802413',
+        detailCode: "802416",
         view: view,
         beforeSubmit: function(data) {
-            data.applyUser = getUserId();
+            data.fromUserId = OSS.SYS_USER;
+            data.fromCurrency = "HYB";
+            data.toCurrency = "HYB";
+            data.tranAmount = data.amount;
             return data;
         }
     };
-
     buildDetail(options);
-
-
-
-
 });

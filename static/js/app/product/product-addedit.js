@@ -53,6 +53,10 @@ $(function() {
         readonly: view
     }];
     var viewList = [{
+        title: "UI次序",
+        field: "orderNo",
+        readonly: true
+    }, {
         field: 'status',
         title: '状态',
         readonly: true,

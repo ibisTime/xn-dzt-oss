@@ -109,8 +109,7 @@ $(function() {
             field: 'pdf',
             title: '物流单',
             type: 'img',
-            single: true,
-            required: true,
+            single: true
         }, {
             title: "备注",
             field: "remark",
@@ -172,40 +171,50 @@ $(function() {
     }];
     buildDetail(options);
     var productSpecs;
-    var orderSizeData;
     var productVarList;
     reqApi({
         code: "620231",
         json: { code },
         sync: true
     }).then(function(data) {
-        if (data.orderSizeData && data.orderSizeData.length) {
-            orderSizeData = data.orderSizeData;
+        if (data.sysDictMap) {
+            var figure = data.sysDictMap.figure;
+            var measure = data.sysDictMap.measure;
+            var other = data.sysDictMap.other;
             var html1 = '',
                 html2 = '';
-            for (var i = 0, length = orderSizeData.length; i < length; i++) {
-                if (orderSizeData[i].ckey.indexOf("4") == 0) {
-                    html2 += '<div class="item-tab tab-input item-tab-fl">' +
-                        '<span clas="span_left">' + orderSizeData[i].cvalue + "：" + '</span>' +
-                        '<div class="case">' + orderSizeData[i].dvalue + '</div>' +
-                        '</div>';
-                } else if (orderSizeData[i].ckey.indexOf("6-02") != -1) {
+            for (var i = 0, length = figure.length; i < length; i++) {
+                var dvlaue = figure[i].orderSizeData.dvalue ? figure[i].orderSizeData.dvalue : "-";
+                html2 += '<div class="item-tab tab-input item-tab-fl">' +
+                    '<span clas="span_left">' + figure[i].dvalue + "：" + '</span>' +
+                    '<div class="case">' + dvlaue + '</div>' +
+                    '</div>';
+            }
+            for (var i = 0, length = measure.length; i < length; i++) {
+                var dvlaueLT = measure[i].orderSizeData.dkey ? measure[i].orderSizeData.dkey : "-";
+                html1 += '<div class="item-tab tab-input item-tab-fl">' +
+                    '<span clas="span_left">' + measure[i].dvalue + "：" + '</span>' +
+                    '<div class="case">' + dvlaueLT + '</div>' +
+                    '</div>';
+            }
+            for (var i = 0, length = other.length; i < length; i++) {
+                var dvlaueTX = other[i].orderSizeData.dkey ? other[i].orderSizeData.dkey : "-";
+                if (other[i].dkey.indexOf("6-02") == 0) {
                     html1 += '<div class="item-tab tab-input item-tab-fl">' +
-                        '<span clas="span_left">' + orderSizeData[i].cvalue + "(cm)：" + '</span>' +
-                        '<div class="case">' + orderSizeData[i].dkey + '</div>' +
+                        '<span clas="span_left">' + other[i].dvalue + "(cm)：" + '</span>' +
+                        '<div class="case">' + dvlaueTX + '</div>' +
                         '</div>';
-                } else if (orderSizeData[i].ckey.indexOf("6-03") != -1) {
+                };
+                if (other[i].dkey.indexOf("6-03") == 0) {
                     html1 += '<div class="item-tab tab-input item-tab-fl">' +
-                        '<span clas="span_left">' + orderSizeData[i].cvalue + "(kg)：" + '</span>' +
-                        '<div class="case">' + orderSizeData[i].dkey + '</div>' +
-                        '</div>';
-                } else if (orderSizeData[i].ckey.indexOf("6") != 0) {
-                    html1 += '<div class="item-tab tab-input item-tab-fl">' +
-                        '<span clas="span_left">' + orderSizeData[i].cvalue + "：" + '</span>' +
-                        '<div class="case">' + orderSizeData[i].dkey + '</div>' +
+                        '<span clas="span_left">' + other[i].dvalue + "(kg)：" + '</span>' +
+                        '<div class="case">' + dvlaueTX + '</div>' +
                         '</div>';
                 }
+
+
             }
+
             $('#ltsj').html(html1);
             $('#ttsj').html(html2);
         }
@@ -245,4 +254,5 @@ $(function() {
             }
         }
     });
+
 });

@@ -22,7 +22,8 @@ $(function() {
     }, {
         title: "产地",
         field: "area",
-        maxlength: 255,
+        type: "select",
+        key: "produce_area",
         required: true,
         readonly: view
     }, {

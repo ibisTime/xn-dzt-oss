@@ -33,6 +33,9 @@ $(function() {
             return v && '<img  style="width:40px;height:40px" src="' + OSS.picBaseUrl + '/' + v + '" >' || "-"
         }
     }, {
+        title: "UI次序",
+        field: "orderNo"
+    }, {
         title: "状态",
         field: "status",
         type: "select",
@@ -81,16 +84,7 @@ $(function() {
             return;
         }
         if (selRecords[0].status == 0 || selRecords[0].status == 2) {
-            // window.location.href = "product_up.html?code=" + selRecords[0].code;
-            confirm("确定上架？").then(function() {
-                reqApi({
-                    code: '620003',
-                    json: { "code": selRecords[0].code, location: "0", orderNo: "0" }
-                }).then(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
-                });
-            }, function() {});
+            window.location.href = "product_up.html?code=" + selRecords[0].code;
         } else {
             toastr.warning('不是可以上架的状态');
             return;

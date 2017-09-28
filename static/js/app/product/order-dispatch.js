@@ -45,7 +45,6 @@ $(function() {
         title: "选择量体师",
         type: "citySelect",
         field: "liangti",
-        required: true,
         afterSet: function(v, data) {
             if (data.ltUserDO) {
                 if (data.ltUserDO.province == data.ltUserDO.city && data.ltUserDO.city == data.ltUserDO.area) {
@@ -95,6 +94,19 @@ $(function() {
         title: "量体师",
         field: 'ltUser',
         type: 'select',
+        listCode: '805123',
+        keyName: 'userId',
+        valueName: '{{mobile.DATA}}--{{realName.DATA}}',
+        searchName: "mobile",
+        params: {
+            kind: "B",
+            province: $("#province").val(),
+            city: $("#city").val(),
+            area: $("#area").val(),
+            status: '0',
+            userRefere: sessionStorage.getItem('userId'),
+            updater: ''
+        },
         required: true
     }, {
         title: "备注",

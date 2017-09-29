@@ -75,11 +75,6 @@ $(function() {
             field: "reAddress",
             readonly: true
         }, {
-            title: " 备注",
-            field: "remark",
-            maxlength: 255,
-            readonly: true
-        }, {
             field: 'orderCode',
             title: '发货单号',
             type: "hidden",
@@ -126,10 +121,10 @@ $(function() {
     options.buttons = [{
         title: '确认',
         handler: function() {
-            if ($('#jsForm1').valid()) {
-                var data = $('#jsForm1').serializeObject();
+            if ($('#jsForm').valid()) {
+                var data = $('#jsForm').serializeObject();
                 data["token"] = sessionStorage.getItem('token');
-                $('#jsForm1').find('.btn-file [type=file]').parent().next().each(function(i, el) {
+                $('#jsForm').find('.btn-file [type=file]').parent().next().each(function(i, el) {
                     var values = [];
                     var imgs = $(el).find('.img-ctn');
                     imgs.each(function(index, img) {
@@ -154,6 +149,10 @@ $(function() {
                     if (item.type == "checkbox") {
                         data[item.field] = $.isArray(data[item.field]) ? data[item.field].join(",") : data[item.field];
                     }
+                }
+                if (data.deliveryDatetime == "-") {
+                    toastr.warning("发货时间必填");
+                    return "";
                 }
                 reqApi({
                     code: "620209",
@@ -184,21 +183,21 @@ $(function() {
             var html1 = '',
                 html2 = '';
             for (var i = 0, length = figure.length; i < length; i++) {
-                var dvlaue = figure[i].orderSizeData.dvalue ? figure[i].orderSizeData.dvalue : "-";
+                var dvlaue = figure[i].orderSizeData ? figure[i].orderSizeData.dvalue : "-";
                 html2 += '<div class="item-tab tab-input item-tab-fl">' +
                     '<span clas="span_left">' + figure[i].dvalue + "：" + '</span>' +
                     '<div class="case">' + dvlaue + '</div>' +
                     '</div>';
             }
             for (var i = 0, length = measure.length; i < length; i++) {
-                var dvlaueLT = measure[i].orderSizeData.dkey ? measure[i].orderSizeData.dkey : "-";
+                var dvlaueLT = measure[i].orderSizeData ? measure[i].orderSizeData.dkey : "-";
                 html1 += '<div class="item-tab tab-input item-tab-fl">' +
                     '<span clas="span_left">' + measure[i].dvalue + "：" + '</span>' +
                     '<div class="case">' + dvlaueLT + '</div>' +
                     '</div>';
             }
             for (var i = 0, length = other.length; i < length; i++) {
-                var dvlaueTX = other[i].orderSizeData.dkey ? other[i].orderSizeData.dkey : "-";
+                var dvlaueTX = other[i].orderSizeData ? other[i].orderSizeData.dkey : "-";
                 if (other[i].dkey.indexOf("6-02") == 0) {
                     html1 += '<div class="item-tab tab-input item-tab-fl">' +
                         '<span clas="span_left">' + other[i].dvalue + "(cm)：" + '</span>' +

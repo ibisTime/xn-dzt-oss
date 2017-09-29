@@ -40,6 +40,6 @@ $(function() {
         router: 'menu',
         columns: columns,
         pageCode: '805000',
-        deletaCode: "805004"
+        deleteCode: "805004"
     });
 });

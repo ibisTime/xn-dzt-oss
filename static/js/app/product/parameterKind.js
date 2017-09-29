@@ -17,9 +17,6 @@ $(function() {
         field: 'parentKey',
         type: 'select',
         listCode: '620257',
-        params: {
-            // type: 0
-        },
         keyName: 'dkey',
         valueName: 'dvalue',
         searchName: "dvalue",

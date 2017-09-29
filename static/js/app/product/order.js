@@ -76,7 +76,6 @@ $(function() {
         },
         beforeSearch: function(data) {
             if (data.ltDatetime) {
-                console.log(data.ltDatetime)
                 data.ltDatetime = data.ltDatetime.concat(" 00:00:00")
                 return data;
             } else {
@@ -90,73 +89,6 @@ $(function() {
         beforeDetail: function(data) {
             window.location.href = 'orderSearch_addedit.html?v=1&code=' + data.code;
         }
-    });
-    //代复购
-    $("#rePurchaseBtn").click(function() {
-        window.location.href = 'order_rePurchase.html';
-    });
-    //代定价
-    $("#priceBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 1) {
-            toastr.info("不是代定价的状态");
-            return;
-        }
-        if (!selRecords[0].ltUser) {
-            toastr.info("不是代定价的状态");
-            return;
-        } else { //type=0是衬衫 1是h+
-            window.location.href = 'order_price.html?code=' + selRecords[0].code;
-        };
-
-    });
-    //代支付
-    $("#payBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 2) {
-            toastr.info("不是可以代支付的状态");
-            return;
-        }
-        window.location.href = 'order_pay.html?code=' + selRecords[0].code;
-    });
-    //数据录入
-    $("#shuBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 3) {
-            toastr.warning("不是可以数据录入的状态");
-            return;
-        }
-        if (selRecords[0].type == 1) {
-            window.location.href = 'order_shujuH+.html?code=' + selRecords[0].code;
-        } else {
-            window.location.href = 'order_shuju.html?code=' + selRecords[0].code;
-        }
-
-    });
-    //提交复核
-    $("#tijiaoBtn").click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].checkOrder != 1) {
-            toastr.warning("不是可以提交复核的状态");
-            return;
-        }
-        window.location.href = 'order_tijiao.html?code=' + selRecords[0].code;
     });
     //复核
     $("#cheBtn").click(function() {

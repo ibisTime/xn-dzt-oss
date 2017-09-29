@@ -1,7 +1,6 @@
 $(function() {
-
     var code = getQueryString('code');
-
+    //预约
     var fields = [{
         field: 'applyUser',
         title: '下单人编号',

@@ -122,13 +122,7 @@ $(function() {
             toastr.info("请选择记录");
             return;
         }
-        // if (selRecords[0].status == 0 || selRecords[0].status == 2) {
         window.location.href = "productSize.html?&modelCode=" + selRecords[0].code + "&name=" + selRecords[0].name;
-        // } else {
-        //     toastr.warning('不是可以上架的状态');
-        //     return;
-        // }
-
     });
     $('#add2Btn').remove();
     $('#goBackBtn').remove();

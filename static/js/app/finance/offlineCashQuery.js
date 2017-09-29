@@ -87,7 +87,8 @@ $(function() {
         pageCode: '802755',
         searchParams: {
             channelType: '90',
-            companyCode: OSS.companyCode
+            companyCode: OSS.companyCode,
+            statusList: ["2", "4", "5"]
         },
         // singleSelect: false,
         beforeDetail: function(data) {

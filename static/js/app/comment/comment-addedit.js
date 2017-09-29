@@ -59,7 +59,7 @@ $(function() {
             "C": "审批不通过",
             "D": "被过滤"
         }
-    }, ];
+    }];
     if (view) {
         remarkNote = [];
         fields = fields.concat(checkList),

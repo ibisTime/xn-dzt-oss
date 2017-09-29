@@ -143,20 +143,6 @@ $(function() {
         }
         window.location.href = "account.html?userId=" + selRecords[0].userId + "&kind=B";
     });
-    //审核
-    $('#cheBtn').click(function() {
-        var selRecords = $('#tableList').bootstrapTable('getSelections');
-        if (selRecords.length <= 0) {
-            toastr.info("请选择记录");
-            return;
-        }
-        if (selRecords[0].status != 3) {
-            toastr.info("不是可以审核的状态");
-            return;
-        }
-        window.location.href = "quantity_check.html?userId=" + selRecords[0].userId;
-
-    });
     //设置等级
     $('#levelBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');

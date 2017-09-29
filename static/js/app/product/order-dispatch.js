@@ -42,7 +42,7 @@ $(function() {
         formatter: dateFormat,
         readonly: true
     }, {
-        title: "选择量体师",
+        title: "所属区域",
         type: "citySelect",
         field: "liangti",
         afterSet: function(v, data) {

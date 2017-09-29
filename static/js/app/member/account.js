@@ -25,8 +25,7 @@ $(function() {
         title: '币种',
         type: 'select',
         key: 'currency_type',
-        formatter: Dict.getNameForList('currency_type'),
-        // search: true
+        formatter: Dict.getNameForList('currency_type')
     }, {
         field: 'accountNumber',
         title: '账号'
@@ -43,8 +42,7 @@ $(function() {
         title: '状态',
         type: 'select',
         key: 'account_status',
-        formatter: Dict.getNameForList('account_status'),
-        // search: true
+        formatter: Dict.getNameForList('account_status')
     }, {
         field: 'createDatetime',
         title: '创建时间',

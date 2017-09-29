@@ -9,7 +9,7 @@ $(function() {
         formatter: function(v, data) {
             if (v) {
                 return v
-            }  else if (data.commenter == "0") {
+            } else if (data.commenter == "0") {
                 return "平台"
             }
         }
@@ -23,7 +23,7 @@ $(function() {
         formatter: function(v, data) {
             if (v) {
                 return v
-            }  else if (data.receiver == "0") {
+            } else if (data.receiver == "0") {
                 return "平台"
             }
         }
@@ -31,14 +31,11 @@ $(function() {
 
     buildList({
         columns: columns,
-        pageCode: '620148', //B 
+        pageCode: '620148',
         searchParams: {
             companyCode: OSS.company,
             type: "0",
             receiver: "0"
-        },
-        beforeDetail: function(data) {
-            window.location.href = 'complain_read.html?code=' + data.code;
         }
     });
     //回复
@@ -49,6 +46,5 @@ $(function() {
             return;
         }
         window.location.href = './complain_addedit.html?code=' + selRecords[0].code + "&receiver=" + selRecords[0].receiver + "&commenter=" + selRecords[0].commenter;
-
     });
 });

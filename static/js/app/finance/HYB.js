@@ -11,7 +11,9 @@ $(function() {
         field: 'applyUser',
         title: '申请人',
         formatter: function(v, data) {
-            return data.toUser.mobile;
+            if (data.toUser) {
+                return data.toUser.nickname;
+            }
         }
     }, {
         field: 'fromAmount',
@@ -29,7 +31,7 @@ $(function() {
         title: '支付渠道',
         type: 'select',
         data: {
-            "dbhz": "币种划转"
+            "dbhz": "同币种划转"
         }
     }, {
         field: 'createDatetime',

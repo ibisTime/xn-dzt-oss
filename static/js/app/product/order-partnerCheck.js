@@ -141,21 +141,21 @@ $(function() {
             var html1 = '',
                 html2 = '';
             for (var i = 0, length = figure.length; i < length; i++) {
-                var dvlaue = figure[i].orderSizeData.dvalue ? figure[i].orderSizeData.dvalue : "-";
+                var dvlaue = figure[i].orderSizeData ? figure[i].orderSizeData.dvalue : "-";
                 html2 += '<div class="item-tab tab-input item-tab-fl">' +
                     '<span clas="span_left">' + figure[i].dvalue + "：" + '</span>' +
                     '<div class="case">' + dvlaue + '</div>' +
                     '</div>';
             }
             for (var i = 0, length = measure.length; i < length; i++) {
-                var dvlaueLT = measure[i].orderSizeData.dkey ? measure[i].orderSizeData.dkey : "-";
+                var dvlaueLT = measure[i].orderSizeData ? measure[i].orderSizeData.dkey : "-";
                 html1 += '<div class="item-tab tab-input item-tab-fl">' +
                     '<span clas="span_left">' + measure[i].dvalue + "：" + '</span>' +
                     '<div class="case">' + dvlaueLT + '</div>' +
                     '</div>';
             }
             for (var i = 0, length = other.length; i < length; i++) {
-                var dvlaueTX = other[i].orderSizeData.dkey ? other[i].orderSizeData.dkey : "-";
+                var dvlaueTX = other[i].orderSizeData ? other[i].orderSizeData.dkey : "-";
                 if (other[i].dkey.indexOf("6-02") == 0) {
                     html1 += '<div class="item-tab tab-input item-tab-fl">' +
                         '<span clas="span_left">' + other[i].dvalue + "(cm)：" + '</span>' +

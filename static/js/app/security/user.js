@@ -21,8 +21,7 @@ $(function() {
         type: 'select',
         listCode: '805021',
         keyName: 'code',
-        valueName: 'name',
-        // search: true
+        valueName: 'name'
     }, {
         field: 'remark',
         title: '备注'
@@ -45,6 +44,7 @@ $(function() {
         }
         window.location.href = "user_role.html?userId=" + selRecords[0].userId + "&loginName=" + encodeURI(encodeURI(selRecords[0].loginName)) + "&kind=" + selRecords[0].kind;
     });
+    //修改
     $('#edit2Btn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -53,7 +53,7 @@ $(function() {
         }
         window.location.href = "user_role.html?userId=" + selRecords[0].userId + "&loginName=" + encodeURI(encodeURI(selRecords[0].loginName)) + "&kind=" + selRecords[0].kind;
     });
-
+    //重置
     $('#resetBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -62,7 +62,7 @@ $(function() {
         }
         location.href = "user_pwd_reset.html?userId=" + selRecords[0].userId + '&loginName=' + selRecords[0].loginName;
     });
-
+    //注销
     $('#rockBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {
@@ -82,7 +82,7 @@ $(function() {
             sucList();
         });
     });
-
+    //激活
     $('#activeBtn').click(function() {
         var selRecords = $('#tableList').bootstrapTable('getSelections');
         if (selRecords.length <= 0) {

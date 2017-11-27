@@ -51,6 +51,12 @@ $(function() {
         },
         search: true
     }, {
+        title: '是否默认',
+        field: 'isDefault',
+        formatter: function(v, data) {
+            return v == '1' ? '是' : '否';
+        }
+    }, {
         title: "备注",
         field: "remark"
     }];

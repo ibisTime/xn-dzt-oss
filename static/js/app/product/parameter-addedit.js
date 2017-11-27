@@ -76,6 +76,16 @@ $(function() {
         required: true,
         single: true
     }, {
+        title: '是否默认',
+        field: 'isDefault',
+        type: 'select',
+        required: true,
+        defaultValue: "0",
+        data: {
+            "0": "否",
+            "1": "是"
+        }
+    }, {
         title: "备注",
         field: "remark",
         maxlength: 255

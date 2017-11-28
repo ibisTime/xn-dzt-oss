@@ -190,6 +190,10 @@ $(function() {
                             tabContent += '<div class="item-tab"><span>' + productCategory[j].dvalue + "：" + '</span>' +
                                 '<div class="case caseimg"> ' + (productCategory[j].productCraft && productCategory[j].productCraft.name || '') + '</div></div>';
                         }
+                        if (productCategory[j].productCategory) {
+                            tabContent += '<div class="item-tab"><span>' + productCategory[j].productCategory.dvalue + "：" + '</span>' +
+                                '<div class="case caseimg"> ' + (productCategory[j].productCategory && productCategory[j].productCategory.colorProductCraft.name || '') + '</div></div>';
+                        }
                     }
                     tabContent = '<div class="item-tab"><span>面料：</span>' +
                         '<div class="case caseimg">' + productSpecs[0].modelNum + '</div></div>' + tabContent;

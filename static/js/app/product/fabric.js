@@ -102,8 +102,7 @@ $(function() {
                     code: '620021',
                     json: { "code": data.code }
                 }).then(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                 });
             }, function() {});
         },
@@ -132,8 +131,7 @@ $(function() {
                     code: '620023',
                     json: { "codeList": [selRecords[0].code], location: "0", orderNo: "0", remark: "上架" }
                 }).then(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                 });
             }, function() {});
         } else {
@@ -159,8 +157,7 @@ $(function() {
                     code: '620024',
                     json: { "codeList": [selRecords[0].code], updater: getUserName(), remark: "下架" }
                 }).then(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                 });
             }, function() {});
         } else {
@@ -189,8 +186,7 @@ $(function() {
                 code: '620023',
                 json: { "codeList": codeList, location: "0", orderNo: "0", remark: "批量上架" }
             }).then(function() {
-                toastr.info("操作成功");
-                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                sucList();
             });
         }, function() {});
     });
@@ -214,8 +210,7 @@ $(function() {
                 code: '620024',
                 json: { "codeList": codeList, location: "0", orderNo: "0", remark: "批量下架" }
             }).then(function() {
-                toastr.info("操作成功");
-                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                sucList();
             });
         }, function() {});
     });

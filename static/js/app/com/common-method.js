@@ -604,9 +604,9 @@ function objectArrayFilter(arr, keys) {
 }
 
 function buildList(options) {
-
+    console.log("aha");
+    // console.log(JSON.stringify(options))
     options = options || {};
-
     if (options.type != 'o2m') {
         showPermissionControl();
     }
@@ -850,11 +850,13 @@ function buildList(options) {
             toastr.info("请选择一条记录");
             return;
         }
+
         if (options.beforeDelete) {
             if (!options.beforeDelete(selRecords[0])) {
                 return;
             }
         }
+        window.__del__ = true;
         confirm("确认是否删除该记录？").then(function() {
             var codeParams = {
                 code: selRecords[0].code,
@@ -978,6 +980,12 @@ function buildList(options) {
     if (options.tableId) {
         tableEl = $('#' + options.tableId);
     }
+    tableEl.on('page-change.bs.table', function () {
+        console.log('in');
+        updateTableInfo('tableList');
+    });
+    var tableInfo = JSON.parse(sessionStorage.getItem('tableInfo') || '{}')[location.pathname] || {};
+    // console.log(sessionStorage.getItem('tableInfo'));
     tableEl.bootstrapTable({
         method: "post",
         url: urlDispatch(options.pageCode) + "/api",
@@ -1022,13 +1030,13 @@ function buildList(options) {
         pagination: true,
         sidePagination: 'server',
         totalRows: 0,
-        pageNumber: 1,
-        pageSize: options.pageSize || 10,
+        pageNumber: tableInfo.pageNumber || 1,
+        pageSize: tableInfo.pageSize || 10,
         pageList: options.pageList || [10, 20, 30, 40, 50],
         columns: options.columns
     });
-
     chosen();
+    
 }
 
 function selectImage(file, name) {
@@ -2392,7 +2400,8 @@ function sleep(ms) {
 
 function sucList() {
     toastr.success('操作成功');
-    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+    var option = $('#tableList').bootstrapTable('getOptions');
+    $('#tableList').bootstrapTable('refreshOptions', { url: option.url, pageNumber: option.pageNumber, pageSize: option.pageSize });
 }
 
 function sucDetail() {
@@ -3534,4 +3543,13 @@ function updateListSearch() {
     var params = $('.search-form').serializeObject();
     searchs[pathName] = params;
     sessionStorage.setItem('listSearchs', JSON.stringify(searchs));
+}
+
+function updateTableInfo(id) {
+    var searchs = JSON.parse(sessionStorage.getItem('tableInfo') || '{}');
+    var pathName = location.pathname;
+    var option = $('#' + id).bootstrapTable('getOptions');
+    var params = {pageNumber:option.pageNumber,pageSize:option.pageSize};
+    searchs[pathName] = params;
+    sessionStorage.setItem('tableInfo', JSON.stringify(searchs));
 }

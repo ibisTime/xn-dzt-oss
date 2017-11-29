@@ -11,7 +11,9 @@ $(function() {
         "XXFK": "线下付款",
         "GW": "购物付款",
         "GWTK": "购物退款",
-        "HYCZ": "会员购买"
+        "HYCZ": "会员购买",
+        "HHRFC": "合伙人分成",
+        "LTSFC": "量体师分成"
     };
     var bizTypeDictJF = {
         "01": "注册送积分",

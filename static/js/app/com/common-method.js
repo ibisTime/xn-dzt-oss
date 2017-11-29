@@ -977,7 +977,6 @@ function buildList(options) {
         tableEl = $('#' + options.tableId);
     }
     tableEl.on('load-success.bs.table', function () {
-        console.log('in');
         updateTableInfo('tableList');
     });
     var tableInfo = JSON.parse(sessionStorage.getItem('tableInfo') || '{}')[location.pathname] || {};

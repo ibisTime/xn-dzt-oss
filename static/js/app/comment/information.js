@@ -72,7 +72,6 @@ $(function() {
             toastr.warning('该资讯不是可以上架的状态');
             return;
         }
-
     });
     //下架
     $('#downBtn').click(function() {
@@ -87,8 +86,7 @@ $(function() {
                     code: '620114',
                     json: { "code": selRecords[0].code, updater: getUserName(), remark: "下架" }
                 }).then(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                 });
             }, function() {});
 
@@ -96,6 +94,5 @@ $(function() {
             toastr.warning('不是可以下架的状态');
             return;
         }
-
     });
 });

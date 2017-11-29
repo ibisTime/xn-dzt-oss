@@ -10,7 +10,6 @@ $(function() {
             userId: OSS.SYS_USER
         }
     }).done(function(data) {
-
         accountNumberCNY = data[0].accountNumber;
         $("#amount-CNY").text("￥" + moneyFormat(data[0].amount));
         accountNumberJF = data[1].accountNumber;

@@ -1954,15 +1954,30 @@
             contentType: this.options.contentType,
             dataType: this.options.dataType,
             success: function (res) {
-            	if (res.errorCode != '0') {
-            		that.$tableLoading.html(res.errorInfo);
-            		return;
-            	}
-                res = calculateObjectValue(that.options, that.options.responseHandler, [res], res);
+              	if (res.errorCode != '0') {
+                		that.$tableLoading.html(res.errorInfo);
+                		return;
+              	}
+                var _json = JSON.parse(data.json);
+                if (res.data.totalPage < that.options.totalPages && _json.start > 1) {
+                    _json.start--;
+                    data.json = JSON.stringify(_json);
+                    request = $.extend(request, {
+                        data: that.options.contentType === 'application/json' && that.options.method === 'post' ?
+                            JSON.stringify(data) : data
+                    });
+                    if (that.options.ajax) {
+                        calculateObjectValue(that, that.options.ajax, [request], null);
+                    } else {
+                        $.ajax(request);
+                    }
+                } else {
+                    res = calculateObjectValue(that.options, that.options.responseHandler, [res], res);
 
-                that.load(res);
-                that.trigger('load-success', res);
-                if (!silent) that.$tableLoading.hide();
+                    that.load(res);
+                    that.trigger('load-success', res);
+                    if (!silent) that.$tableLoading.hide();
+                }
             },
             error: function (res) {
                 that.trigger('load-error', res.status, res);

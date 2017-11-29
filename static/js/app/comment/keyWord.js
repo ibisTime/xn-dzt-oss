@@ -39,8 +39,7 @@ $(function() {
                 json: { reqList: reqList }
             }).then(function() {
                 sucList();
-            })
-
+            });
         }
     });
 });

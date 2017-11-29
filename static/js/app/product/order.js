@@ -163,7 +163,8 @@ $(function() {
                 '</form>'
         });
         dw.showModal();
-        $(document).on('click', '#subBtn', function() {
+
+        $(document).off('click', '#subBtn').on('click', '#subBtn', function() {
             $('#popForm').validate({
                 'rules': {
                     remark: {
@@ -180,19 +181,17 @@ $(function() {
                     code: "620213",
                     json: data
                 }).done(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                     setTimeout(function() {
                         dw.close().remove();
-                    }, 500)
+                    }, 500);
                 });
             }
         });
-        $(document).on('click', '#goBackBtn', function() {
+        $(document).off('click', '#goBackBtn').on('click', '#goBackBtn', function() {
             setTimeout(function() {
                 dw.close().remove();
-            }, 500)
-
+            }, 500);
         });
         dw.__center();
     });
@@ -209,8 +208,7 @@ $(function() {
                     code: '620212',
                     json: { "orderCode": selRecords[0].code, remark: "归档", token: sessionStorage.getItem('token') }
                 }).then(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                 });
             }, function() {});
 
@@ -218,7 +216,6 @@ $(function() {
             toastr.warning('只有已评价的状态才可以归档');
             return;
         }
-
     });
 
 });

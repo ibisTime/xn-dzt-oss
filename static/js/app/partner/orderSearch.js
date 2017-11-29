@@ -71,8 +71,7 @@ $(function() {
         },
         beforeSearch: function(data) {
             if (data.ltDatetime) {
-                console.log(data.ltDatetime)
-                data.ltDatetime = data.ltDatetime.concat(" 00:00:00")
+                data.ltDatetime = data.ltDatetime.concat(" 00:00:00");
                 return data;
             } else {
                 return data;

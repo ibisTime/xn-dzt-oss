@@ -91,27 +91,25 @@ $(function() {
     buildList({
         columns: columns,
         pageCode: '620030',
+        deleteCode: '620021',
         singleSelect: false,
+        searchParams: {
+          orderColumn: 'update_datetime',
+          orderDir: 'asc'
+        },
         beforeDelete: function(data) {
             if (data.status != 0) {
                 toastr.warning("只有草稿状态，才可以删除");
-                return;
+                return false;
             }
-            confirm("确定删除？").then(function() {
-                reqApi({
-                    code: '620021',
-                    json: { "code": data.code }
-                }).then(function() {
-                    sucList();
-                });
-            }, function() {});
+            return true;
         },
         beforeEdit: function(data) {
             if (data.status == 1) {
                 toastr.warning("已上架，不可修改");
-                return;
+                return false;
             }
-            window.location.href = "fabric_addedit.html?code=" + data.code;
+            return true;
         }
     });
     //上架

@@ -63,8 +63,7 @@ $(function() {
                     code: '620001',
                     json: { "code": data.code }
                 }).then(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                 });
             }, function() {});
         },
@@ -104,8 +103,7 @@ $(function() {
                     code: '620004',
                     json: { "code": selRecords[0].code, updater: getUserName(), remark: "下架" }
                 }).then(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                 });
             }, function() {});
 

@@ -604,8 +604,6 @@ function objectArrayFilter(arr, keys) {
 }
 
 function buildList(options) {
-    console.log("aha");
-    // console.log(JSON.stringify(options))
     options = options || {};
     if (options.type != 'o2m') {
         showPermissionControl();
@@ -833,7 +831,6 @@ function buildList(options) {
         }
         var codeParams = '';
         if (options.uid) {
-
             options.uid.forEach(function(i) {
                 codeParams += '&' + i + '=' + selRecords[0][i];
             });
@@ -856,7 +853,6 @@ function buildList(options) {
                 return;
             }
         }
-        window.__del__ = true;
         confirm("确认是否删除该记录？").then(function() {
             var codeParams = {
                 code: selRecords[0].code,
@@ -980,12 +976,11 @@ function buildList(options) {
     if (options.tableId) {
         tableEl = $('#' + options.tableId);
     }
-    tableEl.on('page-change.bs.table', function () {
+    tableEl.on('load-success.bs.table', function () {
         console.log('in');
         updateTableInfo('tableList');
     });
     var tableInfo = JSON.parse(sessionStorage.getItem('tableInfo') || '{}')[location.pathname] || {};
-    // console.log(sessionStorage.getItem('tableInfo'));
     tableEl.bootstrapTable({
         method: "post",
         url: urlDispatch(options.pageCode) + "/api",
@@ -1036,7 +1031,7 @@ function buildList(options) {
         columns: options.columns
     });
     chosen();
-    
+
 }
 
 function selectImage(file, name) {
@@ -2164,7 +2159,7 @@ function uploadInit() {
     }
 
     var token;
-    //上传文件类型 
+    //上传文件类型
     var mime_types = [
             //只允许上传图片 （注意，extensions中，逗号后面不要加空格）
             {
@@ -2401,7 +2396,8 @@ function sleep(ms) {
 function sucList() {
     toastr.success('操作成功');
     var option = $('#tableList').bootstrapTable('getOptions');
-    $('#tableList').bootstrapTable('refreshOptions', { url: option.url, pageNumber: option.pageNumber, pageSize: option.pageSize });
+    // url: option.url,
+    $('#tableList').bootstrapTable('refreshOptions', { pageNumber: option.pageNumber, pageSize: option.pageSize });
 }
 
 function sucDetail() {

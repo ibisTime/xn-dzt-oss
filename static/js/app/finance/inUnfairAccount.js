@@ -75,5 +75,5 @@ $(function() {
             return;
         }
         window.location.href = "inUnfairAccount_check.html?Code=" + selRecords[0].code;
-    })
+    });
 });

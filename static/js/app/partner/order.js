@@ -134,7 +134,7 @@ $(function() {
                 '</form>'
         });
         dw.showModal();
-        $(document).on('click', '#subBtn', function() {
+        $(document).off('click', '#subBtn').on('click', '#subBtn', function() {
             $('#popForm').validate({
                 'rules': {
                     remark: {
@@ -151,19 +151,17 @@ $(function() {
                     code: "620213",
                     json: data
                 }).done(function() {
-                    toastr.info("操作成功");
-                    $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                    sucList();
                     setTimeout(function() {
                         dw.close().remove();
-                    }, 500)
+                    }, 500);
                 });
             }
         });
-        $(document).on('click', '#goBackBtn', function() {
+        $(document).off('click', '#goBackBtn').on('click', '#goBackBtn', function() {
             setTimeout(function() {
                 dw.close().remove();
-            }, 500)
-
+            }, 500);
         });
         dw.__center();
     });

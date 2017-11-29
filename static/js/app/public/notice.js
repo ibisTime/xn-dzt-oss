@@ -69,8 +69,7 @@ $(function() {
                 code: '804036',
                 json: { 'id': selRecords[0].id }
             }).done(function() {
-                toastr.info("操作成功");
-                $('#tableList').bootstrapTable('refresh', { url: $('#tableList').bootstrapTable('getOptions').url });
+                sucList();
             });
         }, function() {});
     });
